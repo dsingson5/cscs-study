@@ -282,6 +282,119 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   text-align: center;
   font-style: italic;
 }
+
+/* ─── Save button + status ─── */
+.btn-save {
+  background: var(--good) !important;
+  color: #04201a !important;
+  border-color: var(--good) !important;
+  font-weight: 600;
+}
+.btn-save:hover { box-shadow: 0 0 12px rgba(103, 232, 176, 0.5); transform: translateY(-1px); }
+.q-save-status {
+  font-size: 11px;
+  margin-left: 6px;
+  align-self: center;
+  color: var(--text-dim);
+  transition: opacity 0.3s;
+}
+.q-save-status.saved { color: var(--good); font-weight: 600; }
+
+/* ─── Toast ─── */
+.cscs-toast {
+  position: fixed;
+  top: 24px; right: 24px;
+  background: var(--surface);
+  border: 1px solid var(--good);
+  color: var(--good);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(103, 232, 176, 0.25);
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  z-index: 9999;
+}
+.cscs-toast.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Sync settings modal ─── */
+.sync-button {
+  position: fixed;
+  bottom: 18px; right: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.sync-button:hover { border-color: var(--good); }
+.sync-button .sync-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--text-dimmer);
+}
+.sync-button.enabled .sync-dot { background: var(--good); box-shadow: 0 0 6px var(--good); }
+.sync-button.error .sync-dot { background: var(--bad); }
+
+.sync-modal {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+.sync-modal.shown { display: flex; }
+.sync-modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  max-width: 520px; width: 100%;
+  color: var(--text);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+.sync-modal-content h3 { margin: 0 0 6px; font-size: 18px; }
+.sync-modal-content p { font-size: 13px; color: var(--text-dim); margin: 0 0 14px; }
+.sync-modal-content ol { font-size: 12px; color: var(--text-dim); padding-left: 22px; margin: 8px 0 14px; }
+.sync-modal-content ol li { margin-bottom: 4px; }
+.sync-modal-content ol a { color: var(--good); }
+.sync-modal-content label { display: block; margin-top: 10px; font-size: 12px; color: var(--text-dim); }
+.sync-modal-content input[type=password], .sync-modal-content input[type=text] {
+  width: 100%; margin-top: 4px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); padding: 8px 10px; font-family: ui-monospace, monospace; font-size: 12px;
+}
+.sync-modal-content .sync-actions { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+.sync-modal-content .sync-status {
+  margin-top: 14px; padding: 10px 12px;
+  border-radius: 6px; font-size: 12px;
+  background: var(--bg-2); color: var(--text-dim);
+}
+.sync-modal-content .sync-status.ok { color: var(--good); border-left: 3px solid var(--good); }
+.sync-modal-content .sync-status.err { color: var(--bad); border-left: 3px solid var(--bad); }
+.sync-modal-content .btn-primary {
+  background: var(--good); color: #04201a; border-color: var(--good); font-weight: 600;
+}
+
+/* Subtle auto-save indicator (replaces explicit Save button) */
+.q-save-status {
+  font-size: 10px;
+  margin-left: 8px;
+  align-self: center;
+  color: var(--text-dimmer);
+  font-style: italic;
+  transition: color 0.3s;
+}
+.q-save-status.flashed { color: var(--good); font-style: normal; font-weight: 600; }
 </style>
 <style>:root {
   --bg: #eff2f0;
@@ -562,7 +675,7 @@ body { background-image: repeating-linear-gradient(90deg, transparent 0px, trans
   
   <h2 style="margin: 26px 0 8px; font-size: 20px; font-weight: 700;">Practice questions</h2>
   <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Active recall — write your answer, THEN reveal. Mistakes here resurface in your queue tomorrow.</p>
-  <section class="question-block reveal"><h3>Today&#x27;s questions</h3><div class="qs"><div class="q" data-qid="today_0" data-stable="muscle_fiber_types__4"><div class="q-head"><span class="q-num">Q1</span><span class="q-type applied">applied</span></div><div class="q-text">Which fiber type would dominate a marathon&#x27;s later miles versus a 1RM deadlift?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_0', 'missed')">Missed</button></div><div class="q-reveal" id="reveal_today_0"><div class="reveal-label">Answer</div><div class="reveal-body">Marathon late miles: Type I (oxidative, fatigue-resistant). 1RM deadlift: Type IIx + IIa (high force, brief duration).</div></div></div><div class="q" data-qid="today_1" data-stable="muscle_fiber_types__0"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">What is the contractile unit of skeletal muscle?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_1', 'missed')">Missed</button></div><div class="q-reveal" id="reveal_today_1"><div class="reveal-label">Answer</div><div class="reveal-body">The sarcomere — defined as the region from one Z-disc to the next.</div></div></div><div class="q" data-qid="today_2" data-stable="muscle_fiber_types__3"><div class="q-head"><span class="q-num">Q3</span><span class="q-type recall">recall</span></div><div class="q-text">Cross-bridge cycling requires ATP for which specific step?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_2')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_2', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_2', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_2', 'missed')">Missed</button></div><div class="q-reveal" id="reveal_today_2"><div class="reveal-label">Answer</div><div class="reveal-body">Detachment of myosin from actin (and re-cocking the head). Lack of ATP causes the rigor state.</div></div></div><div class="q" data-qid="today_3" data-stable="muscle_fiber_types__1"><div class="q-head"><span class="q-num">Q4</span><span class="q-type recall">recall</span></div><div class="q-text">Which fiber type has the highest cross-sectional area and force capacity but fatigues fastest?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_3')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_3', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_3', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_3', 'missed')">Missed</button></div><div class="q-reveal" id="reveal_today_3"><div class="reveal-label">Answer</div><div class="reveal-body">Type IIx (fast glycolytic).</div></div></div></div></section><section class="question-block reveal"><h3>Bonus cross-domain question</h3><div class="qs"><div class="q" data-qid="bonus_0" data-stable="macros__0"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">kcal per gram: carb, protein, fat.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('bonus_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('bonus_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('bonus_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('bonus_0', 'missed')">Missed</button></div><div class="q-reveal" id="reveal_bonus_0"><div class="reveal-label">Answer</div><div class="reveal-body">CHO 4 kcal/g, PRO 4 kcal/g, FAT 9 kcal/g.</div></div></div></div></section>
+  <section class="question-block reveal"><h3>Today&#x27;s questions</h3><div class="qs"><div class="q" data-qid="today_0" data-stable="muscle_fiber_types__4"><div class="q-head"><span class="q-num">Q1</span><span class="q-type applied">applied</span></div><div class="q-text">Which fiber type would dominate a marathon&#x27;s later miles versus a 1RM deadlift?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_0"><div class="reveal-label">Answer</div><div class="reveal-body">Marathon late miles: Type I (oxidative, fatigue-resistant). 1RM deadlift: Type IIx + IIa (high force, brief duration).</div></div></div><div class="q" data-qid="today_1" data-stable="muscle_fiber_types__0"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">What is the contractile unit of skeletal muscle?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_1"><div class="reveal-label">Answer</div><div class="reveal-body">The sarcomere — defined as the region from one Z-disc to the next.</div></div></div><div class="q" data-qid="today_2" data-stable="muscle_fiber_types__3"><div class="q-head"><span class="q-num">Q3</span><span class="q-type recall">recall</span></div><div class="q-text">Cross-bridge cycling requires ATP for which specific step?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_2')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_2', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_2', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_2', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_2">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_2"><div class="reveal-label">Answer</div><div class="reveal-body">Detachment of myosin from actin (and re-cocking the head). Lack of ATP causes the rigor state.</div></div></div><div class="q" data-qid="today_3" data-stable="muscle_fiber_types__1"><div class="q-head"><span class="q-num">Q4</span><span class="q-type recall">recall</span></div><div class="q-text">Which fiber type has the highest cross-sectional area and force capacity but fatigues fastest?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_3')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_3', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_3', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_3', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_3">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_3"><div class="reveal-label">Answer</div><div class="reveal-body">Type IIx (fast glycolytic).</div></div></div></div></section><section class="question-block reveal"><h3>Bonus cross-domain question</h3><div class="qs"><div class="q" data-qid="bonus_0" data-stable="macros__0"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">kcal per gram: carb, protein, fat.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('bonus_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('bonus_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('bonus_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('bonus_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="bonus_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_bonus_0"><div class="reveal-label">Answer</div><div class="reveal-body">CHO 4 kcal/g, PRO 4 kcal/g, FAT 9 kcal/g.</div></div></div></div></section>
   <footer>
     Source: <i>Essentials of Strength Training and Conditioning</i> (4th ed.) · Adaptive spacing: SM-2 / Cepeda et al. 2008<br>
     <code>cscs_2026-05-19.html</code> · also written to <code>cscs_today.html</code> (rolling, for localStorage persistence)
@@ -797,6 +910,382 @@ document.addEventListener('DOMContentLoaded', function() {
   restoreAnswers();
   buildPersonalReviewQueue();
 });
+
+// ────────── EXPLICIT SAVE BUTTON ──────────
+function saveQuestion(qid) {
+  const root = document.querySelector('[data-qid="' + qid + '"]');
+  if (!root) return;
+  const stable = root.dataset.stable;
+  if (!stable) return;
+  const txt = root.querySelector('.q-answer');
+  if (txt) {
+    const answers = getAnswers();
+    answers[stable] = txt.value;
+    saveAnswers(answers);
+  }
+  // Flash status text
+  const status = document.querySelector('[data-status-for="' + qid + '"]');
+  if (status) {
+    status.textContent = '✓ Saved locally';
+    status.className = 'q-save-status saved';
+    setTimeout(function() {
+      status.textContent = '';
+      status.className = 'q-save-status';
+    }, 2500);
+  }
+  // Trigger cross-device push if enabled
+  if (typeof scheduleSyncPush === 'function') scheduleSyncPush();
+  showToast('Answer saved');
+}
+
+// ────────── TOAST ──────────
+function showToast(msg) {
+  let t = document.getElementById('cscs-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'cscs-toast';
+    t.className = 'cscs-toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('visible');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function() { t.classList.remove('visible'); }, 2200);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   CROSS-DEVICE SYNC VIA GITHUB GIST
+// ════════════════════════════════════════════════════════════════════════════
+// One-time setup:
+//   1. User creates a GitHub Personal Access Token (PAT) with only the 'gist' scope.
+//   2. PAT is stored in localStorage on each device.
+//   3. First device creates a private Gist; its ID is stored in localStorage.
+//   4. Other devices import the same Gist ID + PAT and start syncing.
+//
+// Sync behavior:
+//   - On page load (after restoring local state): pull remote, merge per-key
+//     (last-write-wins by entry.last_seen / payload.updated_at).
+//   - On any save (answer or mark): debounced push 4 seconds later.
+//   - Manual "Sync now" button forces immediate pull+push.
+//
+// Security:
+//   - PAT lives only in the user's browser localStorage.
+//   - PAT should have ONLY the 'gist' scope.
+//   - The Gist is private (visible only to the token's owner).
+
+const SYNC_KEYS = {
+  token: "sync.token",
+  gist: "sync.gist_id",
+  enabled: "sync.enabled",
+  last_push: "sync.last_push_at",
+  last_pull: "sync.last_pull_at",
+};
+const SYNC_FILENAME = "cscs-progress.json";
+const SYNC_SCHEMA = 2;
+
+function syncEnabled() { return !!lsGet(SYNC_KEYS.enabled, false); }
+function getToken() { return localStorage.getItem(LS_PREFIX + SYNC_KEYS.token) || ""; }
+function getGistId() { return localStorage.getItem(LS_PREFIX + SYNC_KEYS.gist) || ""; }
+function setToken(t) { localStorage.setItem(LS_PREFIX + SYNC_KEYS.token, t); }
+function setGistId(id) { localStorage.setItem(LS_PREFIX + SYNC_KEYS.gist, id); }
+
+async function gistFetch(method, path, token, body) {
+  const res = await fetch("https://api.github.com" + path, {
+    method,
+    headers: {
+      "Authorization": "token " + token,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "X-GitHub-Api-Version": "2022-11-28"
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error("GitHub API " + res.status + ": " + text.slice(0, 200));
+  }
+  return res.status === 204 ? null : res.json();
+}
+
+function buildSyncPayload() {
+  return {
+    schema: SYNC_SCHEMA,
+    updated_at: new Date().toISOString(),
+    qstate: getQuestionState(),
+    answers: getAnswers()
+  };
+}
+
+function mergeRemote(remote) {
+  if (!remote || remote.schema > SYNC_SCHEMA) return false;
+  const localQs = getQuestionState();
+  const localAns = getAnswers();
+  let changed = false;
+
+  // Per-key merge of qstate using last_seen as tiebreaker
+  const mergedQs = Object.assign({}, localQs);
+  for (const k in (remote.qstate || {})) {
+    const r = remote.qstate[k];
+    const l = mergedQs[k];
+    if (!l) { mergedQs[k] = r; changed = true; continue; }
+    const lTime = (l.last_seen || "") + "_" + (l.seen_count || 0);
+    const rTime = (r.last_seen || "") + "_" + (r.seen_count || 0);
+    if (rTime > lTime) { mergedQs[k] = r; changed = true; }
+  }
+
+  // Answers merge: prefer the version whose corresponding qstate is newer.
+  // If qstate is identical, prefer the longer/non-empty value.
+  const mergedAns = Object.assign({}, localAns);
+  for (const k in (remote.answers || {})) {
+    const rVal = remote.answers[k];
+    if (!mergedAns[k]) { mergedAns[k] = rVal; changed = true; continue; }
+    const rNewer = ((remote.qstate && remote.qstate[k] && remote.qstate[k].last_seen) || "") >
+                   ((localQs[k] && localQs[k].last_seen) || "");
+    if (rNewer && rVal && rVal !== mergedAns[k]) { mergedAns[k] = rVal; changed = true; }
+  }
+
+  if (changed) {
+    saveQuestionState(mergedQs);
+    saveAnswers(mergedAns);
+  }
+  return changed;
+}
+
+async function syncPull(opts) {
+  if (!syncEnabled()) return false;
+  const token = getToken(), gist = getGistId();
+  if (!token || !gist) return false;
+  updateSyncButton("syncing", "Pulling…");
+  try {
+    const data = await gistFetch("GET", "/gists/" + gist, token);
+    const file = data.files && data.files[SYNC_FILENAME];
+    if (!file) {
+      updateSyncButton("enabled", "Synced");
+      return false;
+    }
+    let remote;
+    if (file.truncated) {
+      const r = await fetch(file.raw_url);
+      remote = await r.json();
+    } else {
+      remote = JSON.parse(file.content);
+    }
+    const changed = mergeRemote(remote);
+    lsSet(SYNC_KEYS.last_pull, new Date().toISOString());
+    if (changed) {
+      restoreAnswers();
+      buildPersonalReviewQueue();
+      showToast("Pulled remote progress (" + Object.keys(remote.qstate || {}).length + " questions)");
+    }
+    updateSyncButton("enabled", "Synced");
+    return changed;
+  } catch (e) {
+    updateSyncButton("error", "Pull failed");
+    if (opts && opts.silent !== true) showToast("Sync pull failed: " + e.message);
+    return false;
+  }
+}
+
+let _pushTimer = null;
+function scheduleSyncPush() {
+  if (!syncEnabled()) return;
+  clearTimeout(_pushTimer);
+  updateSyncButton("syncing", "Pending…");
+  _pushTimer = setTimeout(syncPush, 4000);
+}
+
+async function syncPush(opts) {
+  if (!syncEnabled()) return false;
+  const token = getToken(), gist = getGistId();
+  if (!token || !gist) return false;
+  updateSyncButton("syncing", "Pushing…");
+  try {
+    const payload = buildSyncPayload();
+    await gistFetch("PATCH", "/gists/" + gist, token, {
+      files: { [SYNC_FILENAME]: { content: JSON.stringify(payload, null, 2) } }
+    });
+    lsSet(SYNC_KEYS.last_push, new Date().toISOString());
+    updateSyncButton("enabled", "Synced");
+    if (opts && opts.toast) showToast("Pushed to cloud");
+    return true;
+  } catch (e) {
+    updateSyncButton("error", "Push failed");
+    showToast("Sync push failed: " + e.message);
+    return false;
+  }
+}
+
+async function createNewGist() {
+  const token = getToken();
+  if (!token) throw new Error("No token");
+  const payload = buildSyncPayload();
+  const data = await gistFetch("POST", "/gists", token, {
+    description: "CSCS Study Progress (sync)",
+    public: false,
+    files: { [SYNC_FILENAME]: { content: JSON.stringify(payload, null, 2) } }
+  });
+  return data.id;
+}
+
+// ────────── SYNC MODAL UI ──────────
+function openSyncModal() {
+  const m = document.getElementById("sync-modal");
+  if (!m) return;
+  document.getElementById("sync-token-input").value = getToken();
+  document.getElementById("sync-gist-input").value = getGistId();
+  const last = lsGet(SYNC_KEYS.last_push, null);
+  const lastPull = lsGet(SYNC_KEYS.last_pull, null);
+  const status = document.getElementById("sync-modal-status");
+  if (syncEnabled() && last) {
+    status.className = "sync-status ok";
+    status.innerHTML = "Sync enabled. Last push: " + new Date(last).toLocaleString() +
+                       (lastPull ? "<br>Last pull: " + new Date(lastPull).toLocaleString() : "");
+  } else {
+    status.className = "sync-status";
+    status.textContent = "Sync not yet configured.";
+  }
+  m.classList.add("shown");
+}
+function closeSyncModal() {
+  document.getElementById("sync-modal").classList.remove("shown");
+}
+async function applySyncSettings() {
+  const token = document.getElementById("sync-token-input").value.trim();
+  const gist = document.getElementById("sync-gist-input").value.trim();
+  const status = document.getElementById("sync-modal-status");
+  if (!token) {
+    status.className = "sync-status err";
+    status.textContent = "Token required.";
+    return;
+  }
+  setToken(token);
+  // Validate by hitting /user/gists or by gist GET
+  status.className = "sync-status";
+  status.textContent = "Validating token…";
+  try {
+    if (gist) {
+      await gistFetch("GET", "/gists/" + gist, token);
+      setGistId(gist);
+    } else {
+      status.textContent = "Creating new private Gist…";
+      const id = await createNewGist();
+      setGistId(id);
+      document.getElementById("sync-gist-input").value = id;
+    }
+    lsSet(SYNC_KEYS.enabled, true);
+    status.className = "sync-status ok";
+    status.textContent = "Sync enabled. Pulling latest…";
+    updateSyncButton("enabled", "Synced");
+    await syncPull({ silent: true });
+    await syncPush({ toast: true });
+    status.className = "sync-status ok";
+    status.innerHTML = "Sync active. Gist ID: <code>" + getGistId() + "</code><br>" +
+                       "Copy this Gist ID to your other devices to keep them in sync.";
+  } catch (e) {
+    status.className = "sync-status err";
+    status.textContent = "Validation failed: " + e.message;
+  }
+}
+function disableSync() {
+  lsSet(SYNC_KEYS.enabled, false);
+  updateSyncButton("off", "Off");
+  const status = document.getElementById("sync-modal-status");
+  status.className = "sync-status";
+  status.textContent = "Sync disabled. Token and Gist ID kept; re-enable any time.";
+  showToast("Sync disabled");
+}
+async function forceSyncNow() {
+  await syncPull();
+  await syncPush({ toast: true });
+}
+
+function updateSyncButton(state, text) {
+  const btn = document.getElementById("sync-button");
+  if (!btn) return;
+  btn.className = "sync-button " + (state === "off" ? "" : state);
+  btn.querySelector(".sync-text").textContent = text;
+}
+
+function injectSyncUI() {
+  // Floating sync button
+  const btn = document.createElement("button");
+  btn.id = "sync-button";
+  btn.className = "sync-button " + (syncEnabled() ? "enabled" : "");
+  btn.innerHTML = '<span class="sync-dot"></span><span class="sync-text">' +
+                   (syncEnabled() ? "Sync" : "Cloud sync off") + '</span>';
+  btn.onclick = openSyncModal;
+  document.body.appendChild(btn);
+
+  // Modal
+  const modal = document.createElement("div");
+  modal.id = "sync-modal";
+  modal.className = "sync-modal";
+  modal.innerHTML =
+    '<div class="sync-modal-content">' +
+      '<h3>Cross-device sync</h3>' +
+      '<p>Sync your answers and SM-2 progress across phone, laptop, tablet — via a <b>private GitHub Gist</b>. Free, no external service needed.</p>' +
+      '<ol>' +
+        '<li>Generate a Personal Access Token (classic) with <b>only the gist scope</b>: <a href="https://github.com/settings/tokens/new?scopes=gist&description=CSCS%20Study%20Sync" target="_blank" rel="noopener">open GitHub →</a></li>' +
+        '<li>Paste it below.</li>' +
+        '<li>Leave Gist ID blank on your first device — it auto-creates one. Copy that ID to your other devices.</li>' +
+      '</ol>' +
+      '<label>Personal Access Token (gist scope only)' +
+        '<input type="password" id="sync-token-input" autocomplete="off" placeholder="ghp_…">' +
+      '</label>' +
+      '<label>Gist ID (blank to auto-create)' +
+        '<input type="text" id="sync-gist-input" autocomplete="off" placeholder="e.g. a1b2c3d4e5f6…">' +
+      '</label>' +
+      '<div class="sync-actions">' +
+        '<button type="button" class="btn-primary" onclick="applySyncSettings()">Enable / Update</button>' +
+        '<button type="button" onclick="forceSyncNow()">Sync now</button>' +
+        '<button type="button" onclick="disableSync()">Disable</button>' +
+        '<button type="button" onclick="closeSyncModal()" style="margin-left:auto;">Close</button>' +
+      '</div>' +
+      '<div id="sync-modal-status" class="sync-status">Sync not yet configured.</div>' +
+    '</div>';
+  modal.addEventListener("click", function(e) { if (e.target === modal) closeSyncModal(); });
+  document.body.appendChild(modal);
+}
+
+// Wire sync into existing save flows by re-binding markSelf and onAnswerInput
+const _origMarkSelf = markSelf;
+markSelf = function(qid, kind) { _origMarkSelf(qid, kind); scheduleSyncPush(); };
+const _origOnInput = onAnswerInput;
+onAnswerInput = function(ev) { _origOnInput(ev); scheduleSyncPush(); };
+
+// Boot sync on load
+document.addEventListener("DOMContentLoaded", function() {
+  injectSyncUI();
+  if (syncEnabled()) {
+    syncPull({ silent: true }).catch(function() {});
+  } else {
+    updateSyncButton("off", "Cloud sync off");
+  }
+});
+
+// ────────── AUTO-SAVE FLASH INDICATOR ──────────
+// Briefly flash "Saved ✓" next to a question when localStorage actually writes.
+// Replaces the explicit Save button — auto-save runs on every keystroke (debounced).
+(function() {
+  const origInput = onAnswerInput;
+  let flashTimers = {};
+  onAnswerInput = function(ev) {
+    origInput(ev);
+    const q = ev.target.closest('.q');
+    if (!q) return;
+    const qid = q.dataset.qid;
+    if (!qid) return;
+    const status = q.querySelector('[data-status-for="' + qid + '"]');
+    if (!status) return;
+    status.textContent = 'Saved ✓';
+    status.classList.add('flashed');
+    clearTimeout(flashTimers[qid]);
+    flashTimers[qid] = setTimeout(function() {
+      status.textContent = 'auto-saving as you type';
+      status.classList.remove('flashed');
+    }, 1400);
+  };
+})();
 </script>
 </body>
 </html>

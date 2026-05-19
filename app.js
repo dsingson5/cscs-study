@@ -226,3 +226,379 @@ document.addEventListener('DOMContentLoaded', function() {
   restoreAnswers();
   buildPersonalReviewQueue();
 });
+
+// ────────── EXPLICIT SAVE BUTTON ──────────
+function saveQuestion(qid) {
+  const root = document.querySelector('[data-qid="' + qid + '"]');
+  if (!root) return;
+  const stable = root.dataset.stable;
+  if (!stable) return;
+  const txt = root.querySelector('.q-answer');
+  if (txt) {
+    const answers = getAnswers();
+    answers[stable] = txt.value;
+    saveAnswers(answers);
+  }
+  // Flash status text
+  const status = document.querySelector('[data-status-for="' + qid + '"]');
+  if (status) {
+    status.textContent = '✓ Saved locally';
+    status.className = 'q-save-status saved';
+    setTimeout(function() {
+      status.textContent = '';
+      status.className = 'q-save-status';
+    }, 2500);
+  }
+  // Trigger cross-device push if enabled
+  if (typeof scheduleSyncPush === 'function') scheduleSyncPush();
+  showToast('Answer saved');
+}
+
+// ────────── TOAST ──────────
+function showToast(msg) {
+  let t = document.getElementById('cscs-toast');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'cscs-toast';
+    t.className = 'cscs-toast';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add('visible');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(function() { t.classList.remove('visible'); }, 2200);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   CROSS-DEVICE SYNC VIA GITHUB GIST
+// ════════════════════════════════════════════════════════════════════════════
+// One-time setup:
+//   1. User creates a GitHub Personal Access Token (PAT) with only the 'gist' scope.
+//   2. PAT is stored in localStorage on each device.
+//   3. First device creates a private Gist; its ID is stored in localStorage.
+//   4. Other devices import the same Gist ID + PAT and start syncing.
+//
+// Sync behavior:
+//   - On page load (after restoring local state): pull remote, merge per-key
+//     (last-write-wins by entry.last_seen / payload.updated_at).
+//   - On any save (answer or mark): debounced push 4 seconds later.
+//   - Manual "Sync now" button forces immediate pull+push.
+//
+// Security:
+//   - PAT lives only in the user's browser localStorage.
+//   - PAT should have ONLY the 'gist' scope.
+//   - The Gist is private (visible only to the token's owner).
+
+const SYNC_KEYS = {
+  token: "sync.token",
+  gist: "sync.gist_id",
+  enabled: "sync.enabled",
+  last_push: "sync.last_push_at",
+  last_pull: "sync.last_pull_at",
+};
+const SYNC_FILENAME = "cscs-progress.json";
+const SYNC_SCHEMA = 2;
+
+function syncEnabled() { return !!lsGet(SYNC_KEYS.enabled, false); }
+function getToken() { return localStorage.getItem(LS_PREFIX + SYNC_KEYS.token) || ""; }
+function getGistId() { return localStorage.getItem(LS_PREFIX + SYNC_KEYS.gist) || ""; }
+function setToken(t) { localStorage.setItem(LS_PREFIX + SYNC_KEYS.token, t); }
+function setGistId(id) { localStorage.setItem(LS_PREFIX + SYNC_KEYS.gist, id); }
+
+async function gistFetch(method, path, token, body) {
+  const res = await fetch("https://api.github.com" + path, {
+    method,
+    headers: {
+      "Authorization": "token " + token,
+      "Accept": "application/vnd.github+json",
+      "Content-Type": "application/json",
+      "X-GitHub-Api-Version": "2022-11-28"
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error("GitHub API " + res.status + ": " + text.slice(0, 200));
+  }
+  return res.status === 204 ? null : res.json();
+}
+
+function buildSyncPayload() {
+  return {
+    schema: SYNC_SCHEMA,
+    updated_at: new Date().toISOString(),
+    qstate: getQuestionState(),
+    answers: getAnswers()
+  };
+}
+
+function mergeRemote(remote) {
+  if (!remote || remote.schema > SYNC_SCHEMA) return false;
+  const localQs = getQuestionState();
+  const localAns = getAnswers();
+  let changed = false;
+
+  // Per-key merge of qstate using last_seen as tiebreaker
+  const mergedQs = Object.assign({}, localQs);
+  for (const k in (remote.qstate || {})) {
+    const r = remote.qstate[k];
+    const l = mergedQs[k];
+    if (!l) { mergedQs[k] = r; changed = true; continue; }
+    const lTime = (l.last_seen || "") + "_" + (l.seen_count || 0);
+    const rTime = (r.last_seen || "") + "_" + (r.seen_count || 0);
+    if (rTime > lTime) { mergedQs[k] = r; changed = true; }
+  }
+
+  // Answers merge: prefer the version whose corresponding qstate is newer.
+  // If qstate is identical, prefer the longer/non-empty value.
+  const mergedAns = Object.assign({}, localAns);
+  for (const k in (remote.answers || {})) {
+    const rVal = remote.answers[k];
+    if (!mergedAns[k]) { mergedAns[k] = rVal; changed = true; continue; }
+    const rNewer = ((remote.qstate && remote.qstate[k] && remote.qstate[k].last_seen) || "") >
+                   ((localQs[k] && localQs[k].last_seen) || "");
+    if (rNewer && rVal && rVal !== mergedAns[k]) { mergedAns[k] = rVal; changed = true; }
+  }
+
+  if (changed) {
+    saveQuestionState(mergedQs);
+    saveAnswers(mergedAns);
+  }
+  return changed;
+}
+
+async function syncPull(opts) {
+  if (!syncEnabled()) return false;
+  const token = getToken(), gist = getGistId();
+  if (!token || !gist) return false;
+  updateSyncButton("syncing", "Pulling…");
+  try {
+    const data = await gistFetch("GET", "/gists/" + gist, token);
+    const file = data.files && data.files[SYNC_FILENAME];
+    if (!file) {
+      updateSyncButton("enabled", "Synced");
+      return false;
+    }
+    let remote;
+    if (file.truncated) {
+      const r = await fetch(file.raw_url);
+      remote = await r.json();
+    } else {
+      remote = JSON.parse(file.content);
+    }
+    const changed = mergeRemote(remote);
+    lsSet(SYNC_KEYS.last_pull, new Date().toISOString());
+    if (changed) {
+      restoreAnswers();
+      buildPersonalReviewQueue();
+      showToast("Pulled remote progress (" + Object.keys(remote.qstate || {}).length + " questions)");
+    }
+    updateSyncButton("enabled", "Synced");
+    return changed;
+  } catch (e) {
+    updateSyncButton("error", "Pull failed");
+    if (opts && opts.silent !== true) showToast("Sync pull failed: " + e.message);
+    return false;
+  }
+}
+
+let _pushTimer = null;
+function scheduleSyncPush() {
+  if (!syncEnabled()) return;
+  clearTimeout(_pushTimer);
+  updateSyncButton("syncing", "Pending…");
+  _pushTimer = setTimeout(syncPush, 4000);
+}
+
+async function syncPush(opts) {
+  if (!syncEnabled()) return false;
+  const token = getToken(), gist = getGistId();
+  if (!token || !gist) return false;
+  updateSyncButton("syncing", "Pushing…");
+  try {
+    const payload = buildSyncPayload();
+    await gistFetch("PATCH", "/gists/" + gist, token, {
+      files: { [SYNC_FILENAME]: { content: JSON.stringify(payload, null, 2) } }
+    });
+    lsSet(SYNC_KEYS.last_push, new Date().toISOString());
+    updateSyncButton("enabled", "Synced");
+    if (opts && opts.toast) showToast("Pushed to cloud");
+    return true;
+  } catch (e) {
+    updateSyncButton("error", "Push failed");
+    showToast("Sync push failed: " + e.message);
+    return false;
+  }
+}
+
+async function createNewGist() {
+  const token = getToken();
+  if (!token) throw new Error("No token");
+  const payload = buildSyncPayload();
+  const data = await gistFetch("POST", "/gists", token, {
+    description: "CSCS Study Progress (sync)",
+    public: false,
+    files: { [SYNC_FILENAME]: { content: JSON.stringify(payload, null, 2) } }
+  });
+  return data.id;
+}
+
+// ────────── SYNC MODAL UI ──────────
+function openSyncModal() {
+  const m = document.getElementById("sync-modal");
+  if (!m) return;
+  document.getElementById("sync-token-input").value = getToken();
+  document.getElementById("sync-gist-input").value = getGistId();
+  const last = lsGet(SYNC_KEYS.last_push, null);
+  const lastPull = lsGet(SYNC_KEYS.last_pull, null);
+  const status = document.getElementById("sync-modal-status");
+  if (syncEnabled() && last) {
+    status.className = "sync-status ok";
+    status.innerHTML = "Sync enabled. Last push: " + new Date(last).toLocaleString() +
+                       (lastPull ? "<br>Last pull: " + new Date(lastPull).toLocaleString() : "");
+  } else {
+    status.className = "sync-status";
+    status.textContent = "Sync not yet configured.";
+  }
+  m.classList.add("shown");
+}
+function closeSyncModal() {
+  document.getElementById("sync-modal").classList.remove("shown");
+}
+async function applySyncSettings() {
+  const token = document.getElementById("sync-token-input").value.trim();
+  const gist = document.getElementById("sync-gist-input").value.trim();
+  const status = document.getElementById("sync-modal-status");
+  if (!token) {
+    status.className = "sync-status err";
+    status.textContent = "Token required.";
+    return;
+  }
+  setToken(token);
+  // Validate by hitting /user/gists or by gist GET
+  status.className = "sync-status";
+  status.textContent = "Validating token…";
+  try {
+    if (gist) {
+      await gistFetch("GET", "/gists/" + gist, token);
+      setGistId(gist);
+    } else {
+      status.textContent = "Creating new private Gist…";
+      const id = await createNewGist();
+      setGistId(id);
+      document.getElementById("sync-gist-input").value = id;
+    }
+    lsSet(SYNC_KEYS.enabled, true);
+    status.className = "sync-status ok";
+    status.textContent = "Sync enabled. Pulling latest…";
+    updateSyncButton("enabled", "Synced");
+    await syncPull({ silent: true });
+    await syncPush({ toast: true });
+    status.className = "sync-status ok";
+    status.innerHTML = "Sync active. Gist ID: <code>" + getGistId() + "</code><br>" +
+                       "Copy this Gist ID to your other devices to keep them in sync.";
+  } catch (e) {
+    status.className = "sync-status err";
+    status.textContent = "Validation failed: " + e.message;
+  }
+}
+function disableSync() {
+  lsSet(SYNC_KEYS.enabled, false);
+  updateSyncButton("off", "Off");
+  const status = document.getElementById("sync-modal-status");
+  status.className = "sync-status";
+  status.textContent = "Sync disabled. Token and Gist ID kept; re-enable any time.";
+  showToast("Sync disabled");
+}
+async function forceSyncNow() {
+  await syncPull();
+  await syncPush({ toast: true });
+}
+
+function updateSyncButton(state, text) {
+  const btn = document.getElementById("sync-button");
+  if (!btn) return;
+  btn.className = "sync-button " + (state === "off" ? "" : state);
+  btn.querySelector(".sync-text").textContent = text;
+}
+
+function injectSyncUI() {
+  // Floating sync button
+  const btn = document.createElement("button");
+  btn.id = "sync-button";
+  btn.className = "sync-button " + (syncEnabled() ? "enabled" : "");
+  btn.innerHTML = '<span class="sync-dot"></span><span class="sync-text">' +
+                   (syncEnabled() ? "Sync" : "Cloud sync off") + '</span>';
+  btn.onclick = openSyncModal;
+  document.body.appendChild(btn);
+
+  // Modal
+  const modal = document.createElement("div");
+  modal.id = "sync-modal";
+  modal.className = "sync-modal";
+  modal.innerHTML =
+    '<div class="sync-modal-content">' +
+      '<h3>Cross-device sync</h3>' +
+      '<p>Sync your answers and SM-2 progress across phone, laptop, tablet — via a <b>private GitHub Gist</b>. Free, no external service needed.</p>' +
+      '<ol>' +
+        '<li>Generate a Personal Access Token (classic) with <b>only the gist scope</b>: <a href="https://github.com/settings/tokens/new?scopes=gist&description=CSCS%20Study%20Sync" target="_blank" rel="noopener">open GitHub →</a></li>' +
+        '<li>Paste it below.</li>' +
+        '<li>Leave Gist ID blank on your first device — it auto-creates one. Copy that ID to your other devices.</li>' +
+      '</ol>' +
+      '<label>Personal Access Token (gist scope only)' +
+        '<input type="password" id="sync-token-input" autocomplete="off" placeholder="ghp_…">' +
+      '</label>' +
+      '<label>Gist ID (blank to auto-create)' +
+        '<input type="text" id="sync-gist-input" autocomplete="off" placeholder="e.g. a1b2c3d4e5f6…">' +
+      '</label>' +
+      '<div class="sync-actions">' +
+        '<button type="button" class="btn-primary" onclick="applySyncSettings()">Enable / Update</button>' +
+        '<button type="button" onclick="forceSyncNow()">Sync now</button>' +
+        '<button type="button" onclick="disableSync()">Disable</button>' +
+        '<button type="button" onclick="closeSyncModal()" style="margin-left:auto;">Close</button>' +
+      '</div>' +
+      '<div id="sync-modal-status" class="sync-status">Sync not yet configured.</div>' +
+    '</div>';
+  modal.addEventListener("click", function(e) { if (e.target === modal) closeSyncModal(); });
+  document.body.appendChild(modal);
+}
+
+// Wire sync into existing save flows by re-binding markSelf and onAnswerInput
+const _origMarkSelf = markSelf;
+markSelf = function(qid, kind) { _origMarkSelf(qid, kind); scheduleSyncPush(); };
+const _origOnInput = onAnswerInput;
+onAnswerInput = function(ev) { _origOnInput(ev); scheduleSyncPush(); };
+
+// Boot sync on load
+document.addEventListener("DOMContentLoaded", function() {
+  injectSyncUI();
+  if (syncEnabled()) {
+    syncPull({ silent: true }).catch(function() {});
+  } else {
+    updateSyncButton("off", "Cloud sync off");
+  }
+});
+
+// ────────── AUTO-SAVE FLASH INDICATOR ──────────
+// Briefly flash "Saved ✓" next to a question when localStorage actually writes.
+// Replaces the explicit Save button — auto-save runs on every keystroke (debounced).
+(function() {
+  const origInput = onAnswerInput;
+  let flashTimers = {};
+  onAnswerInput = function(ev) {
+    origInput(ev);
+    const q = ev.target.closest('.q');
+    if (!q) return;
+    const qid = q.dataset.qid;
+    if (!qid) return;
+    const status = q.querySelector('[data-status-for="' + qid + '"]');
+    if (!status) return;
+    status.textContent = 'Saved ✓';
+    status.classList.add('flashed');
+    clearTimeout(flashTimers[qid]);
+    flashTimers[qid] = setTimeout(function() {
+      status.textContent = 'auto-saving as you type';
+      status.classList.remove('flashed');
+    }, 1400);
+  };
+})();

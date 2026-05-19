@@ -149,6 +149,7 @@ def render_question_block(topic_id, label, qs, block_id):
             f'<button type="button" class="btn-self" data-self="correct" onclick="markSelf(\'{qid}\', \'correct\')">I got it</button>'
             f'<button type="button" class="btn-self" data-self="partial" onclick="markSelf(\'{qid}\', \'partial\')">Close</button>'
             f'<button type="button" class="btn-self" data-self="missed" onclick="markSelf(\'{qid}\', \'missed\')">Missed</button>'
+            f'<span class="q-save-status" data-status-for="{qid}">auto-saving as you type</span>'
             f'</div>'
             f'<div class="q-reveal" id="reveal_{qid}"><div class="reveal-label">Answer</div>'
             f'<div class="reveal-body">{esc(q["a"])}</div></div></div>'

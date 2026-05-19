@@ -276,3 +276,116 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   text-align: center;
   font-style: italic;
 }
+
+/* ─── Save button + status ─── */
+.btn-save {
+  background: var(--good) !important;
+  color: #04201a !important;
+  border-color: var(--good) !important;
+  font-weight: 600;
+}
+.btn-save:hover { box-shadow: 0 0 12px rgba(103, 232, 176, 0.5); transform: translateY(-1px); }
+.q-save-status {
+  font-size: 11px;
+  margin-left: 6px;
+  align-self: center;
+  color: var(--text-dim);
+  transition: opacity 0.3s;
+}
+.q-save-status.saved { color: var(--good); font-weight: 600; }
+
+/* ─── Toast ─── */
+.cscs-toast {
+  position: fixed;
+  top: 24px; right: 24px;
+  background: var(--surface);
+  border: 1px solid var(--good);
+  color: var(--good);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), 0 0 16px rgba(103, 232, 176, 0.25);
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  z-index: 9999;
+}
+.cscs-toast.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Sync settings modal ─── */
+.sync-button {
+  position: fixed;
+  bottom: 18px; right: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border-2);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.sync-button:hover { border-color: var(--good); }
+.sync-button .sync-dot {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--text-dimmer);
+}
+.sync-button.enabled .sync-dot { background: var(--good); box-shadow: 0 0 6px var(--good); }
+.sync-button.error .sync-dot { background: var(--bad); }
+
+.sync-modal {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+}
+.sync-modal.shown { display: flex; }
+.sync-modal-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+  max-width: 520px; width: 100%;
+  color: var(--text);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+}
+.sync-modal-content h3 { margin: 0 0 6px; font-size: 18px; }
+.sync-modal-content p { font-size: 13px; color: var(--text-dim); margin: 0 0 14px; }
+.sync-modal-content ol { font-size: 12px; color: var(--text-dim); padding-left: 22px; margin: 8px 0 14px; }
+.sync-modal-content ol li { margin-bottom: 4px; }
+.sync-modal-content ol a { color: var(--good); }
+.sync-modal-content label { display: block; margin-top: 10px; font-size: 12px; color: var(--text-dim); }
+.sync-modal-content input[type=password], .sync-modal-content input[type=text] {
+  width: 100%; margin-top: 4px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
+  color: var(--text); padding: 8px 10px; font-family: ui-monospace, monospace; font-size: 12px;
+}
+.sync-modal-content .sync-actions { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+.sync-modal-content .sync-status {
+  margin-top: 14px; padding: 10px 12px;
+  border-radius: 6px; font-size: 12px;
+  background: var(--bg-2); color: var(--text-dim);
+}
+.sync-modal-content .sync-status.ok { color: var(--good); border-left: 3px solid var(--good); }
+.sync-modal-content .sync-status.err { color: var(--bad); border-left: 3px solid var(--bad); }
+.sync-modal-content .btn-primary {
+  background: var(--good); color: #04201a; border-color: var(--good); font-weight: 600;
+}
+
+/* Subtle auto-save indicator (replaces explicit Save button) */
+.q-save-status {
+  font-size: 10px;
+  margin-left: 8px;
+  align-self: center;
+  color: var(--text-dimmer);
+  font-style: italic;
+  transition: color 0.3s;
+}
+.q-save-status.flashed { color: var(--good); font-style: normal; font-weight: 600; }
