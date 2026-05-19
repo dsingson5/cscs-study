@@ -396,6 +396,31 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 }
 .q-save-status.flashed { color: var(--good); font-style: normal; font-weight: 600; }
 /* Force redeploy */
+/* trigger deploy */
+
+/* Visual glossary */
+.glossary { margin: 14px 0 16px; padding: 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; }
+.gloss-title { font-size: 11px; color: var(--accent, var(--theme-accent)); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 12px; }
+.gloss-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 600px) { .gloss-grid { grid-template-columns: 1fr 1fr; } }
+.gloss-card {
+  display: flex; gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: glossSlideIn 0.5s ease-out forwards;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.gloss-card:hover { transform: translateY(-2px); border-color: var(--accent, var(--theme-accent)); box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+@keyframes glossSlideIn { to { opacity: 1; transform: translateY(0); } }
+.gloss-svg { flex-shrink: 0; width: 64px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.gloss-svg svg { width: 100%; height: 100%; }
+.gloss-text { flex: 1; min-width: 0; }
+.gloss-term { font-size: 13px; font-weight: 700; color: var(--accent, var(--theme-accent)); margin-bottom: 3px; }
+.gloss-def { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
 </style>
 <style>:root {
   --bg: #13150e;
@@ -656,13 +681,12 @@ function addDays(iso, n) {
 }
 
 function restoreAnswers() {
-  const answers = getAnswers();
+  // Active recall: textareas always start EMPTY so each visit forces a fresh attempt.
+  // Saved marks are still restored so SM-2 progress is visible.
   const state = getQuestionState();
   document.querySelectorAll(".q").forEach(q => {
     const stable = q.dataset.stable;
     if (!stable) return;
-    const txt = q.querySelector(".q-answer");
-    if (txt && answers[stable]) txt.value = answers[stable];
     const mark = state[stable] && state[stable].last_mark;
     if (mark) {
       const btn = q.querySelector('button[data-self="' + mark + '"]');
@@ -793,7 +817,7 @@ function buildPersonalReviewQueue() {
   container.querySelectorAll('.q').forEach(function(q) {
     var s = q.dataset.stable;
     var txt = q.querySelector('.q-answer');
-    if (txt && answers[s]) txt.value = answers[s];
+    // active recall: do not pre-fill answer text
     var mark = state[s] && state[s].last_mark;
     if (mark) {
       var btn = q.querySelector('button[data-self="' + mark + '"]');

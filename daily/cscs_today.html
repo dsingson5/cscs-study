@@ -397,6 +397,30 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .q-save-status.flashed { color: var(--good); font-style: normal; font-weight: 600; }
 /* Force redeploy */
 /* trigger deploy */
+
+/* Visual glossary */
+.glossary { margin: 14px 0 16px; padding: 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 12px; }
+.gloss-title { font-size: 11px; color: var(--accent, var(--theme-accent)); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 12px; }
+.gloss-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 600px) { .gloss-grid { grid-template-columns: 1fr 1fr; } }
+.gloss-card {
+  display: flex; gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: glossSlideIn 0.5s ease-out forwards;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.gloss-card:hover { transform: translateY(-2px); border-color: var(--accent, var(--theme-accent)); box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+@keyframes glossSlideIn { to { opacity: 1; transform: translateY(0); } }
+.gloss-svg { flex-shrink: 0; width: 64px; height: 40px; display: flex; align-items: center; justify-content: center; }
+.gloss-svg svg { width: 100%; height: 100%; }
+.gloss-text { flex: 1; min-width: 0; }
+.gloss-term { font-size: 13px; font-weight: 700; color: var(--accent, var(--theme-accent)); margin-bottom: 3px; }
+.gloss-def { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
 </style>
 <style>:root {
   --bg: #eff2f0;
@@ -672,7 +696,7 @@ body { background-image: repeating-linear-gradient(90deg, transparent 0px, trans
 </div>
   <div class="w-hint">Z-discs pull together as actin slides along myosin via cross-bridge cycling.</div>
 </div>
-<div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Sarcomere = Z-disc to Z-disc</li><li>Cross-bridge cycle requires ATP for both attachment AND detachment</li><li>Type I: high mitochondrial density, capillaries, myoglobin</li><li>Type IIx: largest cross-sectional area, highest force/velocity, lowest endurance</li><li>Heavy resistance training shifts IIx → IIa (not Type II → Type I)</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your aerobic base (HR 132 indoor Z2 cap, LT1=147) reflects Type I oxidative capacity. Your 4×8 sessions (HR 170-175 target) recruit Type IIa heavily — sub-MLSS endurance work develops the IIa pool you need for Hyrox station blocks.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=z6oWj7410G0" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin — Muscle Fiber Types &amp; Training Explained (Iron Culture Ep 236)</div><div class="m-cred">Iron Culture Podcast · Eric Helms PhD + Mike Israetel PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Dr. Andy Galpin: How to Build Strength, Muscle Size &amp; Endurance (Ep 65)</div><div class="m-cred">Stanford neuroscience + Galpin PhD</div></div></a></div></section>
+<div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Sarcomere = Z-disc to Z-disc</li><li>Cross-bridge cycle requires ATP for both attachment AND detachment</li><li>Type I: high mitochondrial density, capillaries, myoglobin</li><li>Type IIx: largest cross-sectional area, highest force/velocity, lowest endurance</li><li>Heavy resistance training shifts IIx → IIa (not Type II → Type I)</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="6" x2="10" y2="34" stroke="#ff5e5e" stroke-width="3"/><line x1="70" y1="6" x2="70" y2="34" stroke="#ff5e5e" stroke-width="3"/><rect x="10" y="14" width="40" height="2" fill="#67e8b0"/><rect x="10" y="24" width="40" height="2" fill="#67e8b0"/><rect x="30" y="14" width="40" height="2" fill="#67e8b0"/><rect x="30" y="24" width="40" height="2" fill="#67e8b0"/><rect x="28" y="12" width="24" height="16" fill="#5ec8ff" opacity="0.7" rx="1"/></svg></div><div class="gloss-text"><div class="gloss-term">Sarcomere</div><div class="gloss-def">The contractile unit, Z-disc to Z-disc. When muscle contracts, sarcomeres shorten — the thin filaments slide inward past the thick filament.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="14" width="50" height="12" fill="#5ec8ff" rx="2"/><g stroke="#ffb86b" stroke-width="2" stroke-linecap="round"><line x1="22" y1="14" x2="22" y2="8"/><line x1="30" y1="14" x2="30" y2="8"/><line x1="38" y1="14" x2="38" y2="8"/><line x1="46" y1="14" x2="46" y2="8"/><line x1="54" y1="14" x2="54" y2="8"/><line x1="22" y1="26" x2="22" y2="32"/><line x1="30" y1="26" x2="30" y2="32"/><line x1="38" y1="26" x2="38" y2="32"/><line x1="46" y1="26" x2="46" y2="32"/><line x1="54" y1="26" x2="54" y2="32"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Myosin</div><div class="gloss-def">Thick filament (blue). Its &#x27;heads&#x27; grab actin and pull — the cross-bridge cycle.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="#67e8b0"><circle cx="10" cy="20" r="4"/><circle cx="22" cy="20" r="4"/><circle cx="34" cy="20" r="4"/><circle cx="46" cy="20" r="4"/><circle cx="58" cy="20" r="4"/><circle cx="70" cy="20" r="4"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Actin</div><div class="gloss-def">Thin filament (green). Anchored at Z-discs, projects toward myosin. Has binding sites for myosin heads.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="20" r="16" fill="#a04040" opacity="0.8"/><circle cx="32" cy="14" r="3" fill="#ffb86b"/><circle cx="44" cy="12" r="3" fill="#ffb86b"/><circle cx="48" cy="24" r="3" fill="#ffb86b"/><circle cx="30" cy="26" r="3" fill="#ffb86b"/><circle cx="40" cy="20" r="3" fill="#ffb86b"/></svg></div><div class="gloss-text"><div class="gloss-term">Type I (slow oxidative)</div><div class="gloss-def">Red, mitochondria-rich, fatigue-resistant. Marathon fibers.</div></div></div><div class="gloss-card" style="animation-delay: 0.32s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="20" r="16" fill="#f0d8a0" opacity="0.85"/><g stroke="#ffd84a" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M 30 14 L 50 14 M 28 20 L 52 20 M 30 26 L 50 26"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Type IIx (fast glycolytic)</div><div class="gloss-def">Pale, glycogen-rich, highest force + speed but fatigues fast. Sprint fibers.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your aerobic base (HR 132 indoor Z2 cap, LT1=147) reflects Type I oxidative capacity. Your 4×8 sessions (HR 170-175 target) recruit Type IIa heavily — sub-MLSS endurance work develops the IIa pool you need for Hyrox station blocks.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=z6oWj7410G0" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin — Muscle Fiber Types &amp; Training Explained (Iron Culture Ep 236)</div><div class="m-cred">Iron Culture Podcast · Eric Helms PhD + Mike Israetel PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Dr. Andy Galpin: How to Build Strength, Muscle Size &amp; Endurance (Ep 65)</div><div class="m-cred">Stanford neuroscience + Galpin PhD</div></div></a></div></section>
   
   <h2 style="margin: 26px 0 8px; font-size: 20px; font-weight: 700;">Practice questions</h2>
   <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Active recall — write your answer, THEN reveal. Mistakes here resurface in your queue tomorrow.</p>
@@ -724,13 +748,12 @@ function addDays(iso, n) {
 }
 
 function restoreAnswers() {
-  const answers = getAnswers();
+  // Active recall: textareas always start EMPTY so each visit forces a fresh attempt.
+  // Saved marks are still restored so SM-2 progress is visible.
   const state = getQuestionState();
   document.querySelectorAll(".q").forEach(q => {
     const stable = q.dataset.stable;
     if (!stable) return;
-    const txt = q.querySelector(".q-answer");
-    if (txt && answers[stable]) txt.value = answers[stable];
     const mark = state[stable] && state[stable].last_mark;
     if (mark) {
       const btn = q.querySelector('button[data-self="' + mark + '"]');
@@ -861,7 +884,7 @@ function buildPersonalReviewQueue() {
   container.querySelectorAll('.q').forEach(function(q) {
     var s = q.dataset.stable;
     var txt = q.querySelector('.q-answer');
-    if (txt && answers[s]) txt.value = answers[s];
+    // active recall: do not pre-fill answer text
     var mark = state[s] && state[s].last_mark;
     if (mark) {
       var btn = q.querySelector('button[data-self="' + mark + '"]');

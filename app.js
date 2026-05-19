@@ -39,13 +39,12 @@ function addDays(iso, n) {
 }
 
 function restoreAnswers() {
-  const answers = getAnswers();
+  // Active recall: textareas always start EMPTY so each visit forces a fresh attempt.
+  // Saved marks are still restored so SM-2 progress is visible.
   const state = getQuestionState();
   document.querySelectorAll(".q").forEach(q => {
     const stable = q.dataset.stable;
     if (!stable) return;
-    const txt = q.querySelector(".q-answer");
-    if (txt && answers[stable]) txt.value = answers[stable];
     const mark = state[stable] && state[stable].last_mark;
     if (mark) {
       const btn = q.querySelector('button[data-self="' + mark + '"]');
@@ -176,7 +175,7 @@ function buildPersonalReviewQueue() {
   container.querySelectorAll('.q').forEach(function(q) {
     var s = q.dataset.stable;
     var txt = q.querySelector('.q-answer');
-    if (txt && answers[s]) txt.value = answers[s];
+    // active recall: do not pre-fill answer text
     var mark = state[s] && state[s].last_mark;
     if (mark) {
       var btn = q.querySelector('button[data-self="' + mark + '"]');

@@ -117,6 +117,18 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
     chip = (f'<span class="domain-chip" style="background: {theme["glow"]}; color: {theme["accent"]}; border-color: {theme["accent"]}66;">'
             f'<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
             f'<path d="{theme["icon"]}"/></svg>{esc(theme["name"])}</span>')
+    # Glossary — animated definition cards for technical terms
+    glossary_html = ""
+    if lesson.get("glossary"):
+        items = ""
+        for i, g in enumerate(lesson["glossary"]):
+            items += (f'<div class="gloss-card" style="animation-delay: {i*0.08:.2f}s">'
+                      f'<div class="gloss-svg">{g["svg"]}</div>'
+                      f'<div class="gloss-text"><div class="gloss-term">{esc(g["term"])}</div>'
+                      f'<div class="gloss-def">{esc(g["def"])}</div></div></div>')
+        glossary_html = (f'<div class="glossary"><div class="gloss-title">Visual glossary</div>'
+                         f'<div class="gloss-grid">{items}</div></div>')
+
     return (f'<section class="lesson-card reveal{motif_class}" data-domain="{domain}" '
             f'style="--accent: {theme["accent"]}; --accent-2: {theme["accent_2"]}; --glow: {theme["glow"]};">'
             f'{hero_html}'
@@ -126,6 +138,7 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
             f'<p class="concept">{esc(lesson.get("key_concept", ""))}</p>'
             f'{widget_html}'
             f'<div class="facts"><div class="facts-title">Key facts to memorize</div><ul>{facts}</ul></div>'
+            f'{glossary_html}'
             f'{tl_html}<div class="media">{media}</div></section>')
 
 

@@ -75,7 +75,34 @@
         "title": "Huberman Lab — Dr. Andy Galpin: How to Build Strength, Muscle Size & Endurance (Ep 65)",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
         "credibility": "Stanford neuroscience + Galpin PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Sarcomere",
+          "def": "The contractile unit, Z-disc to Z-disc. When muscle contracts, sarcomeres shorten — the thin filaments slide inward past the thick filament.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"6\" x2=\"10\" y2=\"34\" stroke=\"#ff5e5e\" stroke-width=\"3\"/><line x1=\"70\" y1=\"6\" x2=\"70\" y2=\"34\" stroke=\"#ff5e5e\" stroke-width=\"3\"/><rect x=\"10\" y=\"14\" width=\"40\" height=\"2\" fill=\"#67e8b0\"/><rect x=\"10\" y=\"24\" width=\"40\" height=\"2\" fill=\"#67e8b0\"/><rect x=\"30\" y=\"14\" width=\"40\" height=\"2\" fill=\"#67e8b0\"/><rect x=\"30\" y=\"24\" width=\"40\" height=\"2\" fill=\"#67e8b0\"/><rect x=\"28\" y=\"12\" width=\"24\" height=\"16\" fill=\"#5ec8ff\" opacity=\"0.7\" rx=\"1\"/></svg>"
+        },
+        {
+          "term": "Myosin",
+          "def": "Thick filament (blue). Its 'heads' grab actin and pull — the cross-bridge cycle.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"15\" y=\"14\" width=\"50\" height=\"12\" fill=\"#5ec8ff\" rx=\"2\"/><g stroke=\"#ffb86b\" stroke-width=\"2\" stroke-linecap=\"round\"><line x1=\"22\" y1=\"14\" x2=\"22\" y2=\"8\"/><line x1=\"30\" y1=\"14\" x2=\"30\" y2=\"8\"/><line x1=\"38\" y1=\"14\" x2=\"38\" y2=\"8\"/><line x1=\"46\" y1=\"14\" x2=\"46\" y2=\"8\"/><line x1=\"54\" y1=\"14\" x2=\"54\" y2=\"8\"/><line x1=\"22\" y1=\"26\" x2=\"22\" y2=\"32\"/><line x1=\"30\" y1=\"26\" x2=\"30\" y2=\"32\"/><line x1=\"38\" y1=\"26\" x2=\"38\" y2=\"32\"/><line x1=\"46\" y1=\"26\" x2=\"46\" y2=\"32\"/><line x1=\"54\" y1=\"26\" x2=\"54\" y2=\"32\"/></g></svg>"
+        },
+        {
+          "term": "Actin",
+          "def": "Thin filament (green). Anchored at Z-discs, projects toward myosin. Has binding sites for myosin heads.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#67e8b0\"><circle cx=\"10\" cy=\"20\" r=\"4\"/><circle cx=\"22\" cy=\"20\" r=\"4\"/><circle cx=\"34\" cy=\"20\" r=\"4\"/><circle cx=\"46\" cy=\"20\" r=\"4\"/><circle cx=\"58\" cy=\"20\" r=\"4\"/><circle cx=\"70\" cy=\"20\" r=\"4\"/></g></svg>"
+        },
+        {
+          "term": "Type I (slow oxidative)",
+          "def": "Red, mitochondria-rich, fatigue-resistant. Marathon fibers.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"16\" fill=\"#a04040\" opacity=\"0.8\"/><circle cx=\"32\" cy=\"14\" r=\"3\" fill=\"#ffb86b\"/><circle cx=\"44\" cy=\"12\" r=\"3\" fill=\"#ffb86b\"/><circle cx=\"48\" cy=\"24\" r=\"3\" fill=\"#ffb86b\"/><circle cx=\"30\" cy=\"26\" r=\"3\" fill=\"#ffb86b\"/><circle cx=\"40\" cy=\"20\" r=\"3\" fill=\"#ffb86b\"/></svg>"
+        },
+        {
+          "term": "Type IIx (fast glycolytic)",
+          "def": "Pale, glycogen-rich, highest force + speed but fatigues fast. Sprint fibers.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"16\" fill=\"#f0d8a0\" opacity=\"0.85\"/><g stroke=\"#ffd84a\" stroke-width=\"1.5\" stroke-linecap=\"round\" fill=\"none\"><path d=\"M 30 14 L 50 14 M 28 20 L 52 20 M 30 26 L 50 26\"/></g></svg>"
+        }
+      ]
     },
     "2": {
       "title": "Motor units & the size principle",
@@ -101,7 +128,24 @@
         "title": "Huberman Lab — Andy Galpin Guest Series: Optimal Protocols to Build Strength & Grow Muscles",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Motor unit",
+          "def": "One alpha motoneuron plus every fiber it innervates. All fibers in a unit are the same type.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"15\" cy=\"25\" r=\"8\" fill=\"#5ec8ff\"/><line x1=\"23\" y1=\"25\" x2=\"60\" y2=\"25\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><line x1=\"60\" y1=\"25\" x2=\"80\" y2=\"15\" stroke=\"#5ec8ff\" stroke-width=\"1.5\"/><line x1=\"60\" y1=\"25\" x2=\"80\" y2=\"25\" stroke=\"#5ec8ff\" stroke-width=\"1.5\"/><line x1=\"60\" y1=\"25\" x2=\"80\" y2=\"35\" stroke=\"#5ec8ff\" stroke-width=\"1.5\"/><rect x=\"80\" y=\"12\" width=\"14\" height=\"6\" fill=\"#a04040\" rx=\"2\"/><rect x=\"80\" y=\"22\" width=\"14\" height=\"6\" fill=\"#a04040\" rx=\"2\"/><rect x=\"80\" y=\"32\" width=\"14\" height=\"6\" fill=\"#a04040\" rx=\"2\"/></svg>"
+        },
+        {
+          "term": "Size Principle",
+          "def": "Smallest (Type I) motor units fire first. Larger (Type IIa, then IIx) units recruit only as force demand rises.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"20\" cy=\"35\" r=\"6\" fill=\"#67e8b0\"/><circle cx=\"40\" cy=\"32\" r=\"9\" fill=\"#ffb86b\"/><circle cx=\"65\" cy=\"28\" r=\"13\" fill=\"#ff7a7a\"/><line x1=\"10\" y1=\"45\" x2=\"90\" y2=\"45\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><text x=\"50\" y=\"49\" fill=\"#9ba3b4\" font-size=\"6\" text-anchor=\"middle\">Force demand →</text></svg>"
+        },
+        {
+          "term": "Rate coding",
+          "def": "After all units are recruited, force keeps rising via higher firing frequency of motoneurons.",
+          "svg": "<svg viewBox=\"0 0 100 40\" xmlns=\"http://www.w3.org/2000/svg\"><g stroke=\"#5ec8ff\" stroke-width=\"1.5\" fill=\"none\"><path d=\"M 10 25 L 18 25 L 18 12 L 22 12 L 22 25 L 30 25\"/><path d=\"M 35 25 L 40 25 L 40 12 L 43 12 L 43 25 L 48 25 L 48 12 L 51 12 L 51 25 L 56 25\"/><path d=\"M 60 25 L 64 25 L 64 12 L 66 12 L 66 25 L 70 25 L 70 12 L 72 12 L 72 25 L 76 25 L 76 12 L 78 12 L 78 25 L 85 25\"/></g><text x=\"20\" y=\"38\" fill=\"#9ba3b4\" font-size=\"5\">low</text><text x=\"48\" y=\"38\" fill=\"#9ba3b4\" font-size=\"5\">moderate</text><text x=\"73\" y=\"38\" fill=\"#9ba3b4\" font-size=\"5\">high</text></svg>"
+        }
+      ]
     },
     "3": {
       "title": "Neuromuscular junction & excitation-contraction coupling",
@@ -127,7 +171,29 @@
         "title": "Huberman Lab — How to Build Strength, Muscle Size & Endurance",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
         "credibility": "Stanford + Galpin PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Acetylcholine (ACh)",
+          "def": "The neurotransmitter at the neuromuscular junction. Binds nicotinic receptors on the sarcolemma, triggering depolarization.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"20\" cy=\"25\" r=\"10\" fill=\"#5ec8ff\" opacity=\"0.3\"/><circle cx=\"20\" cy=\"25\" r=\"4\" fill=\"#5ec8ff\"/><g fill=\"#ffd84a\"><circle cx=\"35\" cy=\"20\" r=\"2.5\"/><circle cx=\"45\" cy=\"28\" r=\"2.5\"/><circle cx=\"55\" cy=\"22\" r=\"2.5\"/></g><rect x=\"65\" y=\"15\" width=\"25\" height=\"20\" fill=\"#a04040\" opacity=\"0.4\" rx=\"3\"/><g fill=\"#a04040\"><circle cx=\"73\" cy=\"22\" r=\"2\"/><circle cx=\"82\" cy=\"22\" r=\"2\"/><circle cx=\"73\" cy=\"30\" r=\"2\"/><circle cx=\"82\" cy=\"30\" r=\"2\"/></g></svg>"
+        },
+        {
+          "term": "T-tubule",
+          "def": "Invagination of sarcolemma that carries action potentials into the depth of the muscle fiber.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"5\" y=\"5\" width=\"90\" height=\"40\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\" rx=\"2\"/><line x1=\"30\" y1=\"5\" x2=\"30\" y2=\"40\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><line x1=\"55\" y1=\"5\" x2=\"55\" y2=\"40\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><line x1=\"80\" y1=\"5\" x2=\"80\" y2=\"40\" stroke=\"#5ec8ff\" stroke-width=\"2\"/></svg>"
+        },
+        {
+          "term": "Sarcoplasmic reticulum (SR)",
+          "def": "Intracellular calcium store. Action potentials release Ca²⁺ from the SR; the Ca²⁺ triggers contraction.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 25 Q 25 10 50 25 T 90 25\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2.5\"/><g fill=\"#ffb86b\"><circle cx=\"20\" cy=\"20\" r=\"2\"/><circle cx=\"35\" cy=\"14\" r=\"2\"/><circle cx=\"50\" cy=\"20\" r=\"2\"/><circle cx=\"65\" cy=\"14\" r=\"2\"/><circle cx=\"80\" cy=\"20\" r=\"2\"/></g><text x=\"50\" y=\"45\" fill=\"#9ba3b4\" font-size=\"6\" text-anchor=\"middle\">Ca²⁺ released</text></svg>"
+        },
+        {
+          "term": "Cross-bridge cycle",
+          "def": "Myosin head binds actin → power stroke → ATP detaches it → ATP hydrolysis re-cocks it. Requires ATP for BOTH attachment and detachment.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"22\" width=\"80\" height=\"6\" fill=\"#5ec8ff\" rx=\"1\"/><g fill=\"#ffb86b\"><circle cx=\"20\" cy=\"14\" r=\"3\"/><circle cx=\"35\" cy=\"14\" r=\"3\"/><circle cx=\"50\" cy=\"14\" r=\"3\"/><circle cx=\"65\" cy=\"14\" r=\"3\"/><circle cx=\"80\" cy=\"14\" r=\"3\"/></g><g stroke=\"#ffb86b\" stroke-width=\"1\"><line x1=\"20\" y1=\"17\" x2=\"20\" y2=\"22\"/><line x1=\"35\" y1=\"17\" x2=\"35\" y2=\"22\"/><line x1=\"50\" y1=\"17\" x2=\"50\" y2=\"22\"/><line x1=\"65\" y1=\"17\" x2=\"65\" y2=\"22\"/><line x1=\"80\" y1=\"17\" x2=\"80\" y2=\"22\"/></g><g fill=\"#67e8b0\"><circle cx=\"15\" cy=\"34\" r=\"2\"/><circle cx=\"30\" cy=\"34\" r=\"2\"/><circle cx=\"45\" cy=\"34\" r=\"2\"/><circle cx=\"60\" cy=\"34\" r=\"2\"/><circle cx=\"75\" cy=\"34\" r=\"2\"/></g></svg>"
+        }
+      ]
     },
     "4": {
       "title": "Cardiovascular system — heart, vessels, blood flow",
@@ -205,7 +271,24 @@
         "title": "Peter Attia Drive #85 — San-Millán: Mitochondria & Energy Systems",
         "url": "https://peterattiamd.com/inigosanmillan/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "ATP",
+          "def": "Adenosine triphosphate. The cell's energy currency. Hydrolysis to ADP + Pi releases the energy that powers contraction.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"20\" cy=\"25\" r=\"9\" fill=\"#ffd84a\"/><text x=\"20\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"8\" font-weight=\"700\">A</text><circle cx=\"40\" cy=\"25\" r=\"7\" fill=\"#ffb86b\"/><text x=\"40\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"7\" font-weight=\"700\">P</text><circle cx=\"55\" cy=\"25\" r=\"7\" fill=\"#ffb86b\"/><text x=\"55\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"7\" font-weight=\"700\">P</text><circle cx=\"70\" cy=\"25\" r=\"7\" fill=\"#ffb86b\"/><text x=\"70\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"7\" font-weight=\"700\">P</text><g stroke=\"#a37a08\" stroke-width=\"1\"><line x1=\"29\" y1=\"25\" x2=\"33\" y2=\"25\"/><line x1=\"47\" y1=\"25\" x2=\"48\" y2=\"25\"/><line x1=\"62\" y1=\"25\" x2=\"63\" y2=\"25\"/></g></svg>"
+        },
+        {
+          "term": "PCr (phosphocreatine)",
+          "def": "High-energy phosphate stored in muscle. Creatine kinase transfers its phosphate to ADP → ATP. Fastest way to regenerate ATP.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"35\" cy=\"25\" r=\"12\" fill=\"#ff8a3a\" opacity=\"0.85\"/><text x=\"35\" y=\"22\" text-anchor=\"middle\" fill=\"#3a1a00\" font-size=\"7\" font-weight=\"700\">Cr</text><text x=\"35\" y=\"32\" text-anchor=\"middle\" fill=\"#3a1a00\" font-size=\"7\" font-weight=\"700\">~P</text><path d=\"M 50 25 L 65 25\" stroke=\"#ffd84a\" stroke-width=\"2\" marker-end=\"url(#arr)\"/><defs><marker id=\"arr\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\"><polygon points=\"0,0 10,5 0,10\" fill=\"#ffd84a\"/></marker></defs><circle cx=\"78\" cy=\"25\" r=\"10\" fill=\"#ffd84a\"/><text x=\"78\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"7\" font-weight=\"700\">ATP</text></svg>"
+        },
+        {
+          "term": "Creatine kinase",
+          "def": "Enzyme that catalyzes PCr + ADP → ATP + Cr. Very fast reaction — the phosphagen system supplies energy in milliseconds.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><g><circle cx=\"50\" cy=\"25\" r=\"18\" fill=\"#ffd84a\" opacity=\"0.3\"/><circle cx=\"50\" cy=\"25\" r=\"14\" fill=\"#ffd84a\" opacity=\"0.5\"/><circle cx=\"50\" cy=\"25\" r=\"10\" fill=\"#ffd84a\"/><text x=\"50\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"7\" font-weight=\"700\">CK</text></g></svg>"
+        }
+      ]
     },
     "7": {
       "title": "Bioenergetics II — Glycolysis & lactate",
@@ -231,7 +314,24 @@
         "title": "Peter Attia Drive #201 — San-Millán on Lactate & Zone 2",
         "url": "https://peterattiamd.com/inigosanmillan2/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Glycolysis",
+          "def": "Breakdown of glucose → 2 pyruvate, yielding 2 ATP (3 from glycogen). 'Fast' glycolysis sends pyruvate to lactate when oxygen is limiting.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><polygon points=\"20,12 30,5 40,12 40,24 30,31 20,24\" fill=\"none\" stroke=\"#ffcc4a\" stroke-width=\"1.5\"/><text x=\"30\" y=\"22\" text-anchor=\"middle\" fill=\"#ffcc4a\" font-size=\"6\">glc</text><line x1=\"42\" y1=\"18\" x2=\"55\" y2=\"18\" stroke=\"#ffb86b\" stroke-width=\"1.5\"/><g fill=\"#ff8a3a\"><circle cx=\"62\" cy=\"18\" r=\"4\"/><circle cx=\"78\" cy=\"18\" r=\"4\"/></g><text x=\"70\" y=\"38\" text-anchor=\"middle\" fill=\"#9ba3b4\" font-size=\"5\">2× pyruvate</text></svg>"
+        },
+        {
+          "term": "Lactate",
+          "def": "Pyruvate + NADH → lactate. NOT waste — Brooks lactate shuttle: lactate moves to oxidative fibers, heart, liver for fuel.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"20\" cy=\"25\" r=\"8\" fill=\"#ff8a3a\"/><line x1=\"28\" y1=\"25\" x2=\"48\" y2=\"25\" stroke=\"#5ec8ff\" stroke-width=\"2\" stroke-dasharray=\"3 2\"/><circle cx=\"56\" cy=\"25\" r=\"10\" fill=\"#a04040\"/><text x=\"56\" y=\"28\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"6\">muscle</text><line x1=\"66\" y1=\"25\" x2=\"80\" y2=\"25\" stroke=\"#5ec8ff\" stroke-width=\"2\" stroke-dasharray=\"3 2\"/><circle cx=\"88\" cy=\"25\" r=\"6\" fill=\"#ff5e5e\"/><text x=\"50\" y=\"45\" text-anchor=\"middle\" fill=\"#9ba3b4\" font-size=\"5\">shuttle to heart/liver</text></svg>"
+        },
+        {
+          "term": "MLSS (Max Lactate Steady State)",
+          "def": "Highest intensity where lactate production = lactate clearance. Tracks LT2. Your LT2 = 158 bpm indoor.",
+          "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"40\" x2=\"90\" y2=\"40\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><line x1=\"10\" y1=\"40\" x2=\"10\" y2=\"5\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><path d=\"M 10 38 L 25 36 L 40 32 L 50 28 L 58 18 L 70 8 L 85 5\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><line x1=\"55\" y1=\"5\" x2=\"55\" y2=\"40\" stroke=\"#ff5e5e\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/><text x=\"55\" y=\"50\" text-anchor=\"middle\" fill=\"#ff5e5e\" font-size=\"5\">LT2 / MLSS</text></svg>"
+        }
+      ]
     },
     "8": {
       "title": "Bioenergetics III — Oxidative phosphorylation",
