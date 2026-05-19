@@ -1,0 +1,73 @@
+name: Daily CSCS HTML build
+
+# Runs every day at 14:00 UTC (07:00 PDT / 10:00 EDT).
+# Adjust the cron line if you need a different local time.
+# https://crontab.guru/ helps with cron syntax.
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch:  # also allow manual triggering from the Actions tab
+  push:
+    branches: [main]
+    paths:
+      - 'data/**'
+      - 'widgets.py'
+      - 'themes.py'
+      - 'motifs.py'
+      - 'generate_daily.py'
+      - 'styles.css'
+      - 'app.js'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Generate today's HTML
+        run: |
+          python generate_daily.py
+          ls -la index.html daily/
+
+      - name: Commit and push regenerated HTML
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A index.html daily/
+          if ! git diff --cached --quiet; then
+            git commit -m "Daily build: $(date -u +%Y-%m-%d)"
+            git push
+          else
+            echo "No changes to commit."
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

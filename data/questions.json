@@ -1,0 +1,196 @@
+{
+  "muscle_fiber_types": [
+    {"q": "What is the contractile unit of skeletal muscle?", "a": "The sarcomere — defined as the region from one Z-disc to the next.", "type": "recall"},
+    {"q": "Which fiber type has the highest cross-sectional area and force capacity but fatigues fastest?", "a": "Type IIx (fast glycolytic).", "type": "recall"},
+    {"q": "A runner says training has 'converted' their Type IIx fibers into Type I. What is technically inaccurate about this claim?", "a": "Training shifts Type IIx → Type IIa, NOT Type II → Type I. Fiber-type proportion (slow/fast) is largely genetically determined; what changes is the IIx-IIa balance within the fast pool.", "type": "applied"},
+    {"q": "Cross-bridge cycling requires ATP for which specific step?", "a": "Detachment of myosin from actin (and re-cocking the head). Lack of ATP causes the rigor state.", "type": "recall"},
+    {"q": "Which fiber type would dominate a marathon's later miles versus a 1RM deadlift?", "a": "Marathon late miles: Type I (oxidative, fatigue-resistant). 1RM deadlift: Type IIx + IIa (high force, brief duration).", "type": "applied"}
+  ],
+  "motor_units": [
+    {"q": "State Henneman's Size Principle.", "a": "Motor units are recruited from smallest (lowest threshold, Type I) to largest (highest threshold, Type IIx) as force demand increases.", "type": "recall"},
+    {"q": "If a lifter trains exclusively with light loads (40% 1RM) but at maximal intent (move-fast-as-possible), can they recruit Type IIx motor units?", "a": "Yes. The Size Principle is sensitive to intent and velocity, not just load. Maximal-effort movements at light loads (e.g., dynamic-effort method) can recruit high-threshold units.", "type": "applied"},
+    {"q": "What two mechanisms grade muscle force?", "a": "Motor unit recruitment AND rate coding (firing frequency).", "type": "recall"},
+    {"q": "What is a doublet?", "a": "Two action potentials fired in rapid succession (<10 ms), enhancing rate of force development.", "type": "recall"}
+  ],
+  "ec_coupling": [
+    {"q": "Name the neurotransmitter at the neuromuscular junction and its receptor type.", "a": "Acetylcholine (ACh); binds nicotinic ACh receptors on the sarcolemma.", "type": "recall"},
+    {"q": "Where is Ca²⁺ stored in the muscle fiber, and what triggers its release?", "a": "Stored in the sarcoplasmic reticulum (SR); released when the action potential propagates down the T-tubule and triggers SR release channels.", "type": "recall"},
+    {"q": "Why does rigor mortis occur?", "a": "Death halts ATP production; without ATP, myosin cannot detach from actin, leaving cross-bridges locked.", "type": "applied"},
+    {"q": "Which protein binds Ca²⁺ to initiate cross-bridge cycling?", "a": "Troponin C — its conformational change moves tropomyosin off the actin myosin-binding sites.", "type": "recall"}
+  ],
+  "cardiovascular": [
+    {"q": "Write the formula for cardiac output.", "a": "Q = HR × SV (heart rate × stroke volume).", "type": "recall"},
+    {"q": "How does chronic endurance training alter the left ventricle anatomically?", "a": "Eccentric hypertrophy — increased chamber volume (larger end-diastolic volume), which increases stroke volume. This is distinct from concentric (wall thickness) hypertrophy seen with resistance training.", "type": "recall"},
+    {"q": "An athlete's resting HR drops from 65 to 50 bpm over 6 months without losing capacity. What's the most likely mechanism?", "a": "Increased stroke volume from cardiac adaptation; lower HR is needed to achieve the same resting cardiac output. Possibly enhanced parasympathetic tone as well.", "type": "applied"}
+  ],
+  "respiratory": [
+    {"q": "What is the Bohr effect?", "a": "A rightward shift in the O₂-hemoglobin dissociation curve caused by ↑CO₂, ↑temperature, or ↓pH — promoting O₂ unloading at active tissue.", "type": "recall"},
+    {"q": "In healthy, non-elite individuals, is VO₂max typically limited by pulmonary, cardiac, or peripheral factors?", "a": "Typically cardiac output (central) and peripheral (mitochondrial/capillary) factors — pulmonary system is rarely limiting in healthy non-elites.", "type": "recall"},
+    {"q": "Why does breathing rate rise faster than tidal volume at higher intensities?", "a": "Tidal volume plateaus near vital capacity; further ventilation increases must come from frequency.", "type": "applied"}
+  ],
+  "atp_pcr": [
+    {"q": "How long does the phosphagen system dominate at maximal intensity?", "a": "Approximately 0-10 seconds.", "type": "recall"},
+    {"q": "How long does full PCr replenishment take, and why does this dictate rest intervals?", "a": "~3-5 minutes for full PCr replenishment. This is why strength/power sets prescribe 3-5 min rest — to allow maximum force output on the next set.", "type": "applied"},
+    {"q": "What enzyme regenerates ATP from PCr?", "a": "Creatine kinase. Reaction: PCr + ADP → ATP + Cr.", "type": "recall"},
+    {"q": "Why does creatine supplementation work?", "a": "It increases the muscle PCr pool (~20%), allowing more rapid ATP regeneration during brief high-intensity efforts.", "type": "recall"}
+  ],
+  "glycolysis": [
+    {"q": "What is the net ATP yield from glycolysis starting from glucose vs glycogen?", "a": "2 ATP from glucose; 3 ATP from glycogen (saves one ATP since glycogen breakdown doesn't require phosphorylation by ATP).", "type": "recall"},
+    {"q": "True or false: Lactate is a metabolic waste product responsible for muscle soreness.", "a": "False. Lactate is a fuel and signaling molecule (Brooks' lactate shuttle); DOMS is unrelated to lactate accumulation.", "type": "recall"},
+    {"q": "What does MLSS stand for, and how does it relate to LT2?", "a": "Maximal Lactate Steady State — the highest exercise intensity at which lactate production = lactate clearance. Closely tracks LT2 / anaerobic threshold.", "type": "recall"},
+    {"q": "An athlete with LT2 = 158 bpm trains an interval session averaging HR 172. Which energy system is being stressed beyond steady-state capacity?", "a": "Above MLSS — fast glycolysis is contributing significantly, lactate accumulates rather than clears. The session is supra-threshold and time-limited.", "type": "applied"}
+  ],
+  "oxidative": [
+    {"q": "Approximate ATP yield per glucose molecule via complete aerobic oxidation.", "a": "~30-32 ATP (varies slightly by textbook source).", "type": "recall"},
+    {"q": "What is the 'crossover point' in fuel utilization?", "a": "~65% VO₂max — the intensity above which carbohydrate becomes the dominant fuel over fat.", "type": "recall"},
+    {"q": "What is the RER for pure fat oxidation vs pure carb?", "a": "Fat: 0.7. Carb: 1.0.", "type": "recall"}
+  ],
+  "energy_system_interaction": [
+    {"q": "What is EPOC and what does its magnitude depend on?", "a": "Excess Post-exercise Oxygen Consumption — the elevated O₂ consumption after exercise to restore homeostasis (PCr resynthesis, O₂ stores, lactate clearance, thermoregulation). Magnitude scales primarily with intensity.", "type": "recall"},
+    {"q": "Rank typical primary energy systems for: 10s sprint, 60s all-out cycle, 5-min row, marathon.", "a": "10s sprint: ATP-PCr. 60s all-out: fast glycolysis. 5-min row: mixed oxidative + glycolytic. Marathon: oxidative (carb early, fat later).", "type": "applied"}
+  ],
+  "biomech_levers": [
+    {"q": "Define torque in biomechanics terms.", "a": "Torque = Force × moment arm (perpendicular distance from the line of force to the axis of rotation).", "type": "recall"},
+    {"q": "Most human joints are which class of lever?", "a": "Third-class levers (effort applied between fulcrum and load). Mechanical disadvantage for force, advantage for range and speed.", "type": "recall"},
+    {"q": "Why do longer limbs require more torque for a given lift?", "a": "Longer limbs produce larger moment arms — for the same load at the same position, the torque demand at the joint increases.", "type": "applied"}
+  ],
+  "force_velocity_length_tension": [
+    {"q": "Order from greatest to least force production: concentric, eccentric, isometric.", "a": "Eccentric > Isometric > Concentric.", "type": "recall"},
+    {"q": "At what approximate percentage of max isometric force does peak power occur?", "a": "Approximately 30% of max isometric force.", "type": "recall"},
+    {"q": "Why is the bottom of a squat (full flexion) typically weaker than mid-range?", "a": "Length-tension: at extreme stretched lengths actin-myosin overlap may be reduced; also leverage (moment arms) often worsens at deepest joint angles.", "type": "applied"}
+  ],
+  "anabolic_hormones": [
+    {"q": "Where is testosterone primarily produced in males?", "a": "Leydig cells of the testes (small amount from adrenal cortex).", "type": "recall"},
+    {"q": "Which sleep stage produces the largest GH pulses?", "a": "Slow-wave (deep) sleep, typically early in the night.", "type": "recall"},
+    {"q": "Which produces a greater acute hormonal response: 3 sets of 5 squats at 90% with 3 min rest, OR 4 sets of 10 squats at 75% with 60 sec rest?", "a": "The 4×10 protocol — higher total volume, large muscle mass, short rest interval all favor acute GH/T spike. (This is the classic 'hypertrophy hormonal response' window.)", "type": "applied"}
+  ],
+  "catabolic_hormones": [
+    {"q": "Name the primary glucocorticoid and its gland of origin.", "a": "Cortisol, from the adrenal cortex.", "type": "recall"},
+    {"q": "What does a sustained drop in the testosterone-to-cortisol ratio suggest?", "a": "Possible overtraining state — chronic catabolic environment outpacing anabolic.", "type": "recall"},
+    {"q": "Is exercise-induced cortisol elevation pathological?", "a": "No — acute cortisol rises are normal and adaptive. Chronic, unremitting elevation (from training stress + life stress + poor sleep + underfueling) is problematic.", "type": "applied"}
+  ],
+  "anaerobic_adaptations": [
+    {"q": "During the first 4 weeks of a resistance program in untrained individuals, what type of adaptation dominates?", "a": "Neural — improved recruitment, rate coding, motor unit synchronization, reduced inhibition.", "type": "recall"},
+    {"q": "When does hypertrophy typically become the dominant adaptation in resistance training?", "a": "Generally after 4-6+ weeks, becoming clearly dominant beyond 8 weeks.", "type": "recall"},
+    {"q": "Why is tendon injury risk elevated when load is rapidly increased?", "a": "Connective tissue (tendon, ligament) adapts more slowly than muscle — strength can outpace tendon capacity.", "type": "applied"}
+  ],
+  "aerobic_adaptations": [
+    {"q": "Decompose VO₂max into its central and peripheral determinants.", "a": "VO₂max = Q × (a-vO₂ difference). Q (central) = HR × SV. The (a-vO₂) difference reflects peripheral O₂ extraction by mitochondria.", "type": "recall"},
+    {"q": "After ~6-12 months of well-designed training, which is more likely to continue improving: VO₂max or lactate threshold?", "a": "Lactate threshold — VO₂max plateaus relatively early in trained athletes; LT/LT2 continues to improve over years.", "type": "recall"},
+    {"q": "How much aerobic adaptation is typically lost in 2-4 weeks of complete inactivity?", "a": "Roughly half of central adaptations (SV, Q) can regress in this timeframe; mitochondrial enzyme activity declines similarly.", "type": "recall"}
+  ],
+  "age_sex": [
+    {"q": "True or false: Resistance training stunts growth in pre-pubertal children.", "a": "False. With proper supervision, resistance training is safe and beneficial; does NOT damage growth plates.", "type": "recall"},
+    {"q": "Approximate female-to-male strength ratio for lower body vs upper body.", "a": "Lower body: ~70-80% (closer). Upper body: ~50-70% (further apart) — reflects lean mass distribution differences.", "type": "recall"},
+    {"q": "What is RED-S?", "a": "Relative Energy Deficiency in Sport — a syndrome of impaired physiological function from inadequate energy availability, broader than the original female athlete triad (encompasses males, additional systems).", "type": "recall"}
+  ],
+  "sport_psych": [
+    {"q": "Describe the inverted-U hypothesis.", "a": "Performance peaks at moderate arousal; too low or too high impairs performance. Optimal arousal varies by task complexity (high arousal helps simple/strength tasks; hurts complex/skilled tasks).", "type": "recall"},
+    {"q": "What does IZOF stand for and how does it refine the inverted-U?", "a": "Individual Zones of Optimal Functioning — recognizes that each athlete has a unique optimal arousal range that may differ from the population average.", "type": "recall"},
+    {"q": "Process goals vs outcome goals — which is better for skill acquisition?", "a": "Process goals (focus on actions/execution) generally outperform outcome goals (winning, time) for skill acquisition and reducing performance anxiety.", "type": "applied"}
+  ],
+  "macros": [
+    {"q": "kcal per gram: carb, protein, fat.", "a": "CHO 4 kcal/g, PRO 4 kcal/g, FAT 9 kcal/g.", "type": "recall"},
+    {"q": "Recommended protein intake range for resistance-trained athletes.", "a": "1.4-2.0 g/kg/day; up to ~2.2 g/kg in hypertrophy phases. Higher than the 0.8 g/kg RDA for sedentary adults.", "type": "recall"},
+    {"q": "Approximate leucine threshold per meal to maximally stimulate MPS.", "a": "~2.5-3 g of leucine per feeding (≈25-40 g of high-quality protein, depending on source).", "type": "recall"},
+    {"q": "A 75 kg endurance athlete training 12 hr/wk. Carb intake target?", "a": "High-volume endurance: 6-10 g/kg/day → 450-750 g CHO. The high end may apply on heavy training days.", "type": "applied"}
+  ],
+  "nutrient_timing": [
+    {"q": "Caffeine dose and timing for ergogenic effect.", "a": "3-6 mg/kg, ingested 30-60 minutes pre-exercise.", "type": "recall"},
+    {"q": "Creatine dosing — is loading required?", "a": "No. 3-5 g/day reaches saturation in ~4 weeks. Loading (20 g/day × 5-7 days) saturates faster but with no end-state difference.", "type": "recall"},
+    {"q": "For sessions longer than 2.5 hours, what's the recommended CHO ingestion rate?", "a": "60-90 g/hr, ideally using mixed glucose + fructose to allow multiple intestinal transporters.", "type": "recall"},
+    {"q": "Which supplements have the strongest evidence base for performance?", "a": "Creatine, caffeine, beta-alanine, sodium bicarbonate, nitrate (beetroot), and high-quality protein/EAA. Most others have weaker or context-dependent evidence.", "type": "recall"}
+  ],
+  "peds": [
+    {"q": "What agency governs banned substances in Olympic-tested sport?", "a": "WADA — World Anti-Doping Agency.", "type": "recall"},
+    {"q": "Why are oral 17α-alkylated anabolic steroids particularly hepatotoxic?", "a": "The 17α-alkyl modification resists hepatic breakdown (allowing oral bioavailability) but stresses the liver — associated with cholestasis, peliosis hepatis, and hepatic tumors.", "type": "recall"},
+    {"q": "Mechanism by which EPO improves endurance performance.", "a": "Increases erythropoiesis → increased red cell mass → increased O₂-carrying capacity → increased VO₂max.", "type": "recall"}
+  ],
+  "test_principles": [
+    {"q": "Define validity and reliability.", "a": "Validity = the test measures what it claims to measure. Reliability = the test produces consistent results on repeat administration under the same conditions.", "type": "recall"},
+    {"q": "What is the standard CSCS testing order on a single day?", "a": "1) Non-fatiguing (vertical jump, agility), 2) agility, 3) max strength (1RM), 4) sprints, 5) muscular endurance, 6) anaerobic capacity, 7) aerobic endurance.", "type": "recall"},
+    {"q": "A coach finds their bench-press 1RM test gives wildly different values across days. Which property is failing?", "a": "Reliability. The test may still be valid (measures strength) but is inconsistent — likely from variable warm-up, technique drift, or testing conditions.", "type": "applied"}
+  ],
+  "test_admin_strength": [
+    {"q": "Why are spotters positioned at the SIDES of a barbell for max squat attempts, not behind?", "a": "Side spotters can support the bar laterally if the lifter loses balance; a single rear spotter cannot safely catch a heavy bar from behind.", "type": "applied"},
+    {"q": "Wingate test — duration and primary metric.", "a": "30-second maximal cycle ergometer effort. Peak power (highest 5-sec output), mean power (anaerobic capacity), fatigue index.", "type": "recall"}
+  ],
+  "test_admin_endurance": [
+    {"q": "Cooper test format and outcome measure.", "a": "12-minute run for distance. Distance is used to estimate VO₂max via published regression equations.", "type": "recall"},
+    {"q": "Why must skinfold measurements be standardized to the right side of the body?", "a": "Reference norms are typically based on right-side measurements; side-to-side differences exist and standardization preserves comparison validity.", "type": "recall"}
+  ],
+  "warmup": [
+    {"q": "Spell out the RAMP warm-up protocol.", "a": "Raise (core temp), Activate and Mobilize (target muscles and joints), Potentiate (sport-specific movements at higher intensity).", "type": "recall"},
+    {"q": "True or false: Static stretching immediately before a max-effort jump improves performance.", "a": "False. Static stretching held for 30+ seconds immediately pre-performance can transiently reduce power/force output by ~5%. Use dynamic warm-up instead.", "type": "applied"}
+  ],
+  "ex_squat": [
+    {"q": "What is the depth criterion for a 'parallel' squat in CSCS standards?", "a": "Femur parallel to the floor — the hip crease at or below the top of the knee.", "type": "recall"},
+    {"q": "Most common technical fault during the squat, and the typical cue to correct it.", "a": "Knee valgus (knees collapsing inward). Cue: 'knees out' or 'spread the floor.'", "type": "applied"}
+  ],
+  "ex_deadlift": [
+    {"q": "Compare conventional vs sumo deadlift in terms of joint demand.", "a": "Conventional: greater low-back shear, more posterior chain (hamstrings, glutes). Sumo: more vertical torso, less low-back shear, more adductor and quad demand.", "type": "recall"},
+    {"q": "Why does the trap bar deadlift reduce L4-L5 shear compared to conventional?", "a": "Hands are at the sides (not in front of the body), allowing a more upright torso and shifting the load line closer to the spine — reducing the moment arm for low-back shear forces.", "type": "applied"}
+  ],
+  "ex_press": [
+    {"q": "List the 5 points of contact during the bench press.", "a": "Head, upper back, and glutes on the bench; both feet flat on the floor.", "type": "recall"},
+    {"q": "Why is overhead press more demanding on lumbar stability than bench press?", "a": "The load is overhead, creating extension torque at the lumbar spine. Without active bracing, the lifter compensates with lumbar hyperextension.", "type": "applied"}
+  ],
+  "ex_clean": [
+    {"q": "Name the three joint extensions in 'triple extension'.", "a": "Ankle, knee, and hip — the explosive simultaneous extension in the second pull of the clean/snatch.", "type": "recall"},
+    {"q": "Why might Olympic-lift derivatives (e.g., mid-thigh pull) be preferred over full lifts for a Hyrox athlete?", "a": "Lower technical demand, similar power development benefit, less time investment to master, and the full catch (front rack) has minimal sport-specific carryover for Hyrox.", "type": "applied"}
+  ],
+  "ex_alt_modes": [
+    {"q": "Is the kettlebell swing primarily a squat or a hinge pattern?", "a": "A hinge — the bell floats with hip extension; knees soften but don't dominate. Not a squat.", "type": "recall"},
+    {"q": "Why is the sled push useful for daily/high-frequency programming?", "a": "Minimal eccentric load → minimal muscle damage and DOMS → can be repeated frequently without compromising recovery. Provides high metabolic stimulus with low joint cost.", "type": "applied"}
+  ],
+  "needs_analysis": [
+    {"q": "Name the two components of a CSCS-style needs analysis.", "a": "Sport analysis (movement patterns, energy systems, injuries, common positions) and Athlete analysis (training history, injuries, testing data, goals, training age).", "type": "recall"},
+    {"q": "How does the needs analysis change for a 16-year-old developing soccer player vs a 35-year-old recreational Hyrox competitor?", "a": "Different sport demands (multi-directional speed vs steady-state power-endurance), different athlete maturity (LTAD principles vs adult training history), different injury patterns and goals.", "type": "applied"}
+  ],
+  "exercise_selection": [
+    {"q": "What is the optimal exercise order within a single session?", "a": "Power exercises (Olympic lifts, jumps) first → core exercises (multi-joint, large muscle: squat, deadlift, bench) → assistance/single-joint exercises last. Highest neural and technical demand goes first.", "type": "recall"}
+  ],
+  "intensity_volume": [
+    {"q": "Rep ranges and approximate %1RM for: strength, hypertrophy, muscular endurance.", "a": "Strength: 1-6 reps, 85-100% 1RM. Hypertrophy: 6-12 reps, 65-85%. Muscular endurance: 12+ reps, <65%.", "type": "recall"},
+    {"q": "Define MEV, MAV, and MRV (Israetel/RP).", "a": "MEV = Minimum Effective Volume (least to drive adaptation). MAV = Maximum Adaptive Volume (the productive sweet spot). MRV = Maximum Recoverable Volume (ceiling before performance regresses).", "type": "recall"}
+  ],
+  "rest_frequency": [
+    {"q": "Optimal rest interval between sets for strength/power vs hypertrophy.", "a": "Strength/power: 3-5 minutes. Hypertrophy: 1-3 minutes. (Recent evidence favors 2-3 min even for hypertrophy.)", "type": "recall"},
+    {"q": "True or false: Training a muscle once per week is the optimal frequency for hypertrophy.", "a": "False. At equated weekly volume, 2-3 sessions per week per muscle produces greater hypertrophy than 1×/week (Schoenfeld et al. meta).", "type": "recall"}
+  ],
+  "plyometrics": [
+    {"q": "Name the three phases of the stretch-shortening cycle.", "a": "Eccentric (lengthening/pre-load) → amortization (transition) → concentric (shortening). Shorter amortization = better SSC utilization.", "type": "recall"},
+    {"q": "Suggested squat strength pre-requisite for performing depth jumps.", "a": "Approximately 1.5× body weight back squat.", "type": "recall"}
+  ],
+  "speed_agility": [
+    {"q": "What work-to-rest ratio is appropriate for max-speed sprint training, and why?", "a": "1:12 to 1:20 — full PCr replenishment and CNS recovery required to maintain true maximum velocity on subsequent reps.", "type": "recall"},
+    {"q": "Difference between change-of-direction (CODS) and reactive agility.", "a": "CODS = pre-planned change of direction (closed loop). Reactive agility = unplanned response to a visual or auditory stimulus (open loop). Reactive agility transfers better to most field/court sports.", "type": "recall"}
+  ],
+  "aerobic_programming": [
+    {"q": "FITT-VP — spell it out.", "a": "Frequency, Intensity, Time, Type, Volume, Progression.", "type": "recall"},
+    {"q": "Polarized training distribution (Seiler) — and is it measured by minutes or sessions?", "a": "~80% sessions in Z1-Z2 (below LT1), ~20% sessions in Z3+ (above LT2). Measured by SESSION COUNT, not minute-share (per Seiler's research).", "type": "recall"}
+  ],
+  "periodization_models": [
+    {"q": "Differentiate linear, undulating, and block periodization.", "a": "Linear: progressive shift from high vol/low int → low vol/high int across a macrocycle. Undulating (DUP): vol and int vary daily/weekly. Block: sequential focused blocks of accumulation → transmutation → realization.", "type": "recall"},
+    {"q": "For trained lifters, which model has the most supporting evidence for strength gains?", "a": "DUP — daily undulating periodization tends to outperform classical linear in head-to-head trials in trained populations.", "type": "recall"}
+  ],
+  "periodization_structure": [
+    {"q": "Timescales of macro-, meso-, and micro-cycles.", "a": "Macrocycle: months to a year. Mesocycle: 2-6 weeks. Microcycle: typically 1 week.", "type": "recall"},
+    {"q": "Taper design: what changes, what stays the same?", "a": "Reduce volume substantially (~40-60%). Maintain intensity and (usually) frequency. Duration: 7-21 days, longer for more endurance-focused events.", "type": "recall"}
+  ],
+  "rehab": [
+    {"q": "The three phases of tissue healing in order.", "a": "Inflammation (0-6 days) → Proliferation (3 days-3 weeks) → Remodeling (3 weeks to >1 year).", "type": "recall"},
+    {"q": "What is LSI and what threshold is typically required for return-to-sport?", "a": "Limb Symmetry Index — strength/power of injured side as a % of uninjured side. Generally ≥90% for return-to-sport clearance.", "type": "recall"}
+  ],
+  "facility_design": [
+    {"q": "Minimum square footage per athlete in a strength facility.", "a": "100 sq ft per athlete.", "type": "recall"},
+    {"q": "Minimum ceiling height in an Olympic-lifting area vs general strength area.", "a": "Olympic lifting: 12 ft. General strength: 10 ft minimum.", "type": "recall"}
+  ],
+  "facility_legal": [
+    {"q": "Four elements required to establish negligence.", "a": "Duty, Breach of duty, Causation, Damages.", "type": "recall"},
+    {"q": "What is an EAP and what does it require?", "a": "Emergency Action Plan — venue-specific written plan covering medical emergencies, evacuation, and serious-injury response. Must be posted, communicated to staff, and practiced.", "type": "recall"}
+  ],
+  "phase1_review": [
+    {"q": "Synthesis: explain how a single 4×8 interval session at HR 170-175 engages multiple body systems studied in Phase 1.", "a": "Neural: high-threshold motor unit recruitment (Size Principle, Type IIa). Energy: above MLSS → fast glycolysis contributing significantly to ATP production. Cardio: HR near max, SV near plateau, Q maximized. Endocrine: catecholamine spike, cortisol elevation, GH response post-session. Adaptation drivers: mitochondrial biogenesis, lactate clearance enzymes, capillary density.", "type": "applied"}
+  ]
+}

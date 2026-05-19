@@ -1,0 +1,1147 @@
+{
+  "meta": {
+    "title": "CSCS 4th Edition — 26-Week Spaced-Repetition Curriculum",
+    "start_date": "2026-05-19",
+    "source_pdf": "vdoc.pub_essentials-of-strength-training-and-conditioning-4th-edition.pdf",
+    "spacing_intervals_days": [
+      1,
+      3,
+      7,
+      14,
+      30,
+      90
+    ],
+    "domains": {
+      "ES": "Exercise Science (~25%)",
+      "NT": "Nutrition (~10%)",
+      "EX": "Exercise Technique (~25%)",
+      "PD": "Program Design & Testing (~40%)"
+    },
+    "phases": [
+      {
+        "phase": 1,
+        "name": "Exercise Sciences Foundations",
+        "days": "1-42"
+      },
+      {
+        "phase": 2,
+        "name": "Age, Psychology, Nutrition, PEDs",
+        "days": "43-77"
+      },
+      {
+        "phase": 3,
+        "name": "Testing & Evaluation",
+        "days": "78-98"
+      },
+      {
+        "phase": 4,
+        "name": "Exercise Technique",
+        "days": "99-126"
+      },
+      {
+        "phase": 5,
+        "name": "Program Design & Periodization",
+        "days": "127-168"
+      },
+      {
+        "phase": 6,
+        "name": "Rehab + Facility & Legal",
+        "days": "169-182"
+      }
+    ]
+  },
+  "lessons": {
+    "1": {
+      "title": "Skeletal muscle architecture & fiber types",
+      "topic_id": "muscle_fiber_types",
+      "domain": "ES",
+      "chapter": "Ch 1",
+      "page_refs": "pp. 3-12",
+      "key_concept": "Skeletal muscle is organized hierarchically: muscle → fasciculus → muscle fiber (one cell) → myofibril → sarcomere. The sarcomere (Z-disc to Z-disc) is the contractile unit; sliding-filament theory says actin slides along myosin via cross-bridge cycling, powered by ATP. Fibers are classified by myosin heavy chain isoform: Type I (slow oxidative, fatigue-resistant, low force, red), Type IIa (fast oxidative-glycolytic, intermediate), Type IIx (fast glycolytic, highest force, fatigues fast). Training shifts IIx → IIa; fiber-type proportion is largely genetic but trainable in expression.",
+      "key_facts": [
+        "Sarcomere = Z-disc to Z-disc",
+        "Cross-bridge cycle requires ATP for both attachment AND detachment",
+        "Type I: high mitochondrial density, capillaries, myoglobin",
+        "Type IIx: largest cross-sectional area, highest force/velocity, lowest endurance",
+        "Heavy resistance training shifts IIx → IIa (not Type II → Type I)"
+      ],
+      "training_link": "Your aerobic base (HR 132 indoor Z2 cap, LT1=147) reflects Type I oxidative capacity. Your 4×8 sessions (HR 170-175 target) recruit Type IIa heavily — sub-MLSS endurance work develops the IIa pool you need for Hyrox station blocks.",
+      "video": {
+        "title": "Dr. Andy Galpin — Muscle Fiber Types & Training Explained (Iron Culture Ep 236)",
+        "url": "https://www.youtube.com/watch?v=z6oWj7410G0",
+        "credibility": "Iron Culture Podcast · Eric Helms PhD + Mike Israetel PhD"
+      },
+      "audio": {
+        "title": "Huberman Lab — Dr. Andy Galpin: How to Build Strength, Muscle Size & Endurance (Ep 65)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
+        "credibility": "Stanford neuroscience + Galpin PhD"
+      }
+    },
+    "2": {
+      "title": "Motor units & the size principle",
+      "topic_id": "motor_units",
+      "domain": "ES",
+      "chapter": "Ch 1",
+      "page_refs": "pp. 12-18",
+      "key_concept": "A motor unit = one alpha motoneuron + all the fibers it innervates. All fibers in a single motor unit are the same type. The Size Principle (Henneman, 1965): motor units are recruited in order of size — smallest (Type I) first, largest (Type IIx) last, as force demand rises. Rate coding (firing frequency) and recruitment together grade force. Heavier loads or maximal-effort actions recruit higher-threshold units; this is why high-intensity work is non-negotiable for Type II development.",
+      "key_facts": [
+        "Henneman's Size Principle — small to large recruitment order",
+        "Force gradation = recruitment + rate coding",
+        "All fibers in a motor unit are SAME type",
+        "High-threshold MUs recruited only at ~80%+ of max force OR at maximal velocities even with lighter loads",
+        "Doublet firing (2 rapid impulses) enhances rate of force development"
+      ],
+      "training_link": "Your strength PM sessions need true high-intensity exposure to recruit Type IIx motor units. Z2 cycling never gets there — that's why bike day's strength block is structurally non-substitutable.",
+      "video": {
+        "title": "Motor unit recruitment & Henneman's size principle",
+        "url": "https://www.youtube.com/watch?v=rtVkWCUk0aU",
+        "credibility": "Exercise physiology lecture"
+      },
+      "audio": {
+        "title": "Huberman Lab — Andy Galpin Guest Series: Optimal Protocols to Build Strength & Grow Muscles",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      }
+    },
+    "3": {
+      "title": "Neuromuscular junction & excitation-contraction coupling",
+      "topic_id": "ec_coupling",
+      "domain": "ES",
+      "chapter": "Ch 1",
+      "page_refs": "pp. 18-25",
+      "key_concept": "Action potential travels down motoneuron → acetylcholine (ACh) released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down T-tubules → triggers sarcoplasmic reticulum to release Ca²⁺ → Ca²⁺ binds troponin → tropomyosin shifts → myosin binds actin → cross-bridge cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).",
+      "key_facts": [
+        "ACh is the neurotransmitter at the NMJ",
+        "Ca²⁺ release from SR is the immediate trigger for contraction",
+        "Troponin C binds Ca²⁺; tropomyosin physically blocks myosin-binding sites on actin",
+        "ATP is required for cross-bridge DETACHMENT (rigor mortis = no ATP)",
+        "Ca²⁺ reuptake is also ATP-dependent (SERCA pump)"
+      ],
+      "training_link": "Caffeine enhances Ca²⁺ release from SR — one mechanism behind its ergogenic effect on your cycling and 4×8 sessions.",
+      "video": {
+        "title": "Ninja Nerd — Neuromuscular Junction & Excitation-Contraction Coupling",
+        "url": "https://www.youtube.com/watch?v=A96kAMPZXv8",
+        "credibility": "Ninja Nerd Medical Lectures · Prof. Zach Murphy"
+      },
+      "audio": {
+        "title": "Huberman Lab — How to Build Strength, Muscle Size & Endurance",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
+        "credibility": "Stanford + Galpin PhD"
+      }
+    },
+    "4": {
+      "title": "Cardiovascular system — heart, vessels, blood flow",
+      "topic_id": "cardiovascular",
+      "domain": "ES",
+      "chapter": "Ch 1",
+      "page_refs": "pp. 25-32",
+      "key_concept": "Cardiac output (Q) = heart rate × stroke volume. At rest ~5 L/min; max exercise ~20-40 L/min. Stroke volume rises until ~40-60% VO₂max then plateaus; HR rises linearly with intensity. Endurance training increases SV (eccentric LV hypertrophy = larger chamber) lowering resting HR. Resistance training causes concentric hypertrophy (thicker wall). Arteries → arterioles (resistance) → capillaries (exchange) → venules → veins. Baroreceptors and chemoreceptors regulate BP/HR.",
+      "key_facts": [
+        "Q = HR × SV",
+        "Frank-Starling: increased venous return → increased SV (stretched LV)",
+        "Endurance training: ↑SV via ↑LV chamber size (eccentric hypertrophy)",
+        "Resistance training: ↑LV wall thickness (concentric hypertrophy)",
+        "Capillary density increases with aerobic training"
+      ],
+      "training_link": "Your RHR drop 46→37 bpm and HRV rise 118→187 ms (Jan→May) is classic endurance adaptation — larger SV requires lower HR for the same Q. Your LT1=147 with HR cap 132 indoor for Z2 reflects this trained state.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101 (cardiac adaptations)",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise, and Metabolic Health",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD + UCSD/Colorado"
+      }
+    },
+    "5": {
+      "title": "Respiratory system & gas exchange",
+      "topic_id": "respiratory",
+      "domain": "ES",
+      "chapter": "Ch 1",
+      "page_refs": "pp. 32-38",
+      "key_concept": "Pulmonary ventilation = breathing frequency × tidal volume. Gas exchange occurs at alveoli via diffusion (driven by partial pressure gradients). O₂ binds hemoglobin (~98.5% saturation at sea level). The oxyhemoglobin dissociation curve shifts RIGHT with ↑temp, ↑CO₂, ↓pH (Bohr effect) — promoting O₂ unloading at working muscle. CO₂ is transported as bicarbonate (~70%), bound to Hb (~20%), and dissolved (~10%).",
+      "key_facts": [
+        "Bohr effect: right shift in O₂-Hb curve unloads O₂ at active muscle",
+        "Resting ventilation: ~6 L/min; max exercise: ~150+ L/min",
+        "Tidal volume rises first, then frequency, with increasing intensity",
+        "VO₂max is typically NOT pulmonary-limited in healthy non-elites",
+        "Ventilatory threshold (VT) tracks lactate threshold"
+      ],
+      "training_link": "Your ventilatory pattern shifts at LT1=147 (indoor) — that's the VT1 inflection. Above LT2=158, breathing becomes the rate-limiter, not legs.",
+      "video": {
+        "title": "Oxygen-Hemoglobin Dissociation Curve (animation)",
+        "url": "https://www.youtube.com/watch?v=zmXt700uXlA",
+        "credibility": "Respiratory physiology animation"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD + Colorado"
+      }
+    },
+    "6": {
+      "title": "Bioenergetics I — ATP and the phosphagen system",
+      "topic_id": "atp_pcr",
+      "domain": "ES",
+      "chapter": "Ch 3",
+      "page_refs": "pp. 53-58",
+      "key_concept": "ATP is the energy currency. Stored ATP lasts ~2 seconds of max work. The phosphagen system (ATP-PCr) regenerates ATP via creatine kinase: PCr + ADP → ATP + Cr. Dominant for ~0-10s all-out efforts (jumps, throws, 1RM, sprint start). PCr stores fully replenish in ~3-5 min rest. This is why creatine supplementation works — it expands the PCr pool.",
+      "key_facts": [
+        "ATP-PCr system: anaerobic, no lactate, fastest power production",
+        "Duration: ~0-10 seconds at max effort",
+        "Creatine kinase enzyme",
+        "Recovery: ~30s for ~50%, full ~3-5 min",
+        "Creatine supplementation: 3-5 g/day; ~20% PCr increase"
+      ],
+      "training_link": "Your strength PM work (heavy compound lifts) is phosphagen-dominant. Why 3-5 min inter-set rest matters: that's the PCr replenishment window. Cutting rest to 60s drops Type II force output.",
+      "video": {
+        "title": "ATP / Phosphocreatine System Overview",
+        "url": "https://www.youtube.com/watch?v=BhJtogLY0e4",
+        "credibility": "Anatomy & physiology educator"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — San-Millán: Mitochondria & Energy Systems",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "7": {
+      "title": "Bioenergetics II — Glycolysis & lactate",
+      "topic_id": "glycolysis",
+      "domain": "ES",
+      "chapter": "Ch 3",
+      "page_refs": "pp. 58-66",
+      "key_concept": "Glycolysis splits glucose (or glycogen) → pyruvate, yielding 2 ATP (from glucose; 3 from glycogen). Fast glycolysis: pyruvate → lactate when oxygen-limited or rate of demand exceeds mitochondrial capacity. Slow glycolysis: pyruvate → acetyl-CoA → Krebs/ETC. Lactate is NOT waste — it's a fuel (Brooks' lactate shuttle), shuttled to oxidative fibers, heart, and liver (Cori cycle: lactate → glucose). MLSS (maximal lactate steady state) is the ceiling of sustainable steady-state work; tracks LT2.",
+      "key_facts": [
+        "Net ATP yield: 2 (glucose) or 3 (glycogen)",
+        "Lactate is a fuel and signaling molecule, NOT just waste",
+        "MLSS ≈ LT2 ≈ critical power (~1 hour TT pace)",
+        "Lactate threshold 1 (LT1, ~2 mmol/L) = aerobic threshold; LT2 (~4 mmol/L) = anaerobic threshold (rough heuristics; individual)",
+        "Cori cycle: muscle lactate → liver glucose → back to muscle"
+      ],
+      "training_link": "Your individual LT1=147, LT2=158 indoor anchor your zones. 4×8 work at HR 170-175 sits supra-MLSS — that's WHY it stresses the system: above lactate steady state, accumulation forces metabolic adaptation.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101 (lactate dynamics)",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán on Lactate & Zone 2",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "8": {
+      "title": "Bioenergetics III — Oxidative phosphorylation",
+      "topic_id": "oxidative",
+      "domain": "ES",
+      "chapter": "Ch 3",
+      "page_refs": "pp. 66-72",
+      "key_concept": "Aerobic ATP production in mitochondria: Krebs cycle generates NADH/FADH₂; electron transport chain uses O₂ as the final electron acceptor to produce ~30-32 ATP per glucose (vs 2 from glycolysis alone). Fat oxidation yields more ATP per molecule but requires more O₂. Fuel selection shifts with intensity: low intensity = predominantly fat; rising intensity = more carb. Crossover point ~65% VO₂max where carb > fat contribution.",
+      "key_facts": [
+        "Aerobic ATP yield: ~30-32 per glucose, ~100+ per fatty acid",
+        "Final electron acceptor: O₂ → forms water",
+        "Crossover point: ~65% VO₂max, carb contribution surpasses fat",
+        "RER = VCO₂/VO₂: 0.7 (pure fat) → 1.0 (pure carb)",
+        "Mitochondrial density doubles with aerobic training"
+      ],
+      "training_link": "Z2 (HR 132 indoor cap) maximally stimulates fat oxidation enzymes and mitochondrial biogenesis without lactate accumulation. The 'long, slow' isn't slow — it's metabolically targeted.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 201: Past, Present & Future",
+        "url": "https://www.youtube.com/watch?v=zKloBrc75KQ",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán on Zone 2 & Mitochondrial Function",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "9": {
+      "title": "Energy system interaction & substrate use",
+      "topic_id": "energy_system_interaction",
+      "domain": "ES",
+      "chapter": "Ch 3",
+      "page_refs": "pp. 72-78",
+      "key_concept": "All three systems are ALWAYS active — proportions shift with duration and intensity. EPOC (excess post-exercise O₂ consumption) repays the 'O₂ debt' — replenishing PCr, restoring O₂ to myoglobin/blood, clearing lactate, and thermoregulation. Training-induced shifts: glycogen storage capacity increases, mitochondrial density doubles, capillarization improves, lactate clearance improves at given intensity.",
+      "key_facts": [
+        "0-10s: ATP-PCr dominant",
+        "10s-2min: fast glycolysis dominant",
+        "2min-3hr: oxidative dominant (carb early, fat later)",
+        ">3hr: fat oxidation increasingly dominant",
+        "EPOC magnitude scales with intensity, not just duration"
+      ],
+      "training_link": "Your Hyrox sessions tax all three systems concurrently — sled push (ATP-PCr/glycolytic), run intervals (oxidative-glycolytic), station work (mixed). That's why recovery cost is 3 days.",
+      "video": {
+        "title": "Most of Your Training Should Be EASY! Polarized Training With Dr. Stephen Seiler",
+        "url": "https://www.youtube.com/watch?v=Ju3McjlSoAg",
+        "credibility": "Floris Gierman + Seiler"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — San-Millán: Energy Systems",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "10": {
+      "title": "Biomechanics I — Force, torque, levers",
+      "topic_id": "biomech_levers",
+      "domain": "ES",
+      "chapter": "Ch 2",
+      "page_refs": "pp. 39-46",
+      "key_concept": "Torque = force × moment arm (perpendicular distance from line of force to axis of rotation). Body joints function as levers. Most human joints are 3rd-class levers (effort between fulcrum and load — biceps curl, leg extension): mechanical disadvantage for force, advantage for range/speed. 1st-class (fulcrum between, e.g., triceps), 2nd-class (load between, e.g., calf raise) also exist. Resistance training requires understanding where torque demand peaks across the ROM (sticking points).",
+      "key_facts": [
+        "Torque = F × d (moment arm)",
+        "3rd-class lever: most joints, e.g., elbow flexion (biceps)",
+        "Moment arm changes through ROM — peak torque demand often mid-range",
+        "Long limbs = larger moment arms = greater torque required",
+        "Pulley systems and cams (Nautilus machines) attempt to match torque curves"
+      ],
+      "training_link": "Sticking point in squat (just out of hole) reflects worst leverage where torque demand peaks. Programming pause squats targets that exact ROM.",
+      "video": {
+        "title": "How To Squat Correctly (FIX MISTAKES!) — Squat University",
+        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
+        "credibility": "Dr. Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Optimal Protocols to Build Strength & Grow Muscles",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      }
+    },
+    "11": {
+      "title": "Biomechanics II — Force-velocity & length-tension",
+      "topic_id": "force_velocity_length_tension",
+      "domain": "ES",
+      "chapter": "Ch 2",
+      "page_refs": "pp. 46-50",
+      "key_concept": "Force-velocity curve: muscle produces MORE force at slow speeds (concentric) and even more eccentrically. As velocity rises, concentric force drops. Power = force × velocity; peak power at ~30% of max isometric force. Length-tension: actin-myosin overlap is optimal at ~resting length; force drops at extremes (too short = overlap interference; too long = insufficient overlap).",
+      "key_facts": [
+        "Eccentric > isometric > concentric force production",
+        "Peak power at ~30% max isometric force",
+        "Length-tension optimum near resting length",
+        "Stretch-shortening cycle: eccentric pre-load enhances concentric output (plyometrics)",
+        "Velocity-based training uses this curve to prescribe load"
+      ],
+      "training_link": "Your strength PM heavy work (high force, low velocity) develops the left side of F-V curve; plyos/jumps would develop the right side. For Hyrox-specific power-endurance, you need both.",
+      "video": {
+        "title": "Dr. Andy Galpin: Muscle Fiber Types and Muscle Growth (force-velocity context)",
+        "url": "https://www.youtube.com/watch?v=9vOmlzLfxGA",
+        "credibility": "Cal State Fullerton · Galpin PhD"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: How to Build Strength, Muscle Size & Endurance",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
+        "credibility": "Stanford + Galpin PhD"
+      }
+    },
+    "12": {
+      "title": "Endocrine I — Anabolic hormones",
+      "topic_id": "anabolic_hormones",
+      "domain": "ES",
+      "chapter": "Ch 4",
+      "page_refs": "pp. 87-96",
+      "key_concept": "Key anabolic hormones: testosterone (gonads/adrenals, ↑ protein synthesis, ↑ neural drive), GH (anterior pituitary, ↑ IGF-1 release, ↑ collagen/fat utilization), IGF-1 (liver + muscle, mediates much of GH's anabolic action), insulin (pancreas, ↑ nutrient uptake, anti-catabolic). Acute resistance exercise spikes T, GH, and IGF-1 — magnitude scales with: total volume, large muscle masses worked, short rest, moderate-high intensity. Chronic resting levels matter less than acute training response for hypertrophy.",
+      "key_facts": [
+        "Testosterone — primary androgen; produced gonads (Leydig cells) and adrenals",
+        "GH released in pulses, peaks in deep sleep stages",
+        "IGF-1 mediates many of GH's actions",
+        "Acute spike correlates with hypertrophy; chronic levels less so",
+        "High volume + short rest + large muscles = biggest acute response"
+      ],
+      "training_link": "Sleep is THE limiter for you (median 5.5h vs 9.8h need). GH peaks in slow-wave sleep — short sleep blunts the anabolic environment your training creates.",
+      "video": {
+        "title": "Brad Schoenfeld — Updated View on Mechanisms of Muscle Hypertrophy (Iron Culture 181)",
+        "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
+        "credibility": "Iron Culture · Brad Schoenfeld PhD"
+      },
+      "audio": {
+        "title": "Stronger By Science Podcast — Episode 9: Hormones & Training Adaptations",
+        "url": "https://www.strongerbyscience.com/podcast-episode-9/",
+        "credibility": "Greg Nuckols MSc + Eric Trexler PhD"
+      }
+    },
+    "13": {
+      "title": "Endocrine II — Catabolic hormones & stress",
+      "topic_id": "catabolic_hormones",
+      "domain": "ES",
+      "chapter": "Ch 4",
+      "page_refs": "pp. 96-102",
+      "key_concept": "Cortisol (adrenal cortex): primary glucocorticoid. Released in response to stress, including exercise. Elevates blood glucose (gluconeogenesis), mobilizes fat, BUT chronically elevated impairs protein synthesis and immune function. T:C ratio used as overtraining marker. Catecholamines (epinephrine, norepinephrine) from adrenal medulla — fight-or-flight, ↑HR, ↑BP, glycogenolysis.",
+      "key_facts": [
+        "Cortisol = glucocorticoid; circadian peak ~AM",
+        "Acute exercise cortisol rise is normal and adaptive",
+        "Chronic elevation = problem (overtraining, poor sleep, undereating)",
+        "T:C ratio drop ≥30% suggests overtraining",
+        "Epinephrine peaks during high-intensity work"
+      ],
+      "training_link": "Your HRV trend (118→187 ms) is a downstream marker of autonomic balance — high HRV = parasympathetic dominance = lower catabolic load. Sleep debt and heat (33°C cost more recovery than 4×8s) push the other direction.",
+      "video": {
+        "title": "Brad Schoenfeld — Mechanisms of Muscle Hypertrophy (Iron Culture 181)",
+        "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
+        "credibility": "Brad Schoenfeld PhD"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Recovery & Stress",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "14": {
+      "title": "Anaerobic training adaptations",
+      "topic_id": "anaerobic_adaptations",
+      "domain": "ES",
+      "chapter": "Ch 5",
+      "page_refs": "pp. 103-119",
+      "key_concept": "Neural adaptations dominate weeks 1-4: improved motor unit recruitment, rate coding, synchronization, decreased Golgi tendon organ inhibition. Hypertrophy starts ~4-6 weeks, becomes dominant after 8+. Muscle: ↑CSA, mostly Type II preferential, ↑ contractile protein, ↑ phosphagen stores, ↑ glycolytic enzymes. Connective tissue: ↑ tendon stiffness, ↑ collagen synthesis. Bone: ↑ mineral density. Endocrine: enhanced acute hormonal response. Limited cardiovascular changes (mostly concentric LV hypertrophy).",
+      "key_facts": [
+        "First 4 wks: neural > hypertrophic",
+        "Hypertrophy: ~4-6+ wks to become evident",
+        "Type II fibers hypertrophy preferentially with heavy load",
+        "Connective tissue lags muscle — injury risk in rapid load jumps",
+        "Cross-sectional area is primary determinant of force"
+      ],
+      "training_link": "Your strength PM has been consistent for months — past neural-only phase, into structural. Connective-tissue lag is why station work substitutions for Hyrox B must respect joint history.",
+      "video": {
+        "title": "Brad Schoenfeld — Maximizing Muscle Hypertrophy (Iron Culture 51)",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Iron Culture · Schoenfeld PhD"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Strength & Muscle Building Protocols",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "15": {
+      "title": "Aerobic endurance training adaptations",
+      "topic_id": "aerobic_adaptations",
+      "domain": "ES",
+      "chapter": "Ch 6",
+      "page_refs": "pp. 121-138",
+      "key_concept": "Central (cardiac): ↑LV chamber size (eccentric hypertrophy), ↑SV, ↓RHR. Peripheral: ↑mitochondrial density and size, ↑oxidative enzymes (citrate synthase, SDH), ↑capillary density, ↑myoglobin, ↑fat oxidation capacity, shifted fuel use toward fat at submax intensities. VO₂max plateaus in ~6-12 months of well-designed training; LT improves longer. Detraining: cardiac changes regress in ~2-4 weeks; mitochondrial in similar timeframe.",
+      "key_facts": [
+        "VO₂max = Q × (a-vO₂ difference)",
+        "VO₂max improves 5-20% in untrained; less in already-trained",
+        "Lactate threshold trainable over years even after VO₂max plateaus",
+        "Capillary density and mitochondrial density both ~2× with chronic training",
+        "Detraining: ~50% loss of central adaptations in 2-4 wks of inactivity"
+      ],
+      "training_link": "Your Jan→May trajectory (HRV +59%, RHR -9) IS this curve in action. With base solidified, LT improvements are the next frontier — sub-threshold 10×1000m and 4×8 (above MLSS) are the right tools.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — Zone 2 Deep Dive (Part 2)",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD + Colorado"
+      }
+    },
+    "16": {
+      "title": "Age and sex differences in training response",
+      "topic_id": "age_sex",
+      "domain": "ES",
+      "chapter": "Ch 7",
+      "page_refs": "pp. 145-160",
+      "key_concept": "Children: can train safely with proper supervision; resistance training does NOT stunt growth. Pre-pubertal gains are largely neural. Adolescents: peak adaptability post-puberty. Older adults: respond to resistance training similarly to younger but slower; counteracts sarcopenia; emphasize multi-joint, moderate load progressing to heavier. Female athletes: similar relative strength gains; absolute differences mostly from hormonal (testosterone) profile and lean mass distribution. Female athlete triad / RED-S: energy deficiency → menstrual dysfunction → low BMD.",
+      "key_facts": [
+        "Pediatric resistance training is SAFE with supervision",
+        "Sarcopenia begins ~30s, accelerates >50",
+        "Female-to-male strength ratio: ~60-80% (lower body closer; upper body further)",
+        "RED-S: Relative Energy Deficiency in Sport — broader than female athlete triad",
+        "Menopause: bone loss accelerates; resistance training is protective"
+      ],
+      "training_link": "Not directly your case, but understanding RED-S concepts maps to your training load × sleep/energy availability — you've felt the limiter when sleep median is 5.5h.",
+      "video": {
+        "title": "Huberman Lab: Galpin — How to Build Strength, Muscle Size & Endurance",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
+        "credibility": "Stanford + Galpin"
+      },
+      "audio": {
+        "title": "Stronger By Science Podcast — Episode 9: Hormonal Contraceptives, Training Adaptations",
+        "url": "https://www.strongerbyscience.com/podcast-episode-9/",
+        "credibility": "Nuckols + Trexler PhD"
+      }
+    },
+    "17": {
+      "title": "Sport psychology — arousal, anxiety, motivation",
+      "topic_id": "sport_psych",
+      "domain": "ES",
+      "chapter": "Ch 8",
+      "page_refs": "pp. 161-178",
+      "key_concept": "Arousal: physiological/psychological activation. Inverted-U hypothesis: performance is best at moderate arousal; too low = under-prepared, too high = anxious/tight. Individual Zones of Optimal Functioning (IZOF) refines this — each athlete has unique optimal zone. Anxiety = cognitive (worry) + somatic (physical). Motivation: intrinsic (process/mastery) vs extrinsic (reward); intrinsic is more durable. Goal-setting: SMART, process > outcome. Self-talk and imagery are validated tools.",
+      "key_facts": [
+        "Inverted-U (Yerkes-Dodson): performance × arousal",
+        "IZOF (Hanin): individual optimal arousal zones",
+        "Process goals > outcome goals for skill acquisition",
+        "Imagery + self-talk improve performance (meta-analyses)",
+        "Choking: skilled performers under high pressure; relates to attentional control"
+      ],
+      "training_link": "Race-week tapering isn't just physiological — your IZOF for Hyrox may differ from training; lower-arousal lifters often need to elevate, higher-arousal athletes need to settle.",
+      "video": {
+        "title": "Yerkes-Dodson Law — Inverted U Theory | Performance vs. Stress",
+        "url": "https://www.youtube.com/watch?v=QWcTSfkDiNA",
+        "credibility": "Dr. Manishika Jain · Psychology educator"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: How to Assess & Improve All Aspects of Fitness",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "18": {
+      "title": "Basic nutrition — macronutrients",
+      "topic_id": "macros",
+      "domain": "NT",
+      "chapter": "Ch 9",
+      "page_refs": "pp. 179-198",
+      "key_concept": "Carbohydrate: 4 kcal/g; spares protein, primary fuel for higher-intensity work; stored as glycogen (~400 g muscle + 100 g liver). Recommendation for athletes: 5-10 g/kg/day depending on training. Protein: 4 kcal/g; structural and enzymatic. Athletes: 1.4-2.0 g/kg/day; up to 2.2 in hypertrophy phases. Fat: 9 kcal/g; essential for hormones, vitamin absorption. Minimum 20-30% kcal from fat. Hydration: ~30-40 mL/kg/day baseline + sweat replacement.",
+      "key_facts": [
+        "CHO: 4 kcal/g; muscle glycogen ~400 g",
+        "PRO: 4 kcal/g; athlete intake 1.4-2.0 g/kg",
+        "FAT: 9 kcal/g; ≥20% of kcal",
+        "Hydration: 30-40 mL/kg + sweat",
+        "EAA leucine threshold ~2.5-3 g per meal for MPS"
+      ],
+      "training_link": "Your training volume (Z2 + intervals + strength + Hyrox) puts CHO needs at high end (~6-8 g/kg). Underfueling chronically blunts everything from glycogen recovery to GH pulse to immune function.",
+      "video": {
+        "title": "Brad Schoenfeld — Resistance Training, Body Composition & Hypertrophy",
+        "url": "https://www.youtube.com/watch?v=SUy6HwOhT3U",
+        "credibility": "Brad Schoenfeld PhD · Huberman Lab"
+      },
+      "audio": {
+        "title": "Sigma Nutrition #123 — Donald Layman PhD: Leucine, mTOR & Anabolic Response",
+        "url": "https://sigmanutrition.com/episode123/",
+        "credibility": "Donald Layman PhD · UIUC"
+      }
+    },
+    "19": {
+      "title": "Performance nutrition — timing & supplements",
+      "topic_id": "nutrient_timing",
+      "domain": "NT",
+      "chapter": "Ch 10",
+      "page_refs": "pp. 199-218",
+      "key_concept": "Pre-exercise: CHO 3-4h prior (1-4 g/kg), lower glycemic; small CHO+PRO 30-60 min if tolerated. During: <60 min no need beyond water; 60-90 min: 30-60 g CHO/hr; >2.5 hr: 60-90 g CHO/hr (mixed glucose+fructose). Post: 0.8-1.2 g/kg CHO + 0.25-0.4 g/kg PRO within ~2 hr (the 'anabolic window' is wider than once thought but earlier is better for glycogen). Effective supplements (high evidence): creatine, caffeine, beta-alanine, sodium bicarbonate, beetroot/nitrate, whey/EAA.",
+      "key_facts": [
+        "Creatine: 3-5 g/day, no loading needed",
+        "Caffeine: 3-6 mg/kg, 30-60 min pre-exercise",
+        "Beta-alanine: 4-6 g/day; buffers H⁺ for 1-4 min efforts",
+        "Sodium bicarbonate: 0.3 g/kg; same intensity range as BA",
+        "Nitrate (beetroot): 5-9 mmol, 2-3 hr pre"
+      ],
+      "training_link": "Caffeine 30-60 min before your 4×8 sessions has high-evidence ergogenic effect for sustained high-intensity work in the 2-10 min range.",
+      "video": {
+        "title": "Brad Schoenfeld — Resistance Training & Time Efficiency",
+        "url": "https://www.youtube.com/watch?v=SUy6HwOhT3U",
+        "credibility": "Schoenfeld PhD"
+      },
+      "audio": {
+        "title": "Sigma Nutrition #123 — Leucine Kinetics & mTOR (Layman PhD)",
+        "url": "https://sigmanutrition.com/episode123/",
+        "credibility": "Layman PhD"
+      }
+    },
+    "20": {
+      "title": "Performance-enhancing substances & methods",
+      "topic_id": "peds",
+      "domain": "NT",
+      "chapter": "Ch 11",
+      "page_refs": "pp. 219-244",
+      "key_concept": "WADA-banned categories: anabolic agents (T, designer steroids), peptide hormones (GH, EPO), beta-2 agonists, hormone/metabolic modulators, diuretics (masking), stimulants, narcotics, cannabinoids, glucocorticoids (in-competition), blood doping. CSCS exam tests recognition of: mechanisms, side effects, ethical/legal context. Recognized side effects of AAS: HPTA suppression, hepatotoxicity (oral 17α-alkylated), cardiovascular risk, psychological effects, virilization in females.",
+      "key_facts": [
+        "WADA = World Anti-Doping Agency",
+        "Anabolic steroids increase MPS via androgen receptor binding",
+        "Oral 17α-alkylated steroids = hepatotoxicity",
+        "EPO/blood doping ↑ RBC mass → ↑ VO₂max",
+        "GH abuse: insulin resistance, acromegaly features"
+      ],
+      "training_link": "Not applicable. Worth knowing the recognition criteria — coaches are mandated reporters and need to recognize patterns.",
+      "video": {
+        "title": "USADA Coach's Advantage — Anti-Doping Education",
+        "url": "https://www.nsca.com/certification/continuing-education/quizzes-and-assessments/usada/usada-coachs-advantage-video-page/",
+        "credibility": "USADA + NSCA partnership"
+      },
+      "audio": {
+        "title": "Sigma Nutrition Radio — Performance-Enhancing Substances",
+        "url": "https://sigmanutrition.com/podcast/",
+        "credibility": "Danny Lennon · evidence-based"
+      }
+    },
+    "21": {
+      "title": "Test selection principles — validity, reliability, specificity",
+      "topic_id": "test_principles",
+      "domain": "PD",
+      "chapter": "Ch 12",
+      "page_refs": "pp. 249-268",
+      "key_concept": "Validity = test measures what it claims (construct, content, criterion). Reliability = consistency on repeat administration (test-retest, inter-rater). Objectivity = inter-rater reliability specifically. Specificity = tests should resemble sport demands (metabolic, biomechanical). Sequence on a test day: 1) non-fatiguing (vertical jump, agility), 2) agility, 3) max strength (1RM), 4) sprints, 5) muscular endurance, 6) anaerobic capacity, 7) aerobic. Always rest fully between modalities.",
+      "key_facts": [
+        "Validity ≠ reliability (a test can be reliable but invalid)",
+        "Order: least to most fatiguing; speed/power → strength → endurance",
+        "Standardization is critical for reliability",
+        "Test must match the demands of the sport",
+        "Pre-test: warm-up, familiarization, instructions identical"
+      ],
+      "training_link": "Your block testing decisions (decoupling, LT thresholds) follow these same principles — reliability via standardized indoor venue, validity by choosing tests that map to Hyrox demands.",
+      "video": {
+        "title": "Andy Galpin — How to Assess & Improve All Aspects of Your Fitness",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
+        "credibility": "Huberman Lab + Galpin"
+      },
+      "audio": {
+        "title": "Iron Culture — Brad Schoenfeld: Hypertrophy Research Methods",
+        "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
+        "credibility": "Iron Culture · Schoenfeld PhD"
+      }
+    },
+    "22": {
+      "title": "Test administration — strength & power",
+      "topic_id": "test_admin_strength",
+      "domain": "PD",
+      "chapter": "Ch 13",
+      "page_refs": "pp. 269-294",
+      "key_concept": "1RM testing: thorough warm-up, 2-4 attempts at progressively heavier loads with 2-4 min rest; spotters required. Vertical jump: countermovement vs static; Sargent test or Vertec/jump mat. Standing long jump: distance from takeoff to closest heel landing. Margaria-Kalamen stair sprint: anaerobic power. Wingate: 30s max cycle effort — peak/mean power, fatigue index.",
+      "key_facts": [
+        "1RM: progressive sets to true 1RM in 4-5 attempts",
+        "Vertec valid; jump mats more practical",
+        "Margaria-Kalamen: 9 steps, time gates",
+        "Wingate: 30s, peak in ~5s, mean = anaerobic capacity",
+        "Spotter is non-negotiable for max-load squat/bench"
+      ],
+      "training_link": "Indoor venue + consistent warm-up = your standardization. The reason your LT2=158 is trustworthy.",
+      "video": {
+        "title": "Squat University — How to Squat Correctly (1RM testing context)",
+        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Assessment of Fitness",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "23": {
+      "title": "Test administration — endurance & body comp",
+      "topic_id": "test_admin_endurance",
+      "domain": "PD",
+      "chapter": "Ch 13",
+      "page_refs": "pp. 295-310",
+      "key_concept": "Aerobic: 1.5-mile run, 12-min Cooper, beep test (multistage shuttle), VO₂max via metabolic cart. Anaerobic capacity: 300-yd shuttle. Body comp: skinfolds (Jackson-Pollock 3 or 7-site), BIA, BodPod, DEXA. Skinfold accuracy depends on tester skill; standardized sites and right side.",
+      "key_facts": [
+        "Cooper test: distance in 12 min → VO₂max estimate",
+        "Beep test: 20m shuttles, increasing pace",
+        "Skinfolds: right side, standardized landmarks",
+        "DEXA = gold standard for body comp in field/research",
+        "Hydration affects BIA significantly"
+      ],
+      "training_link": "Field tests good enough for monitoring. Your LT testing is more sensitive than 12-min Cooper for tracking change in trained athletes.",
+      "video": {
+        "title": "Seiler — Polarized Training 101 (testing context)",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — San-Millán: Energy Systems & Testing",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "24": {
+      "title": "Warm-up & flexibility",
+      "topic_id": "warmup",
+      "domain": "EX",
+      "chapter": "Ch 14",
+      "page_refs": "pp. 317-330",
+      "key_concept": "General warm-up: 5-10 min low-intensity activity to raise core temp. Specific warm-up: movement patterns of upcoming session. RAMP protocol: Raise, Activate/Mobilize, Potentiate. Static stretching: holds 30s+; can transiently reduce force/power if done immediately pre-performance. Dynamic stretching: movement-based; preferred for performance-day warm-up. PNF: contract-relax variations; high gain but partner-dependent.",
+      "key_facts": [
+        "RAMP: Raise, Activate, Mobilize, Potentiate",
+        "Static pre-performance: transient power drop ~5%",
+        "Dynamic warm-up preferred for power activities",
+        "PNF most effective for ROM gains",
+        "Cold muscle = higher injury risk"
+      ],
+      "training_link": "Your 4×8 sessions and Hyrox prep deserve specific warm-up — rep-1 'too easy' rule means warm-up determines rep-1 readiness.",
+      "video": {
+        "title": "Squat University — How To Squat Correctly (FIX MISTAKES) — includes warm-up",
+        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Optimal Protocols (warm-up & potentiation)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "25": {
+      "title": "Resistance technique — squat",
+      "topic_id": "ex_squat",
+      "domain": "EX",
+      "chapter": "Ch 15",
+      "page_refs": "pp. 350-370",
+      "key_concept": "Back squat: bar on upper traps (high bar) or rear delts (low bar). Stance ~shoulder width, toes slight out. Cues: brace core (Valsalva for max effort), break at hips and knees together, descend keeping chest up, knees track over toes (not collapsed in). Depth ≥ parallel (femur). Drive through midfoot, hips and shoulders rise together. Spotters at sides for max attempts. Common faults: knee valgus, butt wink at bottom, forward lean.",
+      "key_facts": [
+        "Bar position changes torque distribution between hips/knees",
+        "Parallel = femur parallel to floor",
+        "Valsalva increases intra-abdominal pressure → spine stability",
+        "Knee valgus is the most common fault; cue 'knees out'",
+        "Spotters at sides, never directly behind, for max attempts"
+      ],
+      "training_link": "Your strength PM session structure relies on squat fidelity — these technique points are non-negotiable for your hip-dominant Hyrox prep.",
+      "video": {
+        "title": "Squat University — How To Squat Correctly (FIX MISTAKES!)",
+        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Iron Culture — Schoenfeld: Mechanisms of Hypertrophy",
+        "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "26": {
+      "title": "Resistance technique — deadlift",
+      "topic_id": "ex_deadlift",
+      "domain": "EX",
+      "chapter": "Ch 15",
+      "page_refs": "pp. 370-385",
+      "key_concept": "Conventional: stance ~hip width, shins near bar, grip outside knees (double-overhand or mixed), hips set below shoulders, neutral spine, lats engaged. Pull: bar drags shins, push floor away with legs, hips and shoulders rise together until bar passes knees then hips extend through. Sumo: wider stance, grip inside knees, more vertical torso, more quad/glute, less low-back demand. Trap bar: more upright torso, friendlier to most lifters.",
+      "key_facts": [
+        "Bar should travel in straight line, close to body",
+        "Neutral spine throughout",
+        "Lockout: stand tall, hips extended; don't hyperextend lumbar",
+        "Sumo reduces low-back shear, increases adductor demand",
+        "Trap bar reduces L4-L5 shear"
+      ],
+      "training_link": "Trap bar deadlift is the highest-ROI lift for your hybrid demands — high power output, low joint cost.",
+      "video": {
+        "title": "Squat University — How to Deadlift Properly (Conventional & Sumo)",
+        "url": "https://www.youtube.com/watch?v=tNn7AlPITOw",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Strength Protocols",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "27": {
+      "title": "Resistance technique — bench & overhead press",
+      "topic_id": "ex_press",
+      "domain": "EX",
+      "chapter": "Ch 15",
+      "page_refs": "pp. 385-400",
+      "key_concept": "Bench: 5 points of contact (head, upper back, glutes on bench; both feet on floor). Grip ~1.5× shoulder width. Bar path: descend to lower chest/sternum, slight curve up to over upper chest at lockout. Scaps retracted/depressed. Spotter at head. Overhead press: bar at clavicle, elbows slightly in front, brace, press up while staying tight, slight forward shift of head as bar passes face. Avoid lumbar hyperextension.",
+      "key_facts": [
+        "Bench: 5 points of contact",
+        "Scaps retracted and depressed",
+        "Bar to lower chest, NOT throat",
+        "OHP: brace HARD; lumbar neutral",
+        "Push-press uses leg drive to start"
+      ],
+      "training_link": "OHP is technique-heavy and underused — but for shoulder durability across a long training career it's worth keeping in.",
+      "video": {
+        "title": "Squat University — How To Squat Correctly (technique principles)",
+        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "28": {
+      "title": "Olympic lifts — power clean & derivatives",
+      "topic_id": "ex_clean",
+      "domain": "EX",
+      "chapter": "Ch 15",
+      "page_refs": "pp. 400-420",
+      "key_concept": "Power clean: from floor or hang. Phases: 1st pull (floor to knee, slow), transition (knee to mid-thigh, hips extend), 2nd pull (explosive triple extension — ankle, knee, hip), catch (front rack, elbows high, partial squat). Common faults: early arm bend, jumping forward, soft catch. Hang clean: starts from mid-thigh — teaches 2nd pull. Mid-thigh pull: power without catch demand. Olympic derivatives may give better ROI than full lifts for sport athletes.",
+      "key_facts": [
+        "Triple extension: ankle, knee, hip",
+        "Arms stay straight in 1st and 2nd pull",
+        "Catch: front rack, elbows high",
+        "Hang clean starts from mid-thigh",
+        "Derivatives often superior for non-Olympic sports"
+      ],
+      "training_link": "Likely overkill for Hyrox — high learning cost vs return. Kettlebell swing or jump squat may deliver triple-extension power with lower complexity.",
+      "video": {
+        "title": "Galpin — Optimal Protocols (power & technique)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Huberman + Galpin"
+      },
+      "audio": {
+        "title": "Iron Culture 236 — Galpin: Muscle Fiber Types & Training",
+        "url": "https://www.youtube.com/watch?v=z6oWj7410G0",
+        "credibility": "Iron Culture · Helms PhD"
+      }
+    },
+    "29": {
+      "title": "Alternative modes — kettlebell, sled, strongman",
+      "topic_id": "ex_alt_modes",
+      "domain": "EX",
+      "chapter": "Ch 16",
+      "page_refs": "pp. 421-450",
+      "key_concept": "KB swing: hip-hinge driven; bell floats with hip extension; not a squat. Goblet squat: front-loaded squat — good teaching tool. Turkish get-up: full-body integration. Sled push/drag: low eccentric load, high metabolic. Strongman (yoke, farmers, sandbag): odd-object, irregular loading; high-stability demand. Each has place in athletic training. Selection: match demand profile to sport.",
+      "key_facts": [
+        "KB swing: hip hinge, NOT a squat",
+        "Sled: low eccentric → low DOMS, can do daily",
+        "Farmers: grip, posture, glute endurance",
+        "Yoke walk: spinal compression demand",
+        "Odd objects build trunk stability"
+      ],
+      "training_link": "Sled push is highly Hyrox-specific. Low eccentric load means recovery cost is lower than the metabolic stress would suggest — useful as substitute for higher-impact intervals.",
+      "video": {
+        "title": "Squat University — Deadlift Form Fixes (alternative implements)",
+        "url": "https://www.youtube.com/watch?v=tNn7AlPITOw",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Strength Building Protocols",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "30": {
+      "title": "Resistance program design — needs analysis",
+      "topic_id": "needs_analysis",
+      "domain": "PD",
+      "chapter": "Ch 17",
+      "page_refs": "pp. 455-470",
+      "key_concept": "Step 1 of program design. Two-part: (a) Sport analysis — movement patterns, primary energy systems, injury patterns, common positions. (b) Athlete analysis — training history, injuries, testing data, goals, training age. Inputs from steps 1-2 drive everything downstream: exercise selection, intensity, volume, frequency, rest, periodization. Without needs analysis, programming is generic.",
+      "key_facts": [
+        "Sport analysis: movements, energy systems, injuries, common positions",
+        "Athlete analysis: history, injuries, testing, goals, training age",
+        "Drives exercise selection, intensity, volume, frequency, rest",
+        "Periodization is downstream of needs analysis",
+        "Re-assess needs analysis as the athlete evolves"
+      ],
+      "training_link": "Your Hyrox needs analysis: hip-dominant, mixed metabolic, station-strength endurance, heat-tolerance, low joint-impact for runs. Maps directly to your current substitution rules.",
+      "video": {
+        "title": "Galpin — Optimal Protocols (needs analysis discussion)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Huberman + Galpin"
+      },
+      "audio": {
+        "title": "Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy (programming)",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "31": {
+      "title": "Resistance program — exercise selection",
+      "topic_id": "exercise_selection",
+      "domain": "PD",
+      "chapter": "Ch 17",
+      "page_refs": "pp. 470-485",
+      "key_concept": "Core exercises (multi-joint, large muscle): squat, deadlift, bench, OHP, row. Assistance (single-joint or smaller muscle). Structural exercises load the spine axially; power exercises are explosive (cleans, jumps). Sport-specific exercises mimic competitive movement patterns. Balance pushing/pulling, anterior/posterior, knee/hip dominance. Exercise order: power → core → assistance (most fatiguing → least).",
+      "key_facts": [
+        "Core: multi-joint, large muscle group, structural",
+        "Order: power → core → assistance",
+        "Balance push/pull, ant/post, knee/hip",
+        "Sport-specific should resemble actual movement",
+        "Single-joint exercises target weak links"
+      ],
+      "training_link": "Your sled push + KB swing + hinge variations are core/power; accessory single-joint lifts fill gaps.",
+      "video": {
+        "title": "Mike Israetel — How Much Training Volume is Best? (Mesocycle Design)",
+        "url": "https://www.youtube.com/watch?v=TvDOXZYxk6k",
+        "credibility": "Renaissance Periodization · Israetel PhD"
+      },
+      "audio": {
+        "title": "Iron Culture 51 — Schoenfeld: Hypertrophy Programming",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "32": {
+      "title": "Resistance program — intensity & volume",
+      "topic_id": "intensity_volume",
+      "domain": "PD",
+      "chapter": "Ch 17",
+      "page_refs": "pp. 485-505",
+      "key_concept": "%1RM and rep ranges: strength 1-6 reps at 85-100%; hypertrophy 6-12 at 65-85%; muscular endurance 12+ at <65%; power 1-5 explosive at varied intensities (30-50% for ballistic, 75-90% for cleans). Volume = sets × reps × load. Weekly hard-set landmark (Schoenfeld): MV (maintenance) ≈ 6-10, MEV ≈ 10, MAV ≈ 12-20, MRV ≈ 20+ per muscle/wk for hypertrophy. Strength MRV lower.",
+      "key_facts": [
+        "Strength: 1-6 reps, 85-100% 1RM, 3-5 sets, long rest",
+        "Hypertrophy: 6-12 reps, 65-85%, 3-6 sets",
+        "Endurance: 12+ reps, <65%, 2-3 sets",
+        "Power: 1-5 reps explosive, varied %",
+        "Volume landmarks: MV/MEV/MAV/MRV"
+      ],
+      "training_link": "Your strength PM sessions should sit in low-rep, moderate-set range (5×5, 4×6 patterns) — high stimulus, low recovery cost stacked on top of your conditioning load.",
+      "video": {
+        "title": "Dr. Mike Israetel — How Much Training Volume is Best? (MEV/MAV/MRV)",
+        "url": "https://www.youtube.com/watch?v=TvDOXZYxk6k",
+        "credibility": "Renaissance Periodization · Israetel PhD"
+      },
+      "audio": {
+        "title": "Iron Culture 51 — Schoenfeld: Volume & Frequency for Hypertrophy",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "33": {
+      "title": "Resistance program — rest & frequency",
+      "topic_id": "rest_frequency",
+      "domain": "PD",
+      "chapter": "Ch 17",
+      "page_refs": "pp. 505-515",
+      "key_concept": "Rest intervals: power and strength 3-5 min between sets; hypertrophy 1-3 min; endurance ≤1 min. Short rest reduces load capacity; long rest preserves intensity. Frequency: per muscle 2-3×/wk produces more hypertrophy than 1×/wk at equated volume (meta-analyses). For strength, 3-5×/wk possible at lower per-session volume. Recovery between full-body sessions: 48 hr minimum.",
+      "key_facts": [
+        "Strength/power: 3-5 min rest",
+        "Hypertrophy: 1-3 min rest",
+        "Endurance: ≤1 min",
+        "2-3×/wk per muscle > 1×/wk at equated volume",
+        "Strength can tolerate higher frequency than max-hypertrophy programs"
+      ],
+      "training_link": "Your 'recovery by session type' memory matches this — strength PM days are 2×/wk, leaving 48+ hr recovery between similar stimuli.",
+      "video": {
+        "title": "Mike Israetel — Volume Landmarks & Mesocycle Design",
+        "url": "https://www.youtube.com/watch?v=TvDOXZYxk6k",
+        "credibility": "Israetel PhD"
+      },
+      "audio": {
+        "title": "Iron Culture 51 — Schoenfeld: Frequency & Recovery",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "34": {
+      "title": "Plyometric program design",
+      "topic_id": "plyometrics",
+      "domain": "PD",
+      "chapter": "Ch 18",
+      "page_refs": "pp. 519-540",
+      "key_concept": "SSC (stretch-shortening cycle): eccentric pre-load enhances concentric output via stored elastic energy + stretch reflex. Amortization phase = transition; SHORTER amortization = better. Categories: low-intensity (skipping, ankle hops), moderate (box jumps, hurdle hops), high (depth jumps, repeat broad jumps). Volume measured in foot contacts: beginner 80-100/session; advanced 120-140; elite ≤200. Surface: grass/track > concrete. Pre-req: ~1.5× BW squat for high-intensity plyos.",
+      "key_facts": [
+        "SSC: eccentric → amortization → concentric",
+        "Amortization: faster = better SSC use",
+        "Foot contacts: 80-200/session",
+        "Surface affects injury risk",
+        "1.5× BW squat as pre-req for depth jumps"
+      ],
+      "training_link": "Your hip-dominant strength base supports plyo addition — but high-impact plyos (depth jumps) compete for joint capacity with your run volume. Box jumps (low landing impact) are safer add.",
+      "video": {
+        "title": "Galpin — Optimal Protocols (plyometric programming)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Huberman + Galpin"
+      },
+      "audio": {
+        "title": "Iron Culture — Hypertrophy & Power Adaptations",
+        "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "35": {
+      "title": "Speed & agility training",
+      "topic_id": "speed_agility",
+      "domain": "PD",
+      "chapter": "Ch 19",
+      "page_refs": "pp. 543-562",
+      "key_concept": "Sprint mechanics: acceleration (0-20m, forward lean, long push), max velocity (upright, cyclic, vertical force production), deceleration. Coaching cues: arm drive, knee drive, dorsiflexion. Agility = ability to react and change direction; CODS = closed-loop change of direction. Reactive agility involves stimulus (visual/auditory). Programming: short distances at full intensity, full recovery (work:rest 1:12-1:20 for max speed).",
+      "key_facts": [
+        "Acceleration: forward lean, long ground contact",
+        "Max velocity: upright, vertical force, brief contact",
+        "Work:rest for max-speed = 1:12 to 1:20",
+        "Reactive agility > closed-loop for transfer to sport",
+        "Sprint training is a power-skill — not a conditioning tool"
+      ],
+      "training_link": "Hyrox running is sub-maximal pacing — true speed work won't transfer much. Skip dedicated speed unless you're chasing a 5K PR.",
+      "video": {
+        "title": "Galpin — Assess & Improve All Aspects of Fitness (speed work)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
+        "credibility": "Huberman + Galpin"
+      },
+      "audio": {
+        "title": "Iron Culture 236 — Galpin: Fiber Types & Training Specificity",
+        "url": "https://www.youtube.com/watch?v=z6oWj7410G0",
+        "credibility": "Iron Culture · Galpin"
+      }
+    },
+    "36": {
+      "title": "Aerobic endurance program design",
+      "topic_id": "aerobic_programming",
+      "domain": "PD",
+      "chapter": "Ch 20",
+      "page_refs": "pp. 565-588",
+      "key_concept": "FITT-VP: Frequency, Intensity, Time, Type, Volume, Progression. Modes: LSD (long slow distance), tempo (LT2 work), interval (work:rest at high intensity), Fartlek (fartlek = play with speed). Polarized model (Seiler): ~80% sessions in Z1/2 (below LT1), ~20% in Z3+ (above LT2), minimum time in the middle 'gray zone.' Periodization: progressive volume → progressive intensity → race specificity → taper.",
+      "key_facts": [
+        "FITT-VP framework",
+        "LSD: 30+ min at <70% HRmax",
+        "Tempo: at LT2, 20-40 min",
+        "Polarized: 80/20 by SESSION COUNT (Seiler)",
+        "Pyramidal (more tempo, less Z3+) also used"
+      ],
+      "training_link": "Your block follows Seiler closely (memory: session-count basis for 80/20). 4×8 at HR 170-175 is your supra-MLSS work; Z2 cycling is your Z1/2 bulk.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training in Practice",
+        "url": "https://www.youtube.com/watch?v=wlYymwMsSFQ",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán: Zone 2 Programming",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "37": {
+      "title": "Periodization I — models",
+      "topic_id": "periodization_models",
+      "domain": "PD",
+      "chapter": "Ch 21",
+      "page_refs": "pp. 591-610",
+      "key_concept": "Linear (Matveyev): high volume/low intensity → low volume/high intensity over a macrocycle. Reverse linear: inverse, for endurance. Undulating (DUP): intensity/volume vary within a week — strong evidence for strength gains. Block (Issurin): sequential focused blocks of accumulation → transmutation → realization. Conjugate (Westside): rotating max-effort + dynamic-effort + repeated-effort methods in the same week.",
+      "key_facts": [
+        "Linear: traditional, single-peak",
+        "Undulating: daily/weekly variation",
+        "Block: sequential focused blocks",
+        "Conjugate: simultaneous methods, rotating exercises",
+        "DUP often outperforms linear for strength in trained lifters"
+      ],
+      "training_link": "Your block structure (memory: v9.8 phased plan, Phase 0 sleep gate, 4-week blocks) is block periodization with explicit readiness gates — most CSCS texts don't include readiness gates; you've gone beyond textbook.",
+      "video": {
+        "title": "Mike Israetel — Mesocycle Design & Volume Landmarks",
+        "url": "https://www.youtube.com/watch?v=TvDOXZYxk6k",
+        "credibility": "Israetel PhD"
+      },
+      "audio": {
+        "title": "Iron Culture 51 — Schoenfeld: Periodization for Hypertrophy",
+        "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "38": {
+      "title": "Periodization II — macro, meso, micro",
+      "topic_id": "periodization_structure",
+      "domain": "PD",
+      "chapter": "Ch 21",
+      "page_refs": "pp. 610-625",
+      "key_concept": "Macrocycle: annual or season-long plan. Mesocycle: 2-6 wk blocks with a specific focus (hypertrophy, strength, power, peaking). Microcycle: typically 1 week. Phases (linear): hypertrophy/endurance → basic strength → strength/power → peaking → active rest. Tapering: 7-21 days, ~40-60% volume reduction, intensity maintained, frequency maintained. Supercompensation: rest → recovery → adaptation → return to baseline.",
+      "key_facts": [
+        "Macro: months to year",
+        "Meso: 2-6 weeks",
+        "Micro: ~1 week",
+        "Taper: cut volume ~50%, keep intensity",
+        "Supercompensation timing varies by stimulus"
+      ],
+      "training_link": "Your block weeks → 4-week meso → race buildup pattern matches this textbook framework. Phase 0 sleep gate is custom on top.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 201: Past, Present & Future",
+        "url": "https://www.youtube.com/watch?v=zKloBrc75KQ",
+        "credibility": "Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán: Zone 2 (block periodization)",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD"
+      }
+    },
+    "39": {
+      "title": "Rehabilitation & reconditioning principles",
+      "topic_id": "rehab",
+      "domain": "PD",
+      "chapter": "Ch 22",
+      "page_refs": "pp. 627-650",
+      "key_concept": "Tissue healing phases: inflammation (0-6 days), proliferation (3 days-3 wks), remodeling (3 wks-1 yr+). PT-led acute care; CSCS role in return-to-sport (RTS) bridging. RTS criteria: pain-free ROM, ≥90% LSI (limb symmetry index), psychological readiness, sport-specific testing. Progressive loading: isometric → isotonic → isokinetic → SSC/plyometric → sport-specific. Avoid rushing the SSC stage.",
+      "key_facts": [
+        "Healing phases: inflammation, proliferation, remodeling",
+        "LSI ≥90% for RTS",
+        "Progressive loading sequence non-negotiable",
+        "Psychological readiness is real and measurable",
+        "CSCS works WITH PT, not replacing"
+      ],
+      "training_link": "Reads as preventive for you — load progression rules apply to ANY new stimulus, not just injury return.",
+      "video": {
+        "title": "Squat University — How to Deadlift Properly (return-to-lifting form)",
+        "url": "https://www.youtube.com/watch?v=tNn7AlPITOw",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Galpin: Recovery Protocols",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin"
+      }
+    },
+    "40": {
+      "title": "Facility design & layout",
+      "topic_id": "facility_design",
+      "domain": "PD",
+      "chapter": "Ch 23",
+      "page_refs": "pp. 651-672",
+      "key_concept": "100 sq ft per athlete minimum. Ceiling: 12+ ft (Olympic lifts) or 10 ft minimum. Lighting: 50-100 foot-candles. Flooring: rubber for free-weight areas, low-pile carpet OK for cardio. Mirrors: 6 in above floor, 20 in clear of equipment. Equipment spacing: 36 in walkways. Power racks anchored. Layout flow: stretch → free weight → resistance → cardio (or per traffic patterns).",
+      "key_facts": [
+        "100 sq ft per athlete",
+        "Ceiling: 12 ft (Oly), 10 ft minimum",
+        "Lighting: 50-100 foot-candles",
+        "Walkways: 36 in minimum",
+        "Equipment grouped by movement pattern"
+      ],
+      "training_link": "Relevant if you ever open a facility — exam-relevant numbers to memorize verbatim.",
+      "video": {
+        "title": "Galpin — Assess & Improve Fitness (facility considerations)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
+        "credibility": "Huberman + Galpin"
+      },
+      "audio": {
+        "title": "Iron Culture — Hypertrophy & Training Environment",
+        "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
+        "credibility": "Schoenfeld PhD"
+      }
+    },
+    "41": {
+      "title": "Facility policies, procedures & legal",
+      "topic_id": "facility_legal",
+      "domain": "PD",
+      "chapter": "Ch 24",
+      "page_refs": "pp. 673-695",
+      "key_concept": "Negligence requires: duty, breach of duty, causation, damages. Standard of care = what a reasonable professional in same role would do. Documentation is everything (waivers, PARQ, incident reports, equipment maintenance logs). Emergency action plan (EAP): venue-specific, posted, practiced. Pre-participation screening (PARQ, medical clearance for risk factors). Confidentiality (HIPAA/FERPA where applicable).",
+      "key_facts": [
+        "Negligence: duty, breach, causation, damages",
+        "Standard of care = reasonable professional in same role",
+        "EAP required and practiced",
+        "PARQ before participation",
+        "Equipment inspection logged"
+      ],
+      "training_link": "Not direct for you, but recurring exam content area.",
+      "video": {
+        "title": "USADA Coach's Advantage — NSCA Continuing Education",
+        "url": "https://www.nsca.com/certification/continuing-education/quizzes-and-assessments/usada/usada-coachs-advantage-video-page/",
+        "credibility": "NSCA + USADA"
+      },
+      "audio": {
+        "title": "Sigma Nutrition Radio — Evidence-based practice",
+        "url": "https://sigmanutrition.com/podcast/",
+        "credibility": "Danny Lennon"
+      }
+    },
+    "42": {
+      "title": "Phase 1 integration review",
+      "topic_id": "phase1_review",
+      "domain": "ES",
+      "chapter": "Synthesis",
+      "page_refs": "Review all",
+      "key_concept": "Phase 1 spans Exercise Sciences foundations. Today: stitch together. Muscle structure → motor units → EC coupling → cardio/respiratory → bioenergetics (3 systems) → biomechanics → endocrine → adaptations. Notice the through-line: ALL training response comes back to stress → recovery → adaptation, mediated by specific tissue and system responses.",
+      "key_facts": [
+        "Force production: muscle architecture × neural drive × biomechanics",
+        "Energy supply: phosphagen (10s) → glycolysis (2min) → oxidative (>2min)",
+        "Hormones modulate adaptation; sleep modulates hormones",
+        "Anaerobic adaptation: neural first, then structural",
+        "Aerobic adaptation: central first, then peripheral"
+      ],
+      "training_link": "Your training memories already encode all of this — chart's been built on these principles. Today's review consolidates the textbook scaffolding.",
+      "video": {
+        "title": "Huberman Lab — Galpin: How to Build Strength, Muscle Size & Endurance (synthesis)",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
+        "credibility": "Stanford + Galpin"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — San-Millán: Energy Systems Overview",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD"
+      }
+    }
+  }
+}
