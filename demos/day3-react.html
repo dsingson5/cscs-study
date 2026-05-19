@@ -6,27 +6,42 @@
 <title>CSCS Day 3 — React Demo (EC Coupling)</title>
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/framer-motion@11.11.17/dist/framer-motion.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   body { background: #0a0e16; color: #e8ebf2; font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif; }
   body { background-image: radial-gradient(at 20% 10%, rgba(94, 200, 255, 0.10) 0px, transparent 50%), radial-gradient(at 80% 60%, rgba(192, 143, 255, 0.07) 0px, transparent 50%); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes drawLine { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+  @keyframes slideDown { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 240px; } }
+  .anim-fadeUp { opacity: 0; animation: fadeUp 0.5s ease-out forwards; }
+  .anim-fadeIn { opacity: 0; animation: fadeIn 0.5s ease-out forwards; }
+  .anim-popIn { opacity: 0; animation: popIn 0.4s ease-out forwards; }
+  .neuron-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawLine 1.5s ease-out forwards; }
+  .term-pop {
+    position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(8px) scale(0.92);
+    margin-bottom: 8px; width: 280px; padding: 12px 14px;
+    background: #0a0e16; border: 1px solid rgba(94,200,255,0.4); border-radius: 10px;
+    box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 24px rgba(94,200,255,0.15);
+    opacity: 0; pointer-events: none; transition: opacity 0.18s, transform 0.18s; z-index: 50;
+  }
+  .term-pop.shown { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+  .reveal-block { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.3s ease-out, opacity 0.25s; }
+  .reveal-block.shown { max-height: 240px; opacity: 1; }
+  .ec-step { transition: all 0.35s ease-out; }
 </style>
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
+<script type="text/babel" data-presets="env,react">
 const { useState, useEffect, useRef } = React;
-const { motion, AnimatePresence } = window.FramerMotion || window['framer-motion'] || {};
 
-// ────────── DATA ──────────
 const LESSON = {
   day: 3,
   date: "May 21, 2026",
   title: "Neuromuscular junction & excitation-contraction coupling",
-  motif: "Neural",
-  concept: "Action potential travels down motoneuron → acetylcholine (ACh) released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down T-tubules → triggers sarcoplasmic reticulum to release Ca²⁺ → Ca²⁺ binds troponin → tropomyosin shifts → myosin binds actin → cross-bridge cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).",
   facts: [
     "ACh is the neurotransmitter at the NMJ",
     "Ca²⁺ release from SR is the immediate trigger for contraction",
@@ -51,14 +66,15 @@ const LESSON = {
   ],
   terms: {
     "ACh": "Acetylcholine — neurotransmitter at the NMJ. Binds nicotinic receptors on the sarcolemma.",
+    "acetylcholine": "Acetylcholine — neurotransmitter at the NMJ. Binds nicotinic receptors on the sarcolemma.",
     "T-tubule": "Invagination of the sarcolemma that carries action potentials into the depth of the muscle fiber.",
-    "SR": "Sarcoplasmic reticulum — intracellular Ca²⁺ store. Releases Ca²⁺ when AP reaches T-tubules.",
+    "T-tubules": "Invagination of the sarcolemma that carries action potentials into the depth of the muscle fiber.",
+    "sarcoplasmic reticulum": "Intracellular Ca²⁺ store. Releases Ca²⁺ when AP reaches T-tubules.",
     "troponin": "Calcium-binding protein on the thin filament. Ca²⁺ binding moves tropomyosin off the myosin-binding sites of actin.",
     "cross-bridge": "Myosin head bound to actin. Cycles through power stroke → ATP-driven detachment → re-cocking → re-attachment."
   }
 };
 
-// ────────── TERM POPOVER ──────────
 function Term({ children, term }) {
   const [open, setOpen] = useState(false);
   const def = LESSON.terms[term] || LESSON.terms[children];
@@ -71,49 +87,27 @@ function Term({ children, term }) {
         onMouseLeave={() => setOpen(false)}
         onClick={() => setOpen(o => !o)}
       >{children}</span>
-      <AnimatePresence>
-        {open && (
-          <motion.span
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 4, scale: 0.95 }}
-            transition={{ duration: 0.18 }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-50 w-72 p-3 bg-slate-900 border border-cyan-700/60 rounded-lg shadow-xl text-sm text-slate-200 pointer-events-none"
-          >
-            <span className="block font-bold text-cyan-300 mb-1 text-xs uppercase tracking-wide">{children}</span>
-            <span className="block">{def}</span>
-          </motion.span>
-        )}
-      </AnimatePresence>
+      <span className={"term-pop " + (open ? "shown" : "")}>
+        <span className="block text-[10px] font-bold text-cyan-300 mb-1 uppercase tracking-widest">{children}</span>
+        <span className="block text-[13px] text-slate-200 leading-snug">{def}</span>
+      </span>
     </span>
   );
 }
 
-// ────────── NEURON BANNER ──────────
 function NeuronBanner() {
   return (
-    <motion.svg
-      viewBox="0 0 600 140"
-      className="w-full h-32"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-      <motion.path d="M 80 70 Q 140 30 200 60 T 320 50 T 460 80" fill="none" stroke="#7fe5ff" strokeWidth="1.5"
-        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, delay: 0.2 }} />
-      <motion.path d="M 80 70 Q 130 110 200 95 T 340 105 T 500 70" fill="none" stroke="#7fe5ff" strokeWidth="1.5"
-        initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, delay: 0.4 }} />
-      <motion.circle cx="80" cy="70" r="14" fill="#5ec8ff" stroke="#fff" strokeWidth="1.5"
-        initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.6, delay: 0.6 }} />
-      {[[200, 60], [320, 50], [460, 80], [200, 95], [340, 105], [500, 70]].map(([cx, cy], i) => (
-        <motion.circle key={i} cx={cx} cy={cy} r="6" fill="#7fe5ff"
-          initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.4, delay: 1 + i * 0.1 }} />
+    <svg viewBox="0 0 600 140" className="w-full h-32 anim-fadeIn">
+      <path className="neuron-path" d="M 80 70 Q 140 30 200 60 T 320 50 T 460 80" fill="none" stroke="#7fe5ff" strokeWidth="1.5" style={{animationDelay: "0.2s"}}/>
+      <path className="neuron-path" d="M 80 70 Q 130 110 200 95 T 340 105 T 500 70" fill="none" stroke="#7fe5ff" strokeWidth="1.5" style={{animationDelay: "0.4s"}}/>
+      <circle cx="80" cy="70" r="14" fill="#5ec8ff" stroke="#fff" strokeWidth="1.5" className="anim-popIn" style={{animationDelay: "0.6s", transformOrigin: "80px 70px"}}/>
+      {[[200,60,1.0],[320,50,1.1],[460,80,1.2],[200,95,1.3],[340,105,1.4],[500,70,1.5]].map(([x,y,d],i) => (
+        <circle key={i} cx={x} cy={y} r="6" fill="#7fe5ff" className="anim-popIn" style={{animationDelay: `${d}s`, transformOrigin: `${x}px ${y}px`}}/>
       ))}
-    </motion.svg>
+    </svg>
   );
 }
 
-// ────────── EC STEP WALKTHROUGH ──────────
 function ECSteps() {
   const [cur, setCur] = useState(-1);
   const [auto, setAuto] = useState(false);
@@ -127,154 +121,107 @@ function ECSteps() {
   }, [auto]);
   return (
     <div className="bg-slate-900/60 border border-slate-700 rounded-xl p-4">
-      <div className="text-xs text-cyan-300 uppercase tracking-wider mb-3">Step-through cascade</div>
+      <div className="text-xs text-cyan-300 uppercase tracking-wider mb-3 font-bold">Step-through cascade</div>
       <div className="space-y-2">
-        {LESSON.steps.map((s, i) => (
-          <motion.div
-            key={i}
-            initial={false}
-            animate={{
+        {LESSON.steps.map((s, i) => {
+          const active = i === cur;
+          const past = i < cur;
+          return (
+            <div key={i} className="ec-step flex gap-3 p-3 bg-slate-800/60 border rounded-lg" style={{
               opacity: i <= cur ? 1 : 0.32,
-              x: i === cur ? 6 : 0,
-              borderColor: i === cur ? '#5ec8ff' : '#334155'
-            }}
-            className="flex gap-3 p-3 bg-slate-800/60 border rounded-lg"
-          >
-            <motion.div
-              animate={{ background: i === cur ? '#5ec8ff' : '#0f172a', color: i === cur ? '#0a0e16' : '#94a3b8' }}
-              className="w-7 h-7 flex-shrink-0 rounded-full flex items-center justify-center text-xs font-bold"
-            >{i + 1}</motion.div>
-            <div>
-              <div className="text-sm font-semibold">{s.label}</div>
-              <div className="text-xs text-slate-400 mt-0.5">{s.desc}</div>
+              transform: active ? "translateX(6px)" : "translateX(0)",
+              borderColor: active ? "#5ec8ff" : "#334155",
+              boxShadow: active ? "0 0 18px rgba(94,200,255,0.18)" : "none"
+            }}>
+              <div className="w-7 h-7 flex-shrink-0 rounded-full flex items-center justify-center text-xs font-bold transition-all" style={{
+                background: active ? "#5ec8ff" : "#0f172a",
+                color: active ? "#0a0e16" : "#94a3b8",
+                boxShadow: active ? "0 0 14px #5ec8ff" : "none"
+              }}>{i + 1}</div>
+              <div>
+                <div className="text-sm font-semibold">{s.label}</div>
+                <div className="text-xs text-slate-400 mt-0.5">{s.desc}</div>
+              </div>
             </div>
-          </motion.div>
-        ))}
+          );
+        })}
       </div>
       <div className="mt-3 flex gap-2">
-        <button onClick={() => setCur(c => Math.max(-1, c - 1))} className="px-3 py-1.5 text-xs bg-slate-800 border border-slate-700 rounded hover:border-cyan-500">◀ Prev</button>
-        <button onClick={() => setCur(c => Math.min(LESSON.steps.length - 1, c + 1))} className="px-3 py-1.5 text-xs bg-slate-800 border border-slate-700 rounded hover:border-cyan-500">Next ▶</button>
-        <button onClick={() => { setCur(0); setAuto(a => !a); }} className="px-3 py-1.5 text-xs bg-cyan-600 text-slate-900 font-semibold rounded hover:bg-cyan-500">{auto ? '⏸ Pause' : '⏵ Auto-play'}</button>
+        <button onClick={() => { setAuto(false); setCur(c => Math.max(-1, c - 1)); }} className="px-3 py-1.5 text-xs bg-slate-800 border border-slate-700 rounded hover:border-cyan-500">◀ Prev</button>
+        <button onClick={() => { setAuto(false); setCur(c => Math.min(LESSON.steps.length - 1, c + 1)); }} className="px-3 py-1.5 text-xs bg-slate-800 border border-slate-700 rounded hover:border-cyan-500">Next ▶</button>
+        <button onClick={() => { if (!auto) setCur(0); setAuto(a => !a); }} className="px-3 py-1.5 text-xs bg-cyan-600 text-slate-900 font-semibold rounded hover:bg-cyan-500">{auto ? '⏸ Pause' : '⏵ Auto-play'}</button>
       </div>
     </div>
   );
 }
 
-// ────────── QUESTION CARD ──────────
 function QuestionCard({ q, i }) {
   const [revealed, setRevealed] = useState(false);
   const [mark, setMark] = useState(null);
   const [answer, setAnswer] = useState("");
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: i * 0.06 }}
-      className="bg-slate-900/60 border border-slate-700 rounded-xl p-4"
-    >
+    <div className="bg-slate-900/60 border border-slate-700 rounded-xl p-4 anim-fadeUp" style={{animationDelay: `${0.05 + i*0.06}s`}}>
       <div className="flex items-center gap-2 mb-2">
         <span className="text-xs text-slate-400">Q{i + 1}</span>
-        <span className="text-[10px] bg-cyan-500/15 text-cyan-300 px-2 py-0.5 rounded-full uppercase tracking-wider">{q.type || 'recall'}</span>
+        <span className="text-[10px] bg-cyan-500/15 text-cyan-300 px-2 py-0.5 rounded-full uppercase tracking-wider">recall</span>
       </div>
       <div className="text-sm mb-3">{q.q}</div>
-      <textarea
-        value={answer}
-        onChange={e => setAnswer(e.target.value)}
-        placeholder="Try recall before revealing…"
-        className="w-full min-h-[60px] bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:border-cyan-500 focus:outline-none transition"
-      />
+      <textarea value={answer} onChange={e => setAnswer(e.target.value)} placeholder="Try recall before revealing…" className="w-full min-h-[60px] bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-xs text-slate-100 focus:border-cyan-500 focus:outline-none transition"/>
       <div className="mt-2 flex gap-1.5 flex-wrap">
-        <button onClick={() => setRevealed(r => !r)} className="px-3 py-1 text-xs bg-slate-800 border border-slate-700 rounded hover:border-cyan-500">Reveal</button>
-        {['correct', 'partial', 'missed'].map(k => (
-          <motion.button
-            key={k}
-            onClick={() => setMark(k)}
-            whileTap={{ scale: 0.95 }}
-            className={`px-3 py-1 text-xs border rounded transition ${
-              mark === k
-                ? k === 'correct' ? 'bg-emerald-500 text-slate-900 border-emerald-500'
-                : k === 'partial' ? 'bg-amber-400 text-slate-900 border-amber-400'
-                : 'bg-rose-500 text-white border-rose-500'
-                : 'bg-slate-800 border-slate-700 hover:border-cyan-500'
-            }`}
-          >{k === 'correct' ? 'I got it' : k === 'partial' ? 'Close' : 'Missed'}</motion.button>
+        <button onClick={() => setRevealed(r => !r)} className="px-3 py-1 text-xs bg-slate-800 border border-slate-700 rounded hover:border-cyan-500 transition">Reveal</button>
+        {[['correct','I got it','#10b981','#0a0e16'],['partial','Close','#f59e0b','#0a0e16'],['missed','Missed','#ef4444','#fff']].map(([k,label,bg,fg]) => (
+          <button key={k} onClick={() => setMark(k)} className="px-3 py-1 text-xs border rounded transition active:scale-95" style={mark===k ? {background:bg,color:fg,borderColor:bg} : {background:"#1e293b",borderColor:"#334155"}}>{label}</button>
         ))}
       </div>
-      <AnimatePresence>
-        {revealed && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mt-2 overflow-hidden"
-          >
-            <div className="p-3 bg-emerald-500/10 border-l-2 border-emerald-500 rounded text-xs">
-              <div className="text-[10px] text-emerald-400 uppercase tracking-wider mb-1 font-bold">Answer</div>
-              <div>{q.a}</div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
-
-// ────────── APP ──────────
-function App() {
-  return (
-    <div className="max-w-3xl mx-auto px-6 py-8">
-      <motion.header
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="border-b border-slate-700 pb-5 mb-6"
-      >
-        <div className="text-xs uppercase tracking-widest text-slate-400 font-semibold">CSCS Study · Day {LESSON.day} · React demo</div>
-        <h1 className="text-3xl font-bold mt-1 bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">{LESSON.date}</h1>
-        <div className="text-sm text-emerald-400 mt-1 flex items-center gap-2">
-          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-          Phase 1: Exercise Sciences Foundations · Neural motif
+      <div className={"reveal-block mt-2 " + (revealed ? "shown" : "")}>
+        <div className="p-3 bg-emerald-500/10 border-l-2 border-emerald-500 rounded text-xs">
+          <div className="text-[10px] text-emerald-400 uppercase tracking-wider mb-1 font-bold">Answer</div>
+          <div>{q.a}</div>
         </div>
-      </motion.header>
-
-      <motion.section
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.5 }}
-        className="bg-slate-900/60 border border-slate-700 border-l-[3px] border-l-cyan-500 rounded-2xl p-6 mb-5 overflow-hidden"
-      >
-        <NeuronBanner />
-        <div className="text-[10px] text-cyan-300 uppercase tracking-widest font-bold mt-1">Neural · Neuroscience</div>
-        <h2 className="text-2xl font-bold mt-2 text-cyan-100">{LESSON.title}</h2>
-        <p className="text-sm text-slate-300 mt-3 leading-relaxed">
-          Action potential travels down motoneuron → <Term term="ACh">acetylcholine</Term> released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down <Term term="T-tubule">T-tubules</Term> → triggers <Term term="SR">sarcoplasmic reticulum</Term> to release Ca²⁺ → Ca²⁺ binds <Term term="troponin">troponin</Term> → tropomyosin shifts → myosin binds actin → <Term term="cross-bridge">cross-bridge</Term> cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).
-        </p>
-        <div className="mt-5"><ECSteps /></div>
-        <div className="mt-5 bg-slate-800/50 border border-slate-700 rounded-lg p-4">
-          <div className="text-xs text-cyan-300 uppercase tracking-wider font-bold mb-2">Key facts to memorize</div>
-          <ul className="text-sm space-y-1.5 list-disc pl-5 text-slate-200">
-            {LESSON.facts.map((f, i) => (
-              <motion.li key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 + i * 0.06 }}>{f}</motion.li>
-            ))}
-          </ul>
-        </div>
-      </motion.section>
-
-      <h2 className="text-lg font-bold mb-3">Practice questions</h2>
-      <p className="text-xs text-slate-400 mb-3">Try recall before revealing. Mark honestly — your SM-2 schedule depends on it.</p>
-      <div className="space-y-3">
-        {LESSON.questions.map((q, i) => <QuestionCard key={i} q={q} i={i} />)}
-      </div>
-
-      <div className="text-center text-xs text-slate-500 mt-10 pt-5 border-t border-slate-800">
-        React 18 + Framer Motion + Tailwind (all via CDN, no build step) · Demo mode
       </div>
     </div>
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+function App() {
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-8">
+      <header className="border-b border-slate-700 pb-5 mb-6 anim-fadeUp">
+        <div className="text-xs uppercase tracking-widest text-slate-400 font-semibold">CSCS Study · Day {LESSON.day} · React demo</div>
+        <h1 className="text-3xl font-bold mt-1 bg-gradient-to-r from-cyan-300 to-purple-300 bg-clip-text text-transparent">{LESSON.date}</h1>
+        <div className="text-sm text-emerald-400 mt-1 flex items-center gap-2">
+          <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"/>
+          Phase 1: Exercise Sciences Foundations · Neural motif
+        </div>
+      </header>
+
+      <section className="bg-slate-900/60 border border-slate-700 border-l-[3px] border-l-cyan-500 rounded-2xl p-6 mb-5 anim-fadeUp" style={{animationDelay: "0.1s"}}>
+        <NeuronBanner/>
+        <div className="text-[10px] text-cyan-300 uppercase tracking-widest font-bold mt-1">Neural · Neuroscience</div>
+        <h2 className="text-2xl font-bold mt-2 text-cyan-100">{LESSON.title}</h2>
+        <p className="text-sm text-slate-300 mt-3 leading-relaxed">
+          Action potential travels down motoneuron → <Term term="ACh">acetylcholine</Term> released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down <Term term="T-tubules">T-tubules</Term> → triggers <Term term="sarcoplasmic reticulum">sarcoplasmic reticulum</Term> to release Ca²⁺ → Ca²⁺ binds <Term term="troponin">troponin</Term> → tropomyosin shifts → myosin binds actin → <Term term="cross-bridge">cross-bridge</Term> cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).
+        </p>
+        <div className="mt-5"><ECSteps/></div>
+        <div className="mt-5 bg-slate-800/50 border border-slate-700 rounded-lg p-4">
+          <div className="text-xs text-cyan-300 uppercase tracking-wider font-bold mb-2">Key facts to memorize</div>
+          <ul className="text-sm space-y-1.5 list-disc pl-5 text-slate-200">
+            {LESSON.facts.map((f, i) => <li key={i} className="anim-fadeUp" style={{animationDelay: `${0.4 + i*0.06}s`}}>{f}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <h2 className="text-lg font-bold mb-3">Practice questions</h2>
+      <p className="text-xs text-slate-400 mb-3">Try recall before revealing. Hover the underlined terms above for definitions.</p>
+      <div className="space-y-3">
+        {LESSON.questions.map((q, i) => <QuestionCard key={i} q={q} i={i}/>)}
+      </div>
+      <div className="text-center text-xs text-slate-500 mt-10 pt-5 border-t border-slate-800">React 18 + Tailwind via CDN · No build step · Demo mode</div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
 </script>
 </body>
 </html>
