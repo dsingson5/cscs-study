@@ -421,6 +421,71 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-text { flex: 1; min-width: 0; }
 .gloss-term { font-size: 13px; font-weight: 700; color: var(--accent, var(--theme-accent)); margin-bottom: 3px; }
 .gloss-def { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+/* trigger */
+/* */
+/* */
+
+/* Term popovers — hover any glossary term in body text */
+.term-pop {
+  color: var(--accent, #5ec8ff);
+  border-bottom: 1px dashed rgba(94, 200, 255, 0.45);
+  cursor: help;
+  transition: color 0.15s, border-color 0.15s;
+}
+.term-pop:hover { color: var(--accent-2, #88dfff); border-bottom-color: rgba(94, 200, 255, 0.8); }
+
+.term-card-overlay {
+  position: fixed;
+  z-index: 99999;
+  max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--accent, #5ec8ff);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(94, 200, 255, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity 0.18s, transform 0.18s;
+  font-size: 13px;
+}
+.term-card-overlay.shown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.term-card-overlay .tc-term {
+  font-size: 10px;
+  color: var(--accent, #5ec8ff);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.term-card-overlay .tc-def {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Smooth scroll-reveal motion upgrade */
+.reveal {
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lesson-card.reveal { transform: translateY(24px); }
+.lesson-card.reveal.visible { transform: translateY(0); }
+
+/* Subtle widget entrance */
+.widget {
+  animation: widgetIn 0.5s ease-out 0.2s both;
+}
+@keyframes widgetIn {
+  from { opacity: 0; transform: scale(0.98) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Glossary card hover glow */
+.gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
+.gloss-card .gloss-svg svg { transition: transform 0.3s; }
+.gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
 </style>
 <style>:root {
   --bg: #130f17;
@@ -1279,6 +1344,132 @@ applySyncSettings = async function() {
     status.textContent = "Failed: " + e.message;
   }
 };
+
+// ════════════════════════════════════════════════════════════════════════════
+//   TERM POPOVERS — hover any glossary term in the concept paragraph to see
+//   its definition. Terms are sourced from the lesson's own glossary, so
+//   coverage scales automatically as more glossary entries are added.
+// ════════════════════════════════════════════════════════════════════════════
+(function() {
+  function collectTerms() {
+    const map = {};
+    document.querySelectorAll('.gloss-card').forEach(card => {
+      const term = card.querySelector('.gloss-term');
+      const def = card.querySelector('.gloss-def');
+      if (term && def) {
+        const t = term.textContent.trim();
+        const d = def.textContent.trim();
+        map[t] = d;
+        // Aliases — split on parens, "/", "(", remove suffix forms
+        const noParens = t.replace(/\s*\([^)]*\)/, '').trim();
+        if (noParens && noParens !== t) map[noParens] = d;
+      }
+    });
+    return map;
+  }
+
+  function wrapTermsIn(el, terms) {
+    if (!el) return;
+    const keys = Object.keys(terms).sort((a, b) => b.length - a.length);
+    if (keys.length === 0) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => {
+        if (!node.nodeValue || node.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement && node.parentElement.closest('.term-pop, .gloss-card')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const targets = [];
+    let n;
+    while ((n = walker.nextNode())) targets.push(n);
+    targets.forEach(node => {
+      let text = node.nodeValue;
+      let changed = false;
+      for (const k of keys) {
+        const re = new RegExp('(\\b)(' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(\\b)', 'i');
+        if (re.test(text)) {
+          text = text.replace(re, '$1<span class="term-pop" data-term="' + k + '">$2</span>$3');
+          changed = true;
+          break; // one wrap per text node to avoid nested-span churn
+        }
+      }
+      if (changed) {
+        const span = document.createElement('span');
+        span.innerHTML = text;
+        node.parentNode.replaceChild(span, node);
+      }
+    });
+  }
+
+  function setupPopovers() {
+    let card = document.querySelector('.term-card-overlay');
+    if (!card) {
+      card = document.createElement('div');
+      card.className = 'term-card-overlay';
+      card.innerHTML = '<div class="tc-term"></div><div class="tc-def"></div>';
+      document.body.appendChild(card);
+    }
+    let active = null;
+    document.body.addEventListener('mouseover', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) return;
+      const key = t.dataset.term;
+      if (!key) return;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+    document.body.addEventListener('mouseout', e => {
+      if (e.target.closest('.term-pop')) {
+        card.classList.remove('shown');
+        active = null;
+      }
+    });
+    document.body.addEventListener('click', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) { card.classList.remove('shown'); return; }
+      const key = t.dataset.term;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      if (active === t) { card.classList.remove('shown'); active = null; return; }
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      window.__CSCS_TERMS = collectTerms();
+      document.querySelectorAll('.concept, .training-link p, .facts li').forEach(el => wrapTermsIn(el, window.__CSCS_TERMS));
+      setupPopovers();
+    }, 100);
+  });
+})();
 </script>
 </body>
 </html>

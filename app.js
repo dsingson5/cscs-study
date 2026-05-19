@@ -661,3 +661,129 @@ applySyncSettings = async function() {
     status.textContent = "Failed: " + e.message;
   }
 };
+
+// ════════════════════════════════════════════════════════════════════════════
+//   TERM POPOVERS — hover any glossary term in the concept paragraph to see
+//   its definition. Terms are sourced from the lesson's own glossary, so
+//   coverage scales automatically as more glossary entries are added.
+// ════════════════════════════════════════════════════════════════════════════
+(function() {
+  function collectTerms() {
+    const map = {};
+    document.querySelectorAll('.gloss-card').forEach(card => {
+      const term = card.querySelector('.gloss-term');
+      const def = card.querySelector('.gloss-def');
+      if (term && def) {
+        const t = term.textContent.trim();
+        const d = def.textContent.trim();
+        map[t] = d;
+        // Aliases — split on parens, "/", "(", remove suffix forms
+        const noParens = t.replace(/\s*\([^)]*\)/, '').trim();
+        if (noParens && noParens !== t) map[noParens] = d;
+      }
+    });
+    return map;
+  }
+
+  function wrapTermsIn(el, terms) {
+    if (!el) return;
+    const keys = Object.keys(terms).sort((a, b) => b.length - a.length);
+    if (keys.length === 0) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => {
+        if (!node.nodeValue || node.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement && node.parentElement.closest('.term-pop, .gloss-card')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const targets = [];
+    let n;
+    while ((n = walker.nextNode())) targets.push(n);
+    targets.forEach(node => {
+      let text = node.nodeValue;
+      let changed = false;
+      for (const k of keys) {
+        const re = new RegExp('(\\b)(' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(\\b)', 'i');
+        if (re.test(text)) {
+          text = text.replace(re, '$1<span class="term-pop" data-term="' + k + '">$2</span>$3');
+          changed = true;
+          break; // one wrap per text node to avoid nested-span churn
+        }
+      }
+      if (changed) {
+        const span = document.createElement('span');
+        span.innerHTML = text;
+        node.parentNode.replaceChild(span, node);
+      }
+    });
+  }
+
+  function setupPopovers() {
+    let card = document.querySelector('.term-card-overlay');
+    if (!card) {
+      card = document.createElement('div');
+      card.className = 'term-card-overlay';
+      card.innerHTML = '<div class="tc-term"></div><div class="tc-def"></div>';
+      document.body.appendChild(card);
+    }
+    let active = null;
+    document.body.addEventListener('mouseover', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) return;
+      const key = t.dataset.term;
+      if (!key) return;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+    document.body.addEventListener('mouseout', e => {
+      if (e.target.closest('.term-pop')) {
+        card.classList.remove('shown');
+        active = null;
+      }
+    });
+    document.body.addEventListener('click', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) { card.classList.remove('shown'); return; }
+      const key = t.dataset.term;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      if (active === t) { card.classList.remove('shown'); active = null; return; }
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      window.__CSCS_TERMS = collectTerms();
+      document.querySelectorAll('.concept, .training-link p, .facts li').forEach(el => wrapTermsIn(el, window.__CSCS_TERMS));
+      setupPopovers();
+    }, 100);
+  });
+})();

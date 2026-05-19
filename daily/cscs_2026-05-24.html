@@ -421,6 +421,71 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-text { flex: 1; min-width: 0; }
 .gloss-term { font-size: 13px; font-weight: 700; color: var(--accent, var(--theme-accent)); margin-bottom: 3px; }
 .gloss-def { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+/* trigger */
+/* */
+/* */
+
+/* Term popovers — hover any glossary term in body text */
+.term-pop {
+  color: var(--accent, #5ec8ff);
+  border-bottom: 1px dashed rgba(94, 200, 255, 0.45);
+  cursor: help;
+  transition: color 0.15s, border-color 0.15s;
+}
+.term-pop:hover { color: var(--accent-2, #88dfff); border-bottom-color: rgba(94, 200, 255, 0.8); }
+
+.term-card-overlay {
+  position: fixed;
+  z-index: 99999;
+  max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--accent, #5ec8ff);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(94, 200, 255, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity 0.18s, transform 0.18s;
+  font-size: 13px;
+}
+.term-card-overlay.shown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.term-card-overlay .tc-term {
+  font-size: 10px;
+  color: var(--accent, #5ec8ff);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.term-card-overlay .tc-def {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Smooth scroll-reveal motion upgrade */
+.reveal {
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lesson-card.reveal { transform: translateY(24px); }
+.lesson-card.reveal.visible { transform: translateY(0); }
+
+/* Subtle widget entrance */
+.widget {
+  animation: widgetIn 0.5s ease-out 0.2s both;
+}
+@keyframes widgetIn {
+  from { opacity: 0; transform: scale(0.98) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Glossary card hover glow */
+.gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
+.gloss-card .gloss-svg svg { transition: transform 0.3s; }
+.gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
 </style>
 <style>:root {
   --bg: #0a0c09;
@@ -634,7 +699,7 @@ body { font-family: "JetBrains Mono", "SF Mono", monospace; }
   <div class="w-hint">All three systems are always active — proportions shift with intensity and duration.</div>
 </div>
 <div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>ATP-PCr system: anaerobic, no lactate, fastest power production</li><li>Duration: ~0-10 seconds at max effort</li><li>Creatine kinase enzyme</li><li>Recovery: ~30s for ~50%, full ~3-5 min</li><li>Creatine supplementation: 3-5 g/day; ~20% PCr increase</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="25" r="9" fill="#ffd84a"/><text x="20" y="28" text-anchor="middle" fill="#3a2008" font-size="8" font-weight="700">A</text><circle cx="40" cy="25" r="7" fill="#ffb86b"/><text x="40" y="28" text-anchor="middle" fill="#3a2008" font-size="7" font-weight="700">P</text><circle cx="55" cy="25" r="7" fill="#ffb86b"/><text x="55" y="28" text-anchor="middle" fill="#3a2008" font-size="7" font-weight="700">P</text><circle cx="70" cy="25" r="7" fill="#ffb86b"/><text x="70" y="28" text-anchor="middle" fill="#3a2008" font-size="7" font-weight="700">P</text><g stroke="#a37a08" stroke-width="1"><line x1="29" y1="25" x2="33" y2="25"/><line x1="47" y1="25" x2="48" y2="25"/><line x1="62" y1="25" x2="63" y2="25"/></g></svg></div><div class="gloss-text"><div class="gloss-term">ATP</div><div class="gloss-def">Adenosine triphosphate. The cell&#x27;s energy currency. Hydrolysis to ADP + Pi releases the energy that powers contraction.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><circle cx="35" cy="25" r="12" fill="#ff8a3a" opacity="0.85"/><text x="35" y="22" text-anchor="middle" fill="#3a1a00" font-size="7" font-weight="700">Cr</text><text x="35" y="32" text-anchor="middle" fill="#3a1a00" font-size="7" font-weight="700">~P</text><path d="M 50 25 L 65 25" stroke="#ffd84a" stroke-width="2" marker-end="url(#arr)"/><defs><marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><polygon points="0,0 10,5 0,10" fill="#ffd84a"/></marker></defs><circle cx="78" cy="25" r="10" fill="#ffd84a"/><text x="78" y="28" text-anchor="middle" fill="#3a2008" font-size="7" font-weight="700">ATP</text></svg></div><div class="gloss-text"><div class="gloss-term">PCr (phosphocreatine)</div><div class="gloss-def">High-energy phosphate stored in muscle. Creatine kinase transfers its phosphate to ADP → ATP. Fastest way to regenerate ATP.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><g><circle cx="50" cy="25" r="18" fill="#ffd84a" opacity="0.3"/><circle cx="50" cy="25" r="14" fill="#ffd84a" opacity="0.5"/><circle cx="50" cy="25" r="10" fill="#ffd84a"/><text x="50" y="28" text-anchor="middle" fill="#3a2008" font-size="7" font-weight="700">CK</text></g></svg></div><div class="gloss-text"><div class="gloss-term">Creatine kinase</div><div class="gloss-def">Enzyme that catalyzes PCr + ADP → ATP + Cr. Very fast reaction — the phosphagen system supplies energy in milliseconds.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM work (heavy compound lifts) is phosphagen-dominant. Why 3-5 min inter-set rest matters: that&#x27;s the PCr replenishment window. Cutting rest to 60s drops Type II force output.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=BhJtogLY0e4" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">ATP / Phosphocreatine System Overview</div><div class="m-cred">Anatomy &amp; physiology educator</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #85 — San-Millán: Mitochondria &amp; Energy Systems</div><div class="m-cred">Peter Attia MD</div></div></a></div></section>
-  <div class="review-section"><h2 class="rs-title">Spaced repetition reviews</h2><p class="rs-sub">Research-validated spacing intervals (Cepeda et al. 2008) — concepts resurface at 1d, 3d, 7d, 14d, 30d, 90d for long-term retention.</p><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 32-38</span></div><h2>Respiratory system &amp; gas exchange</h2><p class="concept">Pulmonary ventilation = breathing frequency × tidal volume. Gas exchange occurs at alveoli via diffusion (driven by partial pressure gradients). O₂ binds hemoglobin (~98.5% saturation at sea level). The oxyhemoglobin dissociation curve shifts RIGHT with ↑temp, ↑CO₂, ↓pH (Bohr effect) — promoting O₂ unloading at working muscle. CO₂ is transported as bicarbonate (~70%), bound to Hb (~20%), and dissolved (~10%).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bohr effect: right shift in O₂-Hb curve unloads O₂ at active muscle</li><li>Resting ventilation: ~6 L/min; max exercise: ~150+ L/min</li><li>Tidal volume rises first, then frequency, with increasing intensity</li><li>VO₂max is typically NOT pulmonary-limited in healthy non-elites</li><li>Ventilatory threshold (VT) tracks lactate threshold</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your ventilatory pattern shifts at LT1=147 (indoor) — that&#x27;s the VT1 inflection. Above LT2=158, breathing becomes the rate-limiter, not legs.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=zmXt700uXlA" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Oxygen-Hemoglobin Dissociation Curve (animation)</div><div class="m-cred">Respiratory physiology animation</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan2/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)</div><div class="m-cred">Peter Attia MD + Colorado</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 18-25</span></div><h2>Neuromuscular junction &amp; excitation-contraction coupling</h2><p class="concept">Action potential travels down motoneuron → acetylcholine (ACh) released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down T-tubules → triggers sarcoplasmic reticulum to release Ca²⁺ → Ca²⁺ binds troponin → tropomyosin shifts → myosin binds actin → cross-bridge cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>ACh is the neurotransmitter at the NMJ</li><li>Ca²⁺ release from SR is the immediate trigger for contraction</li><li>Troponin C binds Ca²⁺; tropomyosin physically blocks myosin-binding sites on actin</li><li>ATP is required for cross-bridge DETACHMENT (rigor mortis = no ATP)</li><li>Ca²⁺ reuptake is also ATP-dependent (SERCA pump)</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="25" r="10" fill="#5ec8ff" opacity="0.3"/><circle cx="20" cy="25" r="4" fill="#5ec8ff"/><g fill="#ffd84a"><circle cx="35" cy="20" r="2.5"/><circle cx="45" cy="28" r="2.5"/><circle cx="55" cy="22" r="2.5"/></g><rect x="65" y="15" width="25" height="20" fill="#a04040" opacity="0.4" rx="3"/><g fill="#a04040"><circle cx="73" cy="22" r="2"/><circle cx="82" cy="22" r="2"/><circle cx="73" cy="30" r="2"/><circle cx="82" cy="30" r="2"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Acetylcholine (ACh)</div><div class="gloss-def">The neurotransmitter at the neuromuscular junction. Binds nicotinic receptors on the sarcolemma, triggering depolarization.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="90" height="40" fill="none" stroke="#5ec8ff" stroke-width="2" rx="2"/><line x1="30" y1="5" x2="30" y2="40" stroke="#5ec8ff" stroke-width="2"/><line x1="55" y1="5" x2="55" y2="40" stroke="#5ec8ff" stroke-width="2"/><line x1="80" y1="5" x2="80" y2="40" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">T-tubule</div><div class="gloss-def">Invagination of sarcolemma that carries action potentials into the depth of the muscle fiber.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><path d="M 10 25 Q 25 10 50 25 T 90 25" fill="none" stroke="#67e8b0" stroke-width="2.5"/><g fill="#ffb86b"><circle cx="20" cy="20" r="2"/><circle cx="35" cy="14" r="2"/><circle cx="50" cy="20" r="2"/><circle cx="65" cy="14" r="2"/><circle cx="80" cy="20" r="2"/></g><text x="50" y="45" fill="#9ba3b4" font-size="6" text-anchor="middle">Ca²⁺ released</text></svg></div><div class="gloss-text"><div class="gloss-term">Sarcoplasmic reticulum (SR)</div><div class="gloss-def">Intracellular calcium store. Action potentials release Ca²⁺ from the SR; the Ca²⁺ triggers contraction.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="22" width="80" height="6" fill="#5ec8ff" rx="1"/><g fill="#ffb86b"><circle cx="20" cy="14" r="3"/><circle cx="35" cy="14" r="3"/><circle cx="50" cy="14" r="3"/><circle cx="65" cy="14" r="3"/><circle cx="80" cy="14" r="3"/></g><g stroke="#ffb86b" stroke-width="1"><line x1="20" y1="17" x2="20" y2="22"/><line x1="35" y1="17" x2="35" y2="22"/><line x1="50" y1="17" x2="50" y2="22"/><line x1="65" y1="17" x2="65" y2="22"/><line x1="80" y1="17" x2="80" y2="22"/></g><g fill="#67e8b0"><circle cx="15" cy="34" r="2"/><circle cx="30" cy="34" r="2"/><circle cx="45" cy="34" r="2"/><circle cx="60" cy="34" r="2"/><circle cx="75" cy="34" r="2"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Cross-bridge cycle</div><div class="gloss-def">Myosin head binds actin → power stroke → ATP detaches it → ATP hydrolysis re-cocks it. Requires ATP for BOTH attachment and detachment.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Caffeine enhances Ca²⁺ release from SR — one mechanism behind its ergogenic effect on your cycling and 4×8 sessions.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=A96kAMPZXv8" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Ninja Nerd — Neuromuscular Junction &amp; Excitation-Contraction Coupling</div><div class="m-cred">Ninja Nerd Medical Lectures · Prof. Zach Murphy</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section></div>
+  <div class="review-section"><h2 class="rs-title">Spaced repetition reviews</h2><p class="rs-sub">Research-validated spacing intervals (Cepeda et al. 2008) — concepts resurface at 1d, 3d, 7d, 14d, 30d, 90d for long-term retention.</p><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 32-38</span></div><h2>Respiratory system &amp; gas exchange</h2><p class="concept">Pulmonary ventilation = breathing frequency × tidal volume. Gas exchange occurs at alveoli via diffusion (driven by partial pressure gradients). O₂ binds hemoglobin (~98.5% saturation at sea level). The oxyhemoglobin dissociation curve shifts RIGHT with ↑temp, ↑CO₂, ↓pH (Bohr effect) — promoting O₂ unloading at working muscle. CO₂ is transported as bicarbonate (~70%), bound to Hb (~20%), and dissolved (~10%).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bohr effect: right shift in O₂-Hb curve unloads O₂ at active muscle</li><li>Resting ventilation: ~6 L/min; max exercise: ~150+ L/min</li><li>Tidal volume rises first, then frequency, with increasing intensity</li><li>VO₂max is typically NOT pulmonary-limited in healthy non-elites</li><li>Ventilatory threshold (VT) tracks lactate threshold</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 32 Q 25 30 35 22 Q 45 14 70 10" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M 16 32 Q 30 30 42 24 Q 54 18 75 14" fill="none" stroke="#ffb86b" stroke-width="2" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Bohr effect</div><div class="gloss-def">↓pH, ↑CO₂, ↑temp shift the O₂-Hb curve RIGHT → unloads more O₂ at working muscle.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 8 32 L 25 28 L 40 20 L 55 10 L 70 5" fill="none" stroke="#5ec8ff" stroke-width="2"/><line x1="25" y1="6" x2="25" y2="32" stroke="#67e8b0" stroke-width="1.5" stroke-dasharray="2 2"/><line x1="55" y1="6" x2="55" y2="32" stroke="#ff7a7a" stroke-width="1.5" stroke-dasharray="2 2"/></svg></div><div class="gloss-text"><div class="gloss-term">VT1 / VT2</div><div class="gloss-def">First (~LT1) and second (~LT2) ventilatory thresholds. Breathing pattern inflects at each. Your LT1=147 indoor.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="20" r="12" fill="#ff5e5e"/><circle cx="32" cy="14" r="3" fill="#5ec8ff"/><circle cx="48" cy="14" r="3" fill="#5ec8ff"/><circle cx="32" cy="26" r="3" fill="#5ec8ff"/><circle cx="48" cy="26" r="3" fill="#5ec8ff"/></svg></div><div class="gloss-text"><div class="gloss-term">Hemoglobin saturation</div><div class="gloss-def">~98.5% saturated at sea level. The S-shaped curve means small PO₂ drops unload a lot of O₂ at tissue.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your ventilatory pattern shifts at LT1=147 (indoor) — that&#x27;s the VT1 inflection. Above LT2=158, breathing becomes the rate-limiter, not legs.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=zmXt700uXlA" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Oxygen-Hemoglobin Dissociation Curve (animation)</div><div class="m-cred">Respiratory physiology animation</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan2/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)</div><div class="m-cred">Peter Attia MD + Colorado</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 18-25</span></div><h2>Neuromuscular junction &amp; excitation-contraction coupling</h2><p class="concept">Action potential travels down motoneuron → acetylcholine (ACh) released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down T-tubules → triggers sarcoplasmic reticulum to release Ca²⁺ → Ca²⁺ binds troponin → tropomyosin shifts → myosin binds actin → cross-bridge cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>ACh is the neurotransmitter at the NMJ</li><li>Ca²⁺ release from SR is the immediate trigger for contraction</li><li>Troponin C binds Ca²⁺; tropomyosin physically blocks myosin-binding sites on actin</li><li>ATP is required for cross-bridge DETACHMENT (rigor mortis = no ATP)</li><li>Ca²⁺ reuptake is also ATP-dependent (SERCA pump)</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="25" r="10" fill="#5ec8ff" opacity="0.3"/><circle cx="20" cy="25" r="4" fill="#5ec8ff"/><g fill="#ffd84a"><circle cx="35" cy="20" r="2.5"/><circle cx="45" cy="28" r="2.5"/><circle cx="55" cy="22" r="2.5"/></g><rect x="65" y="15" width="25" height="20" fill="#a04040" opacity="0.4" rx="3"/><g fill="#a04040"><circle cx="73" cy="22" r="2"/><circle cx="82" cy="22" r="2"/><circle cx="73" cy="30" r="2"/><circle cx="82" cy="30" r="2"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Acetylcholine (ACh)</div><div class="gloss-def">The neurotransmitter at the neuromuscular junction. Binds nicotinic receptors on the sarcolemma, triggering depolarization.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="90" height="40" fill="none" stroke="#5ec8ff" stroke-width="2" rx="2"/><line x1="30" y1="5" x2="30" y2="40" stroke="#5ec8ff" stroke-width="2"/><line x1="55" y1="5" x2="55" y2="40" stroke="#5ec8ff" stroke-width="2"/><line x1="80" y1="5" x2="80" y2="40" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">T-tubule</div><div class="gloss-def">Invagination of sarcolemma that carries action potentials into the depth of the muscle fiber.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><path d="M 10 25 Q 25 10 50 25 T 90 25" fill="none" stroke="#67e8b0" stroke-width="2.5"/><g fill="#ffb86b"><circle cx="20" cy="20" r="2"/><circle cx="35" cy="14" r="2"/><circle cx="50" cy="20" r="2"/><circle cx="65" cy="14" r="2"/><circle cx="80" cy="20" r="2"/></g><text x="50" y="45" fill="#9ba3b4" font-size="6" text-anchor="middle">Ca²⁺ released</text></svg></div><div class="gloss-text"><div class="gloss-term">Sarcoplasmic reticulum (SR)</div><div class="gloss-def">Intracellular calcium store. Action potentials release Ca²⁺ from the SR; the Ca²⁺ triggers contraction.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="22" width="80" height="6" fill="#5ec8ff" rx="1"/><g fill="#ffb86b"><circle cx="20" cy="14" r="3"/><circle cx="35" cy="14" r="3"/><circle cx="50" cy="14" r="3"/><circle cx="65" cy="14" r="3"/><circle cx="80" cy="14" r="3"/></g><g stroke="#ffb86b" stroke-width="1"><line x1="20" y1="17" x2="20" y2="22"/><line x1="35" y1="17" x2="35" y2="22"/><line x1="50" y1="17" x2="50" y2="22"/><line x1="65" y1="17" x2="65" y2="22"/><line x1="80" y1="17" x2="80" y2="22"/></g><g fill="#67e8b0"><circle cx="15" cy="34" r="2"/><circle cx="30" cy="34" r="2"/><circle cx="45" cy="34" r="2"/><circle cx="60" cy="34" r="2"/><circle cx="75" cy="34" r="2"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Cross-bridge cycle</div><div class="gloss-def">Myosin head binds actin → power stroke → ATP detaches it → ATP hydrolysis re-cocks it. Requires ATP for BOTH attachment and detachment.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Caffeine enhances Ca²⁺ release from SR — one mechanism behind its ergogenic effect on your cycling and 4×8 sessions.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=A96kAMPZXv8" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Ninja Nerd — Neuromuscular Junction &amp; Excitation-Contraction Coupling</div><div class="m-cred">Ninja Nerd Medical Lectures · Prof. Zach Murphy</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section></div>
   <h2 style="margin: 26px 0 8px; font-size: 20px; font-weight: 700;">Practice questions</h2>
   <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Active recall — write your answer, THEN reveal. Mistakes here resurface in your queue tomorrow.</p>
   <section class="question-block reveal"><h3>Today&#x27;s questions</h3><div class="qs"><div class="q" data-qid="today_0" data-stable="atp_pcr__2"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">What enzyme regenerates ATP from PCr?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_0"><div class="reveal-label">Answer</div><div class="reveal-body">Creatine kinase. Reaction: PCr + ADP → ATP + Cr.</div></div></div><div class="q" data-qid="today_1" data-stable="atp_pcr__1"><div class="q-head"><span class="q-num">Q2</span><span class="q-type applied">applied</span></div><div class="q-text">How long does full PCr replenishment take, and why does this dictate rest intervals?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_1"><div class="reveal-label">Answer</div><div class="reveal-body">~3-5 minutes for full PCr replenishment. This is why strength/power sets prescribe 3-5 min rest — to allow maximum force output on the next set.</div></div></div><div class="q" data-qid="today_2" data-stable="atp_pcr__3"><div class="q-head"><span class="q-num">Q3</span><span class="q-type recall">recall</span></div><div class="q-text">Why does creatine supplementation work?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_2')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_2', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_2', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_2', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_2">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_2"><div class="reveal-label">Answer</div><div class="reveal-body">It increases the muscle PCr pool (~20%), allowing more rapid ATP regeneration during brief high-intensity efforts.</div></div></div><div class="q" data-qid="today_3" data-stable="atp_pcr__0"><div class="q-head"><span class="q-num">Q4</span><span class="q-type recall">recall</span></div><div class="q-text">How long does the phosphagen system dominate at maximal intensity?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_3')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_3', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_3', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_3', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_3">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_3"><div class="reveal-label">Answer</div><div class="reveal-body">Approximately 0-10 seconds.</div></div></div></div></section><section class="question-block reveal"><h3>Yesterday (24 hr) — Respiratory system &amp; gas exchange</h3><div class="qs"><div class="q" data-qid="r1_0" data-stable="respiratory__1"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">In healthy, non-elite individuals, is VO₂max typically limited by pulmonary, cardiac, or peripheral factors?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r1_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r1_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r1_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r1_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r1_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r1_0"><div class="reveal-label">Answer</div><div class="reveal-body">Typically cardiac output (central) and peripheral (mitochondrial/capillary) factors — pulmonary system is rarely limiting in healthy non-elites.</div></div></div><div class="q" data-qid="r1_1" data-stable="respiratory__2"><div class="q-head"><span class="q-num">Q2</span><span class="q-type applied">applied</span></div><div class="q-text">Why does breathing rate rise faster than tidal volume at higher intensities?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r1_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r1_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r1_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r1_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r1_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r1_1"><div class="reveal-label">Answer</div><div class="reveal-body">Tidal volume plateaus near vital capacity; further ventilation increases must come from frequency.</div></div></div></div></section><section class="question-block reveal"><h3>3 days back — Neuromuscular junction &amp; excitation-contraction coupling</h3><div class="qs"><div class="q" data-qid="r3_0" data-stable="ec_coupling__1"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">Where is Ca²⁺ stored in the muscle fiber, and what triggers its release?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r3_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r3_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r3_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r3_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r3_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r3_0"><div class="reveal-label">Answer</div><div class="reveal-body">Stored in the sarcoplasmic reticulum (SR); released when the action potential propagates down the T-tubule and triggers SR release channels.</div></div></div><div class="q" data-qid="r3_1" data-stable="ec_coupling__2"><div class="q-head"><span class="q-num">Q2</span><span class="q-type applied">applied</span></div><div class="q-text">Why does rigor mortis occur?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r3_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r3_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r3_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r3_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r3_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r3_1"><div class="reveal-label">Answer</div><div class="reveal-body">Death halts ATP production; without ATP, myosin cannot detach from actin, leaving cross-bridges locked.</div></div></div></div></section><section class="question-block reveal"><h3>Bonus cross-domain question</h3><div class="qs"><div class="q" data-qid="bonus_0" data-stable="anaerobic_adaptations__2"><div class="q-head"><span class="q-num">Q1</span><span class="q-type applied">applied</span></div><div class="q-text">Why is tendon injury risk elevated when load is rapidly increased?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('bonus_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('bonus_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('bonus_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('bonus_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="bonus_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_bonus_0"><div class="reveal-label">Answer</div><div class="reveal-body">Connective tissue (tendon, ligament) adapts more slowly than muscle — strength can outpace tendon capacity.</div></div></div></div></section>
@@ -1307,6 +1372,132 @@ applySyncSettings = async function() {
     status.textContent = "Failed: " + e.message;
   }
 };
+
+// ════════════════════════════════════════════════════════════════════════════
+//   TERM POPOVERS — hover any glossary term in the concept paragraph to see
+//   its definition. Terms are sourced from the lesson's own glossary, so
+//   coverage scales automatically as more glossary entries are added.
+// ════════════════════════════════════════════════════════════════════════════
+(function() {
+  function collectTerms() {
+    const map = {};
+    document.querySelectorAll('.gloss-card').forEach(card => {
+      const term = card.querySelector('.gloss-term');
+      const def = card.querySelector('.gloss-def');
+      if (term && def) {
+        const t = term.textContent.trim();
+        const d = def.textContent.trim();
+        map[t] = d;
+        // Aliases — split on parens, "/", "(", remove suffix forms
+        const noParens = t.replace(/\s*\([^)]*\)/, '').trim();
+        if (noParens && noParens !== t) map[noParens] = d;
+      }
+    });
+    return map;
+  }
+
+  function wrapTermsIn(el, terms) {
+    if (!el) return;
+    const keys = Object.keys(terms).sort((a, b) => b.length - a.length);
+    if (keys.length === 0) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => {
+        if (!node.nodeValue || node.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement && node.parentElement.closest('.term-pop, .gloss-card')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const targets = [];
+    let n;
+    while ((n = walker.nextNode())) targets.push(n);
+    targets.forEach(node => {
+      let text = node.nodeValue;
+      let changed = false;
+      for (const k of keys) {
+        const re = new RegExp('(\\b)(' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(\\b)', 'i');
+        if (re.test(text)) {
+          text = text.replace(re, '$1<span class="term-pop" data-term="' + k + '">$2</span>$3');
+          changed = true;
+          break; // one wrap per text node to avoid nested-span churn
+        }
+      }
+      if (changed) {
+        const span = document.createElement('span');
+        span.innerHTML = text;
+        node.parentNode.replaceChild(span, node);
+      }
+    });
+  }
+
+  function setupPopovers() {
+    let card = document.querySelector('.term-card-overlay');
+    if (!card) {
+      card = document.createElement('div');
+      card.className = 'term-card-overlay';
+      card.innerHTML = '<div class="tc-term"></div><div class="tc-def"></div>';
+      document.body.appendChild(card);
+    }
+    let active = null;
+    document.body.addEventListener('mouseover', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) return;
+      const key = t.dataset.term;
+      if (!key) return;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+    document.body.addEventListener('mouseout', e => {
+      if (e.target.closest('.term-pop')) {
+        card.classList.remove('shown');
+        active = null;
+      }
+    });
+    document.body.addEventListener('click', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) { card.classList.remove('shown'); return; }
+      const key = t.dataset.term;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      if (active === t) { card.classList.remove('shown'); active = null; return; }
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      window.__CSCS_TERMS = collectTerms();
+      document.querySelectorAll('.concept, .training-link p, .facts li').forEach(el => wrapTermsIn(el, window.__CSCS_TERMS));
+      setupPopovers();
+    }, 100);
+  });
+})();
 </script>
 </body>
 </html>

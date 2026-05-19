@@ -219,7 +219,29 @@
         "title": "Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise, and Metabolic Health",
         "url": "https://peterattiamd.com/inigosanmillan/",
         "credibility": "Peter Attia MD + UCSD/Colorado"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Cardiac output (Q)",
+          "def": "Q = HR × SV. At rest ~5 L/min; max ~20–40 L/min. The central component of VO₂max.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 40 32 C 28 22 22 14 28 8 C 32 4 38 6 40 12 C 42 6 48 4 52 8 C 58 14 52 22 40 32 Z\" fill=\"#ff5e5e\" stroke=\"#7a1a26\" stroke-width=\"1\"><animate attributeName=\"transform\" type=\"scale\" values=\"1;1.08;1\" dur=\"0.9s\" repeatCount=\"indefinite\" additive=\"sum\"/></path></svg>"
+        },
+        {
+          "term": "Stroke volume (SV)",
+          "def": "Blood ejected per beat (~70–80 mL rest, ~120+ trained). Endurance training enlarges LV → ↑SV → lower HR for same Q.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"25\" cy=\"20\" r=\"14\" fill=\"#ff5e5e\" opacity=\"0.4\"/><circle cx=\"55\" cy=\"20\" r=\"16\" fill=\"#ff5e5e\"/><text x=\"55\" y=\"24\" text-anchor=\"middle\" fill=\"#fff\" font-size=\"8\" font-weight=\"700\">trained</text></svg>"
+        },
+        {
+          "term": "Frank-Starling law",
+          "def": "Increased venous return stretches LV → stronger contraction → ↑SV. Why preload matters.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"15\" width=\"20\" height=\"10\" fill=\"#ff5e5e\" rx=\"2\"/><path d=\"M 32 20 L 42 20\" stroke=\"#ffb86b\" stroke-width=\"2\"/><rect x=\"44\" y=\"10\" width=\"28\" height=\"20\" fill=\"#ff5e5e\" rx=\"3\"/></svg>"
+        },
+        {
+          "term": "Eccentric vs concentric hypertrophy",
+          "def": "Endurance training: eccentric LV hypertrophy (larger chamber). Resistance: concentric (thicker wall). Different shapes, different stimuli.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"25\" cy=\"20\" r=\"14\" fill=\"none\" stroke=\"#ff5e5e\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"20\" r=\"6\" fill=\"#ff5e5e\" opacity=\"0.3\"/><circle cx=\"60\" cy=\"20\" r=\"12\" fill=\"none\" stroke=\"#ff5e5e\" stroke-width=\"6\"/><circle cx=\"60\" cy=\"20\" r=\"3\" fill=\"#ff5e5e\" opacity=\"0.3\"/></svg>"
+        }
+      ]
     },
     "5": {
       "title": "Respiratory system & gas exchange",
@@ -245,7 +267,24 @@
         "title": "Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)",
         "url": "https://peterattiamd.com/inigosanmillan2/",
         "credibility": "Peter Attia MD + Colorado"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Bohr effect",
+          "def": "↓pH, ↑CO₂, ↑temp shift the O₂-Hb curve RIGHT → unloads more O₂ at working muscle.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 32 Q 25 30 35 22 Q 45 14 70 10\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M 16 32 Q 30 30 42 24 Q 54 18 75 14\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\" stroke-dasharray=\"3 2\"/></svg>"
+        },
+        {
+          "term": "VT1 / VT2",
+          "def": "First (~LT1) and second (~LT2) ventilatory thresholds. Breathing pattern inflects at each. Your LT1=147 indoor.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8 32 L 25 28 L 40 20 L 55 10 L 70 5\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><line x1=\"25\" y1=\"6\" x2=\"25\" y2=\"32\" stroke=\"#67e8b0\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/><line x1=\"55\" y1=\"6\" x2=\"55\" y2=\"32\" stroke=\"#ff7a7a\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/></svg>"
+        },
+        {
+          "term": "Hemoglobin saturation",
+          "def": "~98.5% saturated at sea level. The S-shaped curve means small PO₂ drops unload a lot of O₂ at tissue.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"12\" fill=\"#ff5e5e\"/><circle cx=\"32\" cy=\"14\" r=\"3\" fill=\"#5ec8ff\"/><circle cx=\"48\" cy=\"14\" r=\"3\" fill=\"#5ec8ff\"/><circle cx=\"32\" cy=\"26\" r=\"3\" fill=\"#5ec8ff\"/><circle cx=\"48\" cy=\"26\" r=\"3\" fill=\"#5ec8ff\"/></svg>"
+        }
+      ]
     },
     "6": {
       "title": "Bioenergetics I — ATP and the phosphagen system",
@@ -357,7 +396,24 @@
         "title": "Peter Attia Drive #201 — San-Millán on Zone 2 & Mitochondrial Function",
         "url": "https://peterattiamd.com/inigosanmillan2/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Oxidative phosphorylation",
+          "def": "Mitochondrial ATP factory. ETC uses O₂ as final electron acceptor → ~30–32 ATP per glucose vs 2 from glycolysis alone.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"40\" cy=\"20\" rx=\"22\" ry=\"12\" fill=\"#67e8b0\" opacity=\"0.3\" stroke=\"#67e8b0\" stroke-width=\"1.5\"/><path d=\"M 20 14 Q 40 30 60 14 M 20 26 Q 40 10 60 26\" fill=\"none\" stroke=\"#a8efb8\" stroke-width=\"1\"/></svg>"
+        },
+        {
+          "term": "Crossover point",
+          "def": "~65% VO₂max where carb contribution surpasses fat. Below: fat-dominant (Z2). Above: carb-dominant.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8 8 L 70 32\" fill=\"none\" stroke=\"#ffd84a\" stroke-width=\"2\"/><path d=\"M 8 32 L 70 8\" fill=\"none\" stroke=\"#ff8a3a\" stroke-width=\"2\"/><circle cx=\"39\" cy=\"20\" r=\"3.5\" fill=\"#fff\"/></svg>"
+        },
+        {
+          "term": "RER (respiratory exchange ratio)",
+          "def": "VCO₂/VO₂. 0.7 = pure fat oxidation. 1.0 = pure carb. Estimates fuel mix during exercise.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"20\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"1\" rx=\"2\"/><rect x=\"10\" y=\"10\" width=\"40\" height=\"20\" fill=\"#67e8b0\" opacity=\"0.7\" rx=\"2\"/><text x=\"40\" y=\"24\" text-anchor=\"middle\" fill=\"#0a0e16\" font-size=\"9\" font-weight=\"700\">0.85</text></svg>"
+        }
+      ]
     },
     "9": {
       "title": "Energy system interaction & substrate use",
@@ -409,7 +465,19 @@
         "title": "Huberman Lab — Galpin: Optimal Protocols to Build Strength & Grow Muscles",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Torque",
+          "def": "F × d (moment arm). The rotational force at a joint. Long limbs = bigger moment arms = more torque needed for the same load.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"20\" x2=\"70\" y2=\"20\" stroke=\"#7fc4ff\" stroke-width=\"3\"/><circle cx=\"15\" cy=\"20\" r=\"4\" fill=\"#ffcc4a\"/><rect x=\"58\" y=\"12\" width=\"14\" height=\"16\" fill=\"none\" stroke=\"#7fc4ff\" stroke-width=\"1.5\"/><line x1=\"40\" y1=\"20\" x2=\"40\" y2=\"6\" stroke=\"#a8e1ff\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/></svg>"
+        },
+        {
+          "term": "3rd-class lever",
+          "def": "Effort between fulcrum and load. Most human joints. Mechanical disadvantage for force, advantage for range and speed.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"20\" x2=\"70\" y2=\"20\" stroke=\"#7fc4ff\" stroke-width=\"3\"/><circle cx=\"15\" cy=\"20\" r=\"3.5\" fill=\"#ffcc4a\"/><polygon points=\"40,20 36,10 44,10\" fill=\"#67e8b0\"/><rect x=\"60\" y=\"14\" width=\"10\" height=\"12\" fill=\"#ff5e5e\"/></svg>"
+        }
+      ]
     },
     "11": {
       "title": "Biomechanics II — Force-velocity & length-tension",
@@ -435,7 +503,19 @@
         "title": "Huberman Lab — Galpin: How to Build Strength, Muscle Size & Endurance",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
         "credibility": "Stanford + Galpin PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Force-velocity curve",
+          "def": "Force ↓ as velocity ↑ concentrically. Eccentric > isometric > concentric. Peak power at ~30% max isometric force.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 8 Q 25 12 40 22 Q 55 32 70 36\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M 10 12 Q 25 4 40 8 Q 55 18 70 36\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"1.5\" stroke-dasharray=\"3 2\"/></svg>"
+        },
+        {
+          "term": "Length-tension relationship",
+          "def": "Force is maximal at resting length (optimal actin-myosin overlap). Drops at too-short or too-stretched.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 32 Q 25 28 40 8 Q 55 28 70 32\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"40\" y1=\"6\" x2=\"40\" y2=\"34\" stroke=\"#9ba3b4\" stroke-width=\"0.5\" stroke-dasharray=\"2 2\"/></svg>"
+        }
+      ]
     },
     "12": {
       "title": "Endocrine I — Anabolic hormones",
@@ -461,7 +541,24 @@
         "title": "Stronger By Science Podcast — Episode 9: Hormones & Training Adaptations",
         "url": "https://www.strongerbyscience.com/podcast-episode-9/",
         "credibility": "Greg Nuckols MSc + Eric Trexler PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Testosterone",
+          "def": "Primary androgen, produced by Leydig cells (testes) + adrenal cortex. ↑ protein synthesis, ↑ neural drive.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"30\" cy=\"20\" r=\"10\" fill=\"none\" stroke=\"#ffb84a\" stroke-width=\"1.5\"/><circle cx=\"50\" cy=\"20\" r=\"10\" fill=\"none\" stroke=\"#ffb84a\" stroke-width=\"1.5\"/><circle cx=\"50\" cy=\"14\" r=\"3\" fill=\"#ffb84a\"/></svg>"
+        },
+        {
+          "term": "Growth hormone (GH)",
+          "def": "Anterior pituitary. Pulses in deep sleep. ↑ IGF-1, ↑ fat utilization. Sleep debt blunts the anabolic pulse.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g stroke=\"#ffb84a\" stroke-width=\"1.5\" fill=\"none\"><path d=\"M 10 30 L 18 30 L 18 12 L 22 12 L 22 30 L 32 30\"/><path d=\"M 38 30 L 46 30 L 46 18 L 50 18 L 50 30 L 60 30\"/><path d=\"M 65 30 L 70 30\"/></g></svg>"
+        },
+        {
+          "term": "IGF-1",
+          "def": "Insulin-like growth factor. Liver + muscle. Mediates many of GH's anabolic actions on muscle tissue.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"25\" cy=\"20\" r=\"9\" fill=\"#ffb84a\"/><line x1=\"34\" y1=\"20\" x2=\"46\" y2=\"20\" stroke=\"#ffd84a\" stroke-width=\"2\" marker-end=\"url(#a1)\"/><defs><marker id=\"a1\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\"><polygon points=\"0,0 10,5 0,10\" fill=\"#ffd84a\"/></marker></defs><rect x=\"50\" y=\"14\" width=\"20\" height=\"12\" fill=\"#a04040\" rx=\"2\"/></svg>"
+        }
+      ]
     },
     "13": {
       "title": "Endocrine II — Catabolic hormones & stress",
@@ -513,7 +610,19 @@
         "title": "Huberman Lab — Galpin: Strength & Muscle Building Protocols",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Neural adaptation",
+          "def": "First 4 weeks. ↑ recruitment, ↑ rate coding, ↑ motor unit synchronization, ↓ Golgi tendon organ inhibition.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"15\" cy=\"20\" r=\"6\" fill=\"#5ec8ff\"/><path d=\"M 21 20 L 35 20 M 21 20 L 35 10 M 21 20 L 35 30\" stroke=\"#5ec8ff\" stroke-width=\"1.5\" fill=\"none\"/><g fill=\"#67e8b0\"><circle cx=\"40\" cy=\"10\" r=\"3\"/><circle cx=\"40\" cy=\"20\" r=\"3\"/><circle cx=\"40\" cy=\"30\" r=\"3\"/></g></svg>"
+        },
+        {
+          "term": "Hypertrophy",
+          "def": "Muscle growth via ↑ contractile protein. Becomes dominant after 4–6 weeks. Type II preferential with heavy load.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"22\" cy=\"20\" r=\"8\" fill=\"#a33344\" opacity=\"0.7\"/><line x1=\"38\" y1=\"20\" x2=\"48\" y2=\"20\" stroke=\"#ffd84a\" stroke-width=\"2\" marker-end=\"url(#a2)\"/><defs><marker id=\"a2\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\"><polygon points=\"0,0 10,5 0,10\" fill=\"#ffd84a\"/></marker></defs><circle cx=\"60\" cy=\"20\" r=\"13\" fill=\"#a33344\"/></svg>"
+        }
+      ]
     },
     "15": {
       "title": "Aerobic endurance training adaptations",
@@ -539,7 +648,24 @@
         "title": "Peter Attia Drive #201 — Zone 2 Deep Dive (Part 2)",
         "url": "https://peterattiamd.com/inigosanmillan2/",
         "credibility": "Peter Attia MD + Colorado"
-      }
+      },
+      "glossary": [
+        {
+          "term": "VO₂max",
+          "def": "Maximum O₂ uptake. = Q × (a-vO₂ diff). Central + peripheral. Plateaus after ~6–12 months of well-designed training.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"32\" x2=\"70\" y2=\"32\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><line x1=\"10\" y1=\"32\" x2=\"10\" y2=\"6\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><path d=\"M 10 30 Q 18 22 30 14 Q 50 8 70 8\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+        },
+        {
+          "term": "Lactate threshold (LT)",
+          "def": "LT1 ≈ aerobic threshold. LT2 ≈ MLSS ≈ anaerobic threshold. Trainable for years even after VO₂max plateaus. Yours: 147 / 158 indoor.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 32 L 22 30 L 35 26 L 45 22 L 55 12 L 70 4\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><line x1=\"35\" y1=\"6\" x2=\"35\" y2=\"32\" stroke=\"#67e8b0\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/><line x1=\"55\" y1=\"6\" x2=\"55\" y2=\"32\" stroke=\"#ff7a7a\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/></svg>"
+        },
+        {
+          "term": "Mitochondrial biogenesis",
+          "def": "Aerobic training doubles mitochondrial density. PGC-1α-driven. Why Z2 work matters even when it feels easy.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"20\" cy=\"20\" rx=\"10\" ry=\"6\" fill=\"#67e8b0\" opacity=\"0.5\"/><ellipse cx=\"45\" cy=\"20\" rx=\"10\" ry=\"6\" fill=\"#67e8b0\" opacity=\"0.7\"/><ellipse cx=\"65\" cy=\"20\" rx=\"10\" ry=\"6\" fill=\"#67e8b0\"/></svg>"
+        }
+      ]
     },
     "16": {
       "title": "Age and sex differences in training response",
@@ -591,7 +717,19 @@
         "title": "Huberman Lab — Galpin: How to Assess & Improve All Aspects of Fitness",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Inverted-U hypothesis",
+          "def": "Performance peaks at MODERATE arousal. Too low = under-prepared. Too high = anxious / tight.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 32 Q 25 30 40 8 Q 55 30 70 32\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"9\" r=\"3\" fill=\"#67e8b0\"/></svg>"
+        },
+        {
+          "term": "IZOF",
+          "def": "Individual Zones of Optimal Functioning (Hanin). Each athlete has a unique optimal arousal range — not one-size-fits-all.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"20\" y=\"12\" width=\"40\" height=\"16\" fill=\"rgba(127, 196, 142, 0.3)\" stroke=\"#7fc48e\" stroke-width=\"1.5\" rx=\"3\"/><line x1=\"40\" y1=\"6\" x2=\"40\" y2=\"34\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+        }
+      ]
     },
     "18": {
       "title": "Basic nutrition — macronutrients",
@@ -617,7 +755,24 @@
         "title": "Sigma Nutrition #123 — Donald Layman PhD: Leucine, mTOR & Anabolic Response",
         "url": "https://sigmanutrition.com/episode123/",
         "credibility": "Donald Layman PhD · UIUC"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Leucine threshold",
+          "def": "~2.5–3 g leucine per meal to maximally stimulate MPS (muscle protein synthesis). ~25–40 g high-quality protein.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"14\" fill=\"#7ed68a\" opacity=\"0.8\"/><text x=\"40\" y=\"24\" text-anchor=\"middle\" fill=\"#0a2008\" font-size=\"10\" font-weight=\"700\">L</text></svg>"
+        },
+        {
+          "term": "Glycogen",
+          "def": "Stored carb. ~400 g muscle + ~100 g liver. Refills with CHO intake. Endurance limits arrive when this runs low.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#ffb84a\"><circle cx=\"25\" cy=\"20\" r=\"5\"/><circle cx=\"35\" cy=\"14\" r=\"5\"/><circle cx=\"45\" cy=\"20\" r=\"5\"/><circle cx=\"35\" cy=\"26\" r=\"5\"/><circle cx=\"55\" cy=\"14\" r=\"5\"/><circle cx=\"55\" cy=\"26\" r=\"5\"/></g></svg>"
+        },
+        {
+          "term": "MPS",
+          "def": "Muscle protein synthesis. Rises after resistance training + protein. Peaks ~1.5–3 hr post-meal. Then drops despite continued protein.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8 32 L 18 30 L 26 12 L 38 8 L 48 20 L 60 28 L 72 30\" fill=\"none\" stroke=\"#7ed68a\" stroke-width=\"2\"/></svg>"
+        }
+      ]
     },
     "19": {
       "title": "Performance nutrition — timing & supplements",
@@ -643,7 +798,24 @@
         "title": "Sigma Nutrition #123 — Leucine Kinetics & mTOR (Layman PhD)",
         "url": "https://sigmanutrition.com/episode123/",
         "credibility": "Layman PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Creatine",
+          "def": "3–5 g/day, no loading required. Expands PCr pool ~20%. Best-studied performance supplement, especially for brief high-intensity work.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"14\" fill=\"#5ec8ff\" opacity=\"0.3\"/><circle cx=\"40\" cy=\"20\" r=\"10\" fill=\"#5ec8ff\"/><text x=\"40\" y=\"24\" text-anchor=\"middle\" fill=\"#0a0e16\" font-size=\"9\" font-weight=\"700\">Cr</text></svg>"
+        },
+        {
+          "term": "Caffeine timing",
+          "def": "3–6 mg/kg, 30–60 min pre-exercise. High-evidence ergogenic for sustained high-intensity work in the 2–10 min range.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"14\" fill=\"#7ed68a\" opacity=\"0.4\"/><g fill=\"#3a8a4a\"><circle cx=\"40\" cy=\"20\" r=\"3\"/><circle cx=\"34\" cy=\"14\" r=\"2.5\"/><circle cx=\"46\" cy=\"14\" r=\"2.5\"/><circle cx=\"34\" cy=\"26\" r=\"2.5\"/><circle cx=\"46\" cy=\"26\" r=\"2.5\"/></g></svg>"
+        },
+        {
+          "term": "Beta-alanine",
+          "def": "4–6 g/day. Buffers H⁺ via carnosine, helping 1–4 min efforts. Takes weeks to load; tingling is normal.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"20\" y=\"14\" width=\"40\" height=\"12\" fill=\"#ff5e5e\" opacity=\"0.3\" rx=\"2\"/><rect x=\"22\" y=\"14\" width=\"30\" height=\"12\" fill=\"#ff5e5e\" opacity=\"0.7\" rx=\"2\"/><rect x=\"22\" y=\"14\" width=\"20\" height=\"12\" fill=\"#ff5e5e\" rx=\"2\"/></svg>"
+        }
+      ]
     },
     "20": {
       "title": "Performance-enhancing substances & methods",
@@ -799,7 +971,24 @@
         "title": "Iron Culture — Schoenfeld: Mechanisms of Hypertrophy",
         "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Knee valgus",
+          "def": "Most common squat fault — knees collapse inward. Cue: 'knees out' / 'spread the floor.' Reflects weak abductors or coordination issue.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g stroke=\"#ff5e5e\" stroke-width=\"2\" fill=\"none\"><line x1=\"22\" y1=\"6\" x2=\"30\" y2=\"22\"/><line x1=\"30\" y1=\"22\" x2=\"26\" y2=\"34\"/><line x1=\"58\" y1=\"6\" x2=\"50\" y2=\"22\"/><line x1=\"50\" y1=\"22\" x2=\"54\" y2=\"34\"/></g></svg>"
+        },
+        {
+          "term": "Valsalva",
+          "def": "Hold breath against closed glottis → ↑ intra-abdominal pressure → spine stability. Standard for max-effort lifts.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"30\" y=\"10\" width=\"20\" height=\"22\" fill=\"none\" stroke=\"#c9c9c9\" stroke-width=\"2\" rx=\"3\"/><circle cx=\"40\" cy=\"21\" r=\"6\" fill=\"#ffb86b\" opacity=\"0.7\"/></svg>"
+        },
+        {
+          "term": "Parallel depth",
+          "def": "Hip crease at or below the top of the knee. CSCS standard. Squat below for more glute / posterior chain.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g stroke=\"#c9c9c9\" stroke-width=\"2\" fill=\"none\"><line x1=\"14\" y1=\"14\" x2=\"32\" y2=\"22\"/><line x1=\"32\" y1=\"22\" x2=\"28\" y2=\"36\"/><line x1=\"32\" y1=\"22\" x2=\"48\" y2=\"22\"/><line x1=\"48\" y1=\"22\" x2=\"66\" y2=\"14\"/><line x1=\"48\" y1=\"22\" x2=\"52\" y2=\"36\"/></g><line x1=\"14\" y1=\"22\" x2=\"66\" y2=\"22\" stroke=\"#67e8b0\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
+        }
+      ]
     },
     "26": {
       "title": "Resistance technique — deadlift",
@@ -981,7 +1170,24 @@
         "title": "Iron Culture 51 — Schoenfeld: Volume & Frequency for Hypertrophy",
         "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "1RM",
+          "def": "One-rep maximum. The most weight you can move once. Many programs prescribe % 1RM for intensity.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"20\" x2=\"70\" y2=\"20\" stroke=\"#c9c9c9\" stroke-width=\"3\"/><rect x=\"14\" y=\"10\" width=\"14\" height=\"20\" fill=\"#404040\" stroke=\"#c9c9c9\"/><rect x=\"52\" y=\"10\" width=\"14\" height=\"20\" fill=\"#404040\" stroke=\"#c9c9c9\"/><text x=\"40\" y=\"14\" text-anchor=\"middle\" fill=\"#ffd84a\" font-size=\"9\" font-weight=\"700\">1RM</text></svg>"
+        },
+        {
+          "term": "MEV / MAV / MRV",
+          "def": "Israetel volume landmarks. Minimum Effective / Maximum Adaptive / Maximum Recoverable Volume. Dose hypertrophy by sets/week.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"28\" width=\"16\" height=\"6\" fill=\"#67e8b0\" rx=\"1\"/><rect x=\"30\" y=\"20\" width=\"16\" height=\"14\" fill=\"#ffb86b\" rx=\"1\"/><rect x=\"50\" y=\"10\" width=\"16\" height=\"24\" fill=\"#ff7a7a\" rx=\"1\"/></svg>"
+        },
+        {
+          "term": "Hypertrophy rep range",
+          "def": "6–12 reps at 65–85% 1RM, 1–3 min rest. Sweet spot for muscle growth. Mechanical tension is the primary driver.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#67e8b0\"><rect x=\"14\" y=\"12\" width=\"6\" height=\"20\" rx=\"1\"/><rect x=\"24\" y=\"14\" width=\"6\" height=\"18\" rx=\"1\"/><rect x=\"34\" y=\"10\" width=\"6\" height=\"22\" rx=\"1\"/><rect x=\"44\" y=\"16\" width=\"6\" height=\"16\" rx=\"1\"/><rect x=\"54\" y=\"12\" width=\"6\" height=\"20\" rx=\"1\"/><rect x=\"64\" y=\"14\" width=\"6\" height=\"18\" rx=\"1\"/></g></svg>"
+        }
+      ]
     },
     "33": {
       "title": "Resistance program — rest & frequency",
@@ -1033,7 +1239,19 @@
         "title": "Iron Culture — Hypertrophy & Power Adaptations",
         "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "glossary": [
+        {
+          "term": "Stretch-shortening cycle (SSC)",
+          "def": "Eccentric pre-load → amortization → concentric. Stored elastic energy + stretch reflex amplifies output.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"none\" stroke=\"#ffd84a\" stroke-width=\"2\"><path d=\"M 12 32 L 20 20 L 28 32 L 36 12 L 44 32 L 52 8 L 60 32 L 68 4\"/></g></svg>"
+        },
+        {
+          "term": "Amortization",
+          "def": "The transition between eccentric and concentric. Shorter = better SSC utilization = more power.",
+          "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 30 L 30 6\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M 30 6 L 32 6\" stroke=\"#ffd84a\" stroke-width=\"4\"/><path d=\"M 32 6 L 70 30\" stroke=\"#5ec8ff\" stroke-width=\"2\"/></svg>"
+        }
+      ]
     },
     "35": {
       "title": "Speed & agility training",

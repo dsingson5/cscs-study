@@ -421,6 +421,71 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-text { flex: 1; min-width: 0; }
 .gloss-term { font-size: 13px; font-weight: 700; color: var(--accent, var(--theme-accent)); margin-bottom: 3px; }
 .gloss-def { font-size: 12px; color: var(--text-dim); line-height: 1.4; }
+/* trigger */
+/* */
+/* */
+
+/* Term popovers — hover any glossary term in body text */
+.term-pop {
+  color: var(--accent, #5ec8ff);
+  border-bottom: 1px dashed rgba(94, 200, 255, 0.45);
+  cursor: help;
+  transition: color 0.15s, border-color 0.15s;
+}
+.term-pop:hover { color: var(--accent-2, #88dfff); border-bottom-color: rgba(94, 200, 255, 0.8); }
+
+.term-card-overlay {
+  position: fixed;
+  z-index: 99999;
+  max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--accent, #5ec8ff);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(94, 200, 255, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity 0.18s, transform 0.18s;
+  font-size: 13px;
+}
+.term-card-overlay.shown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.term-card-overlay .tc-term {
+  font-size: 10px;
+  color: var(--accent, #5ec8ff);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.term-card-overlay .tc-def {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Smooth scroll-reveal motion upgrade */
+.reveal {
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lesson-card.reveal { transform: translateY(24px); }
+.lesson-card.reveal.visible { transform: translateY(0); }
+
+/* Subtle widget entrance */
+.widget {
+  animation: widgetIn 0.5s ease-out 0.2s both;
+}
+@keyframes widgetIn {
+  from { opacity: 0; transform: scale(0.98) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Glossary card hover glow */
+.gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
+.gloss-card .gloss-svg svg { transition: transform 0.3s; }
+.gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
 </style>
 <style>:root {
   --bg: #0b0f10;
@@ -626,7 +691,7 @@ body { font-family: "Inter", -apple-system, sans-serif; }
 </div>
   <div class="w-hint">Slide HR and SV to see how cardiac output scales. Watch the heart rate visually.</div>
 </div>
-<div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Q = HR × SV</li><li>Frank-Starling: increased venous return → increased SV (stretched LV)</li><li>Endurance training: ↑SV via ↑LV chamber size (eccentric hypertrophy)</li><li>Resistance training: ↑LV wall thickness (concentric hypertrophy)</li><li>Capillary density increases with aerobic training</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your RHR drop 46→37 bpm and HRV rise 118→187 ms (Jan→May) is classic endurance adaptation — larger SV requires lower HR for the same Q. Your LT1=147 with HR cap 132 indoor for Z2 reflects this trained state.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=bxEaAbcO64s" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Stephen Seiler — Polarized Training 101 (cardiac adaptations)</div><div class="m-cred">Fast Talk Labs · Seiler PhD</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise, and Metabolic Health</div><div class="m-cred">Peter Attia MD + UCSD/Colorado</div></div></a></div></section>
+<div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Q = HR × SV</li><li>Frank-Starling: increased venous return → increased SV (stretched LV)</li><li>Endurance training: ↑SV via ↑LV chamber size (eccentric hypertrophy)</li><li>Resistance training: ↑LV wall thickness (concentric hypertrophy)</li><li>Capillary density increases with aerobic training</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 40 32 C 28 22 22 14 28 8 C 32 4 38 6 40 12 C 42 6 48 4 52 8 C 58 14 52 22 40 32 Z" fill="#ff5e5e" stroke="#7a1a26" stroke-width="1"><animate attributeName="transform" type="scale" values="1;1.08;1" dur="0.9s" repeatCount="indefinite" additive="sum"/></path></svg></div><div class="gloss-text"><div class="gloss-term">Cardiac output (Q)</div><div class="gloss-def">Q = HR × SV. At rest ~5 L/min; max ~20–40 L/min. The central component of VO₂max.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="20" r="14" fill="#ff5e5e" opacity="0.4"/><circle cx="55" cy="20" r="16" fill="#ff5e5e"/><text x="55" y="24" text-anchor="middle" fill="#fff" font-size="8" font-weight="700">trained</text></svg></div><div class="gloss-text"><div class="gloss-term">Stroke volume (SV)</div><div class="gloss-def">Blood ejected per beat (~70–80 mL rest, ~120+ trained). Endurance training enlarges LV → ↑SV → lower HR for same Q.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="15" width="20" height="10" fill="#ff5e5e" rx="2"/><path d="M 32 20 L 42 20" stroke="#ffb86b" stroke-width="2"/><rect x="44" y="10" width="28" height="20" fill="#ff5e5e" rx="3"/></svg></div><div class="gloss-text"><div class="gloss-term">Frank-Starling law</div><div class="gloss-def">Increased venous return stretches LV → stronger contraction → ↑SV. Why preload matters.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="25" cy="20" r="14" fill="none" stroke="#ff5e5e" stroke-width="2"/><circle cx="25" cy="20" r="6" fill="#ff5e5e" opacity="0.3"/><circle cx="60" cy="20" r="12" fill="none" stroke="#ff5e5e" stroke-width="6"/><circle cx="60" cy="20" r="3" fill="#ff5e5e" opacity="0.3"/></svg></div><div class="gloss-text"><div class="gloss-term">Eccentric vs concentric hypertrophy</div><div class="gloss-def">Endurance training: eccentric LV hypertrophy (larger chamber). Resistance: concentric (thicker wall). Different shapes, different stimuli.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your RHR drop 46→37 bpm and HRV rise 118→187 ms (Jan→May) is classic endurance adaptation — larger SV requires lower HR for the same Q. Your LT1=147 with HR cap 132 indoor for Z2 reflects this trained state.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=bxEaAbcO64s" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Stephen Seiler — Polarized Training 101 (cardiac adaptations)</div><div class="m-cred">Fast Talk Labs · Seiler PhD</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise, and Metabolic Health</div><div class="m-cred">Peter Attia MD + UCSD/Colorado</div></div></a></div></section>
   <div class="review-section"><h2 class="rs-title">Spaced repetition reviews</h2><p class="rs-sub">Research-validated spacing intervals (Cepeda et al. 2008) — concepts resurface at 1d, 3d, 7d, 14d, 30d, 90d for long-term retention.</p><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 18-25</span></div><h2>Neuromuscular junction &amp; excitation-contraction coupling</h2><p class="concept">Action potential travels down motoneuron → acetylcholine (ACh) released at neuromuscular junction → ACh binds nicotinic receptors on sarcolemma → AP propagates down T-tubules → triggers sarcoplasmic reticulum to release Ca²⁺ → Ca²⁺ binds troponin → tropomyosin shifts → myosin binds actin → cross-bridge cycle. Relaxation requires ATP-dependent Ca²⁺ reuptake into SR. This is why ATP depletion causes rigor (no detachment).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>ACh is the neurotransmitter at the NMJ</li><li>Ca²⁺ release from SR is the immediate trigger for contraction</li><li>Troponin C binds Ca²⁺; tropomyosin physically blocks myosin-binding sites on actin</li><li>ATP is required for cross-bridge DETACHMENT (rigor mortis = no ATP)</li><li>Ca²⁺ reuptake is also ATP-dependent (SERCA pump)</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="25" r="10" fill="#5ec8ff" opacity="0.3"/><circle cx="20" cy="25" r="4" fill="#5ec8ff"/><g fill="#ffd84a"><circle cx="35" cy="20" r="2.5"/><circle cx="45" cy="28" r="2.5"/><circle cx="55" cy="22" r="2.5"/></g><rect x="65" y="15" width="25" height="20" fill="#a04040" opacity="0.4" rx="3"/><g fill="#a04040"><circle cx="73" cy="22" r="2"/><circle cx="82" cy="22" r="2"/><circle cx="73" cy="30" r="2"/><circle cx="82" cy="30" r="2"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Acetylcholine (ACh)</div><div class="gloss-def">The neurotransmitter at the neuromuscular junction. Binds nicotinic receptors on the sarcolemma, triggering depolarization.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="5" width="90" height="40" fill="none" stroke="#5ec8ff" stroke-width="2" rx="2"/><line x1="30" y1="5" x2="30" y2="40" stroke="#5ec8ff" stroke-width="2"/><line x1="55" y1="5" x2="55" y2="40" stroke="#5ec8ff" stroke-width="2"/><line x1="80" y1="5" x2="80" y2="40" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">T-tubule</div><div class="gloss-def">Invagination of sarcolemma that carries action potentials into the depth of the muscle fiber.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><path d="M 10 25 Q 25 10 50 25 T 90 25" fill="none" stroke="#67e8b0" stroke-width="2.5"/><g fill="#ffb86b"><circle cx="20" cy="20" r="2"/><circle cx="35" cy="14" r="2"/><circle cx="50" cy="20" r="2"/><circle cx="65" cy="14" r="2"/><circle cx="80" cy="20" r="2"/></g><text x="50" y="45" fill="#9ba3b4" font-size="6" text-anchor="middle">Ca²⁺ released</text></svg></div><div class="gloss-text"><div class="gloss-term">Sarcoplasmic reticulum (SR)</div><div class="gloss-def">Intracellular calcium store. Action potentials release Ca²⁺ from the SR; the Ca²⁺ triggers contraction.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="22" width="80" height="6" fill="#5ec8ff" rx="1"/><g fill="#ffb86b"><circle cx="20" cy="14" r="3"/><circle cx="35" cy="14" r="3"/><circle cx="50" cy="14" r="3"/><circle cx="65" cy="14" r="3"/><circle cx="80" cy="14" r="3"/></g><g stroke="#ffb86b" stroke-width="1"><line x1="20" y1="17" x2="20" y2="22"/><line x1="35" y1="17" x2="35" y2="22"/><line x1="50" y1="17" x2="50" y2="22"/><line x1="65" y1="17" x2="65" y2="22"/><line x1="80" y1="17" x2="80" y2="22"/></g><g fill="#67e8b0"><circle cx="15" cy="34" r="2"/><circle cx="30" cy="34" r="2"/><circle cx="45" cy="34" r="2"/><circle cx="60" cy="34" r="2"/><circle cx="75" cy="34" r="2"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Cross-bridge cycle</div><div class="gloss-def">Myosin head binds actin → power stroke → ATP detaches it → ATP hydrolysis re-cocks it. Requires ATP for BOTH attachment and detachment.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Caffeine enhances Ca²⁺ release from SR — one mechanism behind its ergogenic effect on your cycling and 4×8 sessions.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=A96kAMPZXv8" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Ninja Nerd — Neuromuscular Junction &amp; Excitation-Contraction Coupling</div><div class="m-cred">Ninja Nerd Medical Lectures · Prof. Zach Murphy</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 3-12</span></div><h2>Skeletal muscle architecture &amp; fiber types</h2><p class="concept">Skeletal muscle is organized hierarchically: muscle → fasciculus → muscle fiber (one cell) → myofibril → sarcomere. The sarcomere (Z-disc to Z-disc) is the contractile unit; sliding-filament theory says actin slides along myosin via cross-bridge cycling, powered by ATP. Fibers are classified by myosin heavy chain isoform: Type I (slow oxidative, fatigue-resistant, low force, red), Type IIa (fast oxidative-glycolytic, intermediate), Type IIx (fast glycolytic, highest force, fatigues fast). Training shifts IIx → IIa; fiber-type proportion is largely genetic but trainable in expression.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Sarcomere = Z-disc to Z-disc</li><li>Cross-bridge cycle requires ATP for both attachment AND detachment</li><li>Type I: high mitochondrial density, capillaries, myoglobin</li><li>Type IIx: largest cross-sectional area, highest force/velocity, lowest endurance</li><li>Heavy resistance training shifts IIx → IIa (not Type II → Type I)</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="6" x2="10" y2="34" stroke="#ff5e5e" stroke-width="3"/><line x1="70" y1="6" x2="70" y2="34" stroke="#ff5e5e" stroke-width="3"/><rect x="10" y="14" width="40" height="2" fill="#67e8b0"/><rect x="10" y="24" width="40" height="2" fill="#67e8b0"/><rect x="30" y="14" width="40" height="2" fill="#67e8b0"/><rect x="30" y="24" width="40" height="2" fill="#67e8b0"/><rect x="28" y="12" width="24" height="16" fill="#5ec8ff" opacity="0.7" rx="1"/></svg></div><div class="gloss-text"><div class="gloss-term">Sarcomere</div><div class="gloss-def">The contractile unit, Z-disc to Z-disc. When muscle contracts, sarcomeres shorten — the thin filaments slide inward past the thick filament.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="15" y="14" width="50" height="12" fill="#5ec8ff" rx="2"/><g stroke="#ffb86b" stroke-width="2" stroke-linecap="round"><line x1="22" y1="14" x2="22" y2="8"/><line x1="30" y1="14" x2="30" y2="8"/><line x1="38" y1="14" x2="38" y2="8"/><line x1="46" y1="14" x2="46" y2="8"/><line x1="54" y1="14" x2="54" y2="8"/><line x1="22" y1="26" x2="22" y2="32"/><line x1="30" y1="26" x2="30" y2="32"/><line x1="38" y1="26" x2="38" y2="32"/><line x1="46" y1="26" x2="46" y2="32"/><line x1="54" y1="26" x2="54" y2="32"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Myosin</div><div class="gloss-def">Thick filament (blue). Its &#x27;heads&#x27; grab actin and pull — the cross-bridge cycle.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="#67e8b0"><circle cx="10" cy="20" r="4"/><circle cx="22" cy="20" r="4"/><circle cx="34" cy="20" r="4"/><circle cx="46" cy="20" r="4"/><circle cx="58" cy="20" r="4"/><circle cx="70" cy="20" r="4"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Actin</div><div class="gloss-def">Thin filament (green). Anchored at Z-discs, projects toward myosin. Has binding sites for myosin heads.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="20" r="16" fill="#a04040" opacity="0.8"/><circle cx="32" cy="14" r="3" fill="#ffb86b"/><circle cx="44" cy="12" r="3" fill="#ffb86b"/><circle cx="48" cy="24" r="3" fill="#ffb86b"/><circle cx="30" cy="26" r="3" fill="#ffb86b"/><circle cx="40" cy="20" r="3" fill="#ffb86b"/></svg></div><div class="gloss-text"><div class="gloss-term">Type I (slow oxidative)</div><div class="gloss-def">Red, mitochondria-rich, fatigue-resistant. Marathon fibers.</div></div></div><div class="gloss-card" style="animation-delay: 0.32s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="20" r="16" fill="#f0d8a0" opacity="0.85"/><g stroke="#ffd84a" stroke-width="1.5" stroke-linecap="round" fill="none"><path d="M 30 14 L 50 14 M 28 20 L 52 20 M 30 26 L 50 26"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Type IIx (fast glycolytic)</div><div class="gloss-def">Pale, glycogen-rich, highest force + speed but fatigues fast. Sprint fibers.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your aerobic base (HR 132 indoor Z2 cap, LT1=147) reflects Type I oxidative capacity. Your 4×8 sessions (HR 170-175 target) recruit Type IIa heavily — sub-MLSS endurance work develops the IIa pool you need for Hyrox station blocks.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=z6oWj7410G0" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin — Muscle Fiber Types &amp; Training Explained (Iron Culture Ep 236)</div><div class="m-cred">Iron Culture Podcast · Eric Helms PhD + Mike Israetel PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Dr. Andy Galpin: How to Build Strength, Muscle Size &amp; Endurance (Ep 65)</div><div class="m-cred">Stanford neuroscience + Galpin PhD</div></div></a></div></section></div>
   <h2 style="margin: 26px 0 8px; font-size: 20px; font-weight: 700;">Practice questions</h2>
   <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Active recall — write your answer, THEN reveal. Mistakes here resurface in your queue tomorrow.</p>
@@ -1300,6 +1365,132 @@ applySyncSettings = async function() {
     status.textContent = "Failed: " + e.message;
   }
 };
+
+// ════════════════════════════════════════════════════════════════════════════
+//   TERM POPOVERS — hover any glossary term in the concept paragraph to see
+//   its definition. Terms are sourced from the lesson's own glossary, so
+//   coverage scales automatically as more glossary entries are added.
+// ════════════════════════════════════════════════════════════════════════════
+(function() {
+  function collectTerms() {
+    const map = {};
+    document.querySelectorAll('.gloss-card').forEach(card => {
+      const term = card.querySelector('.gloss-term');
+      const def = card.querySelector('.gloss-def');
+      if (term && def) {
+        const t = term.textContent.trim();
+        const d = def.textContent.trim();
+        map[t] = d;
+        // Aliases — split on parens, "/", "(", remove suffix forms
+        const noParens = t.replace(/\s*\([^)]*\)/, '').trim();
+        if (noParens && noParens !== t) map[noParens] = d;
+      }
+    });
+    return map;
+  }
+
+  function wrapTermsIn(el, terms) {
+    if (!el) return;
+    const keys = Object.keys(terms).sort((a, b) => b.length - a.length);
+    if (keys.length === 0) return;
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+      acceptNode: node => {
+        if (!node.nodeValue || node.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement && node.parentElement.closest('.term-pop, .gloss-card')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    const targets = [];
+    let n;
+    while ((n = walker.nextNode())) targets.push(n);
+    targets.forEach(node => {
+      let text = node.nodeValue;
+      let changed = false;
+      for (const k of keys) {
+        const re = new RegExp('(\\b)(' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(\\b)', 'i');
+        if (re.test(text)) {
+          text = text.replace(re, '$1<span class="term-pop" data-term="' + k + '">$2</span>$3');
+          changed = true;
+          break; // one wrap per text node to avoid nested-span churn
+        }
+      }
+      if (changed) {
+        const span = document.createElement('span');
+        span.innerHTML = text;
+        node.parentNode.replaceChild(span, node);
+      }
+    });
+  }
+
+  function setupPopovers() {
+    let card = document.querySelector('.term-card-overlay');
+    if (!card) {
+      card = document.createElement('div');
+      card.className = 'term-card-overlay';
+      card.innerHTML = '<div class="tc-term"></div><div class="tc-def"></div>';
+      document.body.appendChild(card);
+    }
+    let active = null;
+    document.body.addEventListener('mouseover', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) return;
+      const key = t.dataset.term;
+      if (!key) return;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+    document.body.addEventListener('mouseout', e => {
+      if (e.target.closest('.term-pop')) {
+        card.classList.remove('shown');
+        active = null;
+      }
+    });
+    document.body.addEventListener('click', e => {
+      const t = e.target.closest('.term-pop');
+      if (!t) { card.classList.remove('shown'); return; }
+      const key = t.dataset.term;
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
+      if (!def) return;
+      if (active === t) { card.classList.remove('shown'); active = null; return; }
+      active = t;
+      card.querySelector('.tc-term').textContent = t.textContent;
+      card.querySelector('.tc-def').textContent = def;
+      const r = t.getBoundingClientRect();
+      const w = 300;
+      let left = r.left + r.width / 2 - w / 2;
+      let top = r.top - card.offsetHeight - 10;
+      if (left < 8) left = 8;
+      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
+      if (top < 8) top = r.bottom + 10;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+      card.style.width = w + 'px';
+      card.classList.add('shown');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      window.__CSCS_TERMS = collectTerms();
+      document.querySelectorAll('.concept, .training-link p, .facts li').forEach(el => wrapTermsIn(el, window.__CSCS_TERMS));
+      setupPopovers();
+    }, 100);
+  });
+})();
 </script>
 </body>
 </html>

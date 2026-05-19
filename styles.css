@@ -418,3 +418,65 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* trigger */
 /* */
 /* */
+
+/* Term popovers — hover any glossary term in body text */
+.term-pop {
+  color: var(--accent, #5ec8ff);
+  border-bottom: 1px dashed rgba(94, 200, 255, 0.45);
+  cursor: help;
+  transition: color 0.15s, border-color 0.15s;
+}
+.term-pop:hover { color: var(--accent-2, #88dfff); border-bottom-color: rgba(94, 200, 255, 0.8); }
+
+.term-card-overlay {
+  position: fixed;
+  z-index: 99999;
+  max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--accent, #5ec8ff);
+  border-radius: 12px;
+  padding: 12px 14px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), 0 0 24px rgba(94, 200, 255, 0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity 0.18s, transform 0.18s;
+  font-size: 13px;
+}
+.term-card-overlay.shown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.term-card-overlay .tc-term {
+  font-size: 10px;
+  color: var(--accent, #5ec8ff);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.term-card-overlay .tc-def {
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Smooth scroll-reveal motion upgrade */
+.reveal {
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.lesson-card.reveal { transform: translateY(24px); }
+.lesson-card.reveal.visible { transform: translateY(0); }
+
+/* Subtle widget entrance */
+.widget {
+  animation: widgetIn 0.5s ease-out 0.2s both;
+}
+@keyframes widgetIn {
+  from { opacity: 0; transform: scale(0.98) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Glossary card hover glow */
+.gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
+.gloss-card .gloss-svg svg { transition: transform 0.3s; }
+.gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
