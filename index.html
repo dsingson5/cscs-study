@@ -514,7 +514,6 @@ body { background-image: repeating-linear-gradient(90deg, transparent 0px, trans
     <div class="h-day">CSCS Study · Day 1 · Tuesday</div>
     <div class="h-date">May 19, 2026</div>
     <div class="h-phase">Phase 1: Exercise Sciences Foundations</div>
-    <div><span class="theme-banner">Anatomy · <span class="tb-name">Indigo Lantern</span> · serif typography · complementary palette · light mode</span></div>
     <div class="domains"><span class="dchip">Exercise Science (~25%)</span> <span class="dchip">Nutrition (~10%)</span> <span class="dchip">Exercise Technique (~25%)</span> <span class="dchip">Program Design &amp; Testing (~40%)</span></div>
     <div class="progress"><div class="bar" style="width: 0.5%;"></div></div>
   </header>
@@ -1227,13 +1226,13 @@ function injectSyncUI() {
       '<ol>' +
         '<li>Generate a Personal Access Token (classic) with <b>only the gist scope</b>: <a href="https://github.com/settings/tokens/new?scopes=gist&description=CSCS%20Study%20Sync" target="_blank" rel="noopener">open GitHub →</a></li>' +
         '<li>Paste it below.</li>' +
-        '<li>Leave Gist ID blank on your first device — it auto-creates one. Copy that ID to your other devices.</li>' +
+        '<li>That's it. Each device with the same token finds the same Gist automatically — no IDs to copy.</li>' +
       '</ol>' +
       '<label>Personal Access Token (gist scope only)' +
         '<input type="password" id="sync-token-input" autocomplete="off" placeholder="ghp_…">' +
       '</label>' +
-      '<label>Gist ID (blank to auto-create)' +
-        '<input type="text" id="sync-gist-input" autocomplete="off" placeholder="e.g. a1b2c3d4e5f6…">' +
+      '<label>Gist ID (optional — auto-discovered from your token)' +
+        '<input type="text" id="sync-gist-input" autocomplete="off" placeholder="leave blank — auto-discovered">' +
       '</label>' +
       '<div class="sync-actions">' +
         '<button type="button" class="btn-primary" onclick="applySyncSettings()">Enable / Update</button>' +
@@ -1286,6 +1285,66 @@ document.addEventListener("DOMContentLoaded", function() {
     }, 1400);
   };
 })();
+
+// ────────── AUTO-DISCOVER GIST BY FILENAME (token-only sync) ──────────
+// On a fresh device, paste the PAT and the page finds the existing CSCS sync
+// Gist by its filename instead of asking the user to copy a Gist ID.
+async function findOrCreateSyncGist(token) {
+  // List the user's Gists (paginated; 100 per page)
+  let page = 1;
+  while (page <= 5) {  // up to 500 Gists; plenty
+    const list = await gistFetch("GET", "/gists?per_page=100&page=" + page, token);
+    if (!Array.isArray(list) || list.length === 0) break;
+    for (const g of list) {
+      if (g.files && g.files[SYNC_FILENAME]) {
+        return g.id;  // found existing CSCS gist
+      }
+    }
+    if (list.length < 100) break;
+    page++;
+  }
+  // No existing Gist with our filename — create a new one
+  return await createNewGist();
+}
+
+// Override applySyncSettings to auto-discover when Gist ID is blank
+const _origApplySync = applySyncSettings;
+applySyncSettings = async function() {
+  const token = document.getElementById("sync-token-input").value.trim();
+  const gistInput = document.getElementById("sync-gist-input");
+  const gist = gistInput.value.trim();
+  const status = document.getElementById("sync-modal-status");
+  if (!token) {
+    status.className = "sync-status err";
+    status.textContent = "Token required.";
+    return;
+  }
+  setToken(token);
+  status.className = "sync-status";
+  status.textContent = "Looking for your sync Gist...";
+  try {
+    let resolvedGistId = gist;
+    if (!resolvedGistId) {
+      resolvedGistId = await findOrCreateSyncGist(token);
+      gistInput.value = resolvedGistId;
+    } else {
+      // Validate the provided gist
+      await gistFetch("GET", "/gists/" + resolvedGistId, token);
+    }
+    setGistId(resolvedGistId);
+    lsSet(SYNC_KEYS.enabled, true);
+    status.className = "sync-status ok";
+    status.textContent = "Found / created your sync Gist. Pulling latest...";
+    updateSyncButton("enabled", "Synced");
+    await syncPull({ silent: true });
+    await syncPush({ toast: true });
+    status.className = "sync-status ok";
+    status.innerHTML = "Sync active automatically. On other devices, just paste the same token — they will find this Gist too.";
+  } catch (e) {
+    status.className = "sync-status err";
+    status.textContent = "Failed: " + e.message;
+  }
+};
 </script>
 </body>
 </html>

@@ -217,7 +217,6 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
     <div class="h-day">CSCS Study · Day {today_day} · {weekday}</div>
     <div class="h-date">{date_str}</div>
     <div class="h-phase">{esc(phase_label)}</div>
-    <div><span class="theme-banner">{esc(motif["name"]) if motif else esc(theme["name"])} · <span class="tb-name">{esc(theme["name"])}</span> · {esc(theme["tagline"])}</span></div>
     <div class="domains">{domains_html}</div>
     <div class="progress"><div class="bar" style="width: {min(100, today_day / 182 * 100):.1f}%;"></div></div>
   </header>
