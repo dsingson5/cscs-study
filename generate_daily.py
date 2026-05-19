@@ -257,10 +257,22 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--day", type=int, help="Override day_number (e.g. --day 2)")
+    parser.add_argument("--date", type=str, help="Pretend today is this ISO date (e.g. --date 2026-05-20)")
+    args, _ = parser.parse_known_args()
+
     curriculum, questions = load_data()
-    today = _dt.date.today()
     meta = curriculum["meta"]
-    today_day = day_number(meta["start_date"], today)
+    if args.date:
+        today = _dt.date.fromisoformat(args.date)
+    else:
+        today = _dt.date.today()
+    today_day = args.day if args.day else day_number(meta["start_date"], today)
+    if args.day and not args.date:
+        # If just --day given, compute synthetic "today" so file naming matches
+        today = _dt.date.fromisoformat(meta["start_date"]) + _dt.timedelta(days=args.day - 1)
     if today_day < 1:
         print(f"Today ({today}) is before curriculum start. No file generated.")
         return 1
