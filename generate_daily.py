@@ -58,6 +58,16 @@ def day_number(start_date, today):
     return (today - _dt.date.fromisoformat(start_date)).days + 1
 
 
+def today_local():
+    """Return today's date in the curriculum's local timezone.
+    Avoids GitHub-runner UTC giving you yesterday's lesson at 11pm Manila."""
+    try:
+        from zoneinfo import ZoneInfo
+        return _dt.datetime.now(ZoneInfo("Asia/Manila")).date()
+    except Exception:
+        return _dt.date.today()
+
+
 def pick_review_lessons(today_day, lessons):
     out = []
     for s in SPACING_DAYS:
@@ -281,7 +291,7 @@ def main():
     if args.date:
         today = _dt.date.fromisoformat(args.date)
     else:
-        today = _dt.date.today()
+        today = today_local()
     today_day = args.day if args.day else day_number(meta["start_date"], today)
     if args.day and not args.date:
         # If just --day given, compute synthetic "today" so file naming matches
