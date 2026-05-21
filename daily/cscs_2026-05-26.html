@@ -486,6 +486,69 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
 .gloss-card .gloss-svg svg { transition: transform 0.3s; }
 .gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
+
+/* ============================================================
+   Animated step-through engine (.step-anim)
+   A reusable visual stepper: one SVG scene per step, cross-fades
+   on navigation, internal entrance + loop animations replay each
+   time a scene becomes active. Themed via --accent / --accent-2.
+   ============================================================ */
+.step-anim { margin: 6px 0 2px; }
+.sa-stage {
+  position: relative; width: 100%; aspect-ratio: 11 / 6;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255,255,255,0.045), transparent 70%),
+    var(--bg-2);
+  border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+.sa-svg { position:absolute; inset:0; display:block; width: 100%; height: 100%; }
+.sa-scene { opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
+.sa-scene.active { opacity: 1; }
+.sa-scene text { font-family: -apple-system, "Segoe UI", sans-serif; }
+
+/* entrance + loop animations — only run on the active scene */
+@keyframes saUp     { from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none} }
+@keyframes saDrop   { from{opacity:0; transform:translateY(-34px)} to{opacity:1; transform:none} }
+@keyframes saRise   { from{opacity:0; transform:translateY(34px)}  to{opacity:1; transform:none} }
+@keyframes saInR    { from{opacity:0; transform:translateX(-30px)} to{opacity:1; transform:none} }
+@keyframes saInL    { from{opacity:0; transform:translateX(30px)}  to{opacity:1; transform:none} }
+@keyframes saPop    { 0%{opacity:0; transform:scale(.4)} 60%{transform:scale(1.12)} 100%{opacity:1; transform:scale(1)} }
+@keyframes saPulse  { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes saPulseS { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }
+@keyframes saSpin   { to { transform: rotate(360deg); } }
+@keyframes saDash   { to { stroke-dashoffset: 0; } }
+@keyframes saFlow   { to { stroke-dashoffset: -240; } }
+@keyframes saBob    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+.sa-up,.sa-drop,.sa-rise,.sa-inR,.sa-inL,.sa-pop,.sa-pulseS,.sa-spin,.sa-bob { transform-box: fill-box; transform-origin: center; }
+.sa-scene.active .sa-up     { animation: saUp .55s ease both; }
+.sa-scene.active .sa-drop   { animation: saDrop .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-rise   { animation: saRise .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-inR    { animation: saInR .55s ease both; }
+.sa-scene.active .sa-inL    { animation: saInL .55s ease both; }
+.sa-scene.active .sa-pop    { animation: saPop .55s cubic-bezier(.5,1.7,.4,1) both; }
+.sa-scene.active .sa-pulse  { animation: saPulse 1.3s ease-in-out infinite; }
+.sa-scene.active .sa-pulseS { animation: saPulseS 1.4s ease-in-out infinite; }
+.sa-scene.active .sa-spin   { animation: saSpin 6s linear infinite; }
+.sa-scene.active .sa-bob    { animation: saBob 2s ease-in-out infinite; }
+.sa-scene.active .sa-draw   { stroke-dasharray: 300; stroke-dashoffset: 300; animation: saDash 1s ease forwards .15s; }
+.sa-scene.active .sa-flow   { stroke-dasharray: 9 9; animation: saFlow 1.4s linear infinite; }
+.sa-d1 { animation-delay: .12s !important; } .sa-d2 { animation-delay: .26s !important; }
+.sa-d3 { animation-delay: .42s !important; } .sa-d4 { animation-delay: .6s !important; }
+
+.sa-progress { height: 4px; background: var(--surface); border-radius: 999px; margin: 12px 0 10px; overflow: hidden; }
+.sa-bar { height: 100%; width: 14%; background: linear-gradient(90deg, var(--accent,#5ec8ff), var(--accent-2,#c08fff)); border-radius: 999px; transition: width .45s ease; box-shadow: 0 0 8px var(--accent,#5ec8ff); }
+.sa-dots { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 11px; }
+.sa-dot { width: 27px; height: 27px; border-radius: 50%; padding: 0; font-size: 11px; font-weight: 700; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all .25s; }
+.sa-dot:hover { border-color: var(--accent,#5ec8ff); transform: translateY(-1px); }
+.sa-dot.past { color: var(--text); border-color: var(--accent,#5ec8ff); }
+.sa-dot.active { background: var(--accent,#5ec8ff); color: var(--bg); border-color: var(--accent,#5ec8ff); box-shadow: 0 0 12px var(--accent,#5ec8ff); transform: scale(1.1); }
+.sa-caption { min-height: 58px; padding: 12px 14px; background: var(--surface-3); border: 1px solid var(--border); border-left: 3px solid var(--accent,#5ec8ff); border-radius: 10px; }
+.sa-step-num { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dimmer); font-weight: 700; }
+.sa-label { font-size: 15px; font-weight: 700; color: var(--text); margin: 3px 0 4px; }
+.sa-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+@keyframes saCapFlash { from{opacity:.25; transform:translateY(4px)} to{opacity:1; transform:none} }
+.sa-caption.flash { animation: saCapFlash .4s ease; }
 </style>
 <style>:root {
   --bg: #12100f;
@@ -634,6 +697,77 @@ body { font-family: "JetBrains Mono", "SF Mono", monospace; }
     <text x="30" y="38" text-anchor="middle" fill="#3a2a08" font-size="13" font-weight="700">ATP</text>
   </g>
 </svg><div class="motif-label">Bioenergetics</div></div><div class="lesson-head"><span class="badge badge-new">Day 8 · New lesson</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 3 · pp. 66-72</span></div><h2>Bioenergetics III — Oxidative phosphorylation</h2><p class="concept">Aerobic ATP production in mitochondria: Krebs cycle generates NADH/FADH₂; electron transport chain uses O₂ as the final electron acceptor to produce ~30-32 ATP per glucose (vs 2 from glycolysis alone). Fat oxidation yields more ATP per molecule but requires more O₂. Fuel selection shifts with intensity: low intensity = predominantly fat; rising intensity = more carb. Crossover point ~65% VO₂max where carb &gt; fat contribution.</p>
+<div class="widget" id="oxidative-stepper">
+  <div class="w-head"><span class="w-icon">&#9654;</span><span class="w-title">Oxidative phosphorylation</span></div>
+  <div class="w-body">
+<script>
+if(!window.SAEngine){
+  window.SA = {};
+  window.SAEngine = {
+    init: function(sid, steps){
+      var root = document.getElementById(sid);
+      if(!root) return;
+      var scenes = root.querySelectorAll('.sa-scene');
+      var dots   = root.querySelectorAll('.sa-dot');
+      var bar    = document.getElementById(sid+'-bar');
+      var curEl  = document.getElementById(sid+'-cur');
+      var labEl  = document.getElementById(sid+'-label');
+      var desEl  = document.getElementById(sid+'-desc');
+      var aBtn   = document.getElementById(sid+'-autobtn');
+      var cap    = root.querySelector('.sa-caption');
+      var n = steps.length, cur = 0, timer = null;
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } if(aBtn) aBtn.textContent='\u23f5 Auto-play'; }
+      function show(i){
+        cur = ((i % n) + n) % n;
+        for(var k=0;k<scenes.length;k++){ scenes[k].classList.remove('active'); }
+        void root.offsetWidth;
+        scenes[cur].classList.add('active');
+        for(var d=0;d<dots.length;d++){ dots[d].classList.toggle('active', d===cur); dots[d].classList.toggle('past', d<cur); }
+        if(bar)   bar.style.width = ((cur+1)/n*100)+'%';
+        if(curEl) curEl.textContent = cur+1;
+        if(labEl) labEl.textContent = steps[cur][0];
+        if(desEl) desEl.textContent = steps[cur][1];
+        if(cap){ cap.classList.remove('flash'); void cap.offsetWidth; cap.classList.add('flash'); }
+      }
+      var api = {
+        next: function(){ stop(); show(cur+1); },
+        prev: function(){ stop(); show(cur-1); },
+        go:   function(i){ stop(); show(i); },
+        auto: function(){
+          if(timer){ stop(); return; }
+          if(aBtn) aBtn.textContent='\u23f8 Pause';
+          if(cur>=n-1) show(0);
+          timer = setInterval(function(){ if(cur>=n-1){ stop(); return; } show(cur+1); }, 1900);
+        }
+      };
+      window.SA[sid] = api;
+      for(var j=0;j<dots.length;j++){ (function(b){ b.addEventListener('click', function(){ api.go(parseInt(b.getAttribute('data-i'))); }); })(dots[j]); }
+      show(0);
+    }
+  };
+}
+</script>
+<div class="step-anim" id="oxidative">
+  <div class="sa-stage"><svg viewBox="0 0 440 240" class="sa-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g class="sa-scene" data-step="0"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">1 · FUEL IN</text><g class="sa-pop"><ellipse cx="220" cy="130" rx="150" ry="74" fill="var(--good,#67e8b0)" opacity="0.1"/><ellipse cx="220" cy="130" rx="150" ry="74" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><path d="M110 130 q22 -30 44 0 q22 30 44 0 q22 -30 44 0 q22 30 44 0 q22 -30 44 0" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2" opacity="0.5"/></g><g class="sa-inR"><circle cx="100" cy="130" r="20" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="100" cy="130" r="20" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="100" y="136.4" fill="var(--text,#e8ebf2)" font-size="14" font-weight="700" text-anchor="middle">Pyr</text></g><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="124" y1="130" x2="180" y2="130"/><polyline points="171.224,134.794 180,130 171.224,125.206" stroke-linejoin="round"/></g><g class="sa-pop"><circle cx="220" cy="130" r="24" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="220" cy="130" r="24" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="220" y="137.68" fill="var(--text,#e8ebf2)" font-size="16.8" font-weight="700" text-anchor="middle">Ac-CoA</text></g></g><g class="sa-scene" data-step="1"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">2 · KREBS CYCLE</text><g class="sa-pop"><ellipse cx="220" cy="130" rx="150" ry="74" fill="var(--good,#67e8b0)" opacity="0.1"/><ellipse cx="220" cy="130" rx="150" ry="74" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><path d="M110 130 q22 -30 44 0 q22 30 44 0 q22 -30 44 0 q22 30 44 0 q22 -30 44 0" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2" opacity="0.5"/></g><circle cx="220" cy="130" r="42" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="3" stroke-dasharray="8 7" class="sa-spin"/><g class="sa-pop"><circle cx="220" cy="130" r="16" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="220" cy="130" r="16" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="220" y="135.12" fill="var(--warn,#ffb86b)" font-size="11.2" font-weight="700" text-anchor="middle">TCA</text></g><g class="sa-rise sa-d1"><circle cx="300" cy="96" r="14" fill="var(--good,#67e8b0)" opacity="0.2"/><circle cx="300" cy="96" r="14" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><text x="300" y="100.48" fill="var(--text,#e8ebf2)" font-size="10" font-weight="700" text-anchor="middle">NADH</text></g><g class="sa-rise sa-d2"><circle cx="316" cy="150" r="12" fill="var(--good,#67e8b0)" opacity="0.2"/><circle cx="316" cy="150" r="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><text x="316" y="153.84" fill="var(--text,#e8ebf2)" font-size="10" font-weight="700" text-anchor="middle">FADH₂</text></g><g class="sa-rise sa-d3"><circle cx="150" cy="92" r="12" fill="var(--text-dim,#9ba3b4)" opacity="0.2"/><circle cx="150" cy="92" r="12" fill="none" stroke="var(--text-dim,#9ba3b4)" stroke-width="2"/><text x="150" y="95.84" fill="var(--text-dim,#9ba3b4)" font-size="10" font-weight="700" text-anchor="middle">CO₂</text></g></g><g class="sa-scene" data-step="2"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">3 · ELECTRON TRANSPORT</text><g class="sa-pop"><ellipse cx="220" cy="130" rx="150" ry="74" fill="var(--good,#67e8b0)" opacity="0.1"/><ellipse cx="220" cy="130" rx="150" ry="74" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><path d="M110 130 q22 -30 44 0 q22 30 44 0 q22 -30 44 0 q22 30 44 0 q22 -30 44 0" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2" opacity="0.5"/></g><line x1="150" y1="130" x2="300" y2="130" stroke="var(--good,#67e8b0)" stroke-width="3" opacity="0.7"/><line x1="150" y1="139" x2="300" y2="139" stroke="var(--good,#67e8b0)" stroke-width="3" opacity="0.7"/><g class="sa-rise sa-d1"><circle cx="160" cy="110" r="11" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="160" cy="110" r="11" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="160" y="113.52" fill="var(--warn,#ffb86b)" font-size="10" font-weight="700" text-anchor="middle">H+</text></g><g class="sa-rise sa-d2"><circle cx="194" cy="110" r="11" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="194" cy="110" r="11" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="194" y="113.52" fill="var(--warn,#ffb86b)" font-size="10" font-weight="700" text-anchor="middle">H+</text></g><g class="sa-rise sa-d3"><circle cx="228" cy="110" r="11" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="228" cy="110" r="11" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="228" y="113.52" fill="var(--warn,#ffb86b)" font-size="10" font-weight="700" text-anchor="middle">H+</text></g><g class="sa-rise sa-d4"><circle cx="262" cy="110" r="11" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="262" cy="110" r="11" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="262" y="113.52" fill="var(--warn,#ffb86b)" font-size="10" font-weight="700" text-anchor="middle">H+</text></g><g class="sa-rise sa-d1"><circle cx="296" cy="110" r="11" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="296" cy="110" r="11" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="296" y="113.52" fill="var(--warn,#ffb86b)" font-size="10" font-weight="700" text-anchor="middle">H+</text></g><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="3" fill="none" stroke-linecap="round"><line x1="170" y1="150" x2="170" y2="116"/><polyline points="174.794,124.776 170,116 165.206,124.776" stroke-linejoin="round"/></g><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="3" fill="none" stroke-linecap="round"><line x1="240" y1="150" x2="240" y2="116"/><polyline points="244.794,124.776 240,116 235.206,124.776" stroke-linejoin="round"/></g></g><g class="sa-scene" data-step="3"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">4 · ATP SYNTHASE</text><g class="sa-pop"><ellipse cx="220" cy="130" rx="150" ry="74" fill="var(--good,#67e8b0)" opacity="0.1"/><ellipse cx="220" cy="130" rx="150" ry="74" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><path d="M110 130 q22 -30 44 0 q22 30 44 0 q22 -30 44 0 q22 30 44 0 q22 -30 44 0" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2" opacity="0.5"/></g><line x1="150" y1="130" x2="300" y2="130" stroke="var(--good,#67e8b0)" stroke-width="3" opacity="0.7"/><line x1="150" y1="139" x2="300" y2="139" stroke="var(--good,#67e8b0)" stroke-width="3" opacity="0.7"/><circle cx="230" cy="150" r="18" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="230" cy="150" r="18" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="3" stroke-dasharray="6 5" class="sa-spin"/><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="230" y1="110" x2="230" y2="144"/><polyline points="225.206,135.224 230,144 234.794,135.224" stroke-linejoin="round"/></g><g class="sa-pop"><circle cx="300" cy="160" r="16" fill="var(--warn,#ffb86b)" opacity="0.2"/><circle cx="300" cy="160" r="16" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2"/><text x="300" y="165.12" fill="var(--warn,#ffb86b)" font-size="11.2" font-weight="700" text-anchor="middle">ATP</text></g><g class="sa-pop"><rect x="120" y="96" width="120" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="120" y="96" width="120" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="180" y="112" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">most ATP here</text></g></g><g class="sa-scene" data-step="4"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">5 · O₂ → H₂O</text><g class="sa-pop"><ellipse cx="220" cy="130" rx="150" ry="74" fill="var(--good,#67e8b0)" opacity="0.1"/><ellipse cx="220" cy="130" rx="150" ry="74" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2"/><path d="M110 130 q22 -30 44 0 q22 30 44 0 q22 -30 44 0 q22 30 44 0 q22 -30 44 0" fill="none" stroke="var(--good,#67e8b0)" stroke-width="2" opacity="0.5"/></g><g class="sa-inR"><circle cx="150" cy="120" r="16" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="150" cy="120" r="16" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="150" y="125.12" fill="var(--accent,#5ec8ff)" font-size="11.2" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="174" y1="124" x2="240" y2="134"/><polyline points="230.605,137.425 240,134 232.041,127.945" stroke-linejoin="round"/></g><g class="sa-pop"><circle cx="280" cy="134" r="18" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="280" cy="134" r="18" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="280" y="139.76" fill="var(--accent,#5ec8ff)" font-size="12.6" font-weight="700" text-anchor="middle">H₂O</text></g><g class="sa-pop"><rect x="120" y="188" width="120" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="120" y="188" width="120" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="180" y="204" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">endurance fuel</text></g></g></svg></div>
+  <div class="sa-progress"><div class="sa-bar" id="oxidative-bar"></div></div>
+  <div class="sa-dots"><button class="sa-dot" data-i="0">1</button><button class="sa-dot" data-i="1">2</button><button class="sa-dot" data-i="2">3</button><button class="sa-dot" data-i="3">4</button><button class="sa-dot" data-i="4">5</button></div>
+  <div class="sa-caption">
+    <div class="sa-step-num">Step <span id="oxidative-cur">1</span> of 5</div>
+    <div class="sa-label" id="oxidative-label"></div>
+    <div class="sa-desc" id="oxidative-desc"></div>
+  </div>
+  <div class="w-controls">
+    <button onclick="SA['oxidative'].prev()">&#9664; Prev</button>
+    <button onclick="SA['oxidative'].next()">Next &#9654;</button>
+    <button onclick="SA['oxidative'].auto()" id="oxidative-autobtn">&#9205; Auto-play</button>
+  </div>
+</div>
+<script>SAEngine.init("oxidative", [["Pyruvate enters as acetyl-CoA", "Inside the mitochondrion, pyruvate is converted to acetyl-CoA — the fuel that feeds the Krebs cycle."], ["Krebs cycle strips out electrons", "The citric acid cycle spins, releasing CO₂ and loading electron carriers: lots of NADH and FADH₂ (plus a little GTP/ATP)."], ["Electrons drive the transport chain", "NADH and FADH₂ drop their electrons into the electron transport chain on the inner membrane, which pumps H⁺ to one side."], ["ATP synthase makes the ATP", "H⁺ floods back through ATP synthase like water through a turbine, spinning it to forge the bulk of the cell's ATP."], ["Oxygen is the final acceptor → water", "O₂ grabs the spent electrons and H⁺ to form water — the reason this system needs oxygen. Slow, but by far the biggest ATP yield."]]);</script>
+</div>
+  <div class="w-hint">Krebs strips electrons; the transport chain pumps H⁺; ATP synthase cashes the gradient in for ATP; oxygen closes the loop as water.</div>
+</div>
+
+
 <div class="widget" id="es-widget">
   <div class="w-head"><span class="w-icon">⚡</span><span class="w-title">Energy systems by duration</span></div>
   <div class="w-body">

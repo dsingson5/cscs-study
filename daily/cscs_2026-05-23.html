@@ -486,6 +486,69 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
 .gloss-card .gloss-svg svg { transition: transform 0.3s; }
 .gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
+
+/* ============================================================
+   Animated step-through engine (.step-anim)
+   A reusable visual stepper: one SVG scene per step, cross-fades
+   on navigation, internal entrance + loop animations replay each
+   time a scene becomes active. Themed via --accent / --accent-2.
+   ============================================================ */
+.step-anim { margin: 6px 0 2px; }
+.sa-stage {
+  position: relative; width: 100%; aspect-ratio: 11 / 6;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255,255,255,0.045), transparent 70%),
+    var(--bg-2);
+  border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+.sa-svg { position:absolute; inset:0; display:block; width: 100%; height: 100%; }
+.sa-scene { opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
+.sa-scene.active { opacity: 1; }
+.sa-scene text { font-family: -apple-system, "Segoe UI", sans-serif; }
+
+/* entrance + loop animations — only run on the active scene */
+@keyframes saUp     { from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none} }
+@keyframes saDrop   { from{opacity:0; transform:translateY(-34px)} to{opacity:1; transform:none} }
+@keyframes saRise   { from{opacity:0; transform:translateY(34px)}  to{opacity:1; transform:none} }
+@keyframes saInR    { from{opacity:0; transform:translateX(-30px)} to{opacity:1; transform:none} }
+@keyframes saInL    { from{opacity:0; transform:translateX(30px)}  to{opacity:1; transform:none} }
+@keyframes saPop    { 0%{opacity:0; transform:scale(.4)} 60%{transform:scale(1.12)} 100%{opacity:1; transform:scale(1)} }
+@keyframes saPulse  { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes saPulseS { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }
+@keyframes saSpin   { to { transform: rotate(360deg); } }
+@keyframes saDash   { to { stroke-dashoffset: 0; } }
+@keyframes saFlow   { to { stroke-dashoffset: -240; } }
+@keyframes saBob    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+.sa-up,.sa-drop,.sa-rise,.sa-inR,.sa-inL,.sa-pop,.sa-pulseS,.sa-spin,.sa-bob { transform-box: fill-box; transform-origin: center; }
+.sa-scene.active .sa-up     { animation: saUp .55s ease both; }
+.sa-scene.active .sa-drop   { animation: saDrop .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-rise   { animation: saRise .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-inR    { animation: saInR .55s ease both; }
+.sa-scene.active .sa-inL    { animation: saInL .55s ease both; }
+.sa-scene.active .sa-pop    { animation: saPop .55s cubic-bezier(.5,1.7,.4,1) both; }
+.sa-scene.active .sa-pulse  { animation: saPulse 1.3s ease-in-out infinite; }
+.sa-scene.active .sa-pulseS { animation: saPulseS 1.4s ease-in-out infinite; }
+.sa-scene.active .sa-spin   { animation: saSpin 6s linear infinite; }
+.sa-scene.active .sa-bob    { animation: saBob 2s ease-in-out infinite; }
+.sa-scene.active .sa-draw   { stroke-dasharray: 300; stroke-dashoffset: 300; animation: saDash 1s ease forwards .15s; }
+.sa-scene.active .sa-flow   { stroke-dasharray: 9 9; animation: saFlow 1.4s linear infinite; }
+.sa-d1 { animation-delay: .12s !important; } .sa-d2 { animation-delay: .26s !important; }
+.sa-d3 { animation-delay: .42s !important; } .sa-d4 { animation-delay: .6s !important; }
+
+.sa-progress { height: 4px; background: var(--surface); border-radius: 999px; margin: 12px 0 10px; overflow: hidden; }
+.sa-bar { height: 100%; width: 14%; background: linear-gradient(90deg, var(--accent,#5ec8ff), var(--accent-2,#c08fff)); border-radius: 999px; transition: width .45s ease; box-shadow: 0 0 8px var(--accent,#5ec8ff); }
+.sa-dots { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 11px; }
+.sa-dot { width: 27px; height: 27px; border-radius: 50%; padding: 0; font-size: 11px; font-weight: 700; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all .25s; }
+.sa-dot:hover { border-color: var(--accent,#5ec8ff); transform: translateY(-1px); }
+.sa-dot.past { color: var(--text); border-color: var(--accent,#5ec8ff); }
+.sa-dot.active { background: var(--accent,#5ec8ff); color: var(--bg); border-color: var(--accent,#5ec8ff); box-shadow: 0 0 12px var(--accent,#5ec8ff); transform: scale(1.1); }
+.sa-caption { min-height: 58px; padding: 12px 14px; background: var(--surface-3); border: 1px solid var(--border); border-left: 3px solid var(--accent,#5ec8ff); border-radius: 10px; }
+.sa-step-num { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dimmer); font-weight: 700; }
+.sa-label { font-size: 15px; font-weight: 700; color: var(--text); margin: 3px 0 4px; }
+.sa-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+@keyframes saCapFlash { from{opacity:.25; transform:translateY(4px)} to{opacity:1; transform:none} }
+.sa-caption.flash { animation: saCapFlash .4s ease; }
 </style>
 <style>:root {
   --bg: #170f13;
@@ -632,6 +695,77 @@ body { background-image: radial-gradient(circle at 50% 50%, rgba(168, 216, 255, 
     <path d="M 350 90 Q 370 100 380 115"/><path d="M 350 75 Q 380 80 390 95"/>
   </g>
 </svg><div class="motif-label">Pulmonary physiology</div></div><div class="lesson-head"><span class="badge badge-new">Day 5 · New lesson</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 1 · pp. 32-38</span></div><h2>Respiratory system &amp; gas exchange</h2><p class="concept">Pulmonary ventilation = breathing frequency × tidal volume. Gas exchange occurs at alveoli via diffusion (driven by partial pressure gradients). O₂ binds hemoglobin (~98.5% saturation at sea level). The oxyhemoglobin dissociation curve shifts RIGHT with ↑temp, ↑CO₂, ↓pH (Bohr effect) — promoting O₂ unloading at working muscle. CO₂ is transported as bicarbonate (~70%), bound to Hb (~20%), and dissolved (~10%).</p>
+<div class="widget" id="respiratory-stepper">
+  <div class="w-head"><span class="w-icon">&#9654;</span><span class="w-title">Gas exchange & the Bohr shift</span></div>
+  <div class="w-body">
+<script>
+if(!window.SAEngine){
+  window.SA = {};
+  window.SAEngine = {
+    init: function(sid, steps){
+      var root = document.getElementById(sid);
+      if(!root) return;
+      var scenes = root.querySelectorAll('.sa-scene');
+      var dots   = root.querySelectorAll('.sa-dot');
+      var bar    = document.getElementById(sid+'-bar');
+      var curEl  = document.getElementById(sid+'-cur');
+      var labEl  = document.getElementById(sid+'-label');
+      var desEl  = document.getElementById(sid+'-desc');
+      var aBtn   = document.getElementById(sid+'-autobtn');
+      var cap    = root.querySelector('.sa-caption');
+      var n = steps.length, cur = 0, timer = null;
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } if(aBtn) aBtn.textContent='\u23f5 Auto-play'; }
+      function show(i){
+        cur = ((i % n) + n) % n;
+        for(var k=0;k<scenes.length;k++){ scenes[k].classList.remove('active'); }
+        void root.offsetWidth;
+        scenes[cur].classList.add('active');
+        for(var d=0;d<dots.length;d++){ dots[d].classList.toggle('active', d===cur); dots[d].classList.toggle('past', d<cur); }
+        if(bar)   bar.style.width = ((cur+1)/n*100)+'%';
+        if(curEl) curEl.textContent = cur+1;
+        if(labEl) labEl.textContent = steps[cur][0];
+        if(desEl) desEl.textContent = steps[cur][1];
+        if(cap){ cap.classList.remove('flash'); void cap.offsetWidth; cap.classList.add('flash'); }
+      }
+      var api = {
+        next: function(){ stop(); show(cur+1); },
+        prev: function(){ stop(); show(cur-1); },
+        go:   function(i){ stop(); show(i); },
+        auto: function(){
+          if(timer){ stop(); return; }
+          if(aBtn) aBtn.textContent='\u23f8 Pause';
+          if(cur>=n-1) show(0);
+          timer = setInterval(function(){ if(cur>=n-1){ stop(); return; } show(cur+1); }, 1900);
+        }
+      };
+      window.SA[sid] = api;
+      for(var j=0;j<dots.length;j++){ (function(b){ b.addEventListener('click', function(){ api.go(parseInt(b.getAttribute('data-i'))); }); })(dots[j]); }
+      show(0);
+    }
+  };
+}
+</script>
+<div class="step-anim" id="respiratory">
+  <div class="sa-stage"><svg viewBox="0 0 440 240" class="sa-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g class="sa-scene" data-step="0"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">1 · INHALE</text><g class="sa-pop"><circle cx="130" cy="120" r="56" fill="var(--accent,#5ec8ff)" opacity="0.12"/><circle cx="130" cy="120" r="56" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="130" y="124" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">alveolus</text></g><g class="sa-draw" stroke="var(--accent,#5ec8ff)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="60" y1="80" x2="110" y2="104"/><polyline points="100.014,104.525 110,104 104.163,95.8803" stroke-linejoin="round"/></g><g class="sa-pop sa-d1"><circle cx="110" cy="110" r="9" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="110" cy="110" r="9" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="110" y="112.88" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-pop sa-d2"><circle cx="132" cy="110" r="9" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="132" cy="110" r="9" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="132" y="112.88" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-pop sa-d3"><circle cx="154" cy="110" r="9" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="154" cy="110" r="9" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="154" y="112.88" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-pop sa-d4"><circle cx="110" cy="134" r="9" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="110" cy="134" r="9" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="110" y="136.88" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g></g><g class="sa-scene" data-step="1"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">2 · DIFFUSION</text><g class="sa-pop"><circle cx="130" cy="120" r="56" fill="var(--accent,#5ec8ff)" opacity="0.12"/><circle cx="130" cy="120" r="56" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="130" y="124" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">alveolus</text></g><g class="sa-pop"><rect x="206" y="92" width="150" height="56" rx="28" fill="var(--bad,#ff7a7a)" opacity="0.12"/><rect x="206" y="92" width="150" height="56" rx="28" fill="none" stroke="var(--bad,#ff7a7a)" stroke-width="2"/><text x="288" y="170" fill="var(--text-dim,#9ba3b4)" font-size="10" text-anchor="middle">capillary</text></g><g class="sa-draw" stroke="var(--good,#67e8b0)" stroke-width="5" fill="none" stroke-linecap="round"><line x1="176" y1="120" x2="240" y2="120"/><polyline points="231.224,124.794 240,120 231.224,115.206" stroke-linejoin="round"/></g><g class="sa-pop"><circle cx="150" cy="120" r="11" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="150" cy="120" r="11" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="150" y="123.52" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-pop"><rect x="150" y="188" width="88" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="150" y="188" width="88" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="194" y="204" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">high → low</text></g></g><g class="sa-scene" data-step="2"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">3 · LOADING</text><g class="sa-pop"><rect x="206" y="92" width="150" height="56" rx="28" fill="var(--bad,#ff7a7a)" opacity="0.12"/><rect x="206" y="92" width="150" height="56" rx="28" fill="none" stroke="var(--bad,#ff7a7a)" stroke-width="2"/><text x="288" y="170" fill="var(--text-dim,#9ba3b4)" font-size="10" text-anchor="middle">capillary</text></g><g class="sa-pop"><circle cx="248" cy="120" r="17" fill="var(--bad,#ff7a7a)" opacity="0.2"/><circle cx="248" cy="120" r="17" fill="none" stroke="var(--bad,#ff7a7a)" stroke-width="2"/><text x="248" y="125.44" fill="var(--bad,#ff7a7a)" font-size="11.9" font-weight="700" text-anchor="middle">Hb</text></g><g class="sa-inL"><circle cx="300" cy="120" r="12" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="300" cy="120" r="12" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="300" y="123.84" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-draw" stroke="var(--good,#67e8b0)" stroke-width="3" fill="none" stroke-linecap="round"><line x1="284" y1="120" x2="266" y2="120"/><polyline points="274.776,115.206 266,120 274.776,124.794" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="206" y="70" width="104" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="206" y="70" width="104" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="258" y="86" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">Hb saturates</text></g></g><g class="sa-scene" data-step="3"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">4 · UNLOADING</text><rect x="60" y="80" width="120" height="80" rx="12" fill="var(--warn,#ffb86b)" opacity="0.12"/><rect x="60" y="80" width="120" height="80" rx="12" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="2" class="sa-pop"/><text x="120" y="124" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">muscle</text><g class="sa-pop"><circle cx="240" cy="120" r="17" fill="var(--bad,#ff7a7a)" opacity="0.2"/><circle cx="240" cy="120" r="17" fill="none" stroke="var(--bad,#ff7a7a)" stroke-width="2"/><text x="240" y="125.44" fill="var(--bad,#ff7a7a)" font-size="11.9" font-weight="700" text-anchor="middle">Hb</text></g><g class="sa-draw" stroke="var(--warn,#ffb86b)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="224" y1="120" x2="170" y2="120"/><polyline points="178.776,115.206 170,120 178.776,124.794" stroke-linejoin="round"/></g><g class="sa-pop"><circle cx="150" cy="120" r="11" fill="var(--accent,#5ec8ff)" opacity="0.2"/><circle cx="150" cy="120" r="11" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="150" y="123.52" fill="var(--accent,#5ec8ff)" font-size="10" font-weight="700" text-anchor="middle">O₂</text></g><g class="sa-pop"><rect x="220" y="70" width="110" height="24" rx="12" fill="var(--warn,#ffb86b)" opacity="0.16"/><rect x="220" y="70" width="110" height="24" rx="12" fill="none" stroke="var(--warn,#ffb86b)" stroke-width="1.4"/><text x="275" y="86" fill="var(--warn,#ffb86b)" font-size="12" font-weight="700" text-anchor="middle">warm + acidic</text></g></g><g class="sa-scene" data-step="4"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">5 · CO₂ OUT</text><g class="sa-pop"><circle cx="130" cy="120" r="56" fill="var(--accent,#5ec8ff)" opacity="0.12"/><circle cx="130" cy="120" r="56" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="2"/><text x="130" y="124" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">alveolus</text></g><g class="sa-pop"><rect x="206" y="92" width="150" height="56" rx="28" fill="var(--bad,#ff7a7a)" opacity="0.12"/><rect x="206" y="92" width="150" height="56" rx="28" fill="none" stroke="var(--bad,#ff7a7a)" stroke-width="2"/><text x="288" y="170" fill="var(--text-dim,#9ba3b4)" font-size="10" text-anchor="middle">capillary</text></g><g class="sa-draw" stroke="var(--text-dim,#9ba3b4)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="240" y1="130" x2="176" y2="130"/><polyline points="184.776,125.206 176,130 184.776,134.794" stroke-linejoin="round"/></g><g class="sa-pop"><circle cx="280" cy="120" r="11" fill="var(--text-dim,#9ba3b4)" opacity="0.2"/><circle cx="280" cy="120" r="11" fill="none" stroke="var(--text-dim,#9ba3b4)" stroke-width="2"/><text x="280" y="123.52" fill="var(--text-dim,#9ba3b4)" font-size="10" font-weight="700" text-anchor="middle">CO₂</text></g><g class="sa-draw" stroke="var(--text-dim,#9ba3b4)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="110" y1="100" x2="60" y2="76"/><polyline points="69.9862,75.4754 60,76 65.837,84.1197" stroke-linejoin="round"/></g></g></svg></div>
+  <div class="sa-progress"><div class="sa-bar" id="respiratory-bar"></div></div>
+  <div class="sa-dots"><button class="sa-dot" data-i="0">1</button><button class="sa-dot" data-i="1">2</button><button class="sa-dot" data-i="2">3</button><button class="sa-dot" data-i="3">4</button><button class="sa-dot" data-i="4">5</button></div>
+  <div class="sa-caption">
+    <div class="sa-step-num">Step <span id="respiratory-cur">1</span> of 5</div>
+    <div class="sa-label" id="respiratory-label"></div>
+    <div class="sa-desc" id="respiratory-desc"></div>
+  </div>
+  <div class="w-controls">
+    <button onclick="SA['respiratory'].prev()">&#9664; Prev</button>
+    <button onclick="SA['respiratory'].next()">Next &#9654;</button>
+    <button onclick="SA['respiratory'].auto()" id="respiratory-autobtn">&#9205; Auto-play</button>
+  </div>
+</div>
+<script>SAEngine.init("respiratory", [["Inhale — fresh air fills the alveoli", "Breathing in floods the alveoli with air that is high in O₂ and low in CO₂, setting up the gradients for exchange."], ["O₂ diffuses into the blood", "Oxygen moves down its pressure gradient across the thin alveolar wall into the capillary — no pump needed, just diffusion."], ["O₂ loads onto hemoglobin", "In the cool, less-acidic lung, hemoglobin grabs O₂ readily — the left-shifted (loading) end of the Bohr relationship."], ["At the muscle — Bohr shift unloads O₂", "Working muscle is warm, acidic and CO₂-rich. That right-shifts the curve, so hemoglobin releases O₂ right where it's needed."], ["CO₂ carried back, then exhaled", "The blood picks up CO₂ from the muscle and carries it back to the lungs, where it diffuses out and is breathed away."]]);</script>
+</div>
+  <div class="w-hint">Oxygen diffuses from alveoli into blood and loads onto hemoglobin in the cool lung; warmth, acid and CO₂ at the muscle flip the switch so it unloads.</div>
+</div>
+
+
 <div class="widget" id="bohr-widget">
   <div class="w-head"><span class="w-icon">⚡</span><span class="w-title">Bohr effect — O₂-hemoglobin dissociation curve</span></div>
   <div class="w-body">

@@ -486,6 +486,69 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
 .gloss-card .gloss-svg svg { transition: transform 0.3s; }
 .gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
+
+/* ============================================================
+   Animated step-through engine (.step-anim)
+   A reusable visual stepper: one SVG scene per step, cross-fades
+   on navigation, internal entrance + loop animations replay each
+   time a scene becomes active. Themed via --accent / --accent-2.
+   ============================================================ */
+.step-anim { margin: 6px 0 2px; }
+.sa-stage {
+  position: relative; width: 100%; aspect-ratio: 11 / 6;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255,255,255,0.045), transparent 70%),
+    var(--bg-2);
+  border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+.sa-svg { position:absolute; inset:0; display:block; width: 100%; height: 100%; }
+.sa-scene { opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
+.sa-scene.active { opacity: 1; }
+.sa-scene text { font-family: -apple-system, "Segoe UI", sans-serif; }
+
+/* entrance + loop animations — only run on the active scene */
+@keyframes saUp     { from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none} }
+@keyframes saDrop   { from{opacity:0; transform:translateY(-34px)} to{opacity:1; transform:none} }
+@keyframes saRise   { from{opacity:0; transform:translateY(34px)}  to{opacity:1; transform:none} }
+@keyframes saInR    { from{opacity:0; transform:translateX(-30px)} to{opacity:1; transform:none} }
+@keyframes saInL    { from{opacity:0; transform:translateX(30px)}  to{opacity:1; transform:none} }
+@keyframes saPop    { 0%{opacity:0; transform:scale(.4)} 60%{transform:scale(1.12)} 100%{opacity:1; transform:scale(1)} }
+@keyframes saPulse  { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes saPulseS { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }
+@keyframes saSpin   { to { transform: rotate(360deg); } }
+@keyframes saDash   { to { stroke-dashoffset: 0; } }
+@keyframes saFlow   { to { stroke-dashoffset: -240; } }
+@keyframes saBob    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+.sa-up,.sa-drop,.sa-rise,.sa-inR,.sa-inL,.sa-pop,.sa-pulseS,.sa-spin,.sa-bob { transform-box: fill-box; transform-origin: center; }
+.sa-scene.active .sa-up     { animation: saUp .55s ease both; }
+.sa-scene.active .sa-drop   { animation: saDrop .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-rise   { animation: saRise .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-inR    { animation: saInR .55s ease both; }
+.sa-scene.active .sa-inL    { animation: saInL .55s ease both; }
+.sa-scene.active .sa-pop    { animation: saPop .55s cubic-bezier(.5,1.7,.4,1) both; }
+.sa-scene.active .sa-pulse  { animation: saPulse 1.3s ease-in-out infinite; }
+.sa-scene.active .sa-pulseS { animation: saPulseS 1.4s ease-in-out infinite; }
+.sa-scene.active .sa-spin   { animation: saSpin 6s linear infinite; }
+.sa-scene.active .sa-bob    { animation: saBob 2s ease-in-out infinite; }
+.sa-scene.active .sa-draw   { stroke-dasharray: 300; stroke-dashoffset: 300; animation: saDash 1s ease forwards .15s; }
+.sa-scene.active .sa-flow   { stroke-dasharray: 9 9; animation: saFlow 1.4s linear infinite; }
+.sa-d1 { animation-delay: .12s !important; } .sa-d2 { animation-delay: .26s !important; }
+.sa-d3 { animation-delay: .42s !important; } .sa-d4 { animation-delay: .6s !important; }
+
+.sa-progress { height: 4px; background: var(--surface); border-radius: 999px; margin: 12px 0 10px; overflow: hidden; }
+.sa-bar { height: 100%; width: 14%; background: linear-gradient(90deg, var(--accent,#5ec8ff), var(--accent-2,#c08fff)); border-radius: 999px; transition: width .45s ease; box-shadow: 0 0 8px var(--accent,#5ec8ff); }
+.sa-dots { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 11px; }
+.sa-dot { width: 27px; height: 27px; border-radius: 50%; padding: 0; font-size: 11px; font-weight: 700; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all .25s; }
+.sa-dot:hover { border-color: var(--accent,#5ec8ff); transform: translateY(-1px); }
+.sa-dot.past { color: var(--text); border-color: var(--accent,#5ec8ff); }
+.sa-dot.active { background: var(--accent,#5ec8ff); color: var(--bg); border-color: var(--accent,#5ec8ff); box-shadow: 0 0 12px var(--accent,#5ec8ff); transform: scale(1.1); }
+.sa-caption { min-height: 58px; padding: 12px 14px; background: var(--surface-3); border: 1px solid var(--border); border-left: 3px solid var(--accent,#5ec8ff); border-radius: 10px; }
+.sa-step-num { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dimmer); font-weight: 700; }
+.sa-label { font-size: 15px; font-weight: 700; color: var(--text); margin: 3px 0 4px; }
+.sa-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+@keyframes saCapFlash { from{opacity:.25; transform:translateY(4px)} to{opacity:1; transform:none} }
+.sa-caption.flash { animation: saCapFlash .4s ease; }
 </style>
 <style>:root {
   --bg: #0d110f;

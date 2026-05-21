@@ -486,6 +486,69 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .gloss-card:hover { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 18px var(--theme-glow-soft, transparent); }
 .gloss-card .gloss-svg svg { transition: transform 0.3s; }
 .gloss-card:hover .gloss-svg svg { transform: scale(1.08); }
+
+/* ============================================================
+   Animated step-through engine (.step-anim)
+   A reusable visual stepper: one SVG scene per step, cross-fades
+   on navigation, internal entrance + loop animations replay each
+   time a scene becomes active. Themed via --accent / --accent-2.
+   ============================================================ */
+.step-anim { margin: 6px 0 2px; }
+.sa-stage {
+  position: relative; width: 100%; aspect-ratio: 11 / 6;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255,255,255,0.045), transparent 70%),
+    var(--bg-2);
+  border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+}
+.sa-svg { position:absolute; inset:0; display:block; width: 100%; height: 100%; }
+.sa-scene { opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
+.sa-scene.active { opacity: 1; }
+.sa-scene text { font-family: -apple-system, "Segoe UI", sans-serif; }
+
+/* entrance + loop animations — only run on the active scene */
+@keyframes saUp     { from{opacity:0; transform:translateY(16px)} to{opacity:1; transform:none} }
+@keyframes saDrop   { from{opacity:0; transform:translateY(-34px)} to{opacity:1; transform:none} }
+@keyframes saRise   { from{opacity:0; transform:translateY(34px)}  to{opacity:1; transform:none} }
+@keyframes saInR    { from{opacity:0; transform:translateX(-30px)} to{opacity:1; transform:none} }
+@keyframes saInL    { from{opacity:0; transform:translateX(30px)}  to{opacity:1; transform:none} }
+@keyframes saPop    { 0%{opacity:0; transform:scale(.4)} 60%{transform:scale(1.12)} 100%{opacity:1; transform:scale(1)} }
+@keyframes saPulse  { 0%,100%{opacity:.4} 50%{opacity:1} }
+@keyframes saPulseS { 0%,100%{transform:scale(1)} 50%{transform:scale(1.22)} }
+@keyframes saSpin   { to { transform: rotate(360deg); } }
+@keyframes saDash   { to { stroke-dashoffset: 0; } }
+@keyframes saFlow   { to { stroke-dashoffset: -240; } }
+@keyframes saBob    { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+.sa-up,.sa-drop,.sa-rise,.sa-inR,.sa-inL,.sa-pop,.sa-pulseS,.sa-spin,.sa-bob { transform-box: fill-box; transform-origin: center; }
+.sa-scene.active .sa-up     { animation: saUp .55s ease both; }
+.sa-scene.active .sa-drop   { animation: saDrop .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-rise   { animation: saRise .6s cubic-bezier(.5,1.5,.4,1) both; }
+.sa-scene.active .sa-inR    { animation: saInR .55s ease both; }
+.sa-scene.active .sa-inL    { animation: saInL .55s ease both; }
+.sa-scene.active .sa-pop    { animation: saPop .55s cubic-bezier(.5,1.7,.4,1) both; }
+.sa-scene.active .sa-pulse  { animation: saPulse 1.3s ease-in-out infinite; }
+.sa-scene.active .sa-pulseS { animation: saPulseS 1.4s ease-in-out infinite; }
+.sa-scene.active .sa-spin   { animation: saSpin 6s linear infinite; }
+.sa-scene.active .sa-bob    { animation: saBob 2s ease-in-out infinite; }
+.sa-scene.active .sa-draw   { stroke-dasharray: 300; stroke-dashoffset: 300; animation: saDash 1s ease forwards .15s; }
+.sa-scene.active .sa-flow   { stroke-dasharray: 9 9; animation: saFlow 1.4s linear infinite; }
+.sa-d1 { animation-delay: .12s !important; } .sa-d2 { animation-delay: .26s !important; }
+.sa-d3 { animation-delay: .42s !important; } .sa-d4 { animation-delay: .6s !important; }
+
+.sa-progress { height: 4px; background: var(--surface); border-radius: 999px; margin: 12px 0 10px; overflow: hidden; }
+.sa-bar { height: 100%; width: 14%; background: linear-gradient(90deg, var(--accent,#5ec8ff), var(--accent-2,#c08fff)); border-radius: 999px; transition: width .45s ease; box-shadow: 0 0 8px var(--accent,#5ec8ff); }
+.sa-dots { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 11px; }
+.sa-dot { width: 27px; height: 27px; border-radius: 50%; padding: 0; font-size: 11px; font-weight: 700; color: var(--text-dim); background: var(--surface); border: 1px solid var(--border); cursor: pointer; transition: all .25s; }
+.sa-dot:hover { border-color: var(--accent,#5ec8ff); transform: translateY(-1px); }
+.sa-dot.past { color: var(--text); border-color: var(--accent,#5ec8ff); }
+.sa-dot.active { background: var(--accent,#5ec8ff); color: var(--bg); border-color: var(--accent,#5ec8ff); box-shadow: 0 0 12px var(--accent,#5ec8ff); transform: scale(1.1); }
+.sa-caption { min-height: 58px; padding: 12px 14px; background: var(--surface-3); border: 1px solid var(--border); border-left: 3px solid var(--accent,#5ec8ff); border-radius: 10px; }
+.sa-step-num { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-dimmer); font-weight: 700; }
+.sa-label { font-size: 15px; font-weight: 700; color: var(--text); margin: 3px 0 4px; }
+.sa-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+@keyframes saCapFlash { from{opacity:.25; transform:translateY(4px)} to{opacity:1; transform:none} }
+.sa-caption.flash { animation: saCapFlash .4s ease; }
 </style>
 <style>:root {
   --bg: #101314;
@@ -636,93 +699,74 @@ body { background-image: repeating-linear-gradient(45deg, transparent 0px, trans
   </g>
   <line x1="40" y1="118" x2="560" y2="118" stroke="#666" stroke-width="1" stroke-dasharray="6 4"/>
 </svg><div class="motif-label">Iron · technique</div></div><div class="lesson-head"><span class="badge badge-new">Day 25 · New lesson</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 15 · pp. 350-370</span></div><h2>Resistance technique — squat</h2><p class="concept">Back squat: bar on upper traps (high bar) or rear delts (low bar). Stance ~shoulder width, toes slight out. Cues: brace core (Valsalva for max effort), break at hips and knees together, descend keeping chest up, knees track over toes (not collapsed in). Depth ≥ parallel (femur). Drive through midfoot, hips and shoulders rise together. Spotters at sides for max attempts. Common faults: knee valgus, butt wink at bottom, forward lean.</p>
-<div class="widget" id="sf-widget">
-  <div class="w-head"><span class="w-icon">⚡</span><span class="w-title">Squat form — interactive cues</span></div>
+<div class="widget" id="ex_squat-stepper">
+  <div class="w-head"><span class="w-icon">&#9654;</span><span class="w-title">Back squat — phase by phase</span></div>
   <div class="w-body">
-<div class="sf-container">
-  <svg viewBox="0 0 300 380" class="w-svg" xmlns="http://www.w3.org/2000/svg">
-    <line x1="40" y1="370" x2="260" y2="370" stroke="#3a4358" stroke-width="2"/>
-    <g id="squatFig">
-      <line x1="150" y1="60" x2="150" y2="155" stroke="#e6e9ef" stroke-width="6" stroke-linecap="round"/>
-      <circle cx="150" cy="40" r="20" fill="#e6e9ef"/>
-      <line x1="105" y1="80" x2="195" y2="80" stroke="#5ec8ff" stroke-width="6" stroke-linecap="round"/>
-      <rect x="95" y="73" width="110" height="14" fill="none" stroke="#5ec8ff" stroke-width="1.5" rx="3"/>
-      <line id="lThigh" x1="150" y1="160" x2="130" y2="240" stroke="#e6e9ef" stroke-width="6" stroke-linecap="round"/>
-      <line id="lShin" x1="130" y1="240" x2="135" y2="350" stroke="#e6e9ef" stroke-width="6" stroke-linecap="round"/>
-      <line id="rThigh" x1="150" y1="160" x2="170" y2="240" stroke="#e6e9ef" stroke-width="6" stroke-linecap="round"/>
-      <line id="rShin" x1="170" y1="240" x2="165" y2="350" stroke="#e6e9ef" stroke-width="6" stroke-linecap="round"/>
-    </g>
-    <g class="sf-cues" id="sfCues">
-      <g class="sf-cue" data-cue="chest" transform="translate(220, 90)">
-        <circle r="11" fill="#5ec8ff"/><text y="4" text-anchor="middle" fill="#0f1419" font-size="11" font-weight="600">1</text>
-      </g>
-      <g class="sf-cue" data-cue="knee" transform="translate(105, 220)">
-        <circle r="11" fill="#67e8b0"/><text y="4" text-anchor="middle" fill="#0f1419" font-size="11" font-weight="600">2</text>
-      </g>
-      <g class="sf-cue" data-cue="depth" transform="translate(210, 200)">
-        <circle r="11" fill="#ffb86b"/><text y="4" text-anchor="middle" fill="#0f1419" font-size="11" font-weight="600">3</text>
-      </g>
-      <g class="sf-cue" data-cue="foot" transform="translate(115, 360)">
-        <circle r="11" fill="#ff7a7a"/><text y="4" text-anchor="middle" fill="#0f1419" font-size="11" font-weight="600">4</text>
-      </g>
-    </g>
-  </svg>
-  <div class="sf-info">
-    <h4>Click a numbered cue</h4>
-    <div id="sfCueText" class="sf-cue-text">Click a numbered marker on the figure to see the coaching cue.</div>
-    <div class="w-controls">
-      <button onclick="sfAnim()" id="sfBtn">▶ Animate descent</button>
-    </div>
+<script>
+if(!window.SAEngine){
+  window.SA = {};
+  window.SAEngine = {
+    init: function(sid, steps){
+      var root = document.getElementById(sid);
+      if(!root) return;
+      var scenes = root.querySelectorAll('.sa-scene');
+      var dots   = root.querySelectorAll('.sa-dot');
+      var bar    = document.getElementById(sid+'-bar');
+      var curEl  = document.getElementById(sid+'-cur');
+      var labEl  = document.getElementById(sid+'-label');
+      var desEl  = document.getElementById(sid+'-desc');
+      var aBtn   = document.getElementById(sid+'-autobtn');
+      var cap    = root.querySelector('.sa-caption');
+      var n = steps.length, cur = 0, timer = null;
+      function stop(){ if(timer){ clearInterval(timer); timer=null; } if(aBtn) aBtn.textContent='\u23f5 Auto-play'; }
+      function show(i){
+        cur = ((i % n) + n) % n;
+        for(var k=0;k<scenes.length;k++){ scenes[k].classList.remove('active'); }
+        void root.offsetWidth;
+        scenes[cur].classList.add('active');
+        for(var d=0;d<dots.length;d++){ dots[d].classList.toggle('active', d===cur); dots[d].classList.toggle('past', d<cur); }
+        if(bar)   bar.style.width = ((cur+1)/n*100)+'%';
+        if(curEl) curEl.textContent = cur+1;
+        if(labEl) labEl.textContent = steps[cur][0];
+        if(desEl) desEl.textContent = steps[cur][1];
+        if(cap){ cap.classList.remove('flash'); void cap.offsetWidth; cap.classList.add('flash'); }
+      }
+      var api = {
+        next: function(){ stop(); show(cur+1); },
+        prev: function(){ stop(); show(cur-1); },
+        go:   function(i){ stop(); show(i); },
+        auto: function(){
+          if(timer){ stop(); return; }
+          if(aBtn) aBtn.textContent='\u23f8 Pause';
+          if(cur>=n-1) show(0);
+          timer = setInterval(function(){ if(cur>=n-1){ stop(); return; } show(cur+1); }, 1900);
+        }
+      };
+      window.SA[sid] = api;
+      for(var j=0;j<dots.length;j++){ (function(b){ b.addEventListener('click', function(){ api.go(parseInt(b.getAttribute('data-i'))); }); })(dots[j]); }
+      show(0);
+    }
+  };
+}
+</script>
+<div class="step-anim" id="ex_squat">
+  <div class="sa-stage"><svg viewBox="0 0 440 240" class="sa-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g class="sa-scene" data-step="0"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">SET-UP</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><text x="220" y="232" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">weight over mid-foot</text><g class="sa-pop" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="206" y1="75" x2="206" y2="132"/><line x1="206" y1="132" x2="206" y2="168"/><line x1="206" y1="168" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="206" y1="82" x2="190" y2="92"/><line x1="190" y1="92" x2="192" y2="80"/></g><circle class="sa-pop" cx="206" cy="58" r="13" fill="var(--accent,#5ec8ff)"/><g class="sa-pop"><line x1="144" y1="80" x2="268" y2="80" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/><circle cx="144" cy="80" r="14" fill="var(--accent-2,#c08fff)"/><circle cx="268" cy="80" r="14" fill="var(--accent-2,#c08fff)"/></g><g class="sa-pop"><rect x="296" y="64" width="46" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="296" y="64" width="46" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="319" y="80" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">BRACE</text></g></g><g class="sa-scene" data-step="1"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">DESCENT</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="212" y1="82" x2="198" y2="146"/><line x1="198" y1="146" x2="216" y2="176"/><line x1="216" y1="176" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="212" y1="90" x2="196" y2="100"/><line x1="196" y1="100" x2="200" y2="90"/></g><circle class="sa-pop" cx="212" cy="66" r="13" fill="var(--accent,#5ec8ff)"/><g class="sa-pop"><line x1="150" y1="88" x2="274" y2="88" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/><circle cx="150" cy="88" r="14" fill="var(--accent-2,#c08fff)"/><circle cx="274" cy="88" r="14" fill="var(--accent-2,#c08fff)"/></g><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="150" y1="118" x2="150" y2="168"/><polyline points="145.206,159.224 150,168 154.794,159.224" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="286" y="150" width="72" height="24" rx="12" fill="var(--accent,#5ec8ff)" opacity="0.16"/><rect x="286" y="150" width="72" height="24" rx="12" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="1.4"/><text x="322" y="166" fill="var(--accent,#5ec8ff)" font-size="12" font-weight="700" text-anchor="middle">hips back</text></g></g><g class="sa-scene" data-step="2"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">BOTTOM</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="220" y1="100" x2="196" y2="180"/><line x1="196" y1="180" x2="232" y2="176"/><line x1="232" y1="176" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="220" y1="108" x2="204" y2="118"/><line x1="204" y1="118" x2="210" y2="108"/></g><circle class="sa-pop" cx="220" cy="84" r="13" fill="var(--accent-2,#c08fff)"/><g class="sa-pop"><line x1="158" y1="106" x2="282" y2="106" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/><circle cx="158" cy="106" r="14" fill="var(--accent-2,#c08fff)"/><circle cx="282" cy="106" r="14" fill="var(--accent-2,#c08fff)"/></g><g class="sa-pop"><rect x="300" y="150" width="46" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="300" y="150" width="46" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="323" y="166" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">DEPTH</text></g><line x1="188" y1="180" x2="246" y2="180" stroke="var(--good,#67e8b0)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8"/></g><g class="sa-scene" data-step="3"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">ASCENT</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="214" y1="86" x2="200" y2="150"/><line x1="200" y1="150" x2="218" y2="178"/><line x1="218" y1="178" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="214" y1="94" x2="198" y2="104"/><line x1="198" y1="104" x2="202" y2="94"/></g><circle class="sa-pop" cx="214" cy="70" r="13" fill="var(--accent,#5ec8ff)"/><g class="sa-pop"><line x1="152" y1="92" x2="276" y2="92" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/><circle cx="152" cy="92" r="14" fill="var(--accent-2,#c08fff)"/><circle cx="276" cy="92" r="14" fill="var(--accent-2,#c08fff)"/></g><g class="sa-draw" stroke="var(--good,#67e8b0)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="150" y1="168" x2="150" y2="108"/><polyline points="154.794,116.776 150,108 145.206,116.776" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="286" y="116" width="51" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="286" y="116" width="51" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="311.5" y="132" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">drive!</text></g></g><g class="sa-scene" data-step="4"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">LOCKOUT</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop" fill="none" stroke="var(--good,#67e8b0)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="206" y1="75" x2="206" y2="132"/><line x1="206" y1="132" x2="206" y2="168"/><line x1="206" y1="168" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="206" y1="82" x2="190" y2="92"/><line x1="190" y1="92" x2="192" y2="80"/></g><circle class="sa-pop" cx="206" cy="58" r="13" fill="var(--good,#67e8b0)"/><g class="sa-pop"><line x1="144" y1="80" x2="268" y2="80" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/><circle cx="144" cy="80" r="14" fill="var(--accent-2,#c08fff)"/><circle cx="268" cy="80" r="14" fill="var(--accent-2,#c08fff)"/></g><g class="sa-draw" stroke="var(--good,#67e8b0)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="150" y1="150" x2="150" y2="92"/><polyline points="154.794,100.776 150,92 145.206,100.776" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="296" y="64" width="46" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="296" y="64" width="46" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="319" y="80" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">TALL</text></g></g></svg></div>
+  <div class="sa-progress"><div class="sa-bar" id="ex_squat-bar"></div></div>
+  <div class="sa-dots"><button class="sa-dot" data-i="0">1</button><button class="sa-dot" data-i="1">2</button><button class="sa-dot" data-i="2">3</button><button class="sa-dot" data-i="3">4</button><button class="sa-dot" data-i="4">5</button></div>
+  <div class="sa-caption">
+    <div class="sa-step-num">Step <span id="ex_squat-cur">1</span> of 5</div>
+    <div class="sa-label" id="ex_squat-label"></div>
+    <div class="sa-desc" id="ex_squat-desc"></div>
+  </div>
+  <div class="w-controls">
+    <button onclick="SA['ex_squat'].prev()">&#9664; Prev</button>
+    <button onclick="SA['ex_squat'].next()">Next &#9654;</button>
+    <button onclick="SA['ex_squat'].auto()" id="ex_squat-autobtn">&#9205; Auto-play</button>
   </div>
 </div>
-<script>
-(function(){
-  const cues = {
-    chest: { title: 'Chest up', text: 'Maintain neutral spine. Cue: "chest tall" or "proud chest." Prevents forward lean and lumbar flexion.' },
-    knee: { title: 'Knees track over toes', text: 'Knee valgus (caving in) is the most common fault. Cue: "knees out" or "spread the floor."' },
-    depth: { title: 'Depth: parallel or below', text: 'Femur parallel to floor at minimum. Hip crease at or below top of knee. Don\'t butt-wink.' },
-    foot: { title: 'Whole-foot contact', text: 'Drive through midfoot. Big toe, pinky toe, heel — all stay grounded. Tripod foot.' }
-  };
-  document.querySelectorAll('.sf-cue').forEach(c => {
-    c.addEventListener('click', () => {
-      const k = c.dataset.cue;
-      const txt = document.getElementById('sfCueText');
-      txt.innerHTML = '<b>' + cues[k].title + '</b><br>' + cues[k].text;
-      document.querySelectorAll('.sf-cue circle').forEach(ci => ci.setAttribute('r', '11'));
-      c.querySelector('circle').setAttribute('r', '14');
-    });
-  });
-  let anim = null;
-  window.sfAnim = function(){
-    const btn = document.getElementById('sfBtn');
-    if(anim){ clearInterval(anim); anim = null; btn.textContent = '▶ Animate descent'; resetFig(); return; }
-    btn.textContent = '⏸ Pause';
-    let t = 0, dir = 1;
-    anim = setInterval(() => {
-      t += dir * 0.04;
-      if(t > 1){ t = 1; dir = -1; }
-      if(t < 0){ t = 0; dir = 1; }
-      const hipDrop = t * 80;
-      const lThigh = document.getElementById('lThigh');
-      const rThigh = document.getElementById('rThigh');
-      const lShin = document.getElementById('lShin');
-      const rShin = document.getElementById('rShin');
-      lThigh.setAttribute('y1', 160 + hipDrop);
-      rThigh.setAttribute('y1', 160 + hipDrop);
-      lShin.setAttribute('y1', 240 + hipDrop * 0.3);
-      rShin.setAttribute('y1', 240 + hipDrop * 0.3);
-    }, 40);
-  };
-  function resetFig(){
-    document.getElementById('lThigh').setAttribute('y1', 160);
-    document.getElementById('rThigh').setAttribute('y1', 160);
-    document.getElementById('lShin').setAttribute('y1', 240);
-    document.getElementById('rShin').setAttribute('y1', 240);
-  }
-})();
-</script>
+<script>SAEngine.init("ex_squat", [["Set up & brace", "Bar on the upper traps, feet about shoulder-width, toes slightly out. Big breath into the belly, brace the core, neutral spine."], ["Descend — hips & knees together", "Break at the hips and knees at the same time and sit between the heels. Knees track over the toes; chest stays up."], ["Hit depth — hip crease below knee", "Reach full depth: the hip crease drops below the top of the knee. Keep tension — no bouncing or collapsing forward."], ["Drive up — lead with the chest", "Push the floor away and drive hips and shoulders up together so the bar travels straight up. Keep the chest tall."], ["Lockout & reset", "Stand fully tall — hips and knees extended, glutes squeezed. Reset the breath and brace before the next rep."]]);</script>
 </div>
-  <div class="w-hint">Click numbered markers for technique points. Press play to animate the descent.</div>
+  <div class="w-hint">Hips and knees move together; the bar stays stacked over mid-foot the whole way.</div>
 </div>
 <div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bar position changes torque distribution between hips/knees</li><li>Parallel = femur parallel to floor</li><li>Valsalva increases intra-abdominal pressure → spine stability</li><li>Knee valgus is the most common fault; cue &#x27;knees out&#x27;</li><li>Spotters at sides, never directly behind, for max attempts</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#ff5e5e" stroke-width="2" fill="none"><line x1="22" y1="6" x2="30" y2="22"/><line x1="30" y1="22" x2="26" y2="34"/><line x1="58" y1="6" x2="50" y2="22"/><line x1="50" y1="22" x2="54" y2="34"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Knee valgus</div><div class="gloss-def">Most common squat fault — knees collapse inward. Cue: &#x27;knees out&#x27; / &#x27;spread the floor.&#x27; Reflects weak abductors or coordination issue.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="10" width="20" height="22" fill="none" stroke="#c9c9c9" stroke-width="2" rx="3"/><circle cx="40" cy="21" r="6" fill="#ffb86b" opacity="0.7"/></svg></div><div class="gloss-text"><div class="gloss-term">Valsalva</div><div class="gloss-def">Hold breath against closed glottis → ↑ intra-abdominal pressure → spine stability. Standard for max-effort lifts.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#c9c9c9" stroke-width="2" fill="none"><line x1="14" y1="14" x2="32" y2="22"/><line x1="32" y1="22" x2="28" y2="36"/><line x1="32" y1="22" x2="48" y2="22"/><line x1="48" y1="22" x2="66" y2="14"/><line x1="48" y1="22" x2="52" y2="36"/></g><line x1="14" y1="22" x2="66" y2="22" stroke="#67e8b0" stroke-width="1" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Parallel depth</div><div class="gloss-def">Hip crease at or below the top of the knee. CSCS standard. Squat below for more glute / posterior chain.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM session structure relies on squat fidelity — these technique points are non-negotiable for your hip-dominant Hyrox prep.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How To Squat Correctly (FIX MISTAKES!)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Schoenfeld: Mechanisms of Hypertrophy</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section>
   <div class="review-section"><h2 class="rs-title">Spaced repetition reviews</h2><p class="rs-sub">Research-validated spacing intervals (Cepeda et al. 2008) — concepts resurface at 1d, 3d, 7d, 14d, 30d, 90d for long-term retention.</p><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 14 · pp. 317-330</span></div><h2>Warm-up &amp; flexibility</h2><p class="concept">General warm-up: 5-10 min low-intensity activity to raise core temp. Specific warm-up: movement patterns of upcoming session. RAMP protocol: Raise, Activate/Mobilize, Potentiate. Static stretching: holds 30s+; can transiently reduce force/power if done immediately pre-performance. Dynamic stretching: movement-based; preferred for performance-day warm-up. PNF: contract-relax variations; high gain but partner-dependent.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>RAMP: Raise, Activate, Mobilize, Potentiate</li><li>Static pre-performance: transient power drop ~5%</li><li>Dynamic warm-up preferred for power activities</li><li>PNF most effective for ROM gains</li><li>Cold muscle = higher injury risk</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your 4×8 sessions and Hyrox prep deserve specific warm-up — rep-1 &#x27;too easy&#x27; rule means warm-up determines rep-1 readiness.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How To Squat Correctly (FIX MISTAKES) — includes warm-up</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: Optimal Protocols (warm-up &amp; potentiation)</div><div class="m-cred">Stanford + Galpin</div></div></a></div></section><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 13 · pp. 269-294</span></div><h2>Test administration — strength &amp; power</h2><p class="concept">1RM testing: thorough warm-up, 2-4 attempts at progressively heavier loads with 2-4 min rest; spotters required. Vertical jump: countermovement vs static; Sargent test or Vertec/jump mat. Standing long jump: distance from takeoff to closest heel landing. Margaria-Kalamen stair sprint: anaerobic power. Wingate: 30s max cycle effort — peak/mean power, fatigue index.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>1RM: progressive sets to true 1RM in 4-5 attempts</li><li>Vertec valid; jump mats more practical</li><li>Margaria-Kalamen: 9 steps, time gates</li><li>Wingate: 30s, peak in ~5s, mean = anaerobic capacity</li><li>Spotter is non-negotiable for max-load squat/bench</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Indoor venue + consistent warm-up = your standardization. The reason your LT2=158 is trustworthy.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How to Squat Correctly (1RM testing context)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: Assessment of Fitness</div><div class="m-cred">Stanford + Galpin</div></div></a></div></section><section class="lesson-card reveal" data-domain="NT" style="--accent: #67e8b0; --accent-2: #9bf2cf; --glow: rgba(103, 232, 176, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 week back</span><span class="domain-chip" style="background: rgba(103, 232, 176, 0.18); color: #67e8b0; border-color: #67e8b066;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 6 6 10 6 14a6 6 0 0 0 12 0c0-4-2-8-6-12z"/></svg>Nutrition</span><span class="domain">Ch 9 · pp. 179-198</span></div><h2>Basic nutrition — macronutrients</h2><p class="concept">Carbohydrate: 4 kcal/g; spares protein, primary fuel for higher-intensity work; stored as glycogen (~400 g muscle + 100 g liver). Recommendation for athletes: 5-10 g/kg/day depending on training. Protein: 4 kcal/g; structural and enzymatic. Athletes: 1.4-2.0 g/kg/day; up to 2.2 in hypertrophy phases. Fat: 9 kcal/g; essential for hormones, vitamin absorption. Minimum 20-30% kcal from fat. Hydration: ~30-40 mL/kg/day baseline + sweat replacement.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>CHO: 4 kcal/g; muscle glycogen ~400 g</li><li>PRO: 4 kcal/g; athlete intake 1.4-2.0 g/kg</li><li>FAT: 9 kcal/g; ≥20% of kcal</li><li>Hydration: 30-40 mL/kg + sweat</li><li>EAA leucine threshold ~2.5-3 g per meal for MPS</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="20" r="14" fill="#7ed68a" opacity="0.8"/><text x="40" y="24" text-anchor="middle" fill="#0a2008" font-size="10" font-weight="700">L</text></svg></div><div class="gloss-text"><div class="gloss-term">Leucine threshold</div><div class="gloss-def">~2.5–3 g leucine per meal to maximally stimulate MPS (muscle protein synthesis). ~25–40 g high-quality protein.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="#ffb84a"><circle cx="25" cy="20" r="5"/><circle cx="35" cy="14" r="5"/><circle cx="45" cy="20" r="5"/><circle cx="35" cy="26" r="5"/><circle cx="55" cy="14" r="5"/><circle cx="55" cy="26" r="5"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Glycogen</div><div class="gloss-def">Stored carb. ~400 g muscle + ~100 g liver. Refills with CHO intake. Endurance limits arrive when this runs low.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 8 32 L 18 30 L 26 12 L 38 8 L 48 20 L 60 28 L 72 30" fill="none" stroke="#7ed68a" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">MPS</div><div class="gloss-def">Muscle protein synthesis. Rises after resistance training + protein. Peaks ~1.5–3 hr post-meal. Then drops despite continued protein.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your training volume (Z2 + intervals + strength + Hyrox) puts CHO needs at high end (~6-8 g/kg). Underfueling chronically blunts everything from glycogen recovery to GH pulse to immune function.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=SUy6HwOhT3U" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Brad Schoenfeld — Resistance Training, Body Composition &amp; Hypertrophy</div><div class="m-cred">Brad Schoenfeld PhD · Huberman Lab</div></div></a><a class="media-link audio" href="https://sigmanutrition.com/episode123/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Sigma Nutrition #123 — Donald Layman PhD: Leucine, mTOR &amp; Anabolic Response</div><div class="m-cred">Donald Layman PhD · UIUC</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">2 weeks back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 2 · pp. 46-50</span></div><h2>Biomechanics II — Force-velocity &amp; length-tension</h2><p class="concept">Force-velocity curve: muscle produces MORE force at slow speeds (concentric) and even more eccentrically. As velocity rises, concentric force drops. Power = force × velocity; peak power at ~30% of max isometric force. Length-tension: actin-myosin overlap is optimal at ~resting length; force drops at extremes (too short = overlap interference; too long = insufficient overlap).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Eccentric &gt; isometric &gt; concentric force production</li><li>Peak power at ~30% max isometric force</li><li>Length-tension optimum near resting length</li><li>Stretch-shortening cycle: eccentric pre-load enhances concentric output (plyometrics)</li><li>Velocity-based training uses this curve to prescribe load</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 8 Q 25 12 40 22 Q 55 32 70 36" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M 10 12 Q 25 4 40 8 Q 55 18 70 36" fill="none" stroke="#ffb86b" stroke-width="1.5" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Force-velocity curve</div><div class="gloss-def">Force ↓ as velocity ↑ concentrically. Eccentric &gt; isometric &gt; concentric. Peak power at ~30% max isometric force.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 32 Q 25 28 40 8 Q 55 28 70 32" fill="none" stroke="#67e8b0" stroke-width="2"/><line x1="40" y1="6" x2="40" y2="34" stroke="#9ba3b4" stroke-width="0.5" stroke-dasharray="2 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Length-tension relationship</div><div class="gloss-def">Force is maximal at resting length (optimal actin-myosin overlap). Drops at too-short or too-stretched.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM heavy work (high force, low velocity) develops the left side of F-V curve; plyos/jumps would develop the right side. For Hyrox-specific power-endurance, you need both.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=9vOmlzLfxGA" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin: Muscle Fiber Types and Muscle Growth (force-velocity context)</div><div class="m-cred">Cal State Fullerton · Galpin PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section></div>

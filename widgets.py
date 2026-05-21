@@ -7,6 +7,8 @@ widget into a lesson card.
 """
 from __future__ import annotations
 
+import steppers
+
 
 def _wrap(widget_id: str, title: str, body: str, hint: str = "") -> str:
     hint_html = f'<div class="w-hint">{hint}</div>' if hint else ""
@@ -986,7 +988,6 @@ def inverted_u() -> str:
 WIDGETS = {
     "muscle_fiber_types": sarcomere_animation,
     "motor_units": motor_unit_recruitment,
-    "ec_coupling": ec_coupling_steps,
     "cardiovascular": heart_calculator,
     "respiratory": bohr_curve,
     "atp_pcr": energy_systems_timeline,
@@ -1002,14 +1003,22 @@ WIDGETS = {
     "sport_psych": inverted_u,
     "macros": macro_calculator,
     "nutrient_timing": macro_calculator,
-    "ex_squat": squat_form_visualizer,
     "aerobic_programming": polarized_donut,
     "phase1_review": energy_systems_timeline,
 }
 
 
 def render(topic_id: str) -> str:
+    """Render the lesson's interactive content.
+
+    A sequential process gets an animated step-through (steppers.render) shown
+    first; any calculator/chart widget for the same topic is appended after it.
+    """
+    parts = []
+    step = steppers.render(topic_id)
+    if step:
+        parts.append(step)
     fn = WIDGETS.get(topic_id)
     if fn:
-        return fn()
-    return ""
+        parts.append(fn())
+    return "\n".join(parts)
