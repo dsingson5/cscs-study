@@ -549,6 +549,108 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .sa-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
 @keyframes saCapFlash { from{opacity:.25; transform:translateY(4px)} to{opacity:1; transform:none} }
 .sa-caption.flash { animation: saCapFlash .4s ease; }
+
+/* ════════════════════════════════════════════════════════════════════════
+   LEARNING-SCIENCE UI v2 — session goal, confidence, gated reveal,
+   4-button grading, self-explanation, calibration dashboard, pretest,
+   caught-up/sleep banner.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Visible session goal (attendance, not a streak) */
+.session-goal { margin-top: 10px; font-size: 12px; color: var(--text-dim); font-variant-numeric: tabular-nums; }
+.session-goal b { color: var(--theme-accent, var(--accent)); }
+.session-goal .sg-note { color: var(--text-dim); opacity: 0.7; }
+
+/* Question meta on the head row */
+.q-domain { font-size: 10px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,0.05); color: var(--text-dim); letter-spacing: 0.03em; }
+.q-status { font-size: 10px; color: var(--good); margin-left: auto; opacity: 0; transition: opacity 0.2s; }
+.q-status.flashed { opacity: 1; }
+.pr-meta { display: inline-flex; gap: 6px; }
+.q-recall { font-size: 10px; color: var(--text-dim); }
+.q-overdue { font-size: 10px; color: var(--warn); }
+
+/* Confidence selector (calibration probe — before reveal) */
+.q-confidence { margin-top: 8px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.conf-label { font-size: 11px; color: var(--text-dim); margin-right: 2px; }
+.conf-btn { font-size: 11px; padding: 4px 12px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; transition: all 0.15s; }
+.conf-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+.conf-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); font-weight: 600; }
+.conf-btn:disabled { opacity: 0.55; cursor: default; }
+
+/* Forced commitment: reveal is locked until an attempt exists */
+.btn-reveal { background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 7px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.15s; }
+.btn-reveal:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-reveal.ready { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 10px rgba(94,200,255,0.18); }
+.btn-idk { background: transparent; border: 1px dashed var(--border); color: var(--text-dim); padding: 7px 14px; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.15s; }
+.btn-idk:hover { border-color: var(--warn); color: var(--warn); }
+
+/* Self-explanation prompt (mechanism cards) */
+.q-selfexplain { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+.q-selfexplain label { font-size: 11px; color: var(--warn); font-weight: 600; display: block; margin-bottom: 5px; }
+.se-answer { width: 100%; min-height: 42px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 8px 10px; font-family: inherit; font-size: 12px; resize: vertical; }
+.se-answer:focus { outline: none; border-color: var(--warn); }
+
+/* 4-button Again / Hard / Good / Easy grading (FSRS) */
+.q-rate { margin-top: 12px; }
+.rate-label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+.rate-hint { opacity: 0.7; }
+.rate-btn { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; min-width: 64px; padding: 7px 10px; margin-right: 6px; margin-bottom: 4px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.rate-btn small { font-size: 9px; font-weight: 500; opacity: 0.75; }
+.rate-btn:hover { transform: translateY(-1px); }
+.rate-again:hover, .rate-again.chosen { background: var(--bad); color: #2a0000; border-color: var(--bad); }
+.rate-hard:hover,  .rate-hard.chosen  { background: var(--warn); color: #2a1500; border-color: var(--warn); }
+.rate-good:hover,  .rate-good.chosen  { background: var(--good); color: #04201a; border-color: var(--good); }
+.rate-easy:hover,  .rate-easy.chosen  { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.rate-btn.chosen { box-shadow: 0 0 12px rgba(255,255,255,0.12); }
+.rate-result { margin-top: 8px; font-size: 11px; color: var(--good); opacity: 0; transition: opacity 0.2s; }
+.rate-result.shown { opacity: 1; }
+.q.rated { opacity: 0.92; }
+
+.qs-sub { font-size: 12px; color: var(--text-dim); margin: 0 0 14px; }
+
+/* Pretest (errorful generation) */
+.pretest-section { margin: 8px 0 18px; }
+.pretest-banner { display: flex; gap: 12px; align-items: flex-start; background: linear-gradient(135deg, rgba(192,143,255,0.10), rgba(94,200,255,0.05)); border: 1px solid rgba(192,143,255,0.30); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 13px; }
+.pretest-banner b { color: #c08fff; }
+.pt-icon { font-size: 20px; line-height: 1; }
+.q.pretest { border-left: 3px solid #c08fff; }
+
+/* Caught-up / sleep banner (no late-night streaks) */
+.caught-up { display: flex; gap: 14px; align-items: center; background: linear-gradient(135deg, rgba(103,232,176,0.10), rgba(94,200,255,0.04)); border: 1px solid rgba(103,232,176,0.30); border-radius: 14px; padding: 16px 18px; margin-bottom: 22px; }
+.cu-check { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 50%; background: var(--good); color: #04201a; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
+.cu-text { font-size: 13px; color: var(--text); }
+.cu-text b { color: var(--good); }
+
+/* Calibration dashboard — where to study, not how much */
+#cscs-dashboard { margin-bottom: 22px; }
+.dashboard { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 4px 16px; }
+.dashboard > summary { cursor: pointer; font-size: 13px; font-weight: 700; padding: 12px 0; color: var(--text); list-style: none; }
+.dashboard > summary::-webkit-details-marker { display: none; }
+.dashboard > summary::before { content: "▸ "; color: var(--accent); }
+.dashboard[open] > summary::before { content: "▾ "; }
+.dash-grid { display: flex; flex-direction: column; gap: 8px; padding: 6px 0 12px; }
+.dash-row { display: grid; grid-template-columns: 130px 1fr 64px 150px; gap: 10px; align-items: center; font-size: 12px; }
+.dash-dom { color: var(--text); font-weight: 600; }
+.dash-bar { position: relative; height: 18px; background: var(--bg); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.dash-fill { height: 100%; border-radius: 999px; transition: width 0.4s ease; }
+.dash-bartxt { position: absolute; left: 8px; top: 0; line-height: 18px; font-size: 10px; color: var(--text); text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.dash-due { color: var(--text-dim); text-align: right; font-variant-numeric: tabular-nums; }
+.dash-cal { font-size: 11px; text-align: right; }
+.cal-ok { color: var(--good); }
+.cal-over { color: var(--bad); }
+.cal-under { color: var(--warn); }
+.dash-empty { color: var(--text-dim); font-size: 12px; padding: 6px 0; }
+.dash-foot { border-top: 1px solid var(--border); padding: 10px 0 12px; display: flex; flex-direction: column; gap: 8px; }
+.dash-spark-wrap { display: flex; align-items: flex-end; gap: 10px; }
+.dash-spark-label { font-size: 10px; color: var(--text-dim); }
+.dash-spark { display: inline-flex; align-items: flex-end; gap: 3px; height: 28px; }
+.dash-spark .spk { width: 8px; background: var(--accent); border-radius: 2px 2px 0 0; opacity: 0.7; }
+.dash-legend { font-size: 10px; color: var(--text-dim); line-height: 1.5; }
+
+@media (max-width: 560px) {
+  .dash-row { grid-template-columns: 92px 1fr 48px; }
+  .dash-cal { grid-column: 2 / -1; text-align: left; }
+}
 </style>
 <style>:root {
   --bg: #0e0f17;
@@ -658,11 +760,13 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.06) 1px, transpar
     <div class="h-phase">Phase 1: Exercise Sciences Foundations</div>
     <div class="domains"><span class="dchip">Exercise Science (~25%)</span> <span class="dchip">Nutrition (~10%)</span> <span class="dchip">Exercise Technique (~25%)</span> <span class="dchip">Program Design &amp; Testing (~40%)</span></div>
     <div class="progress"><div class="bar" style="width: 22.5%;"></div></div>
+    <div class="session-goal">Today: <b id="goal-new">14</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
   <div class="study-tip">
-    <b>Today's study protocol:</b> Try active recall before revealing. Self-mark honestly.
-    Answers and marks are <b>saved in your browser</b> — your "Personal review queue" below
-    surfaces questions you missed or got partial credit on, with adaptive (SM-2) spacing.
+    <b>How to use this:</b> recall and type an answer <b>before</b> you reveal — the reveal stays locked until you commit.
+    After the answer, grade yourself <b>Again / Hard / Good / Easy</b>; that grade schedules the card with
+    <b>FSRS</b> (the algorithm behind Anki). Rate <b>confidence first</b> so the dashboard can show where you're
+    over- or under-confident. Everything saves in your browser.
     <div style="margin-top: 8px; font-size: 11px; color: var(--text-dim);">
       <span id="lifetime-stats">Lifetime: <b>0</b> tracked · <b>0</b> due now</span> ·
       <a href="#" onclick="exportProgress(); return false;" style="color: var(--theme-accent);">Export progress (JSON)</a> ·
@@ -671,13 +775,15 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.06) 1px, transpar
       </label>
     </div>
   </div>
+  <div id="cscs-dashboard"></div>
   <div class="session-summary">
     <div class="stat"><b>1</b>new lesson</div>
     <div class="stat"><b>5</b>spaced reviews</div>
-    <div class="stat"><b>13</b>questions</div>
-    <div class="stat"><b id="self-score">0</b>self-marked correct</div>
+    <div class="stat"><b>14</b>questions</div>
+    <div class="stat"><b id="self-score">0</b>passed today</div>
   </div>
   <div id="personal-reviews"></div>
+  <section class="pretest-section reveal"><div class="pretest-banner"><span class="pt-icon">&#129504;</span><div><b>Predict first.</b> Take a guess before you read today's lesson. Getting it wrong is fine — a failed guess primes your brain to remember the right answer when it arrives.</div></div><div class="qs"><div class="q pretest" data-qid="pre_0" data-stable="facility_legal__1" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Predict</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="pre_0"></span></div><div class="q-text">What is an EAP and what does it require?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('pre_0','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('pre_0','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('pre_0','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_pre_0" disabled onclick="revealQ('pre_0')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('pre_0')">I don't know</button></div><div class="q-reveal" id="reveal_pre_0"><div class="reveal-label">Answer</div><div class="reveal-body">Emergency Action Plan — venue-specific written plan covering medical emergencies, evacuation, and serious-injury response. Must be posted, communicated to staff, and practiced.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('pre_0',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('pre_0',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('pre_0',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('pre_0',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q pretest" data-qid="pre_1" data-stable="facility_legal__0" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Predict</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="pre_1"></span></div><div class="q-text">Four elements required to establish negligence.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('pre_1','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('pre_1','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('pre_1','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_pre_1" disabled onclick="revealQ('pre_1')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('pre_1')">I don't know</button></div><div class="q-reveal" id="reveal_pre_1"><div class="reveal-label">Answer</div><div class="reveal-body">Duty, Breach of duty, Causation, Damages.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('pre_1',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('pre_1',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('pre_1',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('pre_1',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div></div></section>
   <section class="lesson-card reveal has-motif" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="motif-hero"><svg viewBox="0 0 600 140" class="hero-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
   <g stroke="#7fc4ff" stroke-width="2" fill="none">
     <rect x="40" y="20" width="520" height="100"/>
@@ -696,30 +802,54 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.06) 1px, transpar
     <circle cx="80" cy="100" r="3"/><circle cx="140" cy="105" r="3"/>
   </g>
 </svg><div class="motif-label">Architecture · operations</div></div><div class="lesson-head"><span class="badge badge-new">Day 41 · New lesson</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 24 · pp. 673-695</span></div><h2>Facility policies, procedures &amp; legal</h2><p class="concept">Negligence requires: duty, breach of duty, causation, damages. Standard of care = what a reasonable professional in same role would do. Documentation is everything (waivers, PARQ, incident reports, equipment maintenance logs). Emergency action plan (EAP): venue-specific, posted, practiced. Pre-participation screening (PARQ, medical clearance for risk factors). Confidentiality (HIPAA/FERPA where applicable).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Negligence: duty, breach, causation, damages</li><li>Standard of care = reasonable professional in same role</li><li>EAP required and practiced</li><li>PARQ before participation</li><li>Equipment inspection logged</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Not direct for you, but recurring exam content area.</p></div><div class="media"><a class="media-link video" href="https://www.nsca.com/certification/continuing-education/quizzes-and-assessments/usada/usada-coachs-advantage-video-page/" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">USADA Coach&#x27;s Advantage — NSCA Continuing Education</div><div class="m-cred">NSCA + USADA</div></div></a><a class="media-link audio" href="https://sigmanutrition.com/podcast/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Sigma Nutrition Radio — Evidence-based practice</div><div class="m-cred">Danny Lennon</div></div></a></div></section>
-  <div class="review-section"><h2 class="rs-title">Spaced repetition reviews</h2><p class="rs-sub">Research-validated spacing intervals (Cepeda et al. 2008) — concepts resurface at 1d, 3d, 7d, 14d, 30d, 90d for long-term retention.</p><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 23 · pp. 651-672</span></div><h2>Facility design &amp; layout</h2><p class="concept">100 sq ft per athlete minimum. Ceiling: 12+ ft (Olympic lifts) or 10 ft minimum. Lighting: 50-100 foot-candles. Flooring: rubber for free-weight areas, low-pile carpet OK for cardio. Mirrors: 6 in above floor, 20 in clear of equipment. Equipment spacing: 36 in walkways. Power racks anchored. Layout flow: stretch → free weight → resistance → cardio (or per traffic patterns).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>100 sq ft per athlete</li><li>Ceiling: 12 ft (Oly), 10 ft minimum</li><li>Lighting: 50-100 foot-candles</li><li>Walkways: 36 in minimum</li><li>Equipment grouped by movement pattern</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Relevant if you ever open a facility — exam-relevant numbers to memorize verbatim.</p></div><div class="media"><a class="media-link video" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Galpin — Assess &amp; Improve Fitness (facility considerations)</div><div class="m-cred">Huberman + Galpin</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Hypertrophy &amp; Training Environment</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 21 · pp. 610-625</span></div><h2>Periodization II — macro, meso, micro</h2><p class="concept">Macrocycle: annual or season-long plan. Mesocycle: 2-6 wk blocks with a specific focus (hypertrophy, strength, power, peaking). Microcycle: typically 1 week. Phases (linear): hypertrophy/endurance → basic strength → strength/power → peaking → active rest. Tapering: 7-21 days, ~40-60% volume reduction, intensity maintained, frequency maintained. Supercompensation: rest → recovery → adaptation → return to baseline.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Macro: months to year</li><li>Meso: 2-6 weeks</li><li>Micro: ~1 week</li><li>Taper: cut volume ~50%, keep intensity</li><li>Supercompensation timing varies by stimulus</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your block weeks → 4-week meso → race buildup pattern matches this textbook framework. Phase 0 sleep gate is custom on top.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=zKloBrc75KQ" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Stephen Seiler — Polarized Training 201: Past, Present &amp; Future</div><div class="m-cred">Seiler PhD</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan2/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #201 — San-Millán: Zone 2 (block periodization)</div><div class="m-cred">Peter Attia MD</div></div></a></div></section><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 week back</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 18 · pp. 519-540</span></div><h2>Plyometric program design</h2><p class="concept">SSC (stretch-shortening cycle): eccentric pre-load enhances concentric output via stored elastic energy + stretch reflex. Amortization phase = transition; SHORTER amortization = better. Categories: low-intensity (skipping, ankle hops), moderate (box jumps, hurdle hops), high (depth jumps, repeat broad jumps). Volume measured in foot contacts: beginner 80-100/session; advanced 120-140; elite ≤200. Surface: grass/track &gt; concrete. Pre-req: ~1.5× BW squat for high-intensity plyos.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>SSC: eccentric → amortization → concentric</li><li>Amortization: faster = better SSC use</li><li>Foot contacts: 80-200/session</li><li>Surface affects injury risk</li><li>1.5× BW squat as pre-req for depth jumps</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ffd84a" stroke-width="2"><path d="M 12 32 L 20 20 L 28 32 L 36 12 L 44 32 L 52 8 L 60 32 L 68 4"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Stretch-shortening cycle (SSC)</div><div class="gloss-def">Eccentric pre-load → amortization → concentric. Stored elastic energy + stretch reflex amplifies output.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 30 L 30 6" stroke="#5ec8ff" stroke-width="2"/><path d="M 30 6 L 32 6" stroke="#ffd84a" stroke-width="4"/><path d="M 32 6 L 70 30" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">Amortization</div><div class="gloss-def">The transition between eccentric and concentric. Shorter = better SSC utilization = more power.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your hip-dominant strength base supports plyo addition — but high-impact plyos (depth jumps) compete for joint capacity with your run volume. Box jumps (low landing impact) are safer add.</p></div><div class="media"><a class="media-link video" href="https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Galpin — Optimal Protocols (plyometric programming)</div><div class="m-cred">Huberman + Galpin</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Hypertrophy &amp; Power Adaptations</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">2 weeks back</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 15 · pp. 385-400</span></div><h2>Resistance technique — bench &amp; overhead press</h2><p class="concept">Bench: 5 points of contact (head, upper back, glutes on bench; both feet on floor). Grip ~1.5× shoulder width. Bar path: descend to lower chest/sternum, slight curve up to over upper chest at lockout. Scaps retracted/depressed. Spotter at head. Overhead press: bar at clavicle, elbows slightly in front, brace, press up while staying tight, slight forward shift of head as bar passes face. Avoid lumbar hyperextension.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bench: 5 points of contact</li><li>Scaps retracted and depressed</li><li>Bar to lower chest, NOT throat</li><li>OHP: brace HARD; lumbar neutral</li><li>Push-press uses leg drive to start</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>OHP is technique-heavy and underused — but for shoulder durability across a long training career it&#x27;s worth keeping in.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How To Squat Correctly (technique principles)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=fOieQOp3o0A" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 month back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 2 · pp. 46-50</span></div><h2>Biomechanics II — Force-velocity &amp; length-tension</h2><p class="concept">Force-velocity curve: muscle produces MORE force at slow speeds (concentric) and even more eccentrically. As velocity rises, concentric force drops. Power = force × velocity; peak power at ~30% of max isometric force. Length-tension: actin-myosin overlap is optimal at ~resting length; force drops at extremes (too short = overlap interference; too long = insufficient overlap).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Eccentric &gt; isometric &gt; concentric force production</li><li>Peak power at ~30% max isometric force</li><li>Length-tension optimum near resting length</li><li>Stretch-shortening cycle: eccentric pre-load enhances concentric output (plyometrics)</li><li>Velocity-based training uses this curve to prescribe load</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 8 Q 25 12 40 22 Q 55 32 70 36" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M 10 12 Q 25 4 40 8 Q 55 18 70 36" fill="none" stroke="#ffb86b" stroke-width="1.5" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Force-velocity curve</div><div class="gloss-def">Force ↓ as velocity ↑ concentrically. Eccentric &gt; isometric &gt; concentric. Peak power at ~30% max isometric force.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 32 Q 25 28 40 8 Q 55 28 70 32" fill="none" stroke="#67e8b0" stroke-width="2"/><line x1="40" y1="6" x2="40" y2="34" stroke="#9ba3b4" stroke-width="0.5" stroke-dasharray="2 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Length-tension relationship</div><div class="gloss-def">Force is maximal at resting length (optimal actin-myosin overlap). Drops at too-short or too-stretched.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM heavy work (high force, low velocity) develops the left side of F-V curve; plyos/jumps would develop the right side. For Hyrox-specific power-endurance, you need both.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=9vOmlzLfxGA" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin: Muscle Fiber Types and Muscle Growth (force-velocity context)</div><div class="m-cred">Cal State Fullerton · Galpin PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section></div>
+  <div class="review-section"><h2 class="rs-title">Spaced review</h2><p class="rs-sub">Concepts you met before, resurfacing at expanding intervals (Cepeda et al. 2008). Read the recap, then test yourself in the practice set below.</p><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 23 · pp. 651-672</span></div><h2>Facility design &amp; layout</h2><p class="concept">100 sq ft per athlete minimum. Ceiling: 12+ ft (Olympic lifts) or 10 ft minimum. Lighting: 50-100 foot-candles. Flooring: rubber for free-weight areas, low-pile carpet OK for cardio. Mirrors: 6 in above floor, 20 in clear of equipment. Equipment spacing: 36 in walkways. Power racks anchored. Layout flow: stretch → free weight → resistance → cardio (or per traffic patterns).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>100 sq ft per athlete</li><li>Ceiling: 12 ft (Oly), 10 ft minimum</li><li>Lighting: 50-100 foot-candles</li><li>Walkways: 36 in minimum</li><li>Equipment grouped by movement pattern</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Relevant if you ever open a facility — exam-relevant numbers to memorize verbatim.</p></div><div class="media"><a class="media-link video" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Galpin — Assess &amp; Improve Fitness (facility considerations)</div><div class="m-cred">Huberman + Galpin</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Hypertrophy &amp; Training Environment</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 21 · pp. 610-625</span></div><h2>Periodization II — macro, meso, micro</h2><p class="concept">Macrocycle: annual or season-long plan. Mesocycle: 2-6 wk blocks with a specific focus (hypertrophy, strength, power, peaking). Microcycle: typically 1 week. Phases (linear): hypertrophy/endurance → basic strength → strength/power → peaking → active rest. Tapering: 7-21 days, ~40-60% volume reduction, intensity maintained, frequency maintained. Supercompensation: rest → recovery → adaptation → return to baseline.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Macro: months to year</li><li>Meso: 2-6 weeks</li><li>Micro: ~1 week</li><li>Taper: cut volume ~50%, keep intensity</li><li>Supercompensation timing varies by stimulus</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your block weeks → 4-week meso → race buildup pattern matches this textbook framework. Phase 0 sleep gate is custom on top.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=zKloBrc75KQ" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Stephen Seiler — Polarized Training 201: Past, Present &amp; Future</div><div class="m-cred">Seiler PhD</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan2/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #201 — San-Millán: Zone 2 (block periodization)</div><div class="m-cred">Peter Attia MD</div></div></a></div></section><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 week back</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 18 · pp. 519-540</span></div><h2>Plyometric program design</h2><p class="concept">SSC (stretch-shortening cycle): eccentric pre-load enhances concentric output via stored elastic energy + stretch reflex. Amortization phase = transition; SHORTER amortization = better. Categories: low-intensity (skipping, ankle hops), moderate (box jumps, hurdle hops), high (depth jumps, repeat broad jumps). Volume measured in foot contacts: beginner 80-100/session; advanced 120-140; elite ≤200. Surface: grass/track &gt; concrete. Pre-req: ~1.5× BW squat for high-intensity plyos.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>SSC: eccentric → amortization → concentric</li><li>Amortization: faster = better SSC use</li><li>Foot contacts: 80-200/session</li><li>Surface affects injury risk</li><li>1.5× BW squat as pre-req for depth jumps</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="#ffd84a" stroke-width="2"><path d="M 12 32 L 20 20 L 28 32 L 36 12 L 44 32 L 52 8 L 60 32 L 68 4"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Stretch-shortening cycle (SSC)</div><div class="gloss-def">Eccentric pre-load → amortization → concentric. Stored elastic energy + stretch reflex amplifies output.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 30 L 30 6" stroke="#5ec8ff" stroke-width="2"/><path d="M 30 6 L 32 6" stroke="#ffd84a" stroke-width="4"/><path d="M 32 6 L 70 30" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">Amortization</div><div class="gloss-def">The transition between eccentric and concentric. Shorter = better SSC utilization = more power.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your hip-dominant strength base supports plyo addition — but high-impact plyos (depth jumps) compete for joint capacity with your run volume. Box jumps (low landing impact) are safer add.</p></div><div class="media"><a class="media-link video" href="https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Galpin — Optimal Protocols (plyometric programming)</div><div class="m-cred">Huberman + Galpin</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Hypertrophy &amp; Power Adaptations</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">2 weeks back</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 15 · pp. 385-400</span></div><h2>Resistance technique — bench &amp; overhead press</h2><p class="concept">Bench: 5 points of contact (head, upper back, glutes on bench; both feet on floor). Grip ~1.5× shoulder width. Bar path: descend to lower chest/sternum, slight curve up to over upper chest at lockout. Scaps retracted/depressed. Spotter at head. Overhead press: bar at clavicle, elbows slightly in front, brace, press up while staying tight, slight forward shift of head as bar passes face. Avoid lumbar hyperextension.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bench: 5 points of contact</li><li>Scaps retracted and depressed</li><li>Bar to lower chest, NOT throat</li><li>OHP: brace HARD; lumbar neutral</li><li>Push-press uses leg drive to start</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>OHP is technique-heavy and underused — but for shoulder durability across a long training career it&#x27;s worth keeping in.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How To Squat Correctly (technique principles)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=fOieQOp3o0A" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 month back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 2 · pp. 46-50</span></div><h2>Biomechanics II — Force-velocity &amp; length-tension</h2><p class="concept">Force-velocity curve: muscle produces MORE force at slow speeds (concentric) and even more eccentrically. As velocity rises, concentric force drops. Power = force × velocity; peak power at ~30% of max isometric force. Length-tension: actin-myosin overlap is optimal at ~resting length; force drops at extremes (too short = overlap interference; too long = insufficient overlap).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Eccentric &gt; isometric &gt; concentric force production</li><li>Peak power at ~30% max isometric force</li><li>Length-tension optimum near resting length</li><li>Stretch-shortening cycle: eccentric pre-load enhances concentric output (plyometrics)</li><li>Velocity-based training uses this curve to prescribe load</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 8 Q 25 12 40 22 Q 55 32 70 36" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M 10 12 Q 25 4 40 8 Q 55 18 70 36" fill="none" stroke="#ffb86b" stroke-width="1.5" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Force-velocity curve</div><div class="gloss-def">Force ↓ as velocity ↑ concentrically. Eccentric &gt; isometric &gt; concentric. Peak power at ~30% max isometric force.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 32 Q 25 28 40 8 Q 55 28 70 32" fill="none" stroke="#67e8b0" stroke-width="2"/><line x1="40" y1="6" x2="40" y2="34" stroke="#9ba3b4" stroke-width="0.5" stroke-dasharray="2 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Length-tension relationship</div><div class="gloss-def">Force is maximal at resting length (optimal actin-myosin overlap). Drops at too-short or too-stretched.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM heavy work (high force, low velocity) develops the left side of F-V curve; plyos/jumps would develop the right side. For Hyrox-specific power-endurance, you need both.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=9vOmlzLfxGA" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin: Muscle Fiber Types and Muscle Growth (force-velocity context)</div><div class="m-cred">Cal State Fullerton · Galpin PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section></div>
   <h2 style="margin: 26px 0 8px; font-size: 20px; font-weight: 700;">Practice questions</h2>
-  <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Active recall — write your answer, THEN reveal. Mistakes here resurface in your queue tomorrow.</p>
-  <section class="question-block reveal"><h3>Today&#x27;s questions</h3><div class="qs"><div class="q" data-qid="today_0" data-stable="facility_legal__1"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">What is an EAP and what does it require?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_0"><div class="reveal-label">Answer</div><div class="reveal-body">Emergency Action Plan — venue-specific written plan covering medical emergencies, evacuation, and serious-injury response. Must be posted, communicated to staff, and practiced.</div></div></div><div class="q" data-qid="today_1" data-stable="facility_legal__0"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">Four elements required to establish negligence.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('today_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('today_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('today_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('today_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="today_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_today_1"><div class="reveal-label">Answer</div><div class="reveal-body">Duty, Breach of duty, Causation, Damages.</div></div></div></div></section><section class="question-block reveal"><h3>Yesterday (24 hr) — Facility design &amp; layout</h3><div class="qs"><div class="q" data-qid="r1_0" data-stable="facility_design__0"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">Minimum square footage per athlete in a strength facility.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r1_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r1_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r1_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r1_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r1_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r1_0"><div class="reveal-label">Answer</div><div class="reveal-body">100 sq ft per athlete.</div></div></div><div class="q" data-qid="r1_1" data-stable="facility_design__1"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">Minimum ceiling height in an Olympic-lifting area vs general strength area.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r1_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r1_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r1_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r1_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r1_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r1_1"><div class="reveal-label">Answer</div><div class="reveal-body">Olympic lifting: 12 ft. General strength: 10 ft minimum.</div></div></div></div></section><section class="question-block reveal"><h3>3 days back — Periodization II — macro, meso, micro</h3><div class="qs"><div class="q" data-qid="r3_0" data-stable="periodization_structure__0"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">Timescales of macro-, meso-, and micro-cycles.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r3_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r3_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r3_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r3_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r3_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r3_0"><div class="reveal-label">Answer</div><div class="reveal-body">Macrocycle: months to a year. Mesocycle: 2-6 weeks. Microcycle: typically 1 week.</div></div></div><div class="q" data-qid="r3_1" data-stable="periodization_structure__1"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">Taper design: what changes, what stays the same?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r3_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r3_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r3_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r3_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r3_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r3_1"><div class="reveal-label">Answer</div><div class="reveal-body">Reduce volume substantially (~40-60%). Maintain intensity and (usually) frequency. Duration: 7-21 days, longer for more endurance-focused events.</div></div></div></div></section><section class="question-block reveal"><h3>1 week back — Plyometric program design</h3><div class="qs"><div class="q" data-qid="r7_0" data-stable="plyometrics__1"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">Suggested squat strength pre-requisite for performing depth jumps.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r7_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r7_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r7_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r7_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r7_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r7_0"><div class="reveal-label">Answer</div><div class="reveal-body">Approximately 1.5× body weight back squat.</div></div></div><div class="q" data-qid="r7_1" data-stable="plyometrics__0"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">Name the three phases of the stretch-shortening cycle.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r7_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r7_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r7_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r7_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r7_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r7_1"><div class="reveal-label">Answer</div><div class="reveal-body">Eccentric (lengthening/pre-load) → amortization (transition) → concentric (shortening). Shorter amortization = better SSC utilization.</div></div></div></div></section><section class="question-block reveal"><h3>2 weeks back — Resistance technique — bench &amp; overhead press</h3><div class="qs"><div class="q" data-qid="r14_0" data-stable="ex_press__1"><div class="q-head"><span class="q-num">Q1</span><span class="q-type applied">applied</span></div><div class="q-text">Why is overhead press more demanding on lumbar stability than bench press?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r14_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r14_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r14_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r14_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r14_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r14_0"><div class="reveal-label">Answer</div><div class="reveal-body">The load is overhead, creating extension torque at the lumbar spine. Without active bracing, the lifter compensates with lumbar hyperextension.</div></div></div><div class="q" data-qid="r14_1" data-stable="ex_press__0"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">List the 5 points of contact during the bench press.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r14_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r14_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r14_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r14_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r14_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r14_1"><div class="reveal-label">Answer</div><div class="reveal-body">Head, upper back, and glutes on the bench; both feet flat on the floor.</div></div></div></div></section><section class="question-block reveal"><h3>1 month back — Biomechanics II — Force-velocity &amp; length-tension</h3><div class="qs"><div class="q" data-qid="r30_0" data-stable="force_velocity_length_tension__0"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span></div><div class="q-text">Order from greatest to least force production: concentric, eccentric, isometric.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r30_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r30_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r30_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r30_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="r30_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r30_0"><div class="reveal-label">Answer</div><div class="reveal-body">Eccentric &gt; Isometric &gt; Concentric.</div></div></div><div class="q" data-qid="r30_1" data-stable="force_velocity_length_tension__1"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span></div><div class="q-text">At what approximate percentage of max isometric force does peak power occur?</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('r30_1')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('r30_1', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('r30_1', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('r30_1', 'missed')">Missed</button><span class="q-save-status" data-status-for="r30_1">auto-saving as you type</span></div><div class="q-reveal" id="reveal_r30_1"><div class="reveal-label">Answer</div><div class="reveal-body">Approximately 30% of max isometric force.</div></div></div></div></section><section class="question-block reveal"><h3>Bonus cross-domain question</h3><div class="qs"><div class="q" data-qid="bonus_0" data-stable="ex_squat__1"><div class="q-head"><span class="q-num">Q1</span><span class="q-type applied">applied</span></div><div class="q-text">Most common technical fault during the squat, and the typical cue to correct it.</div><textarea class="q-answer" placeholder="Type your answer here (try recall before revealing)…" oninput="onAnswerInput(event)"></textarea><div class="q-actions"><button type="button" class="btn-reveal" onclick="toggleAnswer('bonus_0')">Reveal answer</button><button type="button" class="btn-self" data-self="correct" onclick="markSelf('bonus_0', 'correct')">I got it</button><button type="button" class="btn-self" data-self="partial" onclick="markSelf('bonus_0', 'partial')">Close</button><button type="button" class="btn-self" data-self="missed" onclick="markSelf('bonus_0', 'missed')">Missed</button><span class="q-save-status" data-status-for="bonus_0">auto-saving as you type</span></div><div class="q-reveal" id="reveal_bonus_0"><div class="reveal-label">Answer</div><div class="reveal-body">Knee valgus (knees collapsing inward). Cue: &#x27;knees out&#x27; or &#x27;spread the floor.&#x27;</div></div></div></div></section>
+  <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Forced retrieval first, then grade yourself. Whatever you miss resurfaces on the FSRS-chosen day.</p>
+  <section class="question-block reveal"><h3>Interleaved practice</h3><p class="qs-sub">Mixed across domains by exam weight — this feels harder than drilling one topic, and that difficulty is the point: it roughly doubles what transfers to test day.</p><div class="qs"><div class="q" data-qid="px_0" data-stable="facility_design__0" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_0"></span></div><div class="q-text">Minimum square footage per athlete in a strength facility.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_0','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_0','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_0','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_0" disabled onclick="revealQ('px_0')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_0')">I don't know</button></div><div class="q-reveal" id="reveal_px_0"><div class="reveal-label">Answer</div><div class="reveal-body">100 sq ft per athlete.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_0',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_0',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_0',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_0',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_1" data-stable="force_velocity_length_tension__0" data-domain="ES" data-qtype="recall"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Science</span><span class="q-status" data-status-for="px_1"></span></div><div class="q-text">Order from greatest to least force production: concentric, eccentric, isometric.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_1','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_1','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_1','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_1" disabled onclick="revealQ('px_1')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_1')">I don't know</button></div><div class="q-reveal" id="reveal_px_1"><div class="reveal-label">Answer</div><div class="reveal-body">Eccentric &gt; Isometric &gt; Concentric.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_1',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_1',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_1',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_1',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_2" data-stable="ex_press__1" data-domain="EX" data-qtype="applied"><div class="q-head"><span class="q-num">Q3</span><span class="q-type applied">applied</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_2"></span></div><div class="q-text">Why is overhead press more demanding on lumbar stability than bench press?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_2','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_2','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_2','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_2" disabled onclick="revealQ('px_2')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_2')">I don't know</button></div><div class="q-reveal" id="reveal_px_2"><div class="reveal-label">Answer</div><div class="reveal-body">The load is overhead, creating extension torque at the lumbar spine. Without active bracing, the lifter compensates with lumbar hyperextension.</div><div class="q-selfexplain"><label>In your own words — why is this true?</label><textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_2',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_2',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_2',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_2',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_3" data-stable="facility_design__1" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q4</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_3"></span></div><div class="q-text">Minimum ceiling height in an Olympic-lifting area vs general strength area.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_3','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_3','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_3','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_3" disabled onclick="revealQ('px_3')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_3')">I don't know</button></div><div class="q-reveal" id="reveal_px_3"><div class="reveal-label">Answer</div><div class="reveal-body">Olympic lifting: 12 ft. General strength: 10 ft minimum.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_3',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_3',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_3',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_3',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_4" data-stable="force_velocity_length_tension__1" data-domain="ES" data-qtype="recall"><div class="q-head"><span class="q-num">Q5</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Science</span><span class="q-status" data-status-for="px_4"></span></div><div class="q-text">At what approximate percentage of max isometric force does peak power occur?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_4','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_4','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_4','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_4" disabled onclick="revealQ('px_4')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_4')">I don't know</button></div><div class="q-reveal" id="reveal_px_4"><div class="reveal-label">Answer</div><div class="reveal-body">Approximately 30% of max isometric force.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_4',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_4',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_4',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_4',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_5" data-stable="periodization_structure__0" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q6</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_5"></span></div><div class="q-text">Timescales of macro-, meso-, and micro-cycles.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_5','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_5','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_5','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_5" disabled onclick="revealQ('px_5')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_5')">I don't know</button></div><div class="q-reveal" id="reveal_px_5"><div class="reveal-label">Answer</div><div class="reveal-body">Macrocycle: months to a year. Mesocycle: 2-6 weeks. Microcycle: typically 1 week.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_5',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_5',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_5',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_5',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_6" data-stable="ex_press__0" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q7</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_6"></span></div><div class="q-text">List the 5 points of contact during the bench press.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_6','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_6','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_6','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_6" disabled onclick="revealQ('px_6')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_6')">I don't know</button></div><div class="q-reveal" id="reveal_px_6"><div class="reveal-label">Answer</div><div class="reveal-body">Head, upper back, and glutes on the bench; both feet flat on the floor.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_6',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_6',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_6',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_6',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_7" data-stable="age_sex__1" data-domain="ES" data-qtype="recall"><div class="q-head"><span class="q-num">Q8</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Science</span><span class="q-status" data-status-for="px_7"></span></div><div class="q-text">Approximate female-to-male strength ratio for lower body vs upper body.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_7','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_7','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_7','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_7" disabled onclick="revealQ('px_7')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_7')">I don't know</button></div><div class="q-reveal" id="reveal_px_7"><div class="reveal-label">Answer</div><div class="reveal-body">Lower body: ~70-80% (closer). Upper body: ~50-70% (further apart) — reflects lean mass distribution differences.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_7',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_7',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_7',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_7',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_8" data-stable="periodization_structure__1" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q9</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_8"></span></div><div class="q-text">Taper design: what changes, what stays the same?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_8','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_8','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_8','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_8" disabled onclick="revealQ('px_8')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_8')">I don't know</button></div><div class="q-reveal" id="reveal_px_8"><div class="reveal-label">Answer</div><div class="reveal-body">Reduce volume substantially (~40-60%). Maintain intensity and (usually) frequency. Duration: 7-21 days, longer for more endurance-focused events.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_8',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_8',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_8',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_8',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_9" data-stable="ex_clean__0" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q10</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_9"></span></div><div class="q-text">Name the three joint extensions in &#x27;triple extension&#x27;.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_9','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_9','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_9','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_9" disabled onclick="revealQ('px_9')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_9')">I don't know</button></div><div class="q-reveal" id="reveal_px_9"><div class="reveal-label">Answer</div><div class="reveal-body">Ankle, knee, and hip — the explosive simultaneous extension in the second pull of the clean/snatch.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_9',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_9',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_9',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_9',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_10" data-stable="plyometrics__1" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q11</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_10"></span></div><div class="q-text">Suggested squat strength pre-requisite for performing depth jumps.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_10','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_10','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_10','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_10" disabled onclick="revealQ('px_10')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_10')">I don't know</button></div><div class="q-reveal" id="reveal_px_10"><div class="reveal-label">Answer</div><div class="reveal-body">Approximately 1.5× body weight back squat.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_10',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_10',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_10',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_10',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_11" data-stable="plyometrics__0" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q12</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_11"></span></div><div class="q-text">Name the three phases of the stretch-shortening cycle.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_11','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_11','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_11','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_11" disabled onclick="revealQ('px_11')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_11')">I don't know</button></div><div class="q-reveal" id="reveal_px_11"><div class="reveal-label">Answer</div><div class="reveal-body">Eccentric (lengthening/pre-load) → amortization (transition) → concentric (shortening). Shorter amortization = better SSC utilization.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_11',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_11',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_11',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_11',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div></div></section>
   <footer>
-    Source: <i>Essentials of Strength Training and Conditioning</i> (4th ed.) · Adaptive spacing: SM-2 / Cepeda et al. 2008<br>
+    Source: <i>Essentials of Strength Training and Conditioning</i> · Scheduling: <b>FSRS</b> (ts-fsrs) · spacing principle: Cepeda et al. 2008<br>
     <code>cscs_2026-06-28.html</code> · also written to <code>cscs_today.html</code> (rolling, for localStorage persistence)
   </footer>
 </div>
 <script>window.__CSCS_QUESTIONS = {"muscle_fiber_types": [{"q": "What is the contractile unit of skeletal muscle?", "a": "The sarcomere — defined as the region from one Z-disc to the next.", "type": "recall"}, {"q": "Which fiber type has the highest cross-sectional area and force capacity but fatigues fastest?", "a": "Type IIx (fast glycolytic).", "type": "recall"}, {"q": "A runner says training has 'converted' their Type IIx fibers into Type I. What is technically inaccurate about this claim?", "a": "Training shifts Type IIx → Type IIa, NOT Type II → Type I. Fiber-type proportion (slow/fast) is largely genetically determined; what changes is the IIx-IIa balance within the fast pool.", "type": "applied"}, {"q": "Cross-bridge cycling requires ATP for which specific step?", "a": "Detachment of myosin from actin (and re-cocking the head). Lack of ATP causes the rigor state.", "type": "recall"}, {"q": "Which fiber type would dominate a marathon's later miles versus a 1RM deadlift?", "a": "Marathon late miles: Type I (oxidative, fatigue-resistant). 1RM deadlift: Type IIx + IIa (high force, brief duration).", "type": "applied"}], "motor_units": [{"q": "State Henneman's Size Principle.", "a": "Motor units are recruited from smallest (lowest threshold, Type I) to largest (highest threshold, Type IIx) as force demand increases.", "type": "recall"}, {"q": "If a lifter trains exclusively with light loads (40% 1RM) but at maximal intent (move-fast-as-possible), can they recruit Type IIx motor units?", "a": "Yes. The Size Principle is sensitive to intent and velocity, not just load. Maximal-effort movements at light loads (e.g., dynamic-effort method) can recruit high-threshold units.", "type": "applied"}, {"q": "What two mechanisms grade muscle force?", "a": "Motor unit recruitment AND rate coding (firing frequency).", "type": "recall"}, {"q": "What is a doublet?", "a": "Two action potentials fired in rapid succession (<10 ms), enhancing rate of force development.", "type": "recall"}], "ec_coupling": [{"q": "Name the neurotransmitter at the neuromuscular junction and its receptor type.", "a": "Acetylcholine (ACh); binds nicotinic ACh receptors on the sarcolemma.", "type": "recall"}, {"q": "Where is Ca²⁺ stored in the muscle fiber, and what triggers its release?", "a": "Stored in the sarcoplasmic reticulum (SR); released when the action potential propagates down the T-tubule and triggers SR release channels.", "type": "recall"}, {"q": "Why does rigor mortis occur?", "a": "Death halts ATP production; without ATP, myosin cannot detach from actin, leaving cross-bridges locked.", "type": "applied"}, {"q": "Which protein binds Ca²⁺ to initiate cross-bridge cycling?", "a": "Troponin C — its conformational change moves tropomyosin off the actin myosin-binding sites.", "type": "recall"}], "cardiovascular": [{"q": "Write the formula for cardiac output.", "a": "Q = HR × SV (heart rate × stroke volume).", "type": "recall"}, {"q": "How does chronic endurance training alter the left ventricle anatomically?", "a": "Eccentric hypertrophy — increased chamber volume (larger end-diastolic volume), which increases stroke volume. This is distinct from concentric (wall thickness) hypertrophy seen with resistance training.", "type": "recall"}, {"q": "An athlete's resting HR drops from 65 to 50 bpm over 6 months without losing capacity. What's the most likely mechanism?", "a": "Increased stroke volume from cardiac adaptation; lower HR is needed to achieve the same resting cardiac output. Possibly enhanced parasympathetic tone as well.", "type": "applied"}], "respiratory": [{"q": "What is the Bohr effect?", "a": "A rightward shift in the O₂-hemoglobin dissociation curve caused by ↑CO₂, ↑temperature, or ↓pH — promoting O₂ unloading at active tissue.", "type": "recall"}, {"q": "In healthy, non-elite individuals, is VO₂max typically limited by pulmonary, cardiac, or peripheral factors?", "a": "Typically cardiac output (central) and peripheral (mitochondrial/capillary) factors — pulmonary system is rarely limiting in healthy non-elites.", "type": "recall"}, {"q": "Why does breathing rate rise faster than tidal volume at higher intensities?", "a": "Tidal volume plateaus near vital capacity; further ventilation increases must come from frequency.", "type": "applied"}], "atp_pcr": [{"q": "How long does the phosphagen system dominate at maximal intensity?", "a": "Approximately 0-10 seconds.", "type": "recall"}, {"q": "How long does full PCr replenishment take, and why does this dictate rest intervals?", "a": "~3-5 minutes for full PCr replenishment. This is why strength/power sets prescribe 3-5 min rest — to allow maximum force output on the next set.", "type": "applied"}, {"q": "What enzyme regenerates ATP from PCr?", "a": "Creatine kinase. Reaction: PCr + ADP → ATP + Cr.", "type": "recall"}, {"q": "Why does creatine supplementation work?", "a": "It increases the muscle PCr pool (~20%), allowing more rapid ATP regeneration during brief high-intensity efforts.", "type": "recall"}], "glycolysis": [{"q": "What is the net ATP yield from glycolysis starting from glucose vs glycogen?", "a": "2 ATP from glucose; 3 ATP from glycogen (saves one ATP since glycogen breakdown doesn't require phosphorylation by ATP).", "type": "recall"}, {"q": "True or false: Lactate is a metabolic waste product responsible for muscle soreness.", "a": "False. Lactate is a fuel and signaling molecule (Brooks' lactate shuttle); DOMS is unrelated to lactate accumulation.", "type": "recall"}, {"q": "What does MLSS stand for, and how does it relate to LT2?", "a": "Maximal Lactate Steady State — the highest exercise intensity at which lactate production = lactate clearance. Closely tracks LT2 / anaerobic threshold.", "type": "recall"}, {"q": "An athlete with LT2 = 158 bpm trains an interval session averaging HR 172. Which energy system is being stressed beyond steady-state capacity?", "a": "Above MLSS — fast glycolysis is contributing significantly, lactate accumulates rather than clears. The session is supra-threshold and time-limited.", "type": "applied"}], "oxidative": [{"q": "Approximate ATP yield per glucose molecule via complete aerobic oxidation.", "a": "~30-32 ATP (varies slightly by textbook source).", "type": "recall"}, {"q": "What is the 'crossover point' in fuel utilization?", "a": "~65% VO₂max — the intensity above which carbohydrate becomes the dominant fuel over fat.", "type": "recall"}, {"q": "What is the RER for pure fat oxidation vs pure carb?", "a": "Fat: 0.7. Carb: 1.0.", "type": "recall"}], "energy_system_interaction": [{"q": "What is EPOC and what does its magnitude depend on?", "a": "Excess Post-exercise Oxygen Consumption — the elevated O₂ consumption after exercise to restore homeostasis (PCr resynthesis, O₂ stores, lactate clearance, thermoregulation). Magnitude scales primarily with intensity.", "type": "recall"}, {"q": "Rank typical primary energy systems for: 10s sprint, 60s all-out cycle, 5-min row, marathon.", "a": "10s sprint: ATP-PCr. 60s all-out: fast glycolysis. 5-min row: mixed oxidative + glycolytic. Marathon: oxidative (carb early, fat later).", "type": "applied"}], "biomech_levers": [{"q": "Define torque in biomechanics terms.", "a": "Torque = Force × moment arm (perpendicular distance from the line of force to the axis of rotation).", "type": "recall"}, {"q": "Most human joints are which class of lever?", "a": "Third-class levers (effort applied between fulcrum and load). Mechanical disadvantage for force, advantage for range and speed.", "type": "recall"}, {"q": "Why do longer limbs require more torque for a given lift?", "a": "Longer limbs produce larger moment arms — for the same load at the same position, the torque demand at the joint increases.", "type": "applied"}], "force_velocity_length_tension": [{"q": "Order from greatest to least force production: concentric, eccentric, isometric.", "a": "Eccentric > Isometric > Concentric.", "type": "recall"}, {"q": "At what approximate percentage of max isometric force does peak power occur?", "a": "Approximately 30% of max isometric force.", "type": "recall"}, {"q": "Why is the bottom of a squat (full flexion) typically weaker than mid-range?", "a": "Length-tension: at extreme stretched lengths actin-myosin overlap may be reduced; also leverage (moment arms) often worsens at deepest joint angles.", "type": "applied"}], "anabolic_hormones": [{"q": "Where is testosterone primarily produced in males?", "a": "Leydig cells of the testes (small amount from adrenal cortex).", "type": "recall"}, {"q": "Which sleep stage produces the largest GH pulses?", "a": "Slow-wave (deep) sleep, typically early in the night.", "type": "recall"}, {"q": "Which produces a greater acute hormonal response: 3 sets of 5 squats at 90% with 3 min rest, OR 4 sets of 10 squats at 75% with 60 sec rest?", "a": "The 4×10 protocol — higher total volume, large muscle mass, short rest interval all favor acute GH/T spike. (This is the classic 'hypertrophy hormonal response' window.)", "type": "applied"}], "catabolic_hormones": [{"q": "Name the primary glucocorticoid and its gland of origin.", "a": "Cortisol, from the adrenal cortex.", "type": "recall"}, {"q": "What does a sustained drop in the testosterone-to-cortisol ratio suggest?", "a": "Possible overtraining state — chronic catabolic environment outpacing anabolic.", "type": "recall"}, {"q": "Is exercise-induced cortisol elevation pathological?", "a": "No — acute cortisol rises are normal and adaptive. Chronic, unremitting elevation (from training stress + life stress + poor sleep + underfueling) is problematic.", "type": "applied"}], "anaerobic_adaptations": [{"q": "During the first 4 weeks of a resistance program in untrained individuals, what type of adaptation dominates?", "a": "Neural — improved recruitment, rate coding, motor unit synchronization, reduced inhibition.", "type": "recall"}, {"q": "When does hypertrophy typically become the dominant adaptation in resistance training?", "a": "Generally after 4-6+ weeks, becoming clearly dominant beyond 8 weeks.", "type": "recall"}, {"q": "Why is tendon injury risk elevated when load is rapidly increased?", "a": "Connective tissue (tendon, ligament) adapts more slowly than muscle — strength can outpace tendon capacity.", "type": "applied"}], "aerobic_adaptations": [{"q": "Decompose VO₂max into its central and peripheral determinants.", "a": "VO₂max = Q × (a-vO₂ difference). Q (central) = HR × SV. The (a-vO₂) difference reflects peripheral O₂ extraction by mitochondria.", "type": "recall"}, {"q": "After ~6-12 months of well-designed training, which is more likely to continue improving: VO₂max or lactate threshold?", "a": "Lactate threshold — VO₂max plateaus relatively early in trained athletes; LT/LT2 continues to improve over years.", "type": "recall"}, {"q": "How much aerobic adaptation is typically lost in 2-4 weeks of complete inactivity?", "a": "Roughly half of central adaptations (SV, Q) can regress in this timeframe; mitochondrial enzyme activity declines similarly.", "type": "recall"}], "age_sex": [{"q": "True or false: Resistance training stunts growth in pre-pubertal children.", "a": "False. With proper supervision, resistance training is safe and beneficial; does NOT damage growth plates.", "type": "recall"}, {"q": "Approximate female-to-male strength ratio for lower body vs upper body.", "a": "Lower body: ~70-80% (closer). Upper body: ~50-70% (further apart) — reflects lean mass distribution differences.", "type": "recall"}, {"q": "What is RED-S?", "a": "Relative Energy Deficiency in Sport — a syndrome of impaired physiological function from inadequate energy availability, broader than the original female athlete triad (encompasses males, additional systems).", "type": "recall"}], "sport_psych": [{"q": "Describe the inverted-U hypothesis.", "a": "Performance peaks at moderate arousal; too low or too high impairs performance. Optimal arousal varies by task complexity (high arousal helps simple/strength tasks; hurts complex/skilled tasks).", "type": "recall"}, {"q": "What does IZOF stand for and how does it refine the inverted-U?", "a": "Individual Zones of Optimal Functioning — recognizes that each athlete has a unique optimal arousal range that may differ from the population average.", "type": "recall"}, {"q": "Process goals vs outcome goals — which is better for skill acquisition?", "a": "Process goals (focus on actions/execution) generally outperform outcome goals (winning, time) for skill acquisition and reducing performance anxiety.", "type": "applied"}], "macros": [{"q": "kcal per gram: carb, protein, fat.", "a": "CHO 4 kcal/g, PRO 4 kcal/g, FAT 9 kcal/g.", "type": "recall"}, {"q": "Recommended protein intake range for resistance-trained athletes.", "a": "1.4-2.0 g/kg/day; up to ~2.2 g/kg in hypertrophy phases. Higher than the 0.8 g/kg RDA for sedentary adults.", "type": "recall"}, {"q": "Approximate leucine threshold per meal to maximally stimulate MPS.", "a": "~2.5-3 g of leucine per feeding (≈25-40 g of high-quality protein, depending on source).", "type": "recall"}, {"q": "A 75 kg endurance athlete training 12 hr/wk. Carb intake target?", "a": "High-volume endurance: 6-10 g/kg/day → 450-750 g CHO. The high end may apply on heavy training days.", "type": "applied"}], "nutrient_timing": [{"q": "Caffeine dose and timing for ergogenic effect.", "a": "3-6 mg/kg, ingested 30-60 minutes pre-exercise.", "type": "recall"}, {"q": "Creatine dosing — is loading required?", "a": "No. 3-5 g/day reaches saturation in ~4 weeks. Loading (20 g/day × 5-7 days) saturates faster but with no end-state difference.", "type": "recall"}, {"q": "For sessions longer than 2.5 hours, what's the recommended CHO ingestion rate?", "a": "60-90 g/hr, ideally using mixed glucose + fructose to allow multiple intestinal transporters.", "type": "recall"}, {"q": "Which supplements have the strongest evidence base for performance?", "a": "Creatine, caffeine, beta-alanine, sodium bicarbonate, nitrate (beetroot), and high-quality protein/EAA. Most others have weaker or context-dependent evidence.", "type": "recall"}], "peds": [{"q": "What agency governs banned substances in Olympic-tested sport?", "a": "WADA — World Anti-Doping Agency.", "type": "recall"}, {"q": "Why are oral 17α-alkylated anabolic steroids particularly hepatotoxic?", "a": "The 17α-alkyl modification resists hepatic breakdown (allowing oral bioavailability) but stresses the liver — associated with cholestasis, peliosis hepatis, and hepatic tumors.", "type": "recall"}, {"q": "Mechanism by which EPO improves endurance performance.", "a": "Increases erythropoiesis → increased red cell mass → increased O₂-carrying capacity → increased VO₂max.", "type": "recall"}], "test_principles": [{"q": "Define validity and reliability.", "a": "Validity = the test measures what it claims to measure. Reliability = the test produces consistent results on repeat administration under the same conditions.", "type": "recall"}, {"q": "What is the standard CSCS testing order on a single day?", "a": "1) Non-fatiguing (vertical jump, agility), 2) agility, 3) max strength (1RM), 4) sprints, 5) muscular endurance, 6) anaerobic capacity, 7) aerobic endurance.", "type": "recall"}, {"q": "A coach finds their bench-press 1RM test gives wildly different values across days. Which property is failing?", "a": "Reliability. The test may still be valid (measures strength) but is inconsistent — likely from variable warm-up, technique drift, or testing conditions.", "type": "applied"}], "test_admin_strength": [{"q": "Why are spotters positioned at the SIDES of a barbell for max squat attempts, not behind?", "a": "Side spotters can support the bar laterally if the lifter loses balance; a single rear spotter cannot safely catch a heavy bar from behind.", "type": "applied"}, {"q": "Wingate test — duration and primary metric.", "a": "30-second maximal cycle ergometer effort. Peak power (highest 5-sec output), mean power (anaerobic capacity), fatigue index.", "type": "recall"}], "test_admin_endurance": [{"q": "Cooper test format and outcome measure.", "a": "12-minute run for distance. Distance is used to estimate VO₂max via published regression equations.", "type": "recall"}, {"q": "Why must skinfold measurements be standardized to the right side of the body?", "a": "Reference norms are typically based on right-side measurements; side-to-side differences exist and standardization preserves comparison validity.", "type": "recall"}], "warmup": [{"q": "Spell out the RAMP warm-up protocol.", "a": "Raise (core temp), Activate and Mobilize (target muscles and joints), Potentiate (sport-specific movements at higher intensity).", "type": "recall"}, {"q": "True or false: Static stretching immediately before a max-effort jump improves performance.", "a": "False. Static stretching held for 30+ seconds immediately pre-performance can transiently reduce power/force output by ~5%. Use dynamic warm-up instead.", "type": "applied"}], "ex_squat": [{"q": "What is the depth criterion for a 'parallel' squat in CSCS standards?", "a": "Femur parallel to the floor — the hip crease at or below the top of the knee.", "type": "recall"}, {"q": "Most common technical fault during the squat, and the typical cue to correct it.", "a": "Knee valgus (knees collapsing inward). Cue: 'knees out' or 'spread the floor.'", "type": "applied"}], "ex_deadlift": [{"q": "Compare conventional vs sumo deadlift in terms of joint demand.", "a": "Conventional: greater low-back shear, more posterior chain (hamstrings, glutes). Sumo: more vertical torso, less low-back shear, more adductor and quad demand.", "type": "recall"}, {"q": "Why does the trap bar deadlift reduce L4-L5 shear compared to conventional?", "a": "Hands are at the sides (not in front of the body), allowing a more upright torso and shifting the load line closer to the spine — reducing the moment arm for low-back shear forces.", "type": "applied"}], "ex_press": [{"q": "List the 5 points of contact during the bench press.", "a": "Head, upper back, and glutes on the bench; both feet flat on the floor.", "type": "recall"}, {"q": "Why is overhead press more demanding on lumbar stability than bench press?", "a": "The load is overhead, creating extension torque at the lumbar spine. Without active bracing, the lifter compensates with lumbar hyperextension.", "type": "applied"}], "ex_clean": [{"q": "Name the three joint extensions in 'triple extension'.", "a": "Ankle, knee, and hip — the explosive simultaneous extension in the second pull of the clean/snatch.", "type": "recall"}, {"q": "Why might Olympic-lift derivatives (e.g., mid-thigh pull) be preferred over full lifts for a Hyrox athlete?", "a": "Lower technical demand, similar power development benefit, less time investment to master, and the full catch (front rack) has minimal sport-specific carryover for Hyrox.", "type": "applied"}], "ex_alt_modes": [{"q": "Is the kettlebell swing primarily a squat or a hinge pattern?", "a": "A hinge — the bell floats with hip extension; knees soften but don't dominate. Not a squat.", "type": "recall"}, {"q": "Why is the sled push useful for daily/high-frequency programming?", "a": "Minimal eccentric load → minimal muscle damage and DOMS → can be repeated frequently without compromising recovery. Provides high metabolic stimulus with low joint cost.", "type": "applied"}], "needs_analysis": [{"q": "Name the two components of a CSCS-style needs analysis.", "a": "Sport analysis (movement patterns, energy systems, injuries, common positions) and Athlete analysis (training history, injuries, testing data, goals, training age).", "type": "recall"}, {"q": "How does the needs analysis change for a 16-year-old developing soccer player vs a 35-year-old recreational Hyrox competitor?", "a": "Different sport demands (multi-directional speed vs steady-state power-endurance), different athlete maturity (LTAD principles vs adult training history), different injury patterns and goals.", "type": "applied"}], "exercise_selection": [{"q": "What is the optimal exercise order within a single session?", "a": "Power exercises (Olympic lifts, jumps) first → core exercises (multi-joint, large muscle: squat, deadlift, bench) → assistance/single-joint exercises last. Highest neural and technical demand goes first.", "type": "recall"}], "intensity_volume": [{"q": "Rep ranges and approximate %1RM for: strength, hypertrophy, muscular endurance.", "a": "Strength: 1-6 reps, 85-100% 1RM. Hypertrophy: 6-12 reps, 65-85%. Muscular endurance: 12+ reps, <65%.", "type": "recall"}, {"q": "Define MEV, MAV, and MRV (Israetel/RP).", "a": "MEV = Minimum Effective Volume (least to drive adaptation). MAV = Maximum Adaptive Volume (the productive sweet spot). MRV = Maximum Recoverable Volume (ceiling before performance regresses).", "type": "recall"}], "rest_frequency": [{"q": "Optimal rest interval between sets for strength/power vs hypertrophy.", "a": "Strength/power: 3-5 minutes. Hypertrophy: 1-3 minutes. (Recent evidence favors 2-3 min even for hypertrophy.)", "type": "recall"}, {"q": "True or false: Training a muscle once per week is the optimal frequency for hypertrophy.", "a": "False. At equated weekly volume, 2-3 sessions per week per muscle produces greater hypertrophy than 1×/week (Schoenfeld et al. meta).", "type": "recall"}], "plyometrics": [{"q": "Name the three phases of the stretch-shortening cycle.", "a": "Eccentric (lengthening/pre-load) → amortization (transition) → concentric (shortening). Shorter amortization = better SSC utilization.", "type": "recall"}, {"q": "Suggested squat strength pre-requisite for performing depth jumps.", "a": "Approximately 1.5× body weight back squat.", "type": "recall"}], "speed_agility": [{"q": "What work-to-rest ratio is appropriate for max-speed sprint training, and why?", "a": "1:12 to 1:20 — full PCr replenishment and CNS recovery required to maintain true maximum velocity on subsequent reps.", "type": "recall"}, {"q": "Difference between change-of-direction (CODS) and reactive agility.", "a": "CODS = pre-planned change of direction (closed loop). Reactive agility = unplanned response to a visual or auditory stimulus (open loop). Reactive agility transfers better to most field/court sports.", "type": "recall"}], "aerobic_programming": [{"q": "FITT-VP — spell it out.", "a": "Frequency, Intensity, Time, Type, Volume, Progression.", "type": "recall"}, {"q": "Polarized training distribution (Seiler) — and is it measured by minutes or sessions?", "a": "~80% sessions in Z1-Z2 (below LT1), ~20% sessions in Z3+ (above LT2). Measured by SESSION COUNT, not minute-share (per Seiler's research).", "type": "recall"}], "periodization_models": [{"q": "Differentiate linear, undulating, and block periodization.", "a": "Linear: progressive shift from high vol/low int → low vol/high int across a macrocycle. Undulating (DUP): vol and int vary daily/weekly. Block: sequential focused blocks of accumulation → transmutation → realization.", "type": "recall"}, {"q": "For trained lifters, which model has the most supporting evidence for strength gains?", "a": "DUP — daily undulating periodization tends to outperform classical linear in head-to-head trials in trained populations.", "type": "recall"}], "periodization_structure": [{"q": "Timescales of macro-, meso-, and micro-cycles.", "a": "Macrocycle: months to a year. Mesocycle: 2-6 weeks. Microcycle: typically 1 week.", "type": "recall"}, {"q": "Taper design: what changes, what stays the same?", "a": "Reduce volume substantially (~40-60%). Maintain intensity and (usually) frequency. Duration: 7-21 days, longer for more endurance-focused events.", "type": "recall"}], "rehab": [{"q": "The three phases of tissue healing in order.", "a": "Inflammation (0-6 days) → Proliferation (3 days-3 weeks) → Remodeling (3 weeks to >1 year).", "type": "recall"}, {"q": "What is LSI and what threshold is typically required for return-to-sport?", "a": "Limb Symmetry Index — strength/power of injured side as a % of uninjured side. Generally ≥90% for return-to-sport clearance.", "type": "recall"}], "facility_design": [{"q": "Minimum square footage per athlete in a strength facility.", "a": "100 sq ft per athlete.", "type": "recall"}, {"q": "Minimum ceiling height in an Olympic-lifting area vs general strength area.", "a": "Olympic lifting: 12 ft. General strength: 10 ft minimum.", "type": "recall"}], "facility_legal": [{"q": "Four elements required to establish negligence.", "a": "Duty, Breach of duty, Causation, Damages.", "type": "recall"}, {"q": "What is an EAP and what does it require?", "a": "Emergency Action Plan — venue-specific written plan covering medical emergencies, evacuation, and serious-injury response. Must be posted, communicated to staff, and practiced.", "type": "recall"}], "phase1_review": [{"q": "Synthesis: explain how a single 4×8 interval session at HR 170-175 engages multiple body systems studied in Phase 1.", "a": "Neural: high-threshold motor unit recruitment (Size Principle, Type IIa). Energy: above MLSS → fast glycolysis contributing significantly to ATP production. Cardio: HR near max, SV near plateau, Q maximized. Endocrine: catecholamine spike, cortisol elevation, GH response post-session. Adaptation drivers: mitochondrial biogenesis, lactate clearance enzymes, capillary density.", "type": "applied"}]};</script>
-<script>// CSCS daily study — persistence + adaptive spaced repetition.
+<script>window.__CSCS_DOMAINS = {"muscle_fiber_types": "ES", "motor_units": "ES", "ec_coupling": "ES", "cardiovascular": "ES", "respiratory": "ES", "atp_pcr": "ES", "glycolysis": "ES", "oxidative": "ES", "energy_system_interaction": "ES", "biomech_levers": "ES", "force_velocity_length_tension": "ES", "anabolic_hormones": "ES", "catabolic_hormones": "ES", "anaerobic_adaptations": "ES", "aerobic_adaptations": "ES", "age_sex": "ES", "sport_psych": "ES", "macros": "NT", "nutrient_timing": "NT", "peds": "NT", "test_principles": "PD", "test_admin_strength": "PD", "test_admin_endurance": "PD", "warmup": "EX", "ex_squat": "EX", "ex_deadlift": "EX", "ex_press": "EX", "ex_clean": "EX", "ex_alt_modes": "EX", "needs_analysis": "PD", "exercise_selection": "PD", "intensity_volume": "PD", "rest_frequency": "PD", "plyometrics": "PD", "speed_agility": "PD", "aerobic_programming": "PD", "periodization_models": "PD", "periodization_structure": "PD", "rehab": "PD", "facility_design": "PD", "facility_legal": "PD", "phase1_review": "ES"};</script>
+<script>window.__CSCS_NEWCOUNT = 14;</script>
+<script type="module">
+  try {
+    const m = await import('https://cdn.jsdelivr.net/npm/ts-fsrs@5.4.1/+esm');
+    window.__FSRS = { createEmptyCard: m.createEmptyCard, fsrs: m.fsrs,
+      generatorParameters: m.generatorParameters, Rating: m.Rating, State: m.State };
+  } catch (e) { console.warn('ts-fsrs load failed, using fallback scheduler', e); }
+  window.dispatchEvent(new Event('fsrs-ready'));
+</script>
+<script>// CSCS daily study — learning-science runtime (v2).
 //
-// State is kept in localStorage so answers and self-marks survive page reloads
-// AND survive the daily regeneration of cscs_today.html (same URL → same
-// origin → same localStorage).
+// Implements the evidence-based stack from the learning-science review:
+//   • Retrieval practice with FORCED COMMITMENT — Reveal is gated until the
+//     learner types an attempt or explicitly clicks "I don't know".
+//   • FSRS scheduling (ts-fsrs, Anki's default) with an internal fallback so
+//     the app keeps working if the CDN module fails to load.
+//   • Confidence rating BEFORE reveal + 4-button Again/Hard/Good/Easy AFTER —
+//     the four-button grade is the scheduler input and the confidence is the
+//     calibration probe (Brier score per domain).
+//   • Interleaving the due queue across CSCS domains by exam weight.
+//   • Desirable difficulty framing: forgetting ("Again") is framed as "where
+//     learning happens", not failure. No streaks, no XP (evidence-free).
 //
-// Per-question state implements an SM-2-style adaptive interval:
-//   missed  → next due in 1 day,           ease -= 0.2 (floor 1.3)
-//   partial → next due in max(1, prev × 0.6) days, ease unchanged
-//   correct → next due in round(prev × ease) days, ease += 0.1 (cap 2.7)
-// First-time seen entries default to interval 1, ease 2.5 (SM-2 defaults).
+// State lives in a single localStorage key (cscs.state.v1) so it survives
+// reloads AND the daily regeneration of cscs_today.html (same origin).
+// Old SM-2 state (cscs.qstate / cscs.answers) is migrated on first load.
 
 const LS_PREFIX = "cscs.";
+const STATE_KEY = "state.v1";
 const TODAY = new Date().toISOString().slice(0, 10);
+const TARGET_RETENTION = 0.85;
+
+// Official-NSCA-weighted sampling targets, normalised over the 4 domains the
+// curriculum uses. Practical/Applied (EX + PD) is the larger, harder pool.
+const EXAM_WEIGHTS = { ES: 0.30, NT: 0.12, EX: 0.18, PD: 0.40 };
+const DOMAIN_NAME = { ES: "Exercise Science", NT: "Nutrition", EX: "Exercise Technique", PD: "Program Design" };
+const CONF_P = { low: 0.25, med: 0.6, high: 0.9 };
 
 function lsGet(key, fallback) {
   try {
@@ -731,280 +861,573 @@ function lsSet(key, value) {
   try { localStorage.setItem(LS_PREFIX + key, JSON.stringify(value)); } catch (e) {}
 }
 
-function getQuestionState() { return lsGet("qstate", {}); }
-function saveQuestionState(s) { lsSet("qstate", s); }
-function getAnswers() { return lsGet("answers", {}); }
-function saveAnswers(a) { lsSet("answers", a); }
-
-function daysBetween(aIso, bIso) {
-  const a = new Date(aIso), b = new Date(bIso);
-  return Math.round((b - a) / (1000 * 60 * 60 * 24));
+function domainFor(stable) {
+  const topic = String(stable).split("__")[0];
+  return (window.__CSCS_DOMAINS && window.__CSCS_DOMAINS[topic]) || "ES";
 }
-function addDays(iso, n) {
-  const d = new Date(iso);
-  d.setDate(d.getDate() + n);
-  return d.toISOString().slice(0, 10);
+function topicOf(stable) { return String(stable).split("__")[0]; }
+
+// ════════════════════════════════════════════════════════════════════════════
+//   FSRS SCHEDULER (ts-fsrs via CDN module, with internal fallback)
+// ════════════════════════════════════════════════════════════════════════════
+// The page loads ts-fsrs in a <script type="module"> that sets window.__FSRS.
+// Scheduling only happens on user interaction (well after load), so the module
+// is ready by then; the initial queue build also waits for the ready event.
+
+let __scheduler = null;
+function fsrsReady() { return !!(window.__FSRS && window.__FSRS.fsrs); }
+function getScheduler() {
+  if (__scheduler) return __scheduler;
+  if (fsrsReady()) {
+    const p = window.__FSRS.generatorParameters({
+      request_retention: TARGET_RETENTION, maximum_interval: 365, enable_fuzz: true
+    });
+    __scheduler = window.__FSRS.fsrs(p);
+  }
+  return __scheduler;
 }
 
-function restoreAnswers() {
-  // Active recall: textareas always start EMPTY so each visit forces a fresh attempt.
-  // Saved marks are still restored so SM-2 progress is visible.
-  const state = getQuestionState();
-  document.querySelectorAll(".q").forEach(q => {
-    const stable = q.dataset.stable;
-    if (!stable) return;
-    const mark = state[stable] && state[stable].last_mark;
-    if (mark) {
-      const btn = q.querySelector('button[data-self="' + mark + '"]');
-      if (btn) btn.classList.add("active");
-    }
+function newCard() {
+  const now = new Date();
+  if (fsrsReady()) {
+    try { return fromFsrsCard(window.__FSRS.createEmptyCard(now)); } catch (e) {}
+  }
+  return {
+    due: now.toISOString(), stability: 0, difficulty: 0, elapsed_days: 0,
+    scheduled_days: 0, reps: 0, lapses: 0, state: 0, last_review: null, learning_steps: 0
+  };
+}
+
+function toFsrsCard(s) {
+  return {
+    due: new Date(s.due),
+    stability: s.stability || 0,
+    difficulty: s.difficulty || 0,
+    elapsed_days: s.elapsed_days || 0,
+    scheduled_days: s.scheduled_days || 0,
+    reps: s.reps || 0,
+    lapses: s.lapses || 0,
+    state: s.state || 0,
+    last_review: s.last_review ? new Date(s.last_review) : undefined,
+    learning_steps: s.learning_steps || 0
+  };
+}
+function fromFsrsCard(c) {
+  const iso = d => (d instanceof Date ? d : new Date(d)).toISOString();
+  return {
+    due: iso(c.due),
+    stability: c.stability, difficulty: c.difficulty,
+    elapsed_days: c.elapsed_days, scheduled_days: c.scheduled_days,
+    reps: c.reps, lapses: c.lapses, state: c.state,
+    last_review: c.last_review ? iso(c.last_review) : null,
+    learning_steps: c.learning_steps || 0
+  };
+}
+
+// Pure-JS fallback FSRS-flavoured update (only used if the CDN module fails).
+function fallbackSchedule(s, grade, now) {
+  let interval = Math.max(1, s.scheduled_days || 1);
+  let stab = s.stability || 1;
+  let diff = s.difficulty || 5;
+  let reps = (s.reps || 0) + 1;
+  let lapses = s.lapses || 0;
+  let due = new Date(now);
+  if (grade === 1) {
+    lapses++; stab = Math.max(0.5, stab * 0.5); diff = Math.min(10, diff + 1);
+    due = new Date(now.getTime() + 10 * 60 * 1000); interval = 0;
+  } else {
+    const mult = grade === 2 ? 1.2 : grade === 3 ? 2.2 : 3.2;
+    interval = Math.max(1, Math.round((interval || 1) * mult));
+    stab = stab * mult;
+    diff = Math.max(1, diff - (grade === 4 ? 0.3 : grade === 3 ? 0.1 : 0));
+    due.setDate(due.getDate() + interval);
+  }
+  return {
+    due: due.toISOString(), stability: stab, difficulty: diff, elapsed_days: 0,
+    scheduled_days: interval, reps, lapses, state: grade === 1 ? 3 : 2,
+    last_review: now.toISOString(), learning_steps: 0
+  };
+}
+
+// Returns { card, log }. Never throws.
+function schedule(storedCard, grade, when) {
+  const now = when || new Date();
+  const sched = getScheduler();
+  if (sched) {
+    const card = toFsrsCard(storedCard);
+    let res = null;
+    try { if (typeof sched.next === "function") res = sched.next(card, now, grade); } catch (e) { res = null; }
+    if (!res) { try { res = sched.repeat(card, now)[grade]; } catch (e) { res = null; } }
+    if (res && res.card) return { card: fromFsrsCard(res.card), log: res.log || null };
+  }
+  return { card: fallbackSchedule(storedCard, grade, now), log: null };
+}
+
+// Project the next interval text for each grade WITHOUT mutating state.
+function previewIntervals(storedCard) {
+  const out = {};
+  const now = new Date();
+  [1, 2, 3, 4].forEach(g => {
+    if (g === 1) { out[g] = "<10m"; return; }
+    const r = schedule(storedCard, g, now);
+    const days = Math.max(1, Math.round((new Date(r.card.due) - now) / 86400000));
+    out[g] = days >= 365 ? "1y+" : days >= 30 ? Math.round(days / 30) + "mo" : days + "d";
   });
-  updateScore();
+  return out;
 }
+
+function retrievability(storedCard) {
+  const now = new Date();
+  const sched = getScheduler();
+  if (sched && typeof sched.get_retrievability === "function") {
+    try {
+      const v = sched.get_retrievability(toFsrsCard(storedCard), now, false);
+      if (typeof v === "number") return v;
+      if (typeof v === "string") return parseFloat(v) / 100;
+    } catch (e) {}
+  }
+  const S = storedCard.stability || 1;
+  if (!storedCard.last_review) return null;
+  const t = Math.max(0, (now - new Date(storedCard.last_review)) / 86400000);
+  return Math.pow(1 + t / (9 * S), -1);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   STATE  (single key) + migration from the old SM-2 schema
+// ════════════════════════════════════════════════════════════════════════════
+function getState() {
+  let s = lsGet(STATE_KEY, null);
+  if (!s || s.version !== 1) { s = migrateOrInit(); lsSet(STATE_KEY, s); }
+  if (!s.cards) s.cards = {};
+  if (!s.answers) s.answers = {};
+  if (!s.log) s.log = [];
+  if (!s.calibration) s.calibration = { byDomain: {} };
+  if (!s.user) s.user = { examDate: null, targetRetention: TARGET_RETENTION };
+  return s;
+}
+function saveState(s) { s.updated_at = new Date().toISOString(); lsSet(STATE_KEY, s); }
+
+function migrateOrInit() {
+  const old = lsGet("qstate", null);
+  const oldAns = lsGet("answers", {}) || {};
+  const cards = {};
+  if (old && typeof old === "object") {
+    for (const k in old) {
+      const e = old[k];
+      if (!e) continue;
+      const interval = Math.max(1, e.interval || 1);
+      const ease = e.ease || 2.5;
+      const dueIso = e.next_due ? new Date(e.next_due + "T07:00:00").toISOString() : new Date().toISOString();
+      const lapses = (e.history || []).filter(h => h.m === "missed").length;
+      cards[k] = {
+        due: dueIso,
+        stability: interval,
+        difficulty: Math.min(10, Math.max(1, 10 - (ease - 1.3) / 1.4 * 7)),
+        elapsed_days: 0, scheduled_days: interval,
+        reps: e.seen_count || 0, lapses,
+        state: (e.seen_count || 0) > 0 ? 2 : 0,
+        last_review: e.last_seen ? new Date(e.last_seen + "T07:00:00").toISOString() : null,
+        learning_steps: 0, migrated: true
+      };
+    }
+  }
+  return {
+    version: 1,
+    user: { examDate: null, targetRetention: TARGET_RETENTION },
+    cards, answers: oldAns, log: [],
+    calibration: { byDomain: {} },
+    updated_at: new Date().toISOString()
+  };
+}
+
+function getCard(stable) {
+  const s = getState();
+  return s.cards[stable] || null;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   QUESTION INTERACTION  (commitment → reveal → confidence → grade)
+// ════════════════════════════════════════════════════════════════════════════
+const pendingConf = {};   // qid -> 'low'|'med'|'high'
+const revealed = {};      // qid -> true once revealed
 
 function onAnswerInput(ev) {
   const q = ev.target.closest(".q");
   if (!q) return;
   const stable = q.dataset.stable;
+  if (stable) {
+    const s = getState();
+    s.answers[stable] = ev.target.value;
+    saveState(s);
+  }
+  // Forced commitment: enable Reveal only once there's a non-whitespace attempt.
+  const qid = q.dataset.qid;
+  const btn = document.getElementById("revealbtn_" + qid);
+  if (btn) {
+    const hasText = ev.target.value.trim().length > 0;
+    btn.disabled = !hasText && !revealed[qid];
+    btn.classList.toggle("ready", hasText);
+  }
+  const status = q.querySelector('[data-status-for="' + qid + '"]');
+  if (status) { status.textContent = "saved"; status.classList.add("flashed");
+    clearTimeout(status._t); status._t = setTimeout(() => { status.textContent = ""; status.classList.remove("flashed"); }, 1200); }
+  if (typeof scheduleSyncPush === "function") scheduleSyncPush();
+}
+
+function onSelfExplainInput(ev) {
+  const q = ev.target.closest(".q");
+  if (!q) return;
+  const stable = q.dataset.stable;
   if (!stable) return;
-  const answers = getAnswers();
-  answers[stable] = ev.target.value;
-  saveAnswers(answers);
+  const s = getState();
+  s.answers[stable + "::why"] = ev.target.value;
+  saveState(s);
 }
 
-function toggleAnswer(qid) {
-  const el = document.getElementById("reveal_" + qid);
-  if (el) el.classList.toggle("shown");
-}
-
-function markSelf(qid, kind) {
+function pickConfidence(qid, level) {
+  pendingConf[qid] = level;
   const root = document.querySelector('[data-qid="' + qid + '"]');
   if (!root) return;
-  root.querySelectorAll("button[data-self]").forEach(b => b.classList.remove("active"));
-  const target = root.querySelector('button[data-self="' + kind + '"]');
-  if (target) target.classList.add("active");
-  const stable = root.dataset.stable;
-  if (stable) {
-    const state = getQuestionState();
-    const prev = state[stable] || { seen_count: 0, interval: 1, ease: 2.5, history: [] };
-    prev.seen_count = (prev.seen_count || 0) + 1;
-    prev.last_seen = TODAY;
-    prev.last_mark = kind;
-    if (kind === "missed") {
-      prev.interval = 1;
-      prev.ease = Math.max(1.3, (prev.ease || 2.5) - 0.2);
-    } else if (kind === "partial") {
-      prev.interval = Math.max(1, Math.round((prev.interval || 1) * 0.6));
-    } else {
-      prev.interval = Math.max(1, Math.round((prev.interval || 1) * (prev.ease || 2.5)));
-      prev.ease = Math.min(2.7, (prev.ease || 2.5) + 0.1);
-    }
-    prev.next_due = addDays(TODAY, prev.interval);
-    prev.history = (prev.history || []).slice(-9).concat([{ d: TODAY, m: kind }]);
-    state[stable] = prev;
-    saveQuestionState(state);
-  }
-  updateScore();
-  buildPersonalReviewQueue();
+  root.querySelectorAll(".conf-btn").forEach(b => b.classList.toggle("active", b.dataset.conf === level));
 }
 
-function updateScore() {
-  const correct = document.querySelectorAll('button[data-self="correct"].active').length;
-  const el = document.getElementById("self-score");
-  if (el) el.textContent = correct;
-  const stats = document.getElementById("lifetime-stats");
-  if (stats) {
-    const state = getQuestionState();
-    const total = Object.keys(state).length;
-    const due = Object.values(state).filter(s => s.next_due && s.next_due <= TODAY).length;
-    stats.innerHTML = 'Lifetime: <b>' + total + '</b> tracked &middot; <b>' + due + '</b> due now';
+function dontKnowQ(qid) {
+  // An honest "I don't know" is a legitimate commitment — it forces the
+  // retrieval attempt to resolve before the answer is shown.
+  if (!pendingConf[qid]) pickConfidence(qid, "low");
+  revealQ(qid, true);
+}
+
+function revealQ(qid, fromIDK) {
+  const root = document.querySelector('[data-qid="' + qid + '"]');
+  if (!root) return;
+  const txt = root.querySelector(".q-answer");
+  const committed = fromIDK || (txt && txt.value.trim().length > 0) || revealed[qid];
+  if (!committed) { showToast("Type an attempt first — or tap “I don't know”."); return; }
+  revealed[qid] = true;
+  const panel = document.getElementById("reveal_" + qid);
+  if (panel) panel.classList.add("shown");
+  // Fill projected intervals on the grade buttons (dual-coding the schedule).
+  const stable = root.dataset.stable;
+  const card = getCard(stable) || newCard();
+  const prev = previewIntervals(card);
+  root.querySelectorAll(".rate-btn").forEach(b => {
+    const g = parseInt(b.dataset.grade, 10);
+    const small = b.querySelector("small");
+    if (small && prev[g]) small.textContent = prev[g];
+  });
+  // Disable confidence editing once committed.
+  root.querySelectorAll(".conf-btn").forEach(b => b.disabled = true);
+  const rb = document.getElementById("revealbtn_" + qid);
+  if (rb) rb.disabled = true;
+}
+
+function rateQ(qid, grade) {
+  const root = document.querySelector('[data-qid="' + qid + '"]');
+  if (!root) return;
+  if (!revealed[qid]) revealQ(qid, true);
+  const stable = root.dataset.stable;
+  const domain = root.dataset.domain || domainFor(stable);
+  const s = getState();
+  let card = s.cards[stable] || newCard();
+  const r = schedule(card, grade);
+  s.cards[stable] = r.card;
+  // Review log
+  s.log.push({ cardId: stable, ts: new Date().toISOString(), rating: grade, domain: domain });
+  if (s.log.length > 4000) s.log = s.log.slice(-4000);
+  // Calibration: confidence (pre-reveal) vs. outcome (Again=miss, else hit)
+  const conf = pendingConf[qid] || "med";
+  const predicted = CONF_P[conf];
+  const outcome = grade >= 2 ? 1 : 0;
+  const cal = s.calibration.byDomain[domain] || { n: 0, brierSum: 0, confSum: 0, accSum: 0 };
+  cal.n += 1;
+  cal.brierSum += Math.pow(predicted - outcome, 2);
+  cal.confSum += predicted;
+  cal.accSum += outcome;
+  s.calibration.byDomain[domain] = cal;
+  saveState(s);
+
+  // UI feedback
+  root.querySelectorAll(".rate-btn").forEach(b => b.classList.remove("chosen"));
+  const chosen = root.querySelector('.rate-btn[data-grade="' + grade + '"]');
+  if (chosen) chosen.classList.add("chosen");
+  const nextDays = Math.max(0, Math.round((new Date(r.card.due) - new Date()) / 86400000));
+  const note = root.querySelector(".rate-result");
+  if (note) {
+    note.textContent = grade === 1
+      ? "Back in ~10 min. That's the point — forgetting is where the learning happens."
+      : "Next review in " + (nextDays < 1 ? "today" : nextDays + " day" + (nextDays === 1 ? "" : "s")) + ".";
+    note.classList.add("shown");
   }
+  root.classList.add("rated");
+  updateHeaderStats();
+  renderDashboard();
+  buildReviewQueue();
+  if (typeof scheduleSyncPush === "function") scheduleSyncPush();
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   INTERLEAVED REVIEW QUEUE  (exam-weighted, no two consecutive same topic)
+// ════════════════════════════════════════════════════════════════════════════
+function dueCards() {
+  const s = getState();
+  const now = new Date();
+  const out = [];
+  for (const stable in s.cards) {
+    const c = s.cards[stable];
+    if (!c.due || new Date(c.due) > now) continue;
+    const parts = stable.split("__");
+    if (parts.length !== 2) continue;
+    const topicId = parts[0], idx = parseInt(parts[1], 10);
+    const pool = window.__CSCS_QUESTIONS && window.__CSCS_QUESTIONS[topicId];
+    if (!pool || !pool[idx]) continue;
+    out.push({ stable, topicId, idx, q: pool[idx], card: c, domain: domainFor(stable) });
+  }
+  return out;
+}
+
+// Weighted round-robin interleave so domains appear ~proportionally to exam
+// weight and adjacent cards avoid sharing a topic (discrimination practice).
+function interleave(items) {
+  const byDom = {};
+  items.forEach(it => { (byDom[it.domain] = byDom[it.domain] || []).push(it); });
+  // within a domain, most-overdue first
+  for (const d in byDom) byDom[d].sort((a, b) => new Date(a.card.due) - new Date(b.card.due));
+  const served = {}; Object.keys(byDom).forEach(d => served[d] = 0);
+  const out = [];
+  let remaining = items.length;
+  let lastTopic = null;
+  while (remaining > 0) {
+    // pick the available domain with the largest weight deficit
+    let best = null, bestScore = -Infinity;
+    for (const d in byDom) {
+      if (!byDom[d].length) continue;
+      const w = EXAM_WEIGHTS[d] || 0.1;
+      const deficit = w - served[d] / Math.max(1, out.length);
+      // prefer not repeating the last topic
+      const penalty = byDom[d][0].topicId === lastTopic ? 0.15 : 0;
+      const score = deficit - penalty;
+      if (score > bestScore) { bestScore = score; best = d; }
+    }
+    if (best === null) break;
+    const it = byDom[best].shift();
+    out.push(it); served[best]++; remaining--; lastTopic = it.topicId;
+  }
+  return out;
 }
 
 function escapeHtml(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
 }
 
-function buildPersonalReviewQueue() {
-  const container = document.getElementById('personal-reviews');
+function questionCardHTML(d, qid, opts) {
+  opts = opts || {};
+  const qtype = d.q.type || "recall";
+  const selfexplain = qtype === "applied";
+  const dueDate = d.card && d.card.due ? new Date(d.card.due) : null;
+  const overdue = dueDate ? Math.max(0, Math.round((new Date() - dueDate) / 86400000)) : 0;
+  const R = d.card ? retrievability(d.card) : null;
+  const meta = (R != null ? '<span class="q-recall">recall ' + Math.round(R * 100) + "%</span>" : "") +
+    (overdue > 0 ? '<span class="q-overdue">' + overdue + "d overdue</span>" : "");
+  const se = selfexplain
+    ? '<div class="q-selfexplain"><label>In your own words — why is this true?</label>' +
+      '<textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div>'
+    : "";
+  return '<div class="q' + (opts.pretest ? " pretest" : "") + '" data-qid="' + qid + '" data-stable="' + escapeHtml(d.stable) +
+    '" data-domain="' + d.domain + '" data-qtype="' + qtype + '">' +
+    '<div class="q-head"><span class="q-num">' + (opts.label || "&#10227; Due") + '</span>' +
+    '<span class="q-type ' + qtype + '">' + qtype + '</span>' +
+    '<span class="q-domain">' + (DOMAIN_NAME[d.domain] || d.domain) + '</span>' +
+    '<span class="pr-meta">' + meta + '</span>' +
+    '<span class="q-status" data-status-for="' + qid + '"></span></div>' +
+    '<div class="q-text">' + escapeHtml(d.q.q) + '</div>' +
+    '<textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea>' +
+    '<div class="q-confidence"><span class="conf-label">How sure are you?</span>' +
+    '<button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence(\'' + qid + '\',\'low\')">Low</button>' +
+    '<button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence(\'' + qid + '\',\'med\')">Medium</button>' +
+    '<button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence(\'' + qid + '\',\'high\')">High</button></div>' +
+    '<div class="q-actions">' +
+    '<button type="button" class="btn-reveal" id="revealbtn_' + qid + '" disabled onclick="revealQ(\'' + qid + '\')">Reveal answer</button>' +
+    '<button type="button" class="btn-idk" onclick="dontKnowQ(\'' + qid + '\')">I don\'t know</button></div>' +
+    '<div class="q-reveal" id="reveal_' + qid + '"><div class="reveal-label">Answer</div>' +
+    '<div class="reveal-body">' + escapeHtml(d.q.a) + '</div>' + se +
+    '<div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div>' +
+    '<button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ(\'' + qid + '\',1)">Again<small>&lt;10m</small></button>' +
+    '<button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ(\'' + qid + '\',2)">Hard<small></small></button>' +
+    '<button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ(\'' + qid + '\',3)">Good<small></small></button>' +
+    '<button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ(\'' + qid + '\',4)">Easy<small></small></button>' +
+    '</div><div class="rate-result"></div></div></div>';
+}
+
+function buildReviewQueue() {
+  const container = document.getElementById("personal-reviews");
   if (!container) return;
   if (!window.__CSCS_QUESTIONS) return;
-  const state = getQuestionState();
-  const due = [];
-  for (const stable in state) {
-    const entry = state[stable];
-    if (!entry.next_due || entry.next_due > TODAY) continue;
-    const parts = stable.split('__');
-    if (parts.length !== 2) continue;
-    const topicId = parts[0];
-    const idx = parseInt(parts[1], 10);
-    const pool = window.__CSCS_QUESTIONS[topicId];
-    if (!pool || !pool[idx]) continue;
-    due.push({ stable: stable, topicId: topicId, idx: idx, q: pool[idx], entry: entry });
+  const due = interleave(dueCards());
+  const goalDue = document.getElementById("goal-due");
+  if (goalDue) goalDue.textContent = due.length;
+  if (due.length === 0) {
+    container.innerHTML =
+      '<section class="caught-up"><div class="cu-check">&#10003;</div>' +
+      '<div class="cu-text"><b>All caught up.</b> Nothing is due right now. ' +
+      'Sleep is part of the schedule — don\'t cram tonight. A short review the morning of beats a late session.</div></section>';
+    return;
   }
-  due.sort(function(a, b) {
-    var rank = function(m) { return m === 'missed' ? 0 : m === 'partial' ? 1 : 2; };
-    var r = rank(a.entry.last_mark) - rank(b.entry.last_mark);
-    if (r !== 0) return r;
-    return a.entry.next_due.localeCompare(b.entry.next_due);
-  });
-  if (due.length === 0) { container.innerHTML = ''; return; }
-  var top = due.slice(0, 10);
-  var html = '<section class="personal-review-section">' +
-    '<h2 class="rs-title">Your personal review queue &middot; ' + due.length + ' due</h2>' +
-    '<p class="rs-sub">Adaptive spacing (SM-2). Missed questions resurface in 1 day. Correct ones get longer intervals as you build confidence.</p>';
-  top.forEach(function(d, i) {
-    var qid = 'pr_' + i;
-    var overdueDays = d.entry.next_due ? Math.max(0, daysBetween(d.entry.next_due, TODAY)) : 0;
-    var meta = 'last: <b class="mark-' + (d.entry.last_mark || 'new') + '">' + (d.entry.last_mark || 'new') + '</b>' +
-      ' &middot; seen &times;' + (d.entry.seen_count || 1) + ' &middot; ease ' + (d.entry.ease || 2.5).toFixed(2) +
-      (overdueDays > 0 ? ' &middot; <b>' + overdueDays + 'd overdue</b>' : '');
-    html += '<div class="q personal-review" data-qid="' + qid + '" data-stable="' + escapeHtml(d.stable) + '">' +
-      '<div class="q-head"><span class="q-num">&#10227; Due</span>' +
-      '<span class="q-type ' + (d.q.type || 'recall') + '">' + (d.q.type || 'recall') + '</span>' +
-      '<span class="pr-meta">' + meta + '</span></div>' +
-      '<div class="q-text">' + escapeHtml(d.q.q) + '</div>' +
-      '<textarea class="q-answer" placeholder="Type your answer here..." oninput="onAnswerInput(event)"></textarea>' +
-      '<div class="q-actions">' +
-      '<button type="button" onclick="toggleAnswer(\'' + qid + '\')">Reveal</button>' +
-      '<button type="button" class="btn-self" data-self="correct" onclick="markSelf(\'' + qid + '\', \'correct\')">I got it</button>' +
-      '<button type="button" class="btn-self" data-self="partial" onclick="markSelf(\'' + qid + '\', \'partial\')">Close</button>' +
-      '<button type="button" class="btn-self" data-self="missed" onclick="markSelf(\'' + qid + '\', \'missed\')">Missed</button>' +
-      '</div>' +
-      '<div class="q-reveal" id="reveal_' + qid + '"><div class="reveal-label">Answer</div>' +
-      '<div class="reveal-body">' + escapeHtml(d.q.a) + '</div></div></div>';
-  });
-  if (due.length > 10) {
-    html += '<div class="pr-overflow">+ ' + (due.length - 10) + ' more due will appear after you clear these.</div>';
-  }
-  html += '</section>';
+  const top = due.slice(0, 12);
+  let html = '<section class="personal-review-section">' +
+    '<h2 class="rs-title">Your review queue &middot; ' + due.length + ' due</h2>' +
+    '<p class="rs-sub">Interleaved across domains by exam weight (FSRS-scheduled). Mixing topics feels harder but roughly doubles what transfers to test day. Forgetting one is fine — that\'s where learning happens.</p>';
+  top.forEach((d, i) => { html += questionCardHTML(d, "pr_" + i, { label: "&#10227; Due" }); });
+  if (due.length > 12) html += '<div class="pr-overflow">+ ' + (due.length - 12) + ' more appear after you clear these.</div>';
+  html += "</section>";
   container.innerHTML = html;
-  var answers = getAnswers();
-  container.querySelectorAll('.q').forEach(function(q) {
-    var s = q.dataset.stable;
-    var txt = q.querySelector('.q-answer');
-    // active recall: do not pre-fill answer text
-    var mark = state[s] && state[s].last_mark;
-    if (mark) {
-      var btn = q.querySelector('button[data-self="' + mark + '"]');
-      if (btn) btn.classList.add('active');
-    }
-  });
 }
 
+// ════════════════════════════════════════════════════════════════════════════
+//   CALIBRATION DASHBOARD  (the highest-utility widget per the review)
+// ════════════════════════════════════════════════════════════════════════════
+function renderDashboard() {
+  const host = document.getElementById("cscs-dashboard");
+  if (!host) return;
+  const s = getState();
+  // aggregate retrievability + due counts per domain from cards
+  const agg = {};
+  const now = new Date();
+  for (const stable in s.cards) {
+    const dom = domainFor(stable);
+    const a = agg[dom] = agg[dom] || { n: 0, due: 0, rSum: 0, rN: 0 };
+    a.n++;
+    if (new Date(s.cards[stable].due) <= now) a.due++;
+    const R = retrievability(s.cards[stable]);
+    if (R != null) { a.rSum += R; a.rN++; }
+  }
+  const cal = s.calibration.byDomain;
+  const tracked = Object.keys(s.cards).length;
+  if (tracked === 0) { host.innerHTML = ""; return; }
+
+  const order = ["ES", "EX", "PD", "NT"];
+  let rows = "";
+  order.forEach(dom => {
+    const a = agg[dom]; const c = cal[dom];
+    if (!a && !c) return;
+    const meanR = a && a.rN ? a.rSum / a.rN : null;
+    const acc = c && c.n ? c.accSum / c.n : null;
+    const brier = c && c.n ? c.brierSum / c.n : null;
+    const conf = c && c.n ? c.confSum / c.n : null;
+    // calibration gap: confidence minus accuracy (positive = overconfident)
+    const gap = (conf != null && acc != null) ? conf - acc : null;
+    const rPct = meanR != null ? Math.round(meanR * 100) : null;
+    const rColor = rPct == null ? "var(--text-dim)" : rPct >= 85 ? "var(--good,#67e8b0)" : rPct >= 70 ? "var(--warn,#ffb86b)" : "var(--bad,#ff7a7a)";
+    rows +=
+      '<div class="dash-row">' +
+      '<div class="dash-dom">' + (DOMAIN_NAME[dom] || dom) + '</div>' +
+      '<div class="dash-bar"><div class="dash-fill" style="width:' + (rPct == null ? 0 : rPct) + '%;background:' + rColor + '"></div>' +
+      '<span class="dash-bartxt">' + (rPct == null ? "—" : rPct + "% recall") + '</span></div>' +
+      '<div class="dash-due">' + (a ? a.due : 0) + ' due</div>' +
+      '<div class="dash-cal">' + (gap == null ? "—" :
+        (Math.abs(gap) <= 0.07 ? '<span class="cal-ok">well-calibrated</span>' :
+         gap > 0 ? '<span class="cal-over">overconfident +' + Math.round(gap * 100) + '</span>' :
+                   '<span class="cal-under">underconfident ' + Math.round(gap * 100) + '</span>')) +
+      '</div></div>';
+  });
+  // 14-day review volume sparkline
+  const counts = {};
+  s.log.forEach(l => { const d = (l.ts || "").slice(0, 10); if (d) counts[d] = (counts[d] || 0) + 1; });
+  let spark = "";
+  let maxc = 1; const days = [];
+  for (let i = 13; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); const k = d.toISOString().slice(0, 10); const v = counts[k] || 0; days.push(v); if (v > maxc) maxc = v; }
+  spark = days.map(v => '<span class="spk" style="height:' + Math.max(3, Math.round(v / maxc * 26)) + 'px" title="' + v + ' reviews"></span>').join("");
+
+  host.innerHTML =
+    '<details class="dashboard" open><summary>Your dashboard — where to study, not how much you\'ve studied</summary>' +
+    '<div class="dash-grid">' + (rows || '<div class="dash-empty">Rate a few questions to populate your calibration.</div>') + '</div>' +
+    '<div class="dash-foot"><div class="dash-spark-wrap"><span class="dash-spark-label">14-day reviews</span><div class="dash-spark">' + spark + '</div></div>' +
+    '<div class="dash-legend">Recall = FSRS retrievability. Calibration compares your stated confidence to your real accuracy — overconfidence is the signal to study that domain harder.</div></div>' +
+    '</details>';
+}
+
+function updateHeaderStats() {
+  const s = getState();
+  const tracked = Object.keys(s.cards).length;
+  const now = new Date();
+  const due = Object.values(s.cards).filter(c => c.due && new Date(c.due) <= now).length;
+  const todayLog = s.log.filter(l => (l.ts || "").slice(0, 10) === TODAY);
+  const correct = todayLog.filter(l => l.rating >= 2).length;
+  const sc = document.getElementById("self-score"); if (sc) sc.textContent = correct;
+  const stats = document.getElementById("lifetime-stats");
+  if (stats) stats.innerHTML = "Lifetime: <b>" + tracked + "</b> tracked &middot; <b>" + due + "</b> due now";
+  const gd = document.getElementById("goal-due"); if (gd) gd.textContent = due;
+  const gmin = document.getElementById("goal-min");
+  const newc = window.__CSCS_NEWCOUNT || 0;
+  if (gmin) gmin.textContent = Math.min(40, Math.round((newc + due) * 0.6) + 4);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   EXPORT / IMPORT
+// ════════════════════════════════════════════════════════════════════════════
 function exportProgress() {
-  var blob = new Blob([JSON.stringify({
-    exported_at: new Date().toISOString(),
-    qstate: getQuestionState(),
-    answers: getAnswers()
-  }, null, 2)], { type: 'application/json' });
-  var url = URL.createObjectURL(blob);
-  var a = document.createElement('a');
-  a.href = url; a.download = 'cscs-progress-' + TODAY + '.json';
+  const blob = new Blob([JSON.stringify(getState(), null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "cscs-progress-" + TODAY + ".json";
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
 function importProgress(file) {
-  var reader = new FileReader();
-  reader.onload = function(e) {
+  const reader = new FileReader();
+  reader.onload = e => {
     try {
-      var data = JSON.parse(e.target.result);
-      if (data.qstate) saveQuestionState(data.qstate);
-      if (data.answers) saveAnswers(data.answers);
-      restoreAnswers();
-      buildPersonalReviewQueue();
-      alert('Progress imported.');
-    } catch (err) { alert('Import failed: ' + err.message); }
+      const data = JSON.parse(e.target.result);
+      if (data.version === 1 && data.cards) { lsSet(STATE_KEY, data); }
+      else if (data.qstate) { // legacy export
+        lsSet("qstate", data.qstate); lsSet("answers", data.answers || {});
+        const migrated = migrateOrInit(); lsSet(STATE_KEY, migrated);
+      }
+      bootRender(); showToast("Progress imported.");
+    } catch (err) { showToast("Import failed: " + err.message); }
   };
   reader.readAsText(file);
 }
 
-var obs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      obs.unobserve(e.target);
-    }
-  });
+// ════════════════════════════════════════════════════════════════════════════
+//   TOAST
+// ════════════════════════════════════════════════════════════════════════════
+function showToast(msg) {
+  let t = document.getElementById("cscs-toast");
+  if (!t) { t = document.createElement("div"); t.id = "cscs-toast"; t.className = "cscs-toast"; document.body.appendChild(t); }
+  t.textContent = msg; t.classList.add("visible");
+  clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove("visible"), 2400);
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+//   REVEAL-ON-SCROLL for lesson cards
+// ════════════════════════════════════════════════════════════════════════════
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.reveal').forEach(function(el) { obs.observe(el); });
-  restoreAnswers();
-  buildPersonalReviewQueue();
+function bootRender() {
+  updateHeaderStats();
+  renderDashboard();
+  buildReviewQueue();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
+  // Wait briefly for the FSRS module so the first queue uses real retrievability.
+  if (fsrsReady()) bootRender();
+  else {
+    window.addEventListener("fsrs-ready", bootRender, { once: true });
+    setTimeout(() => { if (!__scheduler) bootRender(); }, 1200); // fallback if module never loads
+  }
 });
 
-// ────────── EXPLICIT SAVE BUTTON ──────────
-function saveQuestion(qid) {
-  const root = document.querySelector('[data-qid="' + qid + '"]');
-  if (!root) return;
-  const stable = root.dataset.stable;
-  if (!stable) return;
-  const txt = root.querySelector('.q-answer');
-  if (txt) {
-    const answers = getAnswers();
-    answers[stable] = txt.value;
-    saveAnswers(answers);
-  }
-  // Flash status text
-  const status = document.querySelector('[data-status-for="' + qid + '"]');
-  if (status) {
-    status.textContent = '✓ Saved locally';
-    status.className = 'q-save-status saved';
-    setTimeout(function() {
-      status.textContent = '';
-      status.className = 'q-save-status';
-    }, 2500);
-  }
-  // Trigger cross-device push if enabled
-  if (typeof scheduleSyncPush === 'function') scheduleSyncPush();
-  showToast('Answer saved');
-}
-
-// ────────── TOAST ──────────
-function showToast(msg) {
-  let t = document.getElementById('cscs-toast');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'cscs-toast';
-    t.className = 'cscs-toast';
-    document.body.appendChild(t);
-  }
-  t.textContent = msg;
-  t.classList.add('visible');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(function() { t.classList.remove('visible'); }, 2200);
-}
-
 // ════════════════════════════════════════════════════════════════════════════
-//   CROSS-DEVICE SYNC VIA GITHUB GIST
+//   CROSS-DEVICE SYNC VIA GITHUB GIST  (adapted to the single-state schema)
 // ════════════════════════════════════════════════════════════════════════════
-// One-time setup:
-//   1. User creates a GitHub Personal Access Token (PAT) with only the 'gist' scope.
-//   2. PAT is stored in localStorage on each device.
-//   3. First device creates a private Gist; its ID is stored in localStorage.
-//   4. Other devices import the same Gist ID + PAT and start syncing.
-//
-// Sync behavior:
-//   - On page load (after restoring local state): pull remote, merge per-key
-//     (last-write-wins by entry.last_seen / payload.updated_at).
-//   - On any save (answer or mark): debounced push 4 seconds later.
-//   - Manual "Sync now" button forces immediate pull+push.
-//
-// Security:
-//   - PAT lives only in the user's browser localStorage.
-//   - PAT should have ONLY the 'gist' scope.
-//   - The Gist is private (visible only to the token's owner).
-
-const SYNC_KEYS = {
-  token: "sync.token",
-  gist: "sync.gist_id",
-  enabled: "sync.enabled",
-  last_push: "sync.last_push_at",
-  last_pull: "sync.last_pull_at",
-};
+const SYNC_KEYS = { token: "sync.token", gist: "sync.gist_id", enabled: "sync.enabled", last_push: "sync.last_push_at", last_pull: "sync.last_pull_at" };
 const SYNC_FILENAME = "cscs-progress.json";
-const SYNC_SCHEMA = 2;
+const SYNC_SCHEMA = 3;
 
 function syncEnabled() { return !!lsGet(SYNC_KEYS.enabled, false); }
 function getToken() { return localStorage.getItem(LS_PREFIX + SYNC_KEYS.token) || ""; }
@@ -1015,62 +1438,50 @@ function setGistId(id) { localStorage.setItem(LS_PREFIX + SYNC_KEYS.gist, id); }
 async function gistFetch(method, path, token, body) {
   const res = await fetch("https://api.github.com" + path, {
     method,
-    headers: {
-      "Authorization": "token " + token,
-      "Accept": "application/vnd.github+json",
-      "Content-Type": "application/json",
-      "X-GitHub-Api-Version": "2022-11-28"
-    },
+    headers: { "Authorization": "token " + token, "Accept": "application/vnd.github+json", "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28" },
     body: body ? JSON.stringify(body) : undefined
   });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error("GitHub API " + res.status + ": " + text.slice(0, 200));
-  }
+  if (!res.ok) { const text = await res.text(); throw new Error("GitHub API " + res.status + ": " + text.slice(0, 200)); }
   return res.status === 204 ? null : res.json();
 }
 
-function buildSyncPayload() {
-  return {
-    schema: SYNC_SCHEMA,
-    updated_at: new Date().toISOString(),
-    qstate: getQuestionState(),
-    answers: getAnswers()
-  };
-}
+function buildSyncPayload() { return { schema: SYNC_SCHEMA, updated_at: new Date().toISOString(), state: getState() }; }
 
 function mergeRemote(remote) {
-  if (!remote || remote.schema > SYNC_SCHEMA) return false;
-  const localQs = getQuestionState();
-  const localAns = getAnswers();
+  if (!remote) return false;
+  const local = getState();
   let changed = false;
-
-  // Per-key merge of qstate using last_seen as tiebreaker
-  const mergedQs = Object.assign({}, localQs);
-  for (const k in (remote.qstate || {})) {
-    const r = remote.qstate[k];
-    const l = mergedQs[k];
-    if (!l) { mergedQs[k] = r; changed = true; continue; }
-    const lTime = (l.last_seen || "") + "_" + (l.seen_count || 0);
-    const rTime = (r.last_seen || "") + "_" + (r.seen_count || 0);
-    if (rTime > lTime) { mergedQs[k] = r; changed = true; }
+  // schema 3 carries the whole state; schema 2 carried qstate/answers
+  let rstate = null;
+  if (remote.schema === SYNC_SCHEMA && remote.state) rstate = remote.state;
+  else if (remote.qstate) { // legacy remote — convert
+    const tmpOld = lsGet("qstate", null);
+    lsSet("qstate", remote.qstate); lsSet("answers", remote.answers || {});
+    rstate = migrateOrInit();
+    if (tmpOld) lsSet("qstate", tmpOld); else localStorage.removeItem(LS_PREFIX + "qstate");
   }
-
-  // Answers merge: prefer the version whose corresponding qstate is newer.
-  // If qstate is identical, prefer the longer/non-empty value.
-  const mergedAns = Object.assign({}, localAns);
-  for (const k in (remote.answers || {})) {
-    const rVal = remote.answers[k];
-    if (!mergedAns[k]) { mergedAns[k] = rVal; changed = true; continue; }
-    const rNewer = ((remote.qstate && remote.qstate[k] && remote.qstate[k].last_seen) || "") >
-                   ((localQs[k] && localQs[k].last_seen) || "");
-    if (rNewer && rVal && rVal !== mergedAns[k]) { mergedAns[k] = rVal; changed = true; }
+  if (!rstate) return false;
+  // cards: newer last_review (or due) wins
+  for (const k in (rstate.cards || {})) {
+    const r = rstate.cards[k], l = local.cards[k];
+    if (!l) { local.cards[k] = r; changed = true; continue; }
+    const lt = l.last_review || l.due || "", rt = r.last_review || r.due || "";
+    if (rt > lt) { local.cards[k] = r; changed = true; }
   }
-
-  if (changed) {
-    saveQuestionState(mergedQs);
-    saveAnswers(mergedAns);
+  // answers: keep non-empty / longer
+  for (const k in (rstate.answers || {})) {
+    const rv = rstate.answers[k];
+    if (!local.answers[k] || (rv && rv.length > (local.answers[k] || "").length)) { if (rv !== local.answers[k]) { local.answers[k] = rv; changed = true; } }
   }
+  // log: union by cardId+ts
+  const seen = new Set(local.log.map(l => l.cardId + "|" + l.ts));
+  (rstate.log || []).forEach(l => { const key = l.cardId + "|" + l.ts; if (!seen.has(key)) { local.log.push(l); seen.add(key); changed = true; } });
+  if (changed) { local.log.sort((a, b) => (a.ts || "").localeCompare(b.ts || "")); }
+  // calibration: take the side with more total observations (whole-object)
+  const ln = Object.values(local.calibration.byDomain || {}).reduce((s, d) => s + (d.n || 0), 0);
+  const rn = Object.values((rstate.calibration && rstate.calibration.byDomain) || {}).reduce((s, d) => s + (d.n || 0), 0);
+  if (rn > ln) { local.calibration = rstate.calibration; changed = true; }
+  if (changed) saveState(local);
   return changed;
 }
 
@@ -1082,31 +1493,16 @@ async function syncPull(opts) {
   try {
     const data = await gistFetch("GET", "/gists/" + gist, token);
     const file = data.files && data.files[SYNC_FILENAME];
-    if (!file) {
-      updateSyncButton("enabled", "Synced");
-      return false;
-    }
+    if (!file) { updateSyncButton("enabled", "Synced"); return false; }
     let remote;
-    if (file.truncated) {
-      const r = await fetch(file.raw_url);
-      remote = await r.json();
-    } else {
-      remote = JSON.parse(file.content);
-    }
+    if (file.truncated) { const r = await fetch(file.raw_url); remote = await r.json(); }
+    else remote = JSON.parse(file.content);
     const changed = mergeRemote(remote);
     lsSet(SYNC_KEYS.last_pull, new Date().toISOString());
-    if (changed) {
-      restoreAnswers();
-      buildPersonalReviewQueue();
-      showToast("Pulled remote progress (" + Object.keys(remote.qstate || {}).length + " questions)");
-    }
+    if (changed) { bootRender(); showToast("Pulled remote progress."); }
     updateSyncButton("enabled", "Synced");
     return changed;
-  } catch (e) {
-    updateSyncButton("error", "Pull failed");
-    if (opts && opts.silent !== true) showToast("Sync pull failed: " + e.message);
-    return false;
-  }
+  } catch (e) { updateSyncButton("error", "Pull failed"); if (!(opts && opts.silent)) showToast("Sync pull failed: " + e.message); return false; }
 }
 
 let _pushTimer = null;
@@ -1116,283 +1512,133 @@ function scheduleSyncPush() {
   updateSyncButton("syncing", "Pending…");
   _pushTimer = setTimeout(syncPush, 4000);
 }
-
 async function syncPush(opts) {
   if (!syncEnabled()) return false;
   const token = getToken(), gist = getGistId();
   if (!token || !gist) return false;
   updateSyncButton("syncing", "Pushing…");
   try {
-    const payload = buildSyncPayload();
-    await gistFetch("PATCH", "/gists/" + gist, token, {
-      files: { [SYNC_FILENAME]: { content: JSON.stringify(payload, null, 2) } }
-    });
+    await gistFetch("PATCH", "/gists/" + gist, token, { files: { [SYNC_FILENAME]: { content: JSON.stringify(buildSyncPayload(), null, 2) } } });
     lsSet(SYNC_KEYS.last_push, new Date().toISOString());
     updateSyncButton("enabled", "Synced");
     if (opts && opts.toast) showToast("Pushed to cloud");
     return true;
-  } catch (e) {
-    updateSyncButton("error", "Push failed");
-    showToast("Sync push failed: " + e.message);
-    return false;
-  }
+  } catch (e) { updateSyncButton("error", "Push failed"); showToast("Sync push failed: " + e.message); return false; }
 }
-
 async function createNewGist() {
   const token = getToken();
   if (!token) throw new Error("No token");
-  const payload = buildSyncPayload();
-  const data = await gistFetch("POST", "/gists", token, {
-    description: "CSCS Study Progress (sync)",
-    public: false,
-    files: { [SYNC_FILENAME]: { content: JSON.stringify(payload, null, 2) } }
-  });
+  const data = await gistFetch("POST", "/gists", token, { description: "CSCS Study Progress (sync)", public: false, files: { [SYNC_FILENAME]: { content: JSON.stringify(buildSyncPayload(), null, 2) } } });
   return data.id;
 }
+async function findOrCreateSyncGist(token) {
+  let page = 1;
+  while (page <= 5) {
+    const list = await gistFetch("GET", "/gists?per_page=100&page=" + page, token);
+    if (!Array.isArray(list) || list.length === 0) break;
+    for (const g of list) { if (g.files && g.files[SYNC_FILENAME]) return g.id; }
+    if (list.length < 100) break;
+    page++;
+  }
+  return await createNewGist();
+}
 
-// ────────── SYNC MODAL UI ──────────
 function openSyncModal() {
   const m = document.getElementById("sync-modal");
   if (!m) return;
   document.getElementById("sync-token-input").value = getToken();
   document.getElementById("sync-gist-input").value = getGistId();
-  const last = lsGet(SYNC_KEYS.last_push, null);
-  const lastPull = lsGet(SYNC_KEYS.last_pull, null);
+  const last = lsGet(SYNC_KEYS.last_push, null), lastPull = lsGet(SYNC_KEYS.last_pull, null);
   const status = document.getElementById("sync-modal-status");
-  if (syncEnabled() && last) {
-    status.className = "sync-status ok";
-    status.innerHTML = "Sync enabled. Last push: " + new Date(last).toLocaleString() +
-                       (lastPull ? "<br>Last pull: " + new Date(lastPull).toLocaleString() : "");
-  } else {
-    status.className = "sync-status";
-    status.textContent = "Sync not yet configured.";
-  }
+  if (syncEnabled() && last) { status.className = "sync-status ok"; status.innerHTML = "Sync enabled. Last push: " + new Date(last).toLocaleString() + (lastPull ? "<br>Last pull: " + new Date(lastPull).toLocaleString() : ""); }
+  else { status.className = "sync-status"; status.textContent = "Sync not yet configured."; }
   m.classList.add("shown");
 }
-function closeSyncModal() {
-  document.getElementById("sync-modal").classList.remove("shown");
-}
-async function applySyncSettings() {
-  const token = document.getElementById("sync-token-input").value.trim();
-  const gist = document.getElementById("sync-gist-input").value.trim();
-  const status = document.getElementById("sync-modal-status");
-  if (!token) {
-    status.className = "sync-status err";
-    status.textContent = "Token required.";
-    return;
-  }
-  setToken(token);
-  // Validate by hitting /user/gists or by gist GET
-  status.className = "sync-status";
-  status.textContent = "Validating token…";
-  try {
-    if (gist) {
-      await gistFetch("GET", "/gists/" + gist, token);
-      setGistId(gist);
-    } else {
-      status.textContent = "Creating new private Gist…";
-      const id = await createNewGist();
-      setGistId(id);
-      document.getElementById("sync-gist-input").value = id;
-    }
-    lsSet(SYNC_KEYS.enabled, true);
-    status.className = "sync-status ok";
-    status.textContent = "Sync enabled. Pulling latest…";
-    updateSyncButton("enabled", "Synced");
-    await syncPull({ silent: true });
-    await syncPush({ toast: true });
-    status.className = "sync-status ok";
-    status.innerHTML = "Sync active. Gist ID: <code>" + getGistId() + "</code><br>" +
-                       "Copy this Gist ID to your other devices to keep them in sync.";
-  } catch (e) {
-    status.className = "sync-status err";
-    status.textContent = "Validation failed: " + e.message;
-  }
-}
+function closeSyncModal() { document.getElementById("sync-modal").classList.remove("shown"); }
 function disableSync() {
-  lsSet(SYNC_KEYS.enabled, false);
-  updateSyncButton("off", "Off");
+  lsSet(SYNC_KEYS.enabled, false); updateSyncButton("off", "Off");
   const status = document.getElementById("sync-modal-status");
-  status.className = "sync-status";
-  status.textContent = "Sync disabled. Token and Gist ID kept; re-enable any time.";
+  status.className = "sync-status"; status.textContent = "Sync disabled. Token and Gist ID kept; re-enable any time.";
   showToast("Sync disabled");
 }
-async function forceSyncNow() {
-  await syncPull();
-  await syncPush({ toast: true });
-}
-
+async function forceSyncNow() { await syncPull(); await syncPush({ toast: true }); }
 function updateSyncButton(state, text) {
   const btn = document.getElementById("sync-button");
   if (!btn) return;
   btn.className = "sync-button " + (state === "off" ? "" : state);
   btn.querySelector(".sync-text").textContent = text;
 }
-
-function injectSyncUI() {
-  // Floating sync button
-  const btn = document.createElement("button");
-  btn.id = "sync-button";
-  btn.className = "sync-button " + (syncEnabled() ? "enabled" : "");
-  btn.innerHTML = '<span class="sync-dot"></span><span class="sync-text">' +
-                   (syncEnabled() ? "Sync" : "Cloud sync off") + '</span>';
-  btn.onclick = openSyncModal;
-  document.body.appendChild(btn);
-
-  // Modal
-  const modal = document.createElement("div");
-  modal.id = "sync-modal";
-  modal.className = "sync-modal";
-  modal.innerHTML =
-    '<div class="sync-modal-content">' +
-      '<h3>Cross-device sync</h3>' +
-      '<p>Sync your answers and SM-2 progress across phone, laptop, tablet — via a <b>private GitHub Gist</b>. Free, no external service needed.</p>' +
-      '<ol>' +
-        '<li>Generate a Personal Access Token (classic) with <b>only the gist scope</b>: <a href="https://github.com/settings/tokens/new?scopes=gist&description=CSCS%20Study%20Sync" target="_blank" rel="noopener">open GitHub →</a></li>' +
-        '<li>Paste it below.</li>' +
-        '<li>Each device with the same token finds the same Gist automatically &mdash; no IDs to copy.</li>' +
-      '</ol>' +
-      '<label>Personal Access Token (gist scope only)' +
-        '<input type="password" id="sync-token-input" autocomplete="off" placeholder="ghp_…">' +
-      '</label>' +
-      '<label>Gist ID (optional — auto-discovered from your token)' +
-        '<input type="text" id="sync-gist-input" autocomplete="off" placeholder="leave blank — auto-discovered">' +
-      '</label>' +
-      '<div class="sync-actions">' +
-        '<button type="button" class="btn-primary" onclick="applySyncSettings()">Enable / Update</button>' +
-        '<button type="button" onclick="forceSyncNow()">Sync now</button>' +
-        '<button type="button" onclick="disableSync()">Disable</button>' +
-        '<button type="button" onclick="closeSyncModal()" style="margin-left:auto;">Close</button>' +
-      '</div>' +
-      '<div id="sync-modal-status" class="sync-status">Sync not yet configured.</div>' +
-    '</div>';
-  modal.addEventListener("click", function(e) { if (e.target === modal) closeSyncModal(); });
-  document.body.appendChild(modal);
-}
-
-// Wire sync into existing save flows by re-binding markSelf and onAnswerInput
-const _origMarkSelf = markSelf;
-markSelf = function(qid, kind) { _origMarkSelf(qid, kind); scheduleSyncPush(); };
-const _origOnInput = onAnswerInput;
-onAnswerInput = function(ev) { _origOnInput(ev); scheduleSyncPush(); };
-
-// Boot sync on load
-document.addEventListener("DOMContentLoaded", function() {
-  injectSyncUI();
-  if (syncEnabled()) {
-    syncPull({ silent: true }).catch(function() {});
-  } else {
-    updateSyncButton("off", "Cloud sync off");
-  }
-});
-
-// ────────── AUTO-SAVE FLASH INDICATOR ──────────
-// Briefly flash "Saved ✓" next to a question when localStorage actually writes.
-// Replaces the explicit Save button — auto-save runs on every keystroke (debounced).
-(function() {
-  const origInput = onAnswerInput;
-  let flashTimers = {};
-  onAnswerInput = function(ev) {
-    origInput(ev);
-    const q = ev.target.closest('.q');
-    if (!q) return;
-    const qid = q.dataset.qid;
-    if (!qid) return;
-    const status = q.querySelector('[data-status-for="' + qid + '"]');
-    if (!status) return;
-    status.textContent = 'Saved ✓';
-    status.classList.add('flashed');
-    clearTimeout(flashTimers[qid]);
-    flashTimers[qid] = setTimeout(function() {
-      status.textContent = 'auto-saving as you type';
-      status.classList.remove('flashed');
-    }, 1400);
-  };
-})();
-
-// ────────── AUTO-DISCOVER GIST BY FILENAME (token-only sync) ──────────
-// On a fresh device, paste the PAT and the page finds the existing CSCS sync
-// Gist by its filename instead of asking the user to copy a Gist ID.
-async function findOrCreateSyncGist(token) {
-  // List the user's Gists (paginated; 100 per page)
-  let page = 1;
-  while (page <= 5) {  // up to 500 Gists; plenty
-    const list = await gistFetch("GET", "/gists?per_page=100&page=" + page, token);
-    if (!Array.isArray(list) || list.length === 0) break;
-    for (const g of list) {
-      if (g.files && g.files[SYNC_FILENAME]) {
-        return g.id;  // found existing CSCS gist
-      }
-    }
-    if (list.length < 100) break;
-    page++;
-  }
-  // No existing Gist with our filename — create a new one
-  return await createNewGist();
-}
-
-// Override applySyncSettings to auto-discover when Gist ID is blank
-const _origApplySync = applySyncSettings;
-applySyncSettings = async function() {
+async function applySyncSettings() {
   const token = document.getElementById("sync-token-input").value.trim();
   const gistInput = document.getElementById("sync-gist-input");
   const gist = gistInput.value.trim();
   const status = document.getElementById("sync-modal-status");
-  if (!token) {
-    status.className = "sync-status err";
-    status.textContent = "Token required.";
-    return;
-  }
+  if (!token) { status.className = "sync-status err"; status.textContent = "Token required."; return; }
   setToken(token);
-  status.className = "sync-status";
-  status.textContent = "Looking for your sync Gist...";
+  status.className = "sync-status"; status.textContent = "Looking for your sync Gist…";
   try {
-    let resolvedGistId = gist;
-    if (!resolvedGistId) {
-      resolvedGistId = await findOrCreateSyncGist(token);
-      gistInput.value = resolvedGistId;
-    } else {
-      // Validate the provided gist
-      await gistFetch("GET", "/gists/" + resolvedGistId, token);
-    }
-    setGistId(resolvedGistId);
+    let resolved = gist;
+    if (!resolved) { resolved = await findOrCreateSyncGist(token); gistInput.value = resolved; }
+    else { await gistFetch("GET", "/gists/" + resolved, token); }
+    setGistId(resolved);
     lsSet(SYNC_KEYS.enabled, true);
-    status.className = "sync-status ok";
-    status.textContent = "Found / created your sync Gist. Pulling latest...";
+    status.className = "sync-status ok"; status.textContent = "Found / created your sync Gist. Pulling latest…";
     updateSyncButton("enabled", "Synced");
     await syncPull({ silent: true });
     await syncPush({ toast: true });
     status.className = "sync-status ok";
-    status.innerHTML = "Sync active automatically. On other devices, just paste the same token — they will find this Gist too.";
-  } catch (e) {
-    status.className = "sync-status err";
-    status.textContent = "Failed: " + e.message;
-  }
-};
+    status.innerHTML = "Sync active. On other devices, paste the same token — they'll find this Gist automatically.";
+  } catch (e) { status.className = "sync-status err"; status.textContent = "Failed: " + e.message; }
+}
+
+function injectSyncUI() {
+  const btn = document.createElement("button");
+  btn.id = "sync-button";
+  btn.className = "sync-button " + (syncEnabled() ? "enabled" : "");
+  btn.innerHTML = '<span class="sync-dot"></span><span class="sync-text">' + (syncEnabled() ? "Sync" : "Cloud sync off") + "</span>";
+  btn.onclick = openSyncModal;
+  document.body.appendChild(btn);
+  const modal = document.createElement("div");
+  modal.id = "sync-modal"; modal.className = "sync-modal";
+  modal.innerHTML =
+    '<div class="sync-modal-content"><h3>Cross-device sync</h3>' +
+    '<p>Sync your FSRS progress across devices via a <b>private GitHub Gist</b>. Free, no external service.</p>' +
+    '<ol><li>Generate a Personal Access Token (classic) with <b>only the gist scope</b>: <a href="https://github.com/settings/tokens/new?scopes=gist&description=CSCS%20Study%20Sync" target="_blank" rel="noopener">open GitHub →</a></li>' +
+    '<li>Paste it below.</li><li>Each device with the same token finds the same Gist automatically.</li></ol>' +
+    '<label>Personal Access Token (gist scope only)<input type="password" id="sync-token-input" autocomplete="off" placeholder="ghp_…"></label>' +
+    '<label>Gist ID (optional — auto-discovered)<input type="text" id="sync-gist-input" autocomplete="off" placeholder="leave blank — auto-discovered"></label>' +
+    '<div class="sync-actions"><button type="button" class="btn-primary" onclick="applySyncSettings()">Enable / Update</button>' +
+    '<button type="button" onclick="forceSyncNow()">Sync now</button><button type="button" onclick="disableSync()">Disable</button>' +
+    '<button type="button" onclick="closeSyncModal()" style="margin-left:auto;">Close</button></div>' +
+    '<div id="sync-modal-status" class="sync-status">Sync not yet configured.</div></div>';
+  modal.addEventListener("click", e => { if (e.target === modal) closeSyncModal(); });
+  document.body.appendChild(modal);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  injectSyncUI();
+  if (syncEnabled()) syncPull({ silent: true }).catch(() => {});
+  else updateSyncButton("off", "Cloud sync off");
+});
 
 // ════════════════════════════════════════════════════════════════════════════
-//   TERM POPOVERS — hover any glossary term in the concept paragraph to see
-//   its definition. Terms are sourced from the lesson's own glossary, so
-//   coverage scales automatically as more glossary entries are added.
+//   TERM POPOVERS — hover any glossary term to see its definition.
 // ════════════════════════════════════════════════════════════════════════════
-(function() {
+(function () {
   function collectTerms() {
     const map = {};
-    document.querySelectorAll('.gloss-card').forEach(card => {
-      const term = card.querySelector('.gloss-term');
-      const def = card.querySelector('.gloss-def');
+    document.querySelectorAll(".gloss-card").forEach(card => {
+      const term = card.querySelector(".gloss-term");
+      const def = card.querySelector(".gloss-def");
       if (term && def) {
-        const t = term.textContent.trim();
-        const d = def.textContent.trim();
+        const t = term.textContent.trim(), d = def.textContent.trim();
         map[t] = d;
-        // Aliases — split on parens, "/", "(", remove suffix forms
-        const noParens = t.replace(/\s*\([^)]*\)/, '').trim();
+        const noParens = t.replace(/\s*\([^)]*\)/, "").trim();
         if (noParens && noParens !== t) map[noParens] = d;
       }
     });
     return map;
   }
-
   function wrapTermsIn(el, terms) {
     if (!el) return;
     const keys = Object.keys(terms).sort((a, b) => b.length - a.length);
@@ -1400,97 +1646,51 @@ applySyncSettings = async function() {
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
       acceptNode: node => {
         if (!node.nodeValue || node.nodeValue.trim().length < 3) return NodeFilter.FILTER_REJECT;
-        if (node.parentElement && node.parentElement.closest('.term-pop, .gloss-card')) return NodeFilter.FILTER_REJECT;
+        if (node.parentElement && node.parentElement.closest(".term-pop, .gloss-card")) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
-    const targets = [];
-    let n;
+    const targets = []; let n;
     while ((n = walker.nextNode())) targets.push(n);
     targets.forEach(node => {
-      let text = node.nodeValue;
-      let changed = false;
+      let text = node.nodeValue, changed = false;
       for (const k of keys) {
-        const re = new RegExp('(\\b)(' + k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(\\b)', 'i');
-        if (re.test(text)) {
-          text = text.replace(re, '$1<span class="term-pop" data-term="' + k + '">$2</span>$3');
-          changed = true;
-          break; // one wrap per text node to avoid nested-span churn
-        }
+        const re = new RegExp("(\\b)(" + k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")(\\b)", "i");
+        if (re.test(text)) { text = text.replace(re, '$1<span class="term-pop" data-term="' + k + '">$2</span>$3'); changed = true; break; }
       }
-      if (changed) {
-        const span = document.createElement('span');
-        span.innerHTML = text;
-        node.parentNode.replaceChild(span, node);
-      }
+      if (changed) { const span = document.createElement("span"); span.innerHTML = text; node.parentNode.replaceChild(span, node); }
     });
   }
-
   function setupPopovers() {
-    let card = document.querySelector('.term-card-overlay');
-    if (!card) {
-      card = document.createElement('div');
-      card.className = 'term-card-overlay';
-      card.innerHTML = '<div class="tc-term"></div><div class="tc-def"></div>';
-      document.body.appendChild(card);
-    }
+    let card = document.querySelector(".term-card-overlay");
+    if (!card) { card = document.createElement("div"); card.className = "term-card-overlay"; card.innerHTML = '<div class="tc-term"></div><div class="tc-def"></div>'; document.body.appendChild(card); }
     let active = null;
-    document.body.addEventListener('mouseover', e => {
-      const t = e.target.closest('.term-pop');
-      if (!t) return;
-      const key = t.dataset.term;
-      if (!key) return;
-      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
-      if (!def) return;
-      active = t;
-      card.querySelector('.tc-term').textContent = t.textContent;
-      card.querySelector('.tc-def').textContent = def;
-      const r = t.getBoundingClientRect();
-      const w = 300;
-      let left = r.left + r.width / 2 - w / 2;
-      let top = r.top - card.offsetHeight - 10;
+    function place(t) {
+      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[t.dataset.term];
+      if (!def) return false;
+      card.querySelector(".tc-term").textContent = t.textContent;
+      card.querySelector(".tc-def").textContent = def;
+      const r = t.getBoundingClientRect(), w = 300;
+      let left = r.left + r.width / 2 - w / 2, top = r.top - card.offsetHeight - 10;
       if (left < 8) left = 8;
       if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
       if (top < 8) top = r.bottom + 10;
-      card.style.left = left + 'px';
-      card.style.top = top + 'px';
-      card.style.width = w + 'px';
-      card.classList.add('shown');
-    });
-    document.body.addEventListener('mouseout', e => {
-      if (e.target.closest('.term-pop')) {
-        card.classList.remove('shown');
-        active = null;
-      }
-    });
-    document.body.addEventListener('click', e => {
-      const t = e.target.closest('.term-pop');
-      if (!t) { card.classList.remove('shown'); return; }
-      const key = t.dataset.term;
-      const def = window.__CSCS_TERMS && window.__CSCS_TERMS[key];
-      if (!def) return;
-      if (active === t) { card.classList.remove('shown'); active = null; return; }
-      active = t;
-      card.querySelector('.tc-term').textContent = t.textContent;
-      card.querySelector('.tc-def').textContent = def;
-      const r = t.getBoundingClientRect();
-      const w = 300;
-      let left = r.left + r.width / 2 - w / 2;
-      let top = r.top - card.offsetHeight - 10;
-      if (left < 8) left = 8;
-      if (left + w > window.innerWidth - 8) left = window.innerWidth - w - 8;
-      if (top < 8) top = r.bottom + 10;
-      card.style.left = left + 'px';
-      card.style.top = top + 'px';
-      card.style.width = w + 'px';
-      card.classList.add('shown');
+      card.style.left = left + "px"; card.style.top = top + "px"; card.style.width = w + "px";
+      card.classList.add("shown"); return true;
+    }
+    document.body.addEventListener("mouseover", e => { const t = e.target.closest(".term-pop"); if (!t) return; active = t; place(t); });
+    document.body.addEventListener("mouseout", e => { if (e.target.closest(".term-pop")) { card.classList.remove("shown"); active = null; } });
+    document.body.addEventListener("click", e => {
+      const t = e.target.closest(".term-pop");
+      if (!t) { card.classList.remove("shown"); return; }
+      if (active === t && card.classList.contains("shown")) { card.classList.remove("shown"); active = null; return; }
+      active = t; place(t);
     });
   }
-
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       window.__CSCS_TERMS = collectTerms();
-      document.querySelectorAll('.concept, .training-link p, .facts li').forEach(el => wrapTermsIn(el, window.__CSCS_TERMS));
+      document.querySelectorAll(".concept, .training-link p, .facts li").forEach(el => wrapTermsIn(el, window.__CSCS_TERMS));
       setupPopovers();
     }, 100);
   });
