@@ -415,6 +415,26 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 '''
 
 
+def build_index_html(base_html, available, this_iso):
+    """Wrap the day's page as a self-correcting landing page.
+    Injects a tiny script that computes *today* in Asia/Manila (the viewer's
+    own clock/timezone is irrelevant) and redirects to the matching daily
+    archive page. Keeps the root URL from ever showing a stale date even if
+    the generator hasn't run for a few days."""
+    days = json.dumps(sorted(available))
+    redirect = (
+        '<script>(function(){var DAYS=' + days + ';var THIS="' + this_iso + '";'
+        'function mt(){try{var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Manila",'
+        'year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());'
+        'var o={};p.forEach(function(x){o[x.type]=x.value;});return o.year+"-"+o.month+"-"+o.day;}'
+        'catch(e){return null;}}'
+        'var t=mt();if(!t)return;var tg=null;'
+        'if(DAYS.indexOf(t)!==-1)tg=t;else if(t>DAYS[DAYS.length-1])tg=DAYS[DAYS.length-1];'
+        'if(tg&&tg!==THIS){location.replace("daily/cscs_"+tg+".html");}})();</script>'
+    )
+    return base_html.replace("<head>", "<head>\n" + redirect, 1)
+
+
 def main():
     import argparse
     parser = argparse.ArgumentParser()
@@ -449,7 +469,12 @@ def main():
     index_path = ROOT / "index.html"  # GitHub Pages entry point
     dated_path.write_text(html, encoding="utf-8")
     rolling_path.write_text(html, encoding="utf-8")
-    index_path.write_text(html, encoding="utf-8")
+    # Index is the GitHub Pages entry point: make it self-correct to Manila "today".
+    available = sorted({p.stem.replace("cscs_", "") for p in OUT.glob("cscs_2*.html")})
+    if today.isoformat() not in available:
+        available.append(today.isoformat())
+        available.sort()
+    index_path.write_text(build_index_html(html, available, today.isoformat()), encoding="utf-8")
     print(f"Wrote {dated_path}")
     print(f"Wrote {rolling_path} (rolling)")
     print(f"Wrote {index_path} (GitHub Pages entry)")
