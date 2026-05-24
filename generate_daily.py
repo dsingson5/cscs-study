@@ -470,7 +470,8 @@ def main():
     dated_path.write_text(html, encoding="utf-8")
     rolling_path.write_text(html, encoding="utf-8")
     # Index is the GitHub Pages entry point: make it self-correct to Manila "today".
-    available = sorted({p.stem.replace("cscs_", "") for p in OUT.glob("cscs_2*.html")})
+    _start = meta["start_date"]
+    available = sorted({d for p in OUT.glob("cscs_2*.html") if (d := p.stem.replace("cscs_", "")) >= _start})
     if today.isoformat() not in available:
         available.append(today.isoformat())
         available.sort()
