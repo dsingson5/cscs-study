@@ -37,6 +37,27 @@ function lsSet(key, value) {
   try { localStorage.setItem(LS_PREFIX + key, JSON.stringify(value)); } catch (e) {}
 }
 
+// ── One-time hard reset ──────────────────────────────────────────────────────
+// Bump RESET_EPOCH to wipe ALL study progress on each device's next load.
+// A local backup (cscs.backup.<epoch>) is kept first so the wipe is recoverable.
+const RESET_EPOCH = "2026-05-24";
+let __didHardReset = false;
+function maybeHardReset() {
+  try {
+    if (localStorage.getItem(LS_PREFIX + "reset_epoch") === RESET_EPOCH) return;
+    const prev = localStorage.getItem(LS_PREFIX + STATE_KEY);
+    if (prev) localStorage.setItem(LS_PREFIX + "backup." + RESET_EPOCH, prev);
+    localStorage.removeItem(LS_PREFIX + STATE_KEY);
+    localStorage.removeItem(LS_PREFIX + "qstate");
+    localStorage.removeItem(LS_PREFIX + "answers");
+    lsSet(STATE_KEY, { version: 1, user: { examDate: null, targetRetention: TARGET_RETENTION },
+      cards: {}, answers: {}, log: [], calibration: { byDomain: {} }, updated_at: new Date().toISOString() });
+    localStorage.setItem(LS_PREFIX + "reset_epoch", RESET_EPOCH);
+    __didHardReset = true;
+  } catch (e) {}
+}
+maybeHardReset();
+
 function domainFor(stable) {
   const topic = String(stable).split("__")[0];
   return (window.__CSCS_DOMAINS && window.__CSCS_DOMAINS[topic]) || "ES";
@@ -793,7 +814,10 @@ function injectSyncUI() {
 
 document.addEventListener("DOMContentLoaded", () => {
   injectSyncUI();
-  if (syncEnabled()) syncPull({ silent: true }).catch(() => {});
+  if (syncEnabled()) {
+    if (__didHardReset) syncPush({ silent: true }).catch(() => {});  // overwrite cloud with the wiped state
+    else syncPull({ silent: true }).catch(() => {});
+  }
   else updateSyncButton("off", "Cloud sync off");
 });
 
