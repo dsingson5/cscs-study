@@ -92,22 +92,33 @@ def today_local():
         return _dt.date.today()
 
 
+def relevant_lessons(lessons):
+    """Training-relevant lessons (Tiers 1-3 + advanced), in day order.
+    Lessons marked relevant=False (Tier-4 test-only) are excluded so the
+    Deep-Review rotation and spaced recaps stay training-focused."""
+    return [lessons[k] for k in sorted(lessons, key=lambda x: int(x))
+            if lessons[k].get("relevant", True)]
+
+
 def pick_review_lessons(today_day, lessons):
     out = []
     for s in SPACING_DAYS:
         t = today_day - s
         if t < 1:
             continue
-        if str(t) in lessons:
+        if str(t) in lessons and lessons[str(t)].get("relevant", True):
             out.append((s, lessons[str(t)]))
     return out
 
 
 def get_today_lesson(today_day, lessons):
+    # Scheduled days serve their authored lesson as-is.
     if str(today_day) in lessons:
         return lessons[str(today_day)], False
-    rng = random.Random(today_day)
-    return rng.choice(list(lessons.values())), True
+    # Beyond the authored calendar: Deep Review rotates EVENLY through the
+    # training-relevant pool only (no random repeats, no Tier-4 test-only).
+    pool = relevant_lessons(lessons) or list(lessons.values())
+    return pool[(today_day - 1) % len(pool)], True
 
 
 def sample_questions(topic_id, questions, n, seed):

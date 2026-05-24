@@ -37,6 +37,11 @@
         "phase": 4,
         "name": "Test & credential (lowest priority)",
         "days": "26-42"
+      },
+      {
+        "phase": 5,
+        "name": "Advanced applied — your training model, beyond the textbook",
+        "days": "43-54"
       }
     ],
     "ordering": "training-relevance priority (reordered 2026-05-23 from David's chapter ranking)"
@@ -78,7 +83,8 @@
           "def": "Muscle growth via ↑ contractile protein. Becomes dominant after 4–6 weeks. Type II preferential with heavy load.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"22\" cy=\"20\" r=\"8\" fill=\"#a33344\" opacity=\"0.7\"/><line x1=\"38\" y1=\"20\" x2=\"48\" y2=\"20\" stroke=\"#ffd84a\" stroke-width=\"2\" marker-end=\"url(#a2)\"/><defs><marker id=\"a2\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\"><polygon points=\"0,0 10,5 0,10\" fill=\"#ffd84a\"/></marker></defs><circle cx=\"60\" cy=\"20\" r=\"13\" fill=\"#a33344\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "2": {
       "title": "Bioenergetics I — ATP and the phosphagen system",
@@ -121,7 +127,8 @@
           "def": "Enzyme that catalyzes PCr + ADP → ATP + Cr. Very fast reaction — the phosphagen system supplies energy in milliseconds.",
           "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><g><circle cx=\"50\" cy=\"25\" r=\"18\" fill=\"#ffd84a\" opacity=\"0.3\"/><circle cx=\"50\" cy=\"25\" r=\"14\" fill=\"#ffd84a\" opacity=\"0.5\"/><circle cx=\"50\" cy=\"25\" r=\"10\" fill=\"#ffd84a\"/><text x=\"50\" y=\"28\" text-anchor=\"middle\" fill=\"#3a2008\" font-size=\"7\" font-weight=\"700\">CK</text></g></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "3": {
       "title": "Bioenergetics II — Glycolysis & lactate",
@@ -164,7 +171,8 @@
           "def": "Highest intensity where lactate production = lactate clearance. Tracks LT2. Your LT2 = 158 bpm indoor.",
           "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"40\" x2=\"90\" y2=\"40\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><line x1=\"10\" y1=\"40\" x2=\"10\" y2=\"5\" stroke=\"#9ba3b4\" stroke-width=\"0.5\"/><path d=\"M 10 38 L 25 36 L 40 32 L 50 28 L 58 18 L 70 8 L 85 5\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><line x1=\"55\" y1=\"5\" x2=\"55\" y2=\"40\" stroke=\"#ff5e5e\" stroke-width=\"1.5\" stroke-dasharray=\"2 2\"/><text x=\"55\" y=\"50\" text-anchor=\"middle\" fill=\"#ff5e5e\" font-size=\"5\">LT2 / MLSS</text></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "4": {
       "title": "Bioenergetics III — Oxidative phosphorylation",
@@ -207,7 +215,8 @@
           "def": "VCO₂/VO₂. 0.7 = pure fat oxidation. 1.0 = pure carb. Estimates fuel mix during exercise.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"10\" width=\"60\" height=\"20\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"1\" rx=\"2\"/><rect x=\"10\" y=\"10\" width=\"40\" height=\"20\" fill=\"#67e8b0\" opacity=\"0.7\" rx=\"2\"/><text x=\"40\" y=\"24\" text-anchor=\"middle\" fill=\"#0a0e16\" font-size=\"9\" font-weight=\"700\">0.85</text></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "5": {
       "title": "Energy system interaction & substrate use",
@@ -233,7 +242,8 @@
         "title": "Peter Attia Drive #85 — San-Millán: Energy Systems",
         "url": "https://peterattiamd.com/inigosanmillan/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "relevant": true
     },
     "6": {
       "title": "Resistance technique — squat",
@@ -276,7 +286,8 @@
           "def": "Hip crease at or below the top of the knee. CSCS standard. Squat below for more glute / posterior chain.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g stroke=\"#c9c9c9\" stroke-width=\"2\" fill=\"none\"><line x1=\"14\" y1=\"14\" x2=\"32\" y2=\"22\"/><line x1=\"32\" y1=\"22\" x2=\"28\" y2=\"36\"/><line x1=\"32\" y1=\"22\" x2=\"48\" y2=\"22\"/><line x1=\"48\" y1=\"22\" x2=\"66\" y2=\"14\"/><line x1=\"48\" y1=\"22\" x2=\"52\" y2=\"36\"/></g><line x1=\"14\" y1=\"22\" x2=\"66\" y2=\"22\" stroke=\"#67e8b0\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "7": {
       "title": "Resistance technique — deadlift",
@@ -302,7 +313,8 @@
         "title": "Huberman Lab — Galpin: Strength Protocols",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "relevant": true
     },
     "8": {
       "title": "Resistance technique — bench & overhead press",
@@ -328,7 +340,8 @@
         "title": "Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy",
         "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "relevant": true
     },
     "9": {
       "title": "Olympic lifts — power clean & derivatives",
@@ -354,7 +367,8 @@
         "title": "Iron Culture 236 — Galpin: Muscle Fiber Types & Training",
         "url": "https://www.youtube.com/watch?v=z6oWj7410G0",
         "credibility": "Iron Culture · Helms PhD"
-      }
+      },
+      "relevant": true
     },
     "10": {
       "title": "Alternative modes — kettlebell, sled, strongman",
@@ -380,7 +394,8 @@
         "title": "Huberman Lab — Galpin: Strength Building Protocols",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "relevant": true
     },
     "11": {
       "title": "Resistance program design — needs analysis",
@@ -406,7 +421,8 @@
         "title": "Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy (programming)",
         "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "relevant": true
     },
     "12": {
       "title": "Resistance program — exercise selection",
@@ -432,7 +448,8 @@
         "title": "Iron Culture 51 — Schoenfeld: Hypertrophy Programming",
         "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "relevant": true
     },
     "13": {
       "title": "Resistance program — intensity & volume",
@@ -475,7 +492,8 @@
           "def": "6–12 reps at 65–85% 1RM, 1–3 min rest. Sweet spot for muscle growth. Mechanical tension is the primary driver.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#67e8b0\"><rect x=\"14\" y=\"12\" width=\"6\" height=\"20\" rx=\"1\"/><rect x=\"24\" y=\"14\" width=\"6\" height=\"18\" rx=\"1\"/><rect x=\"34\" y=\"10\" width=\"6\" height=\"22\" rx=\"1\"/><rect x=\"44\" y=\"16\" width=\"6\" height=\"16\" rx=\"1\"/><rect x=\"54\" y=\"12\" width=\"6\" height=\"20\" rx=\"1\"/><rect x=\"64\" y=\"14\" width=\"6\" height=\"18\" rx=\"1\"/></g></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "14": {
       "title": "Resistance program — rest & frequency",
@@ -501,7 +519,8 @@
         "title": "Iron Culture 51 — Schoenfeld: Frequency & Recovery",
         "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "relevant": true
     },
     "15": {
       "title": "Periodization I — models",
@@ -527,7 +546,8 @@
         "title": "Iron Culture 51 — Schoenfeld: Periodization for Hypertrophy",
         "url": "https://www.youtube.com/watch?v=fOieQOp3o0A",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "relevant": true
     },
     "16": {
       "title": "Periodization II — macro, meso, micro",
@@ -553,7 +573,8 @@
         "title": "Peter Attia Drive #201 — San-Millán: Zone 2 (block periodization)",
         "url": "https://peterattiamd.com/inigosanmillan2/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "relevant": true
     },
     "17": {
       "title": "Plyometric program design",
@@ -591,7 +612,8 @@
           "def": "The transition between eccentric and concentric. Shorter = better SSC utilization = more power.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 30 L 30 6\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M 30 6 L 32 6\" stroke=\"#ffd84a\" stroke-width=\"4\"/><path d=\"M 32 6 L 70 30\" stroke=\"#5ec8ff\" stroke-width=\"2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "18": {
       "title": "Aerobic endurance training adaptations",
@@ -634,7 +656,8 @@
           "def": "Aerobic training doubles mitochondrial density. PGC-1α-driven. Why Z2 work matters even when it feels easy.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"20\" cy=\"20\" rx=\"10\" ry=\"6\" fill=\"#67e8b0\" opacity=\"0.5\"/><ellipse cx=\"45\" cy=\"20\" rx=\"10\" ry=\"6\" fill=\"#67e8b0\" opacity=\"0.7\"/><ellipse cx=\"65\" cy=\"20\" rx=\"10\" ry=\"6\" fill=\"#67e8b0\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "19": {
       "title": "Aerobic endurance program design",
@@ -660,7 +683,8 @@
         "title": "Peter Attia Drive #201 — San-Millán: Zone 2 Programming",
         "url": "https://peterattiamd.com/inigosanmillan2/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "relevant": true
     },
     "20": {
       "title": "Biomechanics II — Force-velocity & length-tension",
@@ -698,7 +722,8 @@
           "def": "Force is maximal at resting length (optimal actin-myosin overlap). Drops at too-short or too-stretched.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 32 Q 25 28 40 8 Q 55 28 70 32\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"40\" y1=\"6\" x2=\"40\" y2=\"34\" stroke=\"#9ba3b4\" stroke-width=\"0.5\" stroke-dasharray=\"2 2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "21": {
       "title": "Performance nutrition — timing & supplements",
@@ -741,7 +766,8 @@
           "def": "4–6 g/day. Buffers H⁺ via carnosine, helping 1–4 min efforts. Takes weeks to load; tingling is normal.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"20\" y=\"14\" width=\"40\" height=\"12\" fill=\"#ff5e5e\" opacity=\"0.3\" rx=\"2\"/><rect x=\"22\" y=\"14\" width=\"30\" height=\"12\" fill=\"#ff5e5e\" opacity=\"0.7\" rx=\"2\"/><rect x=\"22\" y=\"14\" width=\"20\" height=\"12\" fill=\"#ff5e5e\" rx=\"2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "22": {
       "title": "Basic nutrition — macronutrients",
@@ -784,7 +810,8 @@
           "def": "Muscle protein synthesis. Rises after resistance training + protein. Peaks ~1.5–3 hr post-meal. Then drops despite continued protein.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 8 32 L 18 30 L 26 12 L 38 8 L 48 20 L 60 28 L 72 30\" fill=\"none\" stroke=\"#7ed68a\" stroke-width=\"2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "23": {
       "title": "Endocrine I — Anabolic hormones",
@@ -827,7 +854,8 @@
           "def": "Insulin-like growth factor. Liver + muscle. Mediates many of GH's anabolic actions on muscle tissue.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"25\" cy=\"20\" r=\"9\" fill=\"#ffb84a\"/><line x1=\"34\" y1=\"20\" x2=\"46\" y2=\"20\" stroke=\"#ffd84a\" stroke-width=\"2\" marker-end=\"url(#a1)\"/><defs><marker id=\"a1\" viewBox=\"0 0 10 10\" refX=\"5\" refY=\"5\" markerWidth=\"4\" markerHeight=\"4\" orient=\"auto\"><polygon points=\"0,0 10,5 0,10\" fill=\"#ffd84a\"/></marker></defs><rect x=\"50\" y=\"14\" width=\"20\" height=\"12\" fill=\"#a04040\" rx=\"2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": true
     },
     "24": {
       "title": "Endocrine II — Catabolic hormones & stress",
@@ -853,7 +881,8 @@
         "title": "Huberman Lab — Galpin: Recovery & Stress",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "relevant": true
     },
     "25": {
       "title": "Warm-up & flexibility",
@@ -879,7 +908,8 @@
         "title": "Huberman Lab — Galpin: Optimal Protocols (warm-up & potentiation)",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "relevant": true
     },
     "26": {
       "title": "Skeletal muscle architecture & fiber types",
@@ -932,7 +962,8 @@
           "def": "Pale, glycogen-rich, highest force + speed but fatigues fast. Sprint fibers.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"16\" fill=\"#f0d8a0\" opacity=\"0.85\"/><g stroke=\"#ffd84a\" stroke-width=\"1.5\" stroke-linecap=\"round\" fill=\"none\"><path d=\"M 30 14 L 50 14 M 28 20 L 52 20 M 30 26 L 50 26\"/></g></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "27": {
       "title": "Motor units & the size principle",
@@ -975,7 +1006,8 @@
           "def": "After all units are recruited, force keeps rising via higher firing frequency of motoneurons.",
           "svg": "<svg viewBox=\"0 0 100 40\" xmlns=\"http://www.w3.org/2000/svg\"><g stroke=\"#5ec8ff\" stroke-width=\"1.5\" fill=\"none\"><path d=\"M 10 25 L 18 25 L 18 12 L 22 12 L 22 25 L 30 25\"/><path d=\"M 35 25 L 40 25 L 40 12 L 43 12 L 43 25 L 48 25 L 48 12 L 51 12 L 51 25 L 56 25\"/><path d=\"M 60 25 L 64 25 L 64 12 L 66 12 L 66 25 L 70 25 L 70 12 L 72 12 L 72 25 L 76 25 L 76 12 L 78 12 L 78 25 L 85 25\"/></g><text x=\"20\" y=\"38\" fill=\"#9ba3b4\" font-size=\"5\">low</text><text x=\"48\" y=\"38\" fill=\"#9ba3b4\" font-size=\"5\">moderate</text><text x=\"73\" y=\"38\" fill=\"#9ba3b4\" font-size=\"5\">high</text></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "28": {
       "title": "Neuromuscular junction & excitation-contraction coupling",
@@ -1023,7 +1055,8 @@
           "def": "Myosin head binds actin → power stroke → ATP detaches it → ATP hydrolysis re-cocks it. Requires ATP for BOTH attachment and detachment.",
           "svg": "<svg viewBox=\"0 0 100 50\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"10\" y=\"22\" width=\"80\" height=\"6\" fill=\"#5ec8ff\" rx=\"1\"/><g fill=\"#ffb86b\"><circle cx=\"20\" cy=\"14\" r=\"3\"/><circle cx=\"35\" cy=\"14\" r=\"3\"/><circle cx=\"50\" cy=\"14\" r=\"3\"/><circle cx=\"65\" cy=\"14\" r=\"3\"/><circle cx=\"80\" cy=\"14\" r=\"3\"/></g><g stroke=\"#ffb86b\" stroke-width=\"1\"><line x1=\"20\" y1=\"17\" x2=\"20\" y2=\"22\"/><line x1=\"35\" y1=\"17\" x2=\"35\" y2=\"22\"/><line x1=\"50\" y1=\"17\" x2=\"50\" y2=\"22\"/><line x1=\"65\" y1=\"17\" x2=\"65\" y2=\"22\"/><line x1=\"80\" y1=\"17\" x2=\"80\" y2=\"22\"/></g><g fill=\"#67e8b0\"><circle cx=\"15\" cy=\"34\" r=\"2\"/><circle cx=\"30\" cy=\"34\" r=\"2\"/><circle cx=\"45\" cy=\"34\" r=\"2\"/><circle cx=\"60\" cy=\"34\" r=\"2\"/><circle cx=\"75\" cy=\"34\" r=\"2\"/></g></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "29": {
       "title": "Cardiovascular system — heart, vessels, blood flow",
@@ -1071,7 +1104,8 @@
           "def": "Endurance training: eccentric LV hypertrophy (larger chamber). Resistance: concentric (thicker wall). Different shapes, different stimuli.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"25\" cy=\"20\" r=\"14\" fill=\"none\" stroke=\"#ff5e5e\" stroke-width=\"2\"/><circle cx=\"25\" cy=\"20\" r=\"6\" fill=\"#ff5e5e\" opacity=\"0.3\"/><circle cx=\"60\" cy=\"20\" r=\"12\" fill=\"none\" stroke=\"#ff5e5e\" stroke-width=\"6\"/><circle cx=\"60\" cy=\"20\" r=\"3\" fill=\"#ff5e5e\" opacity=\"0.3\"/></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "30": {
       "title": "Respiratory system & gas exchange",
@@ -1114,7 +1148,8 @@
           "def": "~98.5% saturated at sea level. The S-shaped curve means small PO₂ drops unload a lot of O₂ at tissue.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"40\" cy=\"20\" r=\"12\" fill=\"#ff5e5e\"/><circle cx=\"32\" cy=\"14\" r=\"3\" fill=\"#5ec8ff\"/><circle cx=\"48\" cy=\"14\" r=\"3\" fill=\"#5ec8ff\"/><circle cx=\"32\" cy=\"26\" r=\"3\" fill=\"#5ec8ff\"/><circle cx=\"48\" cy=\"26\" r=\"3\" fill=\"#5ec8ff\"/></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "31": {
       "title": "Biomechanics I — Force, torque, levers",
@@ -1152,7 +1187,8 @@
           "def": "Effort between fulcrum and load. Most human joints. Mechanical disadvantage for force, advantage for range and speed.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><line x1=\"10\" y1=\"20\" x2=\"70\" y2=\"20\" stroke=\"#7fc4ff\" stroke-width=\"3\"/><circle cx=\"15\" cy=\"20\" r=\"3.5\" fill=\"#ffcc4a\"/><polygon points=\"40,20 36,10 44,10\" fill=\"#67e8b0\"/><rect x=\"60\" y=\"14\" width=\"10\" height=\"12\" fill=\"#ff5e5e\"/></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "32": {
       "title": "Age and sex differences in training response",
@@ -1178,7 +1214,8 @@
         "title": "Stronger By Science Podcast — Episode 9: Hormonal Contraceptives, Training Adaptations",
         "url": "https://www.strongerbyscience.com/podcast-episode-9/",
         "credibility": "Nuckols + Trexler PhD"
-      }
+      },
+      "relevant": false
     },
     "33": {
       "title": "Sport psychology — arousal, anxiety, motivation",
@@ -1216,7 +1253,8 @@
           "def": "Individual Zones of Optimal Functioning (Hanin). Each athlete has a unique optimal arousal range — not one-size-fits-all.",
           "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"20\" y=\"12\" width=\"40\" height=\"16\" fill=\"rgba(127, 196, 142, 0.3)\" stroke=\"#7fc48e\" stroke-width=\"1.5\" rx=\"3\"/><line x1=\"40\" y1=\"6\" x2=\"40\" y2=\"34\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
         }
-      ]
+      ],
+      "relevant": false
     },
     "34": {
       "title": "Performance-enhancing substances & methods",
@@ -1242,7 +1280,8 @@
         "title": "Sigma Nutrition Radio — Performance-Enhancing Substances",
         "url": "https://sigmanutrition.com/podcast/",
         "credibility": "Danny Lennon · evidence-based"
-      }
+      },
+      "relevant": false
     },
     "35": {
       "title": "Test selection principles — validity, reliability, specificity",
@@ -1268,7 +1307,8 @@
         "title": "Iron Culture — Brad Schoenfeld: Hypertrophy Research Methods",
         "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
         "credibility": "Iron Culture · Schoenfeld PhD"
-      }
+      },
+      "relevant": false
     },
     "36": {
       "title": "Test administration — strength & power",
@@ -1294,7 +1334,8 @@
         "title": "Huberman Lab — Galpin: Assessment of Fitness",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-assess-improve-all-aspects-of-your-fitness",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "relevant": false
     },
     "37": {
       "title": "Test administration — endurance & body comp",
@@ -1320,7 +1361,8 @@
         "title": "Peter Attia Drive #85 — San-Millán: Energy Systems & Testing",
         "url": "https://peterattiamd.com/inigosanmillan/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "relevant": false
     },
     "38": {
       "title": "Speed & agility training",
@@ -1346,7 +1388,8 @@
         "title": "Iron Culture 236 — Galpin: Fiber Types & Training Specificity",
         "url": "https://www.youtube.com/watch?v=z6oWj7410G0",
         "credibility": "Iron Culture · Galpin"
-      }
+      },
+      "relevant": false
     },
     "39": {
       "title": "Rehabilitation & reconditioning principles",
@@ -1372,7 +1415,8 @@
         "title": "Huberman Lab — Galpin: Recovery Protocols",
         "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
         "credibility": "Stanford + Galpin"
-      }
+      },
+      "relevant": false
     },
     "40": {
       "title": "Facility design & layout",
@@ -1398,7 +1442,8 @@
         "title": "Iron Culture — Hypertrophy & Training Environment",
         "url": "https://www.youtube.com/watch?v=hOWoAg8pG8E",
         "credibility": "Schoenfeld PhD"
-      }
+      },
+      "relevant": false
     },
     "41": {
       "title": "Facility policies, procedures & legal",
@@ -1424,7 +1469,8 @@
         "title": "Sigma Nutrition Radio — Evidence-based practice",
         "url": "https://sigmanutrition.com/podcast/",
         "credibility": "Danny Lennon"
-      }
+      },
+      "relevant": false
     },
     "42": {
       "title": "Phase 1 integration review",
@@ -1450,7 +1496,536 @@
         "title": "Peter Attia Drive #85 — San-Millán: Energy Systems Overview",
         "url": "https://peterattiamd.com/inigosanmillan/",
         "credibility": "Peter Attia MD"
-      }
+      },
+      "relevant": false
+    },
+    "43": {
+      "title": "Polarized training & intensity distribution (Seiler)",
+      "topic_id": "polarized_training",
+      "domain": "PD",
+      "chapter": "Beyond the text · Seiler",
+      "page_refs": "Seiler 2010; Stöggl & Sperlich 2014",
+      "key_concept": "Elite endurance athletes cluster ~75-85% of SESSIONS in zone 1 (below LT1/VT1, conversational) and ~15-20% in zone 3 (above LT2/VT2), with little in the 'grey zone' between — a polarized distribution. The model is defined by session count, not minutes. The competing models are pyramidal (most easy, some threshold, little hard) and threshold (heavy zone-2/sweet-spot emphasis). Polarized maximizes aerobic stimulus while limiting autonomic/cardiac cost, so high-intensity days stay genuinely hard. Most over-trained age-groupers fail by drifting easy days into the grey zone.",
+      "key_facts": [
+        "Polarization is a SESSION-COUNT ratio (~80/20), not a minute-share",
+        "3 zones: Z1 < LT1 (easy), Z2 between thresholds (grey), Z3 > LT2 (hard)",
+        "Grey-zone drift = too hard to recover, too easy to drive top-end",
+        "Polarization Index = log10(Z1%/Z3% × ... ) — track distribution over a block",
+        "Easy days must be truly easy so hard days can be truly hard"
+      ],
+      "training_link": "Your Seiler 80/20 is computed on session count (not minutes) and you track a Polarization Index. Your Z2 HR cap of 132 indoor keeps easy days below LT1=147 — exactly the discipline that protects your hard 4×8 days.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Most of Your Training Should Be EASY — Dr. Stephen Seiler",
+        "url": "https://www.youtube.com/watch?v=Ju3McjlSoAg",
+        "credibility": "Floris Gierman + Seiler"
+      },
+      "glossary": [
+        {
+          "term": "Polarized distribution",
+          "def": "~80% of sessions easy (below LT1), ~20% hard (above LT2), minimal middle. Defined by session count.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        },
+        {
+          "term": "Grey zone",
+          "def": "Between LT1 and LT2 — too hard to be recovery, too easy to maximize top-end. Where junk miles live.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ffb86b' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Polarization Index",
+          "def": "A single number summarizing how polarized a training block's intensity distribution is.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='14' cy='20' r='6' fill='#67e8b0'/><circle cx='38' cy='20' r='6' fill='#67e8b0'/><circle cx='62' cy='20' r='6' fill='#67e8b0'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "44": {
+      "title": "Lactate thresholds & zone anchoring (LT1, LT2, MLSS)",
+      "topic_id": "lactate_thresholds_zones",
+      "domain": "PD",
+      "chapter": "Beyond the text · lactate",
+      "page_refs": "San-Millán; Faude 2009",
+      "key_concept": "LT1 (aerobic threshold, ~2 mmol/L) is the first rise of blood lactate above baseline — the ceiling of true easy/Zone-2 work. LT2 (anaerobic threshold / MLSS, ~4 mmol/L heuristic) is the highest intensity where lactate production still equals clearance — sustainable ~30-60 min. Zones should be anchored to YOUR measured thresholds, not %HRmax or generic tables, because threshold HR varies widely between individuals and drifts with fitness, heat, and fatigue. MLSS ≈ critical power ≈ ~1-hour time-trial pace.",
+      "key_facts": [
+        "LT1 ≈ aerobic threshold ≈ top of Zone 2 (~2 mmol/L)",
+        "LT2 ≈ anaerobic threshold ≈ MLSS (~4 mmol/L heuristic, individual)",
+        "MLSS = highest steady state where lactate appearance = clearance",
+        "Anchor zones to measured thresholds, not %HRmax",
+        "Threshold HR drifts down in heat and with fatigue — cap, don't chase"
+      ],
+      "training_link": "Your indoor LT1=147 and LT2=158 are the anchors for every zone you train. Z2 cap 132 sits safely under LT1. Your 4×8 at HR 170-175 is deliberately supra-MLSS — above LT2, where accumulation forces adaptation.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "glossary": [
+        {
+          "term": "LT1",
+          "def": "Aerobic threshold — first lactate rise above baseline (~2 mmol/L). Top of true Zone 2.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#5ec8ff' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "LT2 / MLSS",
+          "def": "Anaerobic threshold — highest sustainable steady state (~4 mmol/L). Production = clearance.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ff7a7a' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Zone anchoring",
+          "def": "Setting HR/power zones from measured thresholds rather than generic %HRmax tables.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "45": {
+      "title": "Zone 2, mitochondrial biogenesis & fat oxidation (San-Millán)",
+      "topic_id": "zone2_mitochondria",
+      "domain": "ES",
+      "chapter": "Beyond the text · metabolism",
+      "page_refs": "San-Millán & Brooks 2018",
+      "key_concept": "Zone 2 (just below LT1) is the intensity that maximally stimulates mitochondrial function and fat oxidation in Type I fibers while keeping lactate near baseline. The chronic signal — repeated Z2 volume — upregulates PGC-1α, driving mitochondrial biogenesis, capillary density, and the MCT1 lactate-clearance transporters. The result is metabolic flexibility: the ability to oxidize fat at higher absolute intensities and clear lactate faster, which raises the power/pace you can hold below threshold.",
+      "key_facts": [
+        "Zone 2 sits just below LT1 — maximal fat-oxidation stimulus, minimal lactate",
+        "PGC-1α is the master regulator of mitochondrial biogenesis",
+        "Adaptations: ↑ mitochondrial density, ↑ capillaries, ↑ MCT1 clearance",
+        "Metabolic flexibility = oxidize fat at higher absolute intensity",
+        "Benefit is dose-dependent on accumulated easy volume, not intensity"
+      ],
+      "training_link": "Your RHR 46→37 and HRV 118→187 (Jan→May) reflect exactly this mitochondrial/autonomic remodeling. The Z2 cap at HR 132 indoor keeps you in the fat-ox sweet spot instead of leaking into the grey zone.",
+      "video": {
+        "title": "Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise & Metabolic Health",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "glossary": [
+        {
+          "term": "PGC-1α",
+          "def": "Master regulator switched on by endurance work; drives mitochondrial biogenesis and capillary growth.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#5ec8ff'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#67e8b0'/></svg>"
+        },
+        {
+          "term": "Metabolic flexibility",
+          "def": "Capacity to switch between and oxidize fat vs carbohydrate efficiently across intensities.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#67e8b0' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "MCT1",
+          "def": "Monocarboxylate transporter that shuttles lactate into oxidative fibers for fuel — upregulated by Z2.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='14' cy='20' r='6' fill='#ffb86b'/><circle cx='38' cy='20' r='6' fill='#ffb86b'/><circle cx='62' cy='20' r='6' fill='#ffb86b'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "46": {
+      "title": "Concurrent training: the molecular interference effect",
+      "topic_id": "concurrent_interference",
+      "domain": "PD",
+      "chapter": "Beyond the text · concurrent",
+      "page_refs": "Hickson 1980; Coffey & Hawley 2017",
+      "key_concept": "Endurance and resistance training drive partly antagonistic molecular signals: endurance work activates AMPK (an energy-sensing pathway favoring mitochondrial biogenesis and catabolism), while resistance training activates mTOR (favoring protein synthesis and hypertrophy). High endurance load can blunt the mTOR response, attenuating strength/power gains — the 'interference effect.' Crucially it is asymmetric: heavy resistance training does NOT meaningfully impair aerobic adaptation. Interference scales with endurance intensity, volume, and frequency, and with proximity in time.",
+      "key_facts": [
+        "Endurance → AMPK; resistance → mTOR; the pathways partly antagonize",
+        "Interference is ASYMMETRIC: endurance blunts strength, not vice-versa",
+        "Severity scales with endurance intensity, volume, frequency, proximity",
+        "Separate hard endurance and heavy lifting by hours / order by priority",
+        "Strength training can ENHANCE endurance economy (no penalty)"
+      ],
+      "training_link": "This is the central rule of your week. Your highest-intensity endurance (4×8, VO₂max, Mixed-Modality) is what most blunts strength, so keep your heaviest DUP day (Lower-Heavy) maximally separated from it. Strength PM after Z1-bike AM respects the asymmetry.",
+      "video": {
+        "title": "Huberman Lab — Andy Galpin: Optimal Protocols to Build Strength",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      },
+      "audio": {
+        "title": "Huberman Lab — Andy Galpin: Optimal Protocols to Build Strength",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      },
+      "glossary": [
+        {
+          "term": "AMPK",
+          "def": "Energy-sensing pathway activated by endurance work; promotes mitochondrial biogenesis, can suppress mTOR.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#5ec8ff'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#ffb86b'/></svg>"
+        },
+        {
+          "term": "mTOR",
+          "def": "Anabolic pathway activated by resistance training; drives muscle protein synthesis and hypertrophy.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#a33344'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#67e8b0'/></svg>"
+        },
+        {
+          "term": "Interference effect",
+          "def": "Attenuation of strength/power gains when high endurance load is trained concurrently.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#ff7a7a'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#5ec8ff'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "47": {
+      "title": "What limits endurance: VO₂max, threshold & economy",
+      "topic_id": "endurance_determinants",
+      "domain": "ES",
+      "chapter": "Beyond the text · determinants",
+      "page_refs": "Joyner & Coyle 2008",
+      "key_concept": "Endurance performance is set by three semi-independent factors: VO₂max (the ceiling of aerobic power, mostly central — cardiac output × a-vO₂ difference), the fractional utilization (the % of VO₂max sustainable at threshold), and movement economy (the O₂/energy cost of a given pace or power). Two athletes with identical VO₂max can perform very differently if one has a higher threshold or better economy. In trained athletes VO₂max plateaus, so gains increasingly come from threshold and economy — which is why high-volume easy work and skill/strength matter late in development.",
+      "key_facts": [
+        "Performance ≈ VO₂max × fractional utilization × economy",
+        "VO₂max is mostly central (cardiac output) in trained non-elites",
+        "Fractional utilization = % of VO₂max held at threshold",
+        "Economy = O₂/energy cost per unit pace or power",
+        "Trained athletes gain more from threshold + economy than from VO₂max"
+      ],
+      "training_link": "Your VO₂max is well-developed, so your returns now come from raising fractional utilization (pushing LT2 up from 158) and economy (run skill, strength-driven stiffness) — which is why your strength block is structurally protected, not optional.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise & Metabolic Health",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "glossary": [
+        {
+          "term": "VO₂max",
+          "def": "Maximal rate of oxygen use — the aerobic-power ceiling. Mostly limited by cardiac output.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        },
+        {
+          "term": "Fractional utilization",
+          "def": "The fraction of VO₂max sustainable at threshold — raises performance without raising the ceiling.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#67e8b0' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Economy",
+          "def": "Oxygen/energy cost of a given pace or power. Better economy = faster at the same VO₂.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ffb86b' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "48": {
+      "title": "Durability & aerobic decoupling (modern endurance)",
+      "topic_id": "durability_decoupling",
+      "domain": "ES",
+      "chapter": "Beyond the text · durability",
+      "page_refs": "Maunder 2021; Weersma",
+      "key_concept": "Classic lab markers (VO₂max, threshold) are measured fresh — but races are won tired. Durability is the resistance of those markers to drift after prolonged work: a durable athlete's threshold and economy hold up after 2-3 hours, a fragile one's collapse. Aerobic decoupling quantifies it: the rise in HR relative to pace/power over a steady effort. Under ~5% decoupling on a long steady session signals a well-developed aerobic base; higher decoupling flags either under-built base or that the effort exceeded true Zone 2.",
+      "key_facts": [
+        "Durability = resistance of threshold/economy to fatigue over time",
+        "Aerobic decoupling = HR drift relative to pace/power on a steady effort",
+        "<5% decoupling ≈ solid aerobic base; >5% = base gap or too-hard pace",
+        "Built by accumulated Zone-2 volume and long sessions",
+        "Lab values measured fresh underpredict real fatigued performance"
+      ],
+      "training_link": "Your progress chart already tracks within-session decoupling — Apr-May ran +7.66% (42% of sessions overreached) vs Aug-Nov +9.86% (65%). You're measurably more durable now. Sub-5% on long Z2 is the target.",
+      "video": {
+        "title": "Most of Your Training Should Be EASY — Dr. Stephen Seiler",
+        "url": "https://www.youtube.com/watch?v=Ju3McjlSoAg",
+        "credibility": "Floris Gierman + Seiler"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)",
+        "url": "https://peterattiamd.com/inigosanmillan2/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "glossary": [
+        {
+          "term": "Durability",
+          "def": "How well threshold, economy and pace hold up after hours of work — performance when tired.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#67e8b0' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Aerobic decoupling",
+          "def": "Drift of heart rate relative to pace/power across a steady effort; lower is better.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 8 18 L 22 18 L 28 8 L 38 32 L 46 20 L 54 20 L 60 14 L 72 14' stroke='#ffb86b' stroke-width='2' fill='none'/></svg>"
+        },
+        {
+          "term": "Aerobic base",
+          "def": "Accumulated easy aerobic volume that underpins durability and fat oxidation.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "49": {
+      "title": "HIIT & interval prescription (long intervals, supra-MLSS)",
+      "topic_id": "hiit_interval_design",
+      "domain": "PD",
+      "chapter": "Beyond the text · intervals",
+      "page_refs": "Seiler & Tønnessen 2009; Buchheit & Laursen 2013",
+      "key_concept": "High-intensity intervals manipulate work duration, intensity, recovery duration and recovery intensity to target a system. For raising threshold/VO₂max, longer reps (4-8 min) at supra-MLSS with short recoveries accumulate the most time near VO₂max while staying repeatable. The first rep should feel almost too easy — pacing is the skill. Recovery is set to keep the SERIES on target, not to fully recover. The aim of threshold/VO₂max intervals is supra-MLSS metabolic stress, not all-out efforts that fail early.",
+      "key_facts": [
+        "Variables: work duration, work intensity, recovery duration, recovery intensity",
+        "Long reps (4-8 min) supra-MLSS maximize time near VO₂max",
+        "Rep 1 should feel too easy — even pacing beats heroic fades",
+        "Recovery keeps the SERIES on target, not full recovery",
+        "Threshold/VO₂max work is controlled supra-MLSS, not all-out sprints"
+      ],
+      "training_link": "Your data shows 4×8 chronically under-paced (HR 146-151 vs ~170 target) while 6-min and 7-min reps are your sweet spots — so you anchor on 6×5 + 7×4. Target the 4×8 at HR 170-175 mean, lactate 7-10 mmol, 2-min recoveries, supra-MLSS.",
+      "video": {
+        "title": "Stephen Seiler — Polarized Training 101",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "audio": {
+        "title": "Most of Your Training Should Be EASY — Dr. Stephen Seiler",
+        "url": "https://www.youtube.com/watch?v=Ju3McjlSoAg",
+        "credibility": "Floris Gierman + Seiler"
+      },
+      "glossary": [
+        {
+          "term": "Supra-MLSS",
+          "def": "Intensity above maximal lactate steady state — lactate accumulates, forcing adaptation. The target of long intervals.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ff7a7a' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Work:rest ratio",
+          "def": "Ratio of effort to recovery duration; for long aerobic intervals recovery only partially restores between reps.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        },
+        {
+          "term": "Time near VO₂max",
+          "def": "Total minutes spent close to maximal oxygen uptake — the key dose for VO₂max intervals.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='14' cy='20' r='6' fill='#67e8b0'/><circle cx='38' cy='20' r='6' fill='#67e8b0'/><circle cx='62' cy='20' r='6' fill='#67e8b0'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "50": {
+      "title": "Hyrox race demands & compromised-running pacing",
+      "topic_id": "hyrox_demands_pacing",
+      "domain": "PD",
+      "chapter": "Beyond the text · Hyrox",
+      "page_refs": "Hyrox format analysis",
+      "key_concept": "Hyrox alternates 8 × 1 km runs with 8 functional stations (ski-erg, sled push, sled pull, burpee broad jumps, row, farmers carry, sandbag lunges, wall balls). The defining demand is 'compromised running' — running well with pre-fatigued, lactate-loaded legs and elevated HR from the prior station. Total run volume (8 km) means run economy under fatigue dominates the result, while the sled push/pull and grip stations are where the elite-to-average gap is largest. Pacing is even-to-negative; the classic error is redlining early sleds and detonating the back-half runs.",
+      "key_facts": [
+        "8 × 1 km runs alternating with 8 functional stations",
+        "'Compromised running' — running on pre-fatigued, lactate-loaded legs",
+        "Run volume (8 km) means fatigued run economy dominates the result",
+        "Sled push/pull + grip = largest elite-to-average performance gap",
+        "Even/negative pacing; redlining early sleds wrecks back-half runs"
+      ],
+      "training_link": "Your Mixed-Modality Engine sessions train exactly the run-station transition. Sled pull + grip endurance is flagged as your biggest gap — the highest-ROI station to drill. Heat venues blunt this work, hence your cool-venue race-specificity rule.",
+      "video": {
+        "title": "Most of Your Training Should Be EASY — Dr. Stephen Seiler",
+        "url": "https://www.youtube.com/watch?v=Ju3McjlSoAg",
+        "credibility": "Floris Gierman + Seiler"
+      },
+      "audio": {
+        "title": "Huberman Lab — Andy Galpin: Optimal Protocols to Build Strength",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      },
+      "glossary": [
+        {
+          "term": "Compromised running",
+          "def": "Running with legs pre-fatigued and lactate-loaded from a prior station — the core Hyrox skill.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 8 18 L 22 18 L 28 8 L 38 32 L 46 20 L 54 20 L 60 14 L 72 14' stroke='#ff7a7a' stroke-width='2' fill='none'/></svg>"
+        },
+        {
+          "term": "Station transition",
+          "def": "The first 100-200 m off a station where HR is high and turnover must be re-established.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#ffb86b'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#5ec8ff'/></svg>"
+        },
+        {
+          "term": "Even pacing",
+          "def": "Holding sustainable effort across all 8 runs/stations rather than redlining early.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#67e8b0'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#67e8b0'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#67e8b0'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "51": {
+      "title": "Sled push/pull mechanics & the force-velocity profile",
+      "topic_id": "sled_force_velocity",
+      "domain": "EX",
+      "chapter": "Beyond the text · sled",
+      "page_refs": "Ch 16 extension; Cross 2017",
+      "key_concept": "Sled work is a horizontal-force task. The force-velocity profile describes the trade-off between how much force you can apply and how fast you move: heavy sleds train the high-force/low-velocity end (acceleration mechanics, ground reaction), light sleds train the high-velocity end (turnover). Technique: stay in a low forward lean with arms long on the push, hips low and drive through mid-foot with full leg extension; on the pull, hinge and row hand-over-hand with continuous tension. Heavy sled pushing transfers strongly to early acceleration and to the Hyrox sled stations.",
+      "key_facts": [
+        "Sled = horizontal force production; load shifts the force-velocity emphasis",
+        "Heavy sled = high-force/low-velocity (acceleration, ground reaction)",
+        "Light sled = high-velocity (turnover, stride frequency)",
+        "Push: low forward lean, long arms, full leg drive through mid-foot",
+        "Pull: hinge, continuous tension, hand-over-hand, brace the trunk"
+      ],
+      "training_link": "Sled push/pull is your flagged biggest gap. Programming both heavy (force) and lighter (velocity) sled loads covers the full profile; your force-velocity research already informs this. Drill it in cool conditions so quality isn't capped by heat.",
+      "video": {
+        "title": "Squat University — How To Squat Correctly",
+        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
+        "credibility": "Aaron Horschig DPT"
+      },
+      "audio": {
+        "title": "Huberman Lab — Andy Galpin: Optimal Protocols to Build Strength",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      },
+      "glossary": [
+        {
+          "term": "Force-velocity profile",
+          "def": "The trade-off curve between force output and movement velocity; load selection targets one end.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#5ec8ff' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Horizontal force",
+          "def": "Force directed forward (not vertical) — the propulsive component sleds and acceleration depend on.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#67e8b0'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#ffb86b'/></svg>"
+        },
+        {
+          "term": "Ground reaction force",
+          "def": "The force the ground returns when you push into it — basis of acceleration and sled drive.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#ff7a7a'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "52": {
+      "title": "Periodization for hybrid athletes (concurrent load)",
+      "topic_id": "hybrid_periodization",
+      "domain": "PD",
+      "chapter": "Beyond the text · periodization",
+      "page_refs": "Ch 21 extension",
+      "key_concept": "Standard periodization assumes one quality is being peaked; hybrid athletes must develop strength and endurance simultaneously, so the art is sequencing to limit interference. Useful tools: block emphasis (a mesocycle leans toward one quality while maintaining the other), daily undulating periodization for the strength side (rotating load/volume within the week), and prioritizing the limiting quality's hard sessions for the freshest slots. Volume and emphasis are periodized at the block level while the polarized intensity DISTRIBUTION is held roughly constant — you don't periodize the 80/20.",
+      "key_facts": [
+        "Hybrid goal: develop strength + endurance together, minimize interference",
+        "Block emphasis: lean a mesocycle to one quality, maintain the other",
+        "DUP on the strength side rotates load/volume within the microcycle",
+        "Give the limiting quality's hard sessions the freshest slots",
+        "Periodize volume/emphasis, NOT the polarized intensity distribution"
+      ],
+      "training_link": "You run a 9-day DUP rotation (Lower / Upper-Grip / Power / Upper-Hyper) inside an ~88-day macrocycle (threshold→VO₂max→consolidation), periodizing emphasis at the block level while holding the polarized distribution constant — textbook-correct resolution of the Seiler tension.",
+      "video": {
+        "title": "Huberman Lab — Andy Galpin: Optimal Protocols to Build Strength",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      },
+      "audio": {
+        "title": "Stephen Seiler — Polarized Training 101",
+        "url": "https://www.youtube.com/watch?v=bxEaAbcO64s",
+        "credibility": "Fast Talk Labs · Seiler PhD"
+      },
+      "glossary": [
+        {
+          "term": "Block periodization",
+          "def": "Mesocycles that concentrate on one quality while maintaining others, sequenced across the year.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        },
+        {
+          "term": "DUP",
+          "def": "Daily Undulating Periodization — load/volume varies session-to-session within a microcycle.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ffb86b' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        },
+        {
+          "term": "Concurrent sequencing",
+          "def": "Ordering sessions/days to keep hard endurance away from heavy lifting and protect priority quality.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#5ec8ff'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#a33344'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "53": {
+      "title": "Heat acclimatization & thermoregulation",
+      "topic_id": "heat_thermoregulation",
+      "domain": "ES",
+      "chapter": "Beyond the text · heat",
+      "page_refs": "Périard 2015",
+      "key_concept": "In the heat, blood is shunted to the skin for cooling, competing with muscle for cardiac output: HR rises, stroke volume falls, and threshold pace drops at the same internal effort — so HR-based zones mislead in heat (cap, don't chase pace). Heat acclimatization over ~10-14 days expands plasma volume, lowers core/skin temperature thresholds for sweating, increases sweat rate, and reduces electrolyte loss, restoring some performance. But quality high-intensity work degrades disproportionately in heat — the recovery cost of a hot session can exceed that of the hard intervals themselves.",
+      "key_facts": [
+        "Heat shunts blood to skin → ↓ stroke volume, ↑ HR, ↓ threshold pace",
+        "HR zones mislead in heat — cap effort, don't chase pace",
+        "Acclimatization (~10-14 d): ↑ plasma volume, earlier/greater sweating",
+        "Quality intensity work degrades disproportionately in the heat",
+        "A hot session's recovery cost can exceed the intervals themselves"
+      ],
+      "training_link": "Your 31-32°C thermo ceiling and 'heat costs more recovery than the 4×8s do' rule come straight from this. It's why race-specificity quality needs cool venues and why heat-season hard work is capped on effort, not pace.",
+      "video": {
+        "title": "Most of Your Training Should Be EASY — Dr. Stephen Seiler",
+        "url": "https://www.youtube.com/watch?v=Ju3McjlSoAg",
+        "credibility": "Floris Gierman + Seiler"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise & Metabolic Health",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "glossary": [
+        {
+          "term": "Plasma volume expansion",
+          "def": "Key heat adaptation — more blood volume supports both cooling and stroke volume.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg>"
+        },
+        {
+          "term": "Cardiovascular drift",
+          "def": "HR rises over a steady effort in heat as skin blood flow steals from stroke volume.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 8 18 L 22 18 L 28 8 L 38 32 L 46 20 L 54 20 L 60 14 L 72 14' stroke='#ff7a7a' stroke-width='2' fill='none'/></svg>"
+        },
+        {
+          "term": "Heat acclimatization",
+          "def": "~10-14 days of heat exposure improving sweat response and lowering thermal strain.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ffb86b' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg>"
+        }
+      ],
+      "relevant": true
+    },
+    "54": {
+      "title": "Recovery, HRV monitoring & sleep as the limiter",
+      "topic_id": "recovery_hrv_sleep",
+      "domain": "PD",
+      "chapter": "Beyond the text · recovery",
+      "page_refs": "Plews 2013; Walker 2017",
+      "key_concept": "Adaptation happens during recovery, not the session — so recovery capacity caps trainable load. Heart-rate variability (HRV) indexes parasympathetic (recovery) tone: a rising multi-week trend tracks positive adaptation, while a suppressed morning HRV flags incomplete recovery and argues for easing that day (readiness-guided training beats rigid plans). Sleep is the single largest recovery lever — it drives growth-hormone release, memory consolidation, and autonomic restoration; chronic sleep debt blunts adaptation and raises injury and illness risk more than almost any training variable.",
+      "key_facts": [
+        "Adaptation occurs in recovery — recovery capacity caps trainable load",
+        "HRV indexes parasympathetic (recovery) tone; watch the trend, not one day",
+        "Suppressed morning HRV → ease the day (readiness-guided training)",
+        "Sleep is the largest recovery lever (GH, consolidation, autonomic reset)",
+        "Chronic sleep debt blunts adaptation, raises injury/illness risk"
+      ],
+      "training_link": "Your WHOOP shows HRV +59% and RHR -9 bpm Jan→May — strong adaptation. But sleep is THE limiter (median ~5.5h vs ~9.8h need), which is why your v9.8 plan gates load behind a 7-day-median recovery check before any increase.",
+      "video": {
+        "title": "Huberman Lab — Andy Galpin: Optimal Protocols to Build Strength",
+        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
+        "credibility": "Stanford + Galpin PhD"
+      },
+      "audio": {
+        "title": "Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise & Metabolic Health",
+        "url": "https://peterattiamd.com/inigosanmillan/",
+        "credibility": "Peter Attia MD + Colorado"
+      },
+      "glossary": [
+        {
+          "term": "HRV",
+          "def": "Heart-rate variability — beat-to-beat variation indexing parasympathetic recovery tone.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 8 18 L 22 18 L 28 8 L 38 32 L 46 20 L 54 20 L 60 14 L 72 14' stroke='#67e8b0' stroke-width='2' fill='none'/></svg>"
+        },
+        {
+          "term": "Readiness-guided training",
+          "def": "Adjusting the day's load to morning recovery markers instead of following a fixed plan.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#5ec8ff'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#67e8b0'/></svg>"
+        },
+        {
+          "term": "Sleep debt",
+          "def": "Accumulated shortfall vs sleep need; blunts adaptation and raises injury/illness risk.",
+          "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#ff7a7a'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#5ec8ff'/></svg>"
+        }
+      ],
+      "relevant": true
     }
   }
 }
