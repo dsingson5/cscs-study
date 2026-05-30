@@ -428,20 +428,42 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 
 def build_index_html(base_html, available, this_iso):
     """Wrap the day's page as a self-correcting landing page.
-    Injects a tiny script that computes *today* in Asia/Manila (the viewer's
-    own clock/timezone is irrelevant) and redirects to the matching daily
-    archive page. Keeps the root URL from ever showing a stale date even if
-    the generator hasn't run for a few days."""
+    Injects a tiny script that:
+      1. Computes *today* in Asia/Manila (viewer's own clock is irrelevant).
+      2. Looks at localStorage cscs.state.v1.log to find dates the user has
+         already answered questions on (grouped by Manila date).
+      3. Redirects to the EARLIEST archive date that is <= today AND has no
+         answer activity yet — so missed days resume on the right page rather
+         than skipping ahead. If everything up to today is done, goes to today.
+      4. On a fresh device (no state yet), defaults to today so a brand-new
+         visitor doesn't get sent back to Day 1."""
     days = json.dumps(sorted(available))
+    # Inlined and minified for <head>. Keep semantics in sync with comment above.
     redirect = (
-        '<script>(function(){var DAYS=' + days + ';var THIS="' + this_iso + '";'
-        'function mt(){try{var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Manila",'
-        'year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());'
+        '<script>(function(){'
+        'var DAYS=' + days + ';var THIS="' + this_iso + '";'
+        'function mt(d){try{var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Manila",'
+        'year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d||new Date());'
         'var o={};p.forEach(function(x){o[x.type]=x.value;});return o.year+"-"+o.month+"-"+o.day;}'
         'catch(e){return null;}}'
-        'var t=mt();if(!t)return;var tg=null;'
-        'if(DAYS.indexOf(t)!==-1)tg=t;else if(t>DAYS[DAYS.length-1])tg=DAYS[DAYS.length-1];'
-        'if(tg&&tg!==THIS){location.replace("daily/cscs_"+tg+".html");}})();</script>'
+        'var today=mt();if(!today)return;'
+        'var reviewed={};var hasState=false;'
+        'try{var raw=localStorage.getItem("cscs.state.v1");'
+        'if(raw){hasState=true;var st=JSON.parse(raw);'
+        '(st&&st.log?st.log:[]).forEach(function(l){'
+        'if(!l||!l.ts)return;var md=mt(new Date(l.ts));if(md)reviewed[md]=true;});}}'
+        'catch(e){}'
+        'var tg=null;'
+        'if(hasState){'
+        'for(var i=0;i<DAYS.length;i++){var d=DAYS[i];if(d>today)break;'
+        'if(!reviewed[d]){tg=d;break;}}'
+        'if(!tg){tg=(DAYS.indexOf(today)!==-1)?today:DAYS[DAYS.length-1];}'
+        '}else{'
+        'if(DAYS.indexOf(today)!==-1)tg=today;'
+        'else if(today>DAYS[DAYS.length-1])tg=DAYS[DAYS.length-1];'
+        '}'
+        'if(tg&&tg!==THIS){location.replace("daily/cscs_"+tg+".html");}'
+        '})();</script>'
     )
     return base_html.replace("<head>", "<head>\n" + redirect, 1)
 
