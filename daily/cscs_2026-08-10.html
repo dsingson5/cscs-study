@@ -651,6 +651,10 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   .dash-row { grid-template-columns: 92px 1fr 48px; }
   .dash-cal { grid-column: 2 / -1; text-align: left; }
 }
+
+/* Last-answered label injected into q-head */
+.q-last { font-size: 11px; color: var(--text-dim); margin-left: 8px; opacity: 0.85; white-space: nowrap; }
+.q-last.q-last-never { color: var(--text-dimmer); font-style: italic; opacity: 0.7; }
 </style>
 <style>:root {
   --bg: #f0f0ea;
@@ -1226,6 +1230,7 @@ function rateQ(qid, grade) {
   s.cards[stable] = r.card;
   // Review log
   s.log.push({ cardId: stable, ts: new Date().toISOString(), rating: grade, domain: domain });
+  refreshLastAnsweredFor(stable);
   if (s.log.length > 4000) s.log = s.log.slice(-4000);
   // Calibration: confidence (pre-reveal) vs. outcome (Again=miss, else hit)
   const conf = pendingConf[qid] || "med";
@@ -1331,7 +1336,7 @@ function questionCardHTML(d, qid, opts) {
     '<span class="q-type ' + qtype + '">' + qtype + '</span>' +
     '<span class="q-domain">' + (DOMAIN_NAME[d.domain] || d.domain) + '</span>' +
     '<span class="pr-meta">' + meta + '</span>' +
-    '<span class="q-status" data-status-for="' + qid + '"></span></div>' +
+    '<span class="q-status" data-status-for="' + qid + '"></span>' + '<span class="q-last" data-last-for="' + qid + '" data-stable="' + escapeHtml(d.stable) + '"></span></div>' +
     '<div class="q-text">' + escapeHtml(d.q.q) + '</div>' +
     '<textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea>' +
     '<div class="q-confidence"><span class="conf-label">How sure are you?</span>' +
@@ -1498,10 +1503,79 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
 
+
+// ────────────────────────────────────────────────────────────────────────────
+//   "Last answered" labels next to each question
+// ────────────────────────────────────────────────────────────────────────────
+function manilaDate(d) {
+  try {
+    var p = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Manila",
+      year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(d || new Date());
+    var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
+    return o.year + "-" + o.month + "-" + o.day;
+  } catch (e) { return null; }
+}
+function formatLastAnswered(ts) {
+  if (!ts) return "";
+  var when = new Date(ts);
+  if (isNaN(when.getTime())) return "";
+  var nowD = manilaDate(new Date());
+  var thenD = manilaDate(when);
+  var nowT = nowD ? new Date(nowD + "T00:00:00").getTime() : NaN;
+  var thenT = thenD ? new Date(thenD + "T00:00:00").getTime() : NaN;
+  var dayDiff = (!isNaN(nowT) && !isNaN(thenT)) ? Math.round((nowT - thenT) / 86400000) : null;
+  var hhmm = "";
+  try {
+    hhmm = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila",
+      hour: "numeric", minute: "2-digit" }).format(when);
+  } catch (e) {}
+  if (dayDiff === 0) return "Last answered today" + (hhmm ? " at " + hhmm : "");
+  if (dayDiff === 1) return "Last answered yesterday";
+  if (dayDiff && dayDiff > 1 && dayDiff <= 7) return "Last answered " + dayDiff + " days ago";
+  if (thenD) {
+    try {
+      var nice = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila",
+        month: "short", day: "numeric" }).format(when);
+      return "Last answered " + nice;
+    } catch (e) { return "Last answered " + thenD; }
+  }
+  return "";
+}
+function latestLogTsFor(stable) {
+  var s = getState();
+  if (!s || !s.log || !s.log.length) return null;
+  var latest = null;
+  for (var i = s.log.length - 1; i >= 0; i--) {
+    var l = s.log[i];
+    if (l && l.cardId === stable) {
+      if (!latest || l.ts > latest) latest = l.ts;
+    }
+  }
+  return latest;
+}
+function refreshLastAnsweredFor(stable) {
+  if (!stable) return;
+  var ts = latestLogTsFor(stable);
+  var txt = ts ? formatLastAnswered(ts) : "Not answered yet";
+  document.querySelectorAll('.q-last[data-stable="' + (window.CSS && CSS.escape ? CSS.escape(stable) : stable) + '"]').forEach(function (el) {
+    el.textContent = txt;
+    el.classList.toggle("q-last-never", !ts);
+  });
+}
+function hydrateLastAnswered() {
+  document.querySelectorAll(".q-last[data-stable]").forEach(function (el) {
+    var stable = el.dataset.stable;
+    var ts = latestLogTsFor(stable);
+    el.textContent = ts ? formatLastAnswered(ts) : "Not answered yet";
+    el.classList.toggle("q-last-never", !ts);
+  });
+}
+
 function bootRender() {
   updateHeaderStats();
   renderDashboard();
   buildReviewQueue();
+  hydrateLastAnswered();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
