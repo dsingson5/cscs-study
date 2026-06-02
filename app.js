@@ -51,7 +51,7 @@ function maybeHardReset() {
     localStorage.removeItem(LS_PREFIX + "qstate");
     localStorage.removeItem(LS_PREFIX + "answers");
     lsSet(STATE_KEY, { version: 1, user: { examDate: null, targetRetention: TARGET_RETENTION },
-      cards: {}, answers: {}, log: [], calibration: { byDomain: {} }, updated_at: new Date().toISOString() });
+      cards: {}, answers: {}, log: [], calibration: { byDomain: {} }, touchedDays: {}, updated_at: new Date().toISOString() });
     localStorage.setItem(LS_PREFIX + "reset_epoch", RESET_EPOCH);
     __didHardReset = true;
   } catch (e) {}
@@ -331,6 +331,12 @@ function rateQ(qid, grade) {
   s.cards[stable] = r.card;
   // Review log
   s.log.push({ cardId: stable, ts: new Date().toISOString(), rating: grade, domain: domain });
+  // Mark THIS page's date as touched so the resume-mode redirect knows we've
+  // engaged with this lesson, regardless of when (Manila-time) we did it.
+  try {
+    var pageDate = (typeof window !== 'undefined' && window.__CSCS_PAGE_DATE) ? window.__CSCS_PAGE_DATE : null;
+    if (pageDate) { s.touchedDays = s.touchedDays || {}; s.touchedDays[pageDate] = true; }
+  } catch (e) {}
   refreshLastAnsweredFor(stable);
   if (s.log.length > 4000) s.log = s.log.slice(-4000);
   // Calibration: confidence (pre-reveal) vs. outcome (Again=miss, else hit)
@@ -672,11 +678,33 @@ function hydrateLastAnswered() {
   });
 }
 
+
+// ────────────────────────────────────────────────────────────────────────────
+//   Prev / Next lesson nav (uses __CSCS_PREV / __CSCS_NEXT baked by generator)
+// ────────────────────────────────────────────────────────────────────────────
+function cscsNavPrev() {
+  if (typeof window === "undefined" || !window.__CSCS_PREV) return false;
+  window.location.href = "cscs_" + window.__CSCS_PREV + ".html";
+  return false;
+}
+function cscsNavNext() {
+  if (typeof window === "undefined" || !window.__CSCS_NEXT) return false;
+  window.location.href = "cscs_" + window.__CSCS_NEXT + ".html";
+  return false;
+}
+function hydrateLessonNav() {
+  var prev = document.getElementById("ln-prev");
+  var next = document.getElementById("ln-next");
+  if (prev && !window.__CSCS_PREV) { prev.classList.add("ln-disabled"); prev.setAttribute("aria-disabled","true"); prev.onclick = function(){ return false; }; }
+  if (next && !window.__CSCS_NEXT) { next.classList.add("ln-disabled"); next.setAttribute("aria-disabled","true"); next.onclick = function(){ return false; }; }
+}
+
 function bootRender() {
   updateHeaderStats();
   renderDashboard();
   buildReviewQueue();
   hydrateLastAnswered();
+  hydrateLessonNav();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -291,7 +291,43 @@ def render_pretest(topic_id, qs, domain):
             f'<div class="qs">{cards}</div></section>')
 
 
+
+def _archive_dates(meta_start_iso):
+    """All ISO dates from start_date through max(today, latest existing daily file)."""
+    import datetime as _d
+    start = _d.date.fromisoformat(meta_start_iso)
+    existing = []
+    try:
+        for p in OUT.glob("cscs_2*.html"):
+            s = p.stem.replace("cscs_", "")
+            if s >= meta_start_iso:
+                existing.append(s)
+    except Exception:
+        pass
+    last_iso = max(existing) if existing else meta_start_iso
+    last = _d.date.fromisoformat(last_iso)
+    today_d = _d.date.today()
+    end = max(last, today_d)
+    out = []
+    d = start
+    while d <= end:
+        out.append(d.isoformat())
+        d = d + _d.timedelta(days=1)
+    return out
+
 def render_html(today, today_day, today_lesson, deep_review, reviews, questions, meta, topic_domain):
+    import json as _json2
+    page_date = today.isoformat()
+    _all = _archive_dates(meta["start_date"])
+    try:
+        _i = _all.index(page_date)
+    except ValueError:
+        _i = -1
+    _prev = _all[_i-1] if _i > 0 else None
+    _next = _all[_i+1] if _i >= 0 and _i+1 < len(_all) else None
+    prev_json = _json2.dumps(_prev)
+    next_json = _json2.dumps(_next)
+
     css = STYLES.read_text(encoding="utf-8")
     js = APP_JS.read_text(encoding="utf-8")
     theme = themes.for_day(today_day)
@@ -384,6 +420,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
     <div class="progress"><div class="bar" style="width: {min(100, today_day / 182 * 100):.1f}%;"></div></div>
     <div class="session-goal">Today: <b id="goal-new">{new_count}</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
+  <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day {today_day} &middot; {date_str}</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
   <div class="study-tip">
     <b>How to use this:</b> recall and type an answer <b>before</b> you reveal — the reveal stays locked until you commit.
     After the answer, grade yourself <b>Again / Hard / Good / Easy</b>; that grade schedules the card with
@@ -419,6 +456,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 <script>window.__CSCS_QUESTIONS = {questions_json};</script>
 <script>window.__CSCS_DOMAINS = {domains_json};</script>
 <script>window.__CSCS_NEWCOUNT = {new_count};</script>
+<script>window.__CSCS_PAGE_DATE = "{page_date}";window.__CSCS_PREV = {prev_json}; window.__CSCS_NEXT = {next_json};</script>
 {FSRS_MODULE}
 <script>{js}</script>
 </body>
@@ -450,7 +488,7 @@ def build_index_html(base_html, available, this_iso):
         'var reviewed={};var hasState=false;'
         'try{var raw=localStorage.getItem("cscs.state.v1");'
         'if(raw){hasState=true;var st=JSON.parse(raw);'
-        '(st&&st.log?st.log:[]).forEach(function(l){'
+        'var touched=(st&&st.touchedDays)?st.touchedDays:{};for(var td in touched){if(touched[td])reviewed[td]=true;}(st&&st.log?st.log:[]).forEach(function(l){'
         'if(!l||!l.ts)return;var md=mt(new Date(l.ts));if(md)reviewed[md]=true;});}}'
         'catch(e){}'
         'var tg=null;'
