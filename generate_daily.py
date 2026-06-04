@@ -464,7 +464,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 '''
 
 
-def build_index_html(base_html, available, this_iso):
+def build_index_html(base_html, available, this_iso, dtopic=None):
     """Wrap the day's page as a self-correcting landing page.
     Injects a tiny script that:
       1. Computes *today* in Asia/Manila (viewer's own clock is irrelevant).
@@ -476,31 +476,42 @@ def build_index_html(base_html, available, this_iso):
       4. On a fresh device (no state yet), defaults to today so a brand-new
          visitor doesn't get sent back to Day 1."""
     days = json.dumps(sorted(available))
-    # Inlined and minified for <head>. Keep semantics in sync with comment above.
+    dtopic_json = json.dumps(dtopic or {})
+    # Inlined, minified for <head>. Resume to the EARLIEST lesson the user has
+    # not engaged with. A lesson DATE counts as done only if (a) it was touched
+    # on its own page (touchedDays) OR (b) the user has graded at least one card
+    # for THAT day's lesson topic. We deliberately ignore answer timestamps:
+    # being active on some calendar date does not mean that date's lesson was
+    # done (reviews from many days land on a single sitting). We also ALWAYS
+    # redirect to a real daily page so the prev/next links never resolve at the
+    # site root (which 404s).
     redirect = (
         '<script>(function(){'
-        'var DAYS=' + days + ';var THIS="' + this_iso + '";'
+        'var DAYS=' + days + ';var DTOPIC=' + dtopic_json + ';var THIS="' + this_iso + '";'
         'function mt(d){try{var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Manila",'
         'year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d||new Date());'
         'var o={};p.forEach(function(x){o[x.type]=x.value;});return o.year+"-"+o.month+"-"+o.day;}'
         'catch(e){return null;}}'
-        'var today=mt();if(!today)return;'
-        'var reviewed={};var hasState=false;'
+        'var today=mt();if(!today){location.replace("daily/cscs_"+THIS+".html");return;}'
+        'var reviewed={};var engaged={};var hasState=false;'
         'try{var raw=localStorage.getItem("cscs.state.v1");'
         'if(raw){hasState=true;var st=JSON.parse(raw);'
-        'var touched=(st&&st.touchedDays)?st.touchedDays:{};for(var td in touched){if(touched[td])reviewed[td]=true;}(st&&st.log?st.log:[]).forEach(function(l){'
-        'if(!l||!l.ts)return;var md=mt(new Date(l.ts));if(md)reviewed[md]=true;});}}'
+        'var tt=(st&&st.touchedDays)?st.touchedDays:{};for(var k in tt){if(tt[k])reviewed[k]=true;}'
+        'var cc=(st&&st.cards)?st.cards:{};for(var ck in cc){engaged[ck.split("__")[0]]=true;}}}'
         'catch(e){}'
         'var tg=null;'
         'if(hasState){'
         'for(var i=0;i<DAYS.length;i++){var d=DAYS[i];if(d>today)break;'
-        'if(!reviewed[d]){tg=d;break;}}'
+        'var done=reviewed[d]||(DTOPIC[d]&&engaged[DTOPIC[d]]);'
+        'if(!done){tg=d;break;}}'
         'if(!tg){tg=(DAYS.indexOf(today)!==-1)?today:DAYS[DAYS.length-1];}'
         '}else{'
         'if(DAYS.indexOf(today)!==-1)tg=today;'
         'else if(today>DAYS[DAYS.length-1])tg=DAYS[DAYS.length-1];'
+        'else tg=DAYS[0];'
         '}'
-        'if(tg&&tg!==THIS){location.replace("daily/cscs_"+tg+".html");}'
+        'if(!tg)tg=THIS;'
+        'location.replace("daily/cscs_"+tg+".html");'
         '})();</script>'
     )
     return base_html.replace("<head>", "<head>\n" + redirect, 1)
@@ -546,7 +557,17 @@ def main():
     if today.isoformat() not in available:
         available.append(today.isoformat())
         available.sort()
-    index_path.write_text(build_index_html(html, available, today.isoformat()), encoding="utf-8")
+    _sd = _dt.date.fromisoformat(meta["start_date"])
+    _lesson_dates = {}
+    for _k, _les in lessons.items():
+        try:
+            _dd = (_sd + _dt.timedelta(days=int(_k) - 1)).isoformat()
+            _tid = _les.get("topic_id")
+            if _tid:
+                _lesson_dates[_dd] = _tid
+        except Exception:
+            pass
+    index_path.write_text(build_index_html(html, available, today.isoformat(), _lesson_dates), encoding="utf-8")
     print(f"Wrote {dated_path}")
     print(f"Wrote {rolling_path} (rolling)")
     print(f"Wrote {index_path} (GitHub Pages entry)")
