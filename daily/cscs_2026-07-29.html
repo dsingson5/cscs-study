@@ -668,6 +668,44 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .lesson-nav a.ln-disabled { color: var(--text-dimmer, #555); pointer-events: none; opacity: 0.4; }
 .lesson-nav .ln-here { color: var(--text-dim, #aaa); font-weight: 600; text-align: center; flex: 1; }
 @media (max-width: 520px) { .lesson-nav { flex-wrap: wrap; font-size: 12px; } .lesson-nav .ln-here { order: -1; flex-basis: 100%; text-align: center; margin-bottom: 4px; } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SAEngine v2 — scrub control, live skeleton tween, plane toggle, 3D view
+   ════════════════════════════════════════════════════════════════════════ */
+.sa-figure-mode .sa-stage { cursor: grab; }
+.sa-stage.sa-grabbing { cursor: grabbing; }
+.sa-figure-mode .sa-fig { display: none; }   /* the live JS skeleton replaces the static pose */
+.sa-skel { pointer-events: none; }
+.sa-skel-side, .sa-skel-front { filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+.sa-cue-lbl { font-family: -apple-system, "Segoe UI", sans-serif; }
+
+.sa-scrubhint {
+  position: absolute; right: 10px; bottom: 7px; font-size: 10px; letter-spacing: .04em;
+  color: var(--text-dim); opacity: 0; transition: opacity .25s; pointer-events: none; user-select: none;
+}
+.sa-figure-mode .sa-scrubhint { opacity: .6; }
+.sa-stage.sa-grabbing .sa-scrubhint { opacity: 0; }
+
+/* scrub slider (drag the movement frame-by-frame) */
+.sa-scrub { -webkit-appearance: none; appearance: none; width: 100%; height: 18px; margin: 10px 0 2px; background: transparent; cursor: pointer; }
+.sa-scrub::-webkit-slider-runnable-track { height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--accent,#5ec8ff), var(--accent-2,#c08fff)); opacity: .85; }
+.sa-scrub::-moz-range-track { height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--accent,#5ec8ff), var(--accent-2,#c08fff)); opacity: .85; }
+.sa-scrub::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 16px; height: 16px; margin-top: -5px; border-radius: 50%; background: var(--bg,#0b0e14); border: 2px solid var(--accent,#5ec8ff); box-shadow: 0 0 8px var(--accent,#5ec8ff); cursor: grab; }
+.sa-scrub::-moz-range-thumb { width: 15px; height: 15px; border-radius: 50%; background: var(--bg,#0b0e14); border: 2px solid var(--accent,#5ec8ff); box-shadow: 0 0 8px var(--accent,#5ec8ff); cursor: grab; }
+.sa-scrub:active::-webkit-slider-thumb { cursor: grabbing; transform: scale(1.12); }
+.sa-scrub:focus { outline: none; }
+.sa-scrub:focus::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(94,200,255,0.22), 0 0 8px var(--accent,#5ec8ff); }
+
+/* plane toggle + 3D buttons */
+.sa-plane-btn { border-color: var(--accent,#5ec8ff); color: var(--accent,#5ec8ff); }
+.sa-plane-btn.on { background: var(--accent,#5ec8ff); color: var(--bg,#0b0e14); }
+.sa-3d-btn { border-color: var(--accent-2,#c08fff); color: var(--accent-2,#c08fff); }
+.sa-3d-btn:hover { background: var(--accent-2,#c08fff); color: var(--bg,#0b0e14); }
+
+/* progressive 3D host */
+.sa-3d { margin-top: 10px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: radial-gradient(circle at 50% 28%, rgba(255,255,255,0.05), transparent 70%), var(--bg-2); min-height: 60px; }
+.sa-3d canvas { display: block; width: 100%; height: auto; touch-action: none; }
+.sa-3d-msg { padding: 22px 16px; text-align: center; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
 </style>
 <style>:root {
   --bg: #eceff3;

@@ -44,55 +44,366 @@ def _wrap(widget_id: str, title: str, body: str, hint: str = "") -> str:
 
 
 # Defined once per page; whichever stepper renders first installs the engine.
-ENGINE = """
+ENGINE = r"""
 <script>
-if(!window.SAEngine){
+/* ============================================================
+   SAEngine v2  (SA_V2)  — offline-first animated step engine.
+   New over v1:
+     - continuous joint TWEENING for figure steppers (Rive-style
+       state blending) so the athlete moves instead of jumping;
+     - drag-to-scrub on the stage + a range slider (GSAP-scrub idea);
+     - smoother eased cross-fade for diagram steppers;
+     - Sagittal <-> Frontal plane toggle for the lifts;
+     - progressive Three.js 3D view (CDN when online, graceful
+       offline fallback) for the lifts.
+   Figure keyframes are auto-extracted from the rendered SVG
+   (data-joints on .sa-fig), so the python step builders stay
+   untouched. Any failure degrades to the old discrete behaviour.
+   ============================================================ */
+if (!window.SAEngine) {
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function saEl(tag, attrs) {
+    var e = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+  function saVar(el, name, fb) {
+    try { var v = getComputedStyle(el).getPropertyValue(name).trim(); return v || fb; }
+    catch (e) { return fb; }
+  }
+  function saRGB(c) {
+    c = (c || "").trim();
+    if (c.charAt(0) === "#") {
+      if (c.length === 4) { return [parseInt(c[1] + c[1], 16), parseInt(c[2] + c[2], 16), parseInt(c[3] + c[3], 16)]; }
+      return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+    }
+    var m = c.match(/(\d+\.?\d*)/g);
+    if (m && m.length >= 3) { return [+m[0], +m[1], +m[2]]; }
+    return [94, 200, 255];
+  }
+  function saMix(a, b, t) {
+    var A = saRGB(a), B = saRGB(b);
+    return "rgb(" + Math.round(A[0] + (B[0] - A[0]) * t) + "," + Math.round(A[1] + (B[1] - A[1]) * t) + "," + Math.round(A[2] + (B[2] - A[2]) * t) + ")";
+  }
+  function saEase(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function lp(a, b, f) { return a + (b - a) * f; }
+  function lpt(a, b, f) { return [lp(a[0], b[0], f), lp(a[1], b[1], f)]; }
+
+  /* read sagittal keyframes straight out of the rendered scenes */
+  function extractFrames(scenes) {
+    var out = [], any = false;
+    for (var k = 0; k < scenes.length; k++) {
+      var fig = scenes[k].querySelector(".sa-fig[data-joints]");
+      if (!fig) { out.push(null); continue; }
+      any = true;
+      var fr = { c: fig.getAttribute("data-c") || "ac", bar: null };
+      try { fr.j = JSON.parse(fig.getAttribute("data-joints")); } catch (e) { return null; }
+      var db = fig.getAttribute("data-bar");
+      if (db) { var p = db.split(","); fr.bar = [+p[0], +p[1]]; }
+      else { var pl = scenes[k].querySelector(".sa-plate[data-bar]"); if (pl) { var pp = pl.getAttribute("data-bar").split(","); fr.bar = [+pp[0], +pp[1]]; } }
+      out.push(fr);
+    }
+    if (!any) return null;
+    var last = null;            // carry a frame across any annotation-only scene
+    for (var i = 0; i < out.length; i++) { if (out[i]) last = out[i]; else if (last) out[i] = last; }
+    for (var j2 = 0, seed = null; j2 < out.length; j2++) { if (!out[j2]) { if (!seed) { for (var z = 0; z < out.length; z++) { if (out[z]) { seed = out[z]; break; } } } out[j2] = seed; } }
+    return out;
+  }
+
+  /* ---------- side-view skeleton (mirrors python _figure) ---------- */
+  function buildSkelSide(svg, inkCol) {
+    var g = saEl("g", { "class": "sa-skel sa-skel-side" });
+    var la = { fill: "none", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" };
+    var lines = {};
+    ["nh", "hk", "ka", "at", "se", "eh"].forEach(function (id) { var ln = saEl("line", la); lines[id] = ln; g.appendChild(ln); });
+    var head = saEl("circle", {}); g.appendChild(head);
+    var barG = saEl("g", { "class": "sa-bar" });
+    var barLine = saEl("line", { "stroke-width": 5, "stroke-linecap": "round", stroke: inkCol });
+    var plL = saEl("circle", { r: 14 }), plR = saEl("circle", { r: 14 });
+    var hubL = saEl("circle", { r: 5, fill: inkCol }), hubR = saEl("circle", { r: 5, fill: inkCol });
+    barG.appendChild(barLine); barG.appendChild(plL); barG.appendChild(plR); barG.appendChild(hubL); barG.appendChild(hubR);
+    g.appendChild(barG); svg.appendChild(g);
+    return { g: g, lines: lines, head: head, barG: barG, barLine: barLine, plL: plL, plR: plR, hubL: hubL, hubR: hubR };
+  }
+  function drawSide(r, A, B, f, color, a2) {
+    var ja = A.j, jb = B.j;
+    function J(key) { return lpt(ja[key], jb[key], f); }
+    var neck = J("neck"), hip = J("hip"), knee = J("knee"), ankle = J("ankle"), toe = J("toe"), sh = J("shoulder"), elb = J("elbow"), hand = J("hand");
+    function set(ln, p, q) { ln.setAttribute("x1", p[0]); ln.setAttribute("y1", p[1]); ln.setAttribute("x2", q[0]); ln.setAttribute("y2", q[1]); ln.setAttribute("stroke", color); }
+    set(r.lines.nh, neck, hip); set(r.lines.hk, hip, knee); set(r.lines.ka, knee, ankle); set(r.lines.at, ankle, toe); set(r.lines.se, sh, elb); set(r.lines.eh, elb, hand);
+    var hx = lp(ja.head[0], jb.head[0], f), hy = lp(ja.head[1], jb.head[1], f), hr = lp(ja.head[2], jb.head[2], f);
+    r.head.setAttribute("cx", hx); r.head.setAttribute("cy", hy); r.head.setAttribute("r", hr); r.head.setAttribute("fill", color);
+    if (A.bar || B.bar) {
+      var ba = A.bar || B.bar, bb = B.bar || A.bar;
+      var bx = lp(ba[0], bb[0], f), by = lp(ba[1], bb[1], f);
+      r.barG.style.opacity = (A.bar && B.bar) ? 1 : (A.bar ? (1 - f) : f);
+      r.barLine.setAttribute("x1", bx - 62); r.barLine.setAttribute("y1", by); r.barLine.setAttribute("x2", bx + 62); r.barLine.setAttribute("y2", by);
+      r.plL.setAttribute("cx", bx - 62); r.plL.setAttribute("cy", by); r.plL.setAttribute("fill", a2);
+      r.plR.setAttribute("cx", bx + 62); r.plR.setAttribute("cy", by); r.plR.setAttribute("fill", a2);
+      r.hubL.setAttribute("cx", bx - 62); r.hubL.setAttribute("cy", by); r.hubR.setAttribute("cx", bx + 62); r.hubR.setAttribute("cy", by);
+    } else { r.barG.style.opacity = 0; }
+  }
+
+  /* ---------- frontal-view skeleton (symmetric) ---------- */
+  function buildSkelFront(svg, inkCol) {
+    var g = saEl("g", { "class": "sa-skel sa-skel-front" });
+    g.style.display = "none";
+    var la = { fill: "none", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" };
+    var lines = {};
+    ["torso", "legLU", "legLD", "legRU", "legRD", "armL", "armR"].forEach(function (id) { var ln = saEl("line", la); lines[id] = ln; g.appendChild(ln); });
+    var head = saEl("circle", {}); g.appendChild(head);
+    var barG = saEl("g", { "class": "sa-bar" });
+    var barLine = saEl("line", { "stroke-width": 5, "stroke-linecap": "round", stroke: inkCol });
+    var plL = saEl("circle", { r: 13 }), plR = saEl("circle", { r: 13 });
+    barG.appendChild(barLine); barG.appendChild(plL); barG.appendChild(plR); g.appendChild(barG);
+    var cue = saEl("text", { "class": "sa-cue-lbl", "text-anchor": "middle", "font-size": 11, "font-weight": 700 });
+    g.appendChild(cue); svg.appendChild(g);
+    return { g: g, lines: lines, head: head, barG: barG, barLine: barLine, plL: plL, plR: plR, cue: cue };
+  }
+  function drawFront(r, A, B, f, color, a2, accent) {
+    var ja = A.j, jb = B.j;
+    function J(key) { return lpt(ja[key], jb[key], f); }
+    var neck = J("neck"), hipC = J("hipC"), shL = J("shL"), shR = J("shR"), handL = J("handL"), handR = J("handR"), kneeL = J("kneeL"), kneeR = J("kneeR"), ankleL = J("ankleL"), ankleR = J("ankleR");
+    function set(ln, p, q) { ln.setAttribute("x1", p[0]); ln.setAttribute("y1", p[1]); ln.setAttribute("x2", q[0]); ln.setAttribute("y2", q[1]); ln.setAttribute("stroke", color); }
+    set(r.lines.torso, neck, hipC); set(r.lines.legLU, hipC, kneeL); set(r.lines.legLD, kneeL, ankleL); set(r.lines.legRU, hipC, kneeR); set(r.lines.legRD, kneeR, ankleR); set(r.lines.armL, shL, handL); set(r.lines.armR, shR, handR);
+    var hx = lp(ja.head[0], jb.head[0], f), hy = lp(ja.head[1], jb.head[1], f), hr = lp(ja.head[2], jb.head[2], f);
+    r.head.setAttribute("cx", hx); r.head.setAttribute("cy", hy); r.head.setAttribute("r", hr); r.head.setAttribute("fill", color);
+    if (A.bar || B.bar) {
+      var ba = A.bar || B.bar, bb = B.bar || A.bar;
+      var bx = lp(ba[0], bb[0], f), by = lp(ba[1], bb[1], f);
+      r.barG.style.opacity = (A.bar && B.bar) ? 1 : (A.bar ? (1 - f) : f);
+      r.barLine.setAttribute("x1", bx - 52); r.barLine.setAttribute("y1", by); r.barLine.setAttribute("x2", bx + 52); r.barLine.setAttribute("y2", by);
+      r.plL.setAttribute("cx", bx - 52); r.plL.setAttribute("cy", by); r.plL.setAttribute("fill", a2);
+      r.plR.setAttribute("cx", bx + 52); r.plR.setAttribute("cy", by); r.plR.setAttribute("fill", a2);
+    } else { r.barG.style.opacity = 0; }
+    var cueTxt = (f < 0.5 ? A.cue : B.cue) || "";
+    r.cue.textContent = cueTxt; r.cue.setAttribute("x", 220); r.cue.setAttribute("y", 226); r.cue.setAttribute("fill", accent); r.cue.style.opacity = cueTxt ? 0.92 : 0;
+  }
+
   window.SA = {};
   window.SAEngine = {
-    init: function(sid, steps){
-      var root = document.getElementById(sid);
-      if(!root) return;
-      var scenes = root.querySelectorAll('.sa-scene');
-      var dots   = root.querySelectorAll('.sa-dot');
-      var bar    = document.getElementById(sid+'-bar');
-      var curEl  = document.getElementById(sid+'-cur');
-      var labEl  = document.getElementById(sid+'-label');
-      var desEl  = document.getElementById(sid+'-desc');
-      var aBtn   = document.getElementById(sid+'-autobtn');
-      var cap    = root.querySelector('.sa-caption');
-      var n = steps.length, cur = 0, timer = null;
-      function stop(){ if(timer){ clearInterval(timer); timer=null; } if(aBtn) aBtn.textContent='\\u23f5 Auto-play'; }
-      function show(i){
+    init: function (sid, steps, opts) {
+      try { this._init(sid, steps, opts || {}); }
+      catch (err) { try { this._fallback(sid, steps); } catch (e2) {} }
+    },
+    _fallback: function (sid, steps) {
+      var _fr0 = document.getElementById(sid); if (_fr0) _fr0.classList.remove("sa-figure-mode");
+      var root = document.getElementById(sid); if (!root) return;
+      var scenes = root.querySelectorAll(".sa-scene"), dots = root.querySelectorAll(".sa-dot");
+      var bar = document.getElementById(sid + "-bar"), curEl = document.getElementById(sid + "-cur");
+      var labEl = document.getElementById(sid + "-label"), desEl = document.getElementById(sid + "-desc");
+      var n = steps.length, cur = 0;
+      function show(i) {
         cur = ((i % n) + n) % n;
-        for(var k=0;k<scenes.length;k++){ scenes[k].classList.remove('active'); }
-        void root.offsetWidth;
-        scenes[cur].classList.add('active');
-        for(var d=0;d<dots.length;d++){ dots[d].classList.toggle('active', d===cur); dots[d].classList.toggle('past', d<cur); }
-        if(bar)   bar.style.width = ((cur+1)/n*100)+'%';
-        if(curEl) curEl.textContent = cur+1;
-        if(labEl) labEl.textContent = steps[cur][0];
-        if(desEl) desEl.textContent = steps[cur][1];
-        if(cap){ cap.classList.remove('flash'); void cap.offsetWidth; cap.classList.add('flash'); }
+        for (var k = 0; k < scenes.length; k++) { scenes[k].classList.toggle("active", k === cur); scenes[k].style.opacity = ""; }
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle("active", d === cur); dots[d].classList.toggle("past", d < cur); }
+        if (bar) bar.style.width = ((cur + 1) / n * 100) + "%";
+        if (curEl) curEl.textContent = cur + 1;
+        if (labEl) labEl.textContent = steps[cur][0];
+        if (desEl) desEl.textContent = steps[cur][1];
       }
-      var api = {
-        next: function(){ stop(); show(cur+1); },
-        prev: function(){ stop(); show(cur-1); },
-        go:   function(i){ stop(); show(i); },
-        auto: function(){
-          if(timer){ stop(); return; }
-          if(aBtn) aBtn.textContent='\\u23f8 Pause';
-          if(cur>=n-1) show(0);
-          timer = setInterval(function(){ if(cur>=n-1){ stop(); return; } show(cur+1); }, 1900);
-        }
-      };
-      window.SA[sid] = api;
-      for(var j=0;j<dots.length;j++){ (function(b){ b.addEventListener('click', function(){ api.go(parseInt(b.getAttribute('data-i'))); }); })(dots[j]); }
+      window.SA[sid] = { next: function () { show(cur + 1); }, prev: function () { show(cur - 1); }, go: function (i) { show(i); }, auto: function () {}, plane: function () {}, three: function () {} };
+      for (var j = 0; j < dots.length; j++) { (function (b) { b.addEventListener("click", function () { show(parseInt(b.getAttribute("data-i"))); }); })(dots[j]); }
       show(0);
+    },
+    _init: function (sid, steps, opts) {
+      var root = document.getElementById(sid); if (!root) return;
+      var stage = root.querySelector(".sa-stage");
+      var svg = root.querySelector(".sa-svg");
+      var scenes = root.querySelectorAll(".sa-scene");
+      var dots = root.querySelectorAll(".sa-dot");
+      var bar = document.getElementById(sid + "-bar");
+      var curEl = document.getElementById(sid + "-cur");
+      var labEl = document.getElementById(sid + "-label");
+      var desEl = document.getElementById(sid + "-desc");
+      var aBtn = document.getElementById(sid + "-autobtn");
+      var slider = document.getElementById(sid + "-scrub");
+      var cap = root.querySelector(".sa-caption");
+      var n = steps.length;
+      var framesS = extractFrames(scenes);
+      var framesF = opts.framesF || null;
+      var lift = !!opts.lift;
+      var t = 0, raf = null, playing = false, plane = "side";
+      var pal = { ac: saVar(stage, "--accent", "#5ec8ff"), a2: saVar(stage, "--accent-2", "#c08fff"), good: saVar(stage, "--good", "#67e8b0"), warn: saVar(stage, "--warn", "#ffb86b"), bad: saVar(stage, "--bad", "#ff7a7a") };
+      var ink = saVar(stage, "--text", "#e8ebf2");
+      function col(key) { return pal[key] || pal.ac; }
+      var skelS = null, skelF = null;
+      if (framesS) {
+        root.classList.add("sa-figure-mode");
+        skelS = buildSkelSide(svg, ink);
+        if (framesF) skelF = buildSkelFront(svg, ink);
+      }
+      function curFrames() { return (plane === "front" && framesF) ? framesF : framesS; }
+      function drawFig(tt) {
+        var F = curFrames(); if (!F) return;
+        var span = F.length - 1;
+        var u = (n > 1) ? (tt / (n - 1)) * span : 0;
+        var i = Math.max(0, Math.min(span, Math.floor(u)));
+        var j = Math.min(span, i + 1);
+        var f = saEase(u - i);
+        var A = F[i], B = F[j];
+        var c = saMix(col(A.c), col(B.c), f);
+        if (plane === "front" && skelF) { skelS.g.style.display = "none"; skelF.g.style.display = ""; drawFront(skelF, A, B, f, c, pal.a2, pal.good); }
+        else { if (skelF) skelF.g.style.display = "none"; skelS.g.style.display = ""; drawSide(skelS, A, B, f, c, pal.a2); }
+      }
+      function setScenes(tt, settle) {
+        if (scenes.length === 0) return;
+        if (plane === "front") { for (var q = 0; q < scenes.length; q++) { scenes[q].classList.remove("active"); scenes[q].style.opacity = "0"; } return; }
+        var near = Math.round(tt);
+        for (var k = 0; k < scenes.length; k++) {
+          var sc = scenes[k];
+          if (settle) { sc.classList.toggle("active", k === near); sc.style.opacity = ""; }
+          else { sc.classList.remove("active"); var d = Math.abs(k - tt); sc.style.opacity = d < 1 ? (1 - d).toFixed(3) : "0"; }
+        }
+      }
+      function updMeta(idx) {
+        if (bar) bar.style.width = ((idx + 1) / n * 100) + "%";
+        if (curEl) curEl.textContent = idx + 1;
+        if (labEl) labEl.textContent = steps[idx][0];
+        if (desEl) desEl.textContent = steps[idx][1];
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle("active", d === idx); dots[d].classList.toggle("past", d < idx); }
+        if (cap) { cap.classList.remove("flash"); void cap.offsetWidth; cap.classList.add("flash"); }
+      }
+      function render(tt, settle) {
+        t = Math.max(0, Math.min(n - 1, tt));
+        if (framesS) drawFig(t);
+        setScenes(t, settle);
+        if (slider && document.activeElement !== slider) slider.value = String(Math.round(t / (n - 1) * 1000));
+        if (settle) updMeta(Math.round(t));
+      }
+      function animateT(from, to, dur, done) {
+        if (raf) cancelAnimationFrame(raf);
+        var st = performance.now();
+        function loop(now) { var p = Math.min(1, (now - st) / dur), e = saEase(p); render(from + (to - from) * e, false); if (p < 1) raf = requestAnimationFrame(loop); else { raf = null; if (done) done(); } }
+        raf = requestAnimationFrame(loop);
+      }
+      function settleTo(target) { stopPlay(); animateT(t, target, 360, function () { render(target, true); }); }
+      function startPlay() {
+        playing = true; if (aBtn) aBtn.innerHTML = "&#9208; Pause";
+        var seq = (Math.round(t) >= n - 1) ? 0 : Math.round(t);
+        render(seq, true);
+        function stepNext() { if (!playing) return; if (seq >= n - 1) { stopPlay(); return; } animateT(seq, seq + 1, 900, function () { render(seq + 1, true); seq++; setTimeout(stepNext, 620); }); }
+        setTimeout(stepNext, 300);
+      }
+      function stopPlay() { playing = false; if (raf) { cancelAnimationFrame(raf); raf = null; } if (aBtn) aBtn.innerHTML = "&#9205; Auto-play"; }
+      function updPlaneBtn() { var pb = document.getElementById(sid + "-planebtn"); if (pb) { pb.innerHTML = (plane === "side" ? "&#8634; Front view" : "&#8634; Side view"); pb.classList.toggle("on", plane === "front"); } }
+      var api = {
+        next: function () { settleTo(Math.min(n - 1, Math.round(t) + 1)); },
+        prev: function () { settleTo(Math.max(0, Math.round(t) - 1)); },
+        go: function (i) { settleTo(Math.max(0, Math.min(n - 1, i))); },
+        auto: function () { if (playing) stopPlay(); else startPlay(); },
+        plane: function () { if (!framesF) return; plane = (plane === "side") ? "front" : "side"; root.setAttribute("data-plane", plane); updPlaneBtn(); render(t, true); },
+        three: function () { SAEngine._three(sid, framesS, pal, ink); }
+      };
+      if (slider) {
+        slider.addEventListener("input", function () { stopPlay(); render(slider.value / 1000 * (n - 1), false); });
+        slider.addEventListener("change", function () { settleTo(Math.round(t)); });
+      }
+      var dragging = false;
+      function px2t(clientX) { var rc = stage.getBoundingClientRect(); var x = (clientX - rc.left) / rc.width; return Math.max(0, Math.min(1, x)) * (n - 1); }
+      stage.addEventListener("pointerdown", function (e) { if (e.target.closest && e.target.closest("button")) return; dragging = true; try { stage.setPointerCapture(e.pointerId); } catch (x) {} stopPlay(); stage.classList.add("sa-grabbing"); render(px2t(e.clientX), false); });
+      stage.addEventListener("pointermove", function (e) { if (dragging) render(px2t(e.clientX), false); });
+      function endDrag() { if (!dragging) return; dragging = false; stage.classList.remove("sa-grabbing"); settleTo(Math.round(t)); }
+      stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag); stage.addEventListener("pointerleave", endDrag);
+      for (var jx = 0; jx < dots.length; jx++) { (function (b) { b.addEventListener("click", function () { api.go(parseInt(b.getAttribute("data-i"))); }); })(dots[jx]); }
+      window.SA[sid] = api;
+      updPlaneBtn();
+      render(0, true);
+    },
+    _three: function (sid, frames, pal, ink) {
+      var host = document.getElementById(sid + "-3d");
+      var btn = document.getElementById(sid + "-3dbtn");
+      if (!host || !frames) return;
+      if (host.getAttribute("data-on") === "1") {
+        host.setAttribute("data-on", "0"); host.style.display = "none";
+        if (host._stop) { host._stop(); host._stop = null; }
+        host.innerHTML = ""; if (btn) btn.innerHTML = "&#9673; 3D view"; return;
+      }
+      host.setAttribute("data-on", "1"); host.style.display = "block";
+      host.innerHTML = '<div class="sa-3d-msg">Loading 3D&hellip;</div>';
+      if (btn) btn.innerHTML = "&#9673; Loading&hellip;";
+      import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js")
+        .then(function (THREE) { host.innerHTML = ""; SAEngine._build3D(THREE, host, frames, pal, ink); if (btn) btn.innerHTML = "&#9673; Hide 3D"; })
+        .catch(function () { host.innerHTML = '<div class="sa-3d-msg">3D view needs an internet connection &mdash; the side &amp; front views above work offline.</div>'; if (btn) btn.innerHTML = "&#9673; 3D view"; });
+    },
+    _build3D: function (THREE, host, frames, pal, ink) {
+      function rgbHex(c) { var r = saRGB(c); return (r[0] << 16) + (r[1] << 8) + r[2]; }
+      var W = host.clientWidth || 460, H = 280;
+      var scene = new THREE.Scene();
+      var cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100); cam.position.set(0, 1.2, 11);
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); renderer.setSize(W, H); host.appendChild(renderer.domElement);
+      scene.add(new THREE.AmbientLight(0xffffff, 0.75));
+      var dl = new THREE.DirectionalLight(0xffffff, 0.9); dl.position.set(4, 8, 6); scene.add(dl);
+      var grid = new THREE.GridHelper(14, 14, 0x44506a, 0x2a3245); grid.position.y = -3.4; scene.add(grid);
+      var group = new THREE.Group(); scene.add(group);
+      var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.ac)), roughness: 0.5, metalness: 0.1 });
+      var barMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(ink)), roughness: 0.4 });
+      var plMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.a2)), roughness: 0.5 });
+      function V(j) { return new THREE.Vector3((j[0] - 220) / 26, (206 - j[1]) / 26, 0); }
+      var joints = {}, bones = [], jointKeys = ["head", "neck", "shoulder", "elbow", "hand", "hip", "knee", "ankle", "toe"];
+      jointKeys.forEach(function (k) { var s = new THREE.Mesh(new THREE.SphereGeometry(k === "head" ? 0.62 : 0.26, 16, 16), mat); group.add(s); joints[k] = s; });
+      var boneDefs = [["neck", "hip"], ["hip", "knee"], ["knee", "ankle"], ["ankle", "toe"], ["shoulder", "elbow"], ["elbow", "hand"]];
+      boneDefs.forEach(function () { var cylL = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); var cylR = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); group.add(cylL); group.add(cylR); bones.push([cylL, cylR]); });
+      var ZOFF = 0.55, YUP = new THREE.Vector3(0, 1, 0);
+      function place(cyl, a, b, z) { var av = a.clone(), bv = b.clone(); av.z = z; bv.z = z; var mid = av.clone().add(bv).multiplyScalar(0.5); cyl.position.copy(mid); var dir = bv.clone().sub(av); var len = dir.length(); cyl.scale.set(1, Math.max(0.001, len), 1); cyl.quaternion.setFromUnitVectors(YUP, dir.normalize()); }
+      var barShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4.6, 12), barMat); barShaft.rotation.z = Math.PI / 2;
+      var plate1 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat); var plate2 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat);
+      plate1.rotation.z = Math.PI / 2; plate2.rotation.z = Math.PI / 2;
+      var barGroup = new THREE.Group(); barGroup.add(barShaft); barGroup.add(plate1); barGroup.add(plate2); plate1.position.x = -2.3; plate2.position.x = 2.3; group.add(barGroup);
+      function frameVerts(F) { var o = {}; jointKeys.forEach(function (k) { o[k] = V(F.j[k]); }); o.bar = F.bar ? V(F.bar) : null; return o; }
+      function applyFrame(va, vb, f) {
+        jointKeys.forEach(function (k) { var p = va[k].clone().lerp(vb[k], f); joints[k].position.set(p.x, p.y, 0); });
+        boneDefs.forEach(function (d, i) { var a = va[d[0]].clone().lerp(vb[d[0]], f); var b = va[d[1]].clone().lerp(vb[d[1]], f); place(bones[i][0], a, b, ZOFF); place(bones[i][1], a, b, -ZOFF); });
+        if (va.bar || vb.bar) { var ba = va.bar || vb.bar, bb = vb.bar || va.bar; var p = ba.clone().lerp(bb, f); barGroup.visible = true; barGroup.position.set(0, p.y, 0); } else { barGroup.visible = false; }
+      }
+      var verts = frames.map(frameVerts), nF = verts.length;
+      var rotY = 0.5, rotX = 0.05, down = false, lx = 0, ly = 0;
+      renderer.domElement.style.cursor = "grab";
+      renderer.domElement.addEventListener("pointerdown", function (e) { down = true; lx = e.clientX; ly = e.clientY; renderer.domElement.style.cursor = "grabbing"; });
+      window.addEventListener("pointermove", function (e) { if (!down) return; rotY += (e.clientX - lx) * 0.01; rotX += (e.clientY - ly) * 0.008; rotX = Math.max(-0.8, Math.min(0.8, rotX)); lx = e.clientX; ly = e.clientY; });
+      window.addEventListener("pointerup", function () { down = false; renderer.domElement.style.cursor = "grab"; });
+      var stopped = false, clock = 0, last = performance.now();
+      function frame(now) {
+        if (stopped) return;
+        var dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt * 0.55;
+        var phase = nF > 1 ? (clock % nF) : 0; var i = Math.floor(phase), j = (i + 1) % nF, f = saEase(phase - i);
+        applyFrame(verts[i], verts[j], f);
+        if (!down) rotY += dt * 0.25; group.rotation.y = rotY; group.rotation.x = rotX;
+        renderer.render(scene, cam); requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+      host._stop = function () { stopped = true; try { renderer.dispose(); } catch (e) {} if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement); };
+      window.addEventListener("resize", function () { var w = host.clientWidth || W; renderer.setSize(w, H); cam.aspect = w / H; cam.updateProjectionMatrix(); });
     }
   };
 }
 </script>
 """
+
+
+FRONTAL = {
+    "ex_squat": [
+        {"c": "ac", "bar": [220, 82], "cue": "stance set", "j": {"head": [220, 58, 13], "neck": [220, 78], "hipC": [220, 138], "shL": [200, 88], "shR": [240, 88], "handL": [196, 80], "handR": [244, 80], "kneeL": [208, 170], "kneeR": [232, 170], "ankleL": [208, 205], "ankleR": [232, 205]}},
+        {"c": "a2", "bar": [220, 120], "cue": "knees track out — not caving in", "j": {"head": [220, 98, 13], "neck": [220, 116], "hipC": [220, 176], "shL": [200, 124], "shR": [240, 124], "handL": [196, 118], "handR": [244, 118], "kneeL": [196, 178], "kneeR": [244, 178], "ankleL": [208, 205], "ankleR": [232, 205]}},
+        {"c": "good", "bar": [220, 82], "cue": "stand tall, locked", "j": {"head": [220, 58, 13], "neck": [220, 78], "hipC": [220, 138], "shL": [200, 88], "shR": [240, 88], "handL": [196, 80], "handR": [244, 80], "kneeL": [208, 170], "kneeR": [232, 170], "ankleL": [208, 205], "ankleR": [232, 205]}},
+    ],
+    "ex_deadlift": [
+        {"c": "ac", "bar": [220, 182], "cue": "grip just outside the knees", "j": {"head": [220, 86, 13], "neck": [220, 104], "hipC": [220, 150], "shL": [202, 112], "shR": [238, 112], "handL": [206, 180], "handR": [234, 180], "kneeL": [206, 172], "kneeR": [234, 172], "ankleL": [206, 206], "ankleR": [234, 206]}},
+        {"c": "ac", "bar": [220, 150], "cue": "bar stays centered, hips square", "j": {"head": [220, 72, 13], "neck": [220, 90], "hipC": [220, 138], "shL": [204, 98], "shR": [236, 98], "handL": [208, 150], "handR": [232, 150], "kneeL": [210, 168], "kneeR": [230, 168], "ankleL": [208, 206], "ankleR": [232, 206]}},
+        {"c": "good", "bar": [220, 128], "cue": "hips & shoulders level", "j": {"head": [220, 58, 13], "neck": [220, 76], "hipC": [220, 128], "shL": [206, 84], "shR": [234, 84], "handL": [208, 128], "handR": [232, 128], "kneeL": [212, 168], "kneeR": [228, 168], "ankleL": [210, 206], "ankleR": [230, 206]}},
+    ],
+    "ex_press": [
+        {"c": "ac", "bar": [220, 80], "cue": "bar on the front delts", "j": {"head": [220, 60, 13], "neck": [220, 80], "hipC": [220, 140], "shL": [200, 88], "shR": [240, 88], "handL": [204, 82], "handR": [236, 82], "kneeL": [210, 172], "kneeR": [230, 172], "ankleL": [210, 205], "ankleR": [230, 205]}},
+        {"c": "ac", "bar": [220, 50], "cue": "press straight up past the face", "j": {"head": [220, 64, 13], "neck": [220, 82], "hipC": [220, 140], "shL": [202, 90], "shR": [238, 90], "handL": [208, 52], "handR": [232, 52], "kneeL": [210, 172], "kneeR": [230, 172], "ankleL": [210, 205], "ankleR": [230, 205]}},
+        {"c": "good", "bar": [220, 28], "cue": "stacked overhead, even", "j": {"head": [220, 64, 13], "neck": [220, 82], "hipC": [220, 140], "shL": [204, 90], "shR": [236, 90], "handL": [212, 28], "handR": [228, 28], "kneeL": [210, 172], "kneeR": [230, 172], "ankleL": [210, 205], "ankleR": [230, 205]}},
+    ],
+    "ex_clean": [
+        {"c": "ac", "bar": [220, 180], "cue": "pull the bar in close", "j": {"head": [220, 86, 13], "neck": [220, 104], "hipC": [220, 150], "shL": [202, 112], "shR": [238, 112], "handL": [206, 180], "handR": [234, 180], "kneeL": [206, 172], "kneeR": [234, 172], "ankleL": [206, 206], "ankleR": [234, 206]}},
+        {"c": "good", "bar": [220, 116], "cue": "triple extension — explode up", "j": {"head": [220, 54, 13], "neck": [220, 72], "hipC": [220, 120], "shL": [206, 80], "shR": [234, 80], "handL": [210, 118], "handR": [230, 118], "kneeL": [212, 162], "kneeR": [228, 162], "ankleL": [212, 206], "ankleR": [228, 206]}},
+        {"c": "a2", "bar": [220, 82], "cue": "catch: elbows high, knees out", "j": {"head": [220, 72, 13], "neck": [220, 90], "hipC": [220, 150], "shL": [202, 98], "shR": [238, 98], "handL": [206, 86], "handR": [234, 86], "kneeL": [200, 176], "kneeR": [240, 176], "ankleL": [208, 206], "ankleR": [232, 206]}},
+    ],
+}
 
 
 def _stepper(sid: str, title: str, steps: list, hint: str = "") -> str:
@@ -106,10 +417,24 @@ def _stepper(sid: str, title: str, steps: list, hint: str = "") -> str:
         for i in range(len(steps))
     )
     meta = json.dumps([[s["label"], s["desc"]] for s in steps], ensure_ascii=False)
+    _fr = FRONTAL.get(sid)
+    _opts = {"framesF": _fr, "lift": True} if _fr else {}
+    _opts_json = json.dumps(_opts, ensure_ascii=False)
+    if _fr:
+        _extra_btns = (
+            '    <button class="sa-plane-btn" id="%s-planebtn" onclick="SA[\'%s\'].plane()">&#8634; Front view</button>\n'
+            '    <button class="sa-3d-btn" id="%s-3dbtn" onclick="SA[\'%s\'].three()">&#9673; 3D view</button>\n'
+        ) % (sid, sid, sid, sid)
+        _extra_html = '  <div class="sa-3d" id="%s-3d" data-on="0" style="display:none"></div>\n' % sid
+    else:
+        _extra_btns = ""
+        _extra_html = ""
     body = ENGINE + (
         '<div class="step-anim" id="%s">\n'
         '  <div class="sa-stage"><svg viewBox="%s" class="sa-svg" '
-        'xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">%s</svg></div>\n'
+        'xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">%s</svg>'
+        '<div class="sa-scrubhint">drag to scrub &#8596;</div></div>\n'
+        '  <input type="range" class="sa-scrub" id="%s-scrub" min="0" max="1000" value="0" aria-label="Scrub the movement">\n'
         '  <div class="sa-progress"><div class="sa-bar" id="%s-bar"></div></div>\n'
         '  <div class="sa-dots">%s</div>\n'
         '  <div class="sa-caption">\n'
@@ -121,11 +446,13 @@ def _stepper(sid: str, title: str, steps: list, hint: str = "") -> str:
         '    <button onclick="SA[\'%s\'].prev()">&#9664; Prev</button>\n'
         '    <button onclick="SA[\'%s\'].next()">Next &#9654;</button>\n'
         '    <button onclick="SA[\'%s\'].auto()" id="%s-autobtn">&#9205; Auto-play</button>\n'
+        '%s'
         '  </div>\n'
+        '%s'
         '</div>\n'
-        '<script>SAEngine.init("%s", %s);</script>\n'
-    ) % (sid, VB, scenes, sid, dots, sid, len(steps), sid, sid,
-         sid, sid, sid, sid, sid, meta)
+        '<script>SAEngine.init("%s", %s, %s);</script>\n'
+    ) % (sid, VB, scenes, sid, sid, dots, sid, len(steps), sid, sid,
+         sid, sid, sid, sid, _extra_btns, _extra_html, sid, meta, _opts_json)
     return _wrap(sid + "-stepper", title, body, hint)
 
 
@@ -140,32 +467,42 @@ def _ground(label=""):
 
 
 def _figure(p, cls="sa-pop", color=None, bar=None):
-    """Side-view athlete from a joints dict. p keys:
-       head=(x,y,r), neck, shoulder, elbow, hand, hip, knee, ankle, toe (each x,y).
-       bar=(x,y) draws a barbell centered there."""
+    """Side-view athlete from a joints dict. Wrapped in one .sa-fig group that
+    carries data-joints / data-c / data-bar so the JS engine can extract the
+    keyframe and tween a live skeleton. The static group is hidden in
+    figure-mode and only revealed if the engine fails to start."""
     c = color or AC
+    sym = "ac"
+    if color == A2:
+        sym = "a2"
+    elif color == GOOD:
+        sym = "good"
+    elif color == WARN:
+        sym = "warn"
+    elif color == BAD:
+        sym = "bad"
     L = lambda a, b: '<line x1="%g" y1="%g" x2="%g" y2="%g"/>' % (p[a][0], p[a][1], p[b][0], p[b][1])
-    limbs = (
-        '<g class="%s" fill="none" stroke="%s" stroke-width="7" '
-        'stroke-linecap="round" stroke-linejoin="round">'
-        % (cls, c)
-    )
+    limbs = '<g fill="none" stroke="%s" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">' % c
     limbs += L("neck", "hip") + L("hip", "knee") + L("knee", "ankle") + L("ankle", "toe")
     limbs += L("shoulder", "elbow") + L("elbow", "hand")
     limbs += "</g>"
-    head = '<circle class="%s" cx="%g" cy="%g" r="%g" fill="%s"/>' % (
-        cls, p["head"][0], p["head"][1], p["head"][2], c)
+    head = '<circle cx="%g" cy="%g" r="%g" fill="%s"/>' % (p["head"][0], p["head"][1], p["head"][2], c)
     barbell = ""
     if bar:
         bx, by = bar
         barbell = (
-            '<g class="%s">'
+            '<g>'
             '<line x1="%g" y1="%g" x2="%g" y2="%g" stroke="%s" stroke-width="5" stroke-linecap="round"/>'
             '<circle cx="%g" cy="%g" r="14" fill="%s"/>'
             '<circle cx="%g" cy="%g" r="14" fill="%s"/>'
             '</g>'
-        ) % (cls, bx - 62, by, bx + 62, by, INK, bx - 62, by, A2, bx + 62, by, A2)
-    return limbs + head + barbell
+        ) % (bx - 62, by, bx + 62, by, INK, bx - 62, by, A2, bx + 62, by, A2)
+    _jk = ("head", "neck", "shoulder", "elbow", "hand", "hip", "knee", "ankle", "toe")
+    _joints = {k: [round(float(v), 1) for v in p[k]] for k in _jk}
+    _dj = json.dumps(_joints, separators=(",", ":"))
+    _barattr = ' data-bar="%g,%g"' % (bar[0], bar[1]) if bar else ""
+    return '<g class="%s sa-fig" data-joints=\'%s\' data-c="%s"%s>%s%s%s</g>' % (
+        cls, _dj, sym, _barattr, limbs, head, barbell)
 
 
 def _arrow(x1, y1, x2, y2, color=None, cls="sa-draw", w=4):
@@ -218,12 +555,12 @@ def _title(text, color=None):
 
 def _plate(cx, cy, cls="sa-pop"):
     return (
-        '<g class="%s">'
+        '<g class="%s sa-plate sa-fig" data-bar="%g,%g">'
         '<circle cx="%g" cy="%g" r="20" fill="%s" opacity="0.25"/>'
         '<circle cx="%g" cy="%g" r="20" fill="none" stroke="%s" stroke-width="3"/>'
         '<circle cx="%g" cy="%g" r="6" fill="%s"/>'
         '</g>'
-    ) % (cls, cx, cy, A2, cx, cy, A2, cx, cy, INK)
+    ) % (cls, cx, cy, cx, cy, A2, cx, cy, A2, cx, cy, INK)
 
 
 def _guide(x, y1=40, y2=206):
