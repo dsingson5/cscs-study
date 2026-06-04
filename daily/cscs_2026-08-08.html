@@ -706,6 +706,10 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .sa-3d { margin-top: 10px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: radial-gradient(circle at 50% 28%, rgba(255,255,255,0.05), transparent 70%), var(--bg-2); min-height: 60px; }
 .sa-3d canvas { display: block; width: 100%; height: auto; touch-action: none; }
 .sa-3d-msg { padding: 22px 16px; text-align: center; font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+/* v2.1 (2026-06-04): side-view barbell rendered end-on (plate face + hub) — matches the sagittal viewing axis. */
+
+/* rebuild trigger 2026-06-04T21:32Z — publish side-view barbell orientation fix (steppers.py end-on plate) */
 </style>
 <style>:root {
   --bg: #090b0a;
@@ -1136,20 +1140,39 @@ if (!window.SAEngine) {
       host.setAttribute("data-on", "1"); host.style.display = "block";
       host.innerHTML = '<div class="sa-3d-msg">Loading 3D&hellip;</div>';
       if (btn) btn.innerHTML = "&#9673; Loading&hellip;";
+      try { host.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (se) {}
+      function fail(msg) { host.innerHTML = '<div class="sa-3d-msg">' + msg + '</div>'; if (btn) btn.innerHTML = "&#9673; 3D view"; }
+      var timedOut = false;
+      var timer = setTimeout(function () { timedOut = true; fail("3D is taking too long to load &mdash; check the connection and press the button again. The side &amp; front views above work offline."); }, 14000);
       import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js")
-        .then(function (THREE) { host.innerHTML = ""; SAEngine._build3D(THREE, host, frames, pal, ink); if (btn) btn.innerHTML = "&#9673; Hide 3D"; })
-        .catch(function () { host.innerHTML = '<div class="sa-3d-msg">3D view needs an internet connection &mdash; the side &amp; front views above work offline.</div>'; if (btn) btn.innerHTML = "&#9673; 3D view"; });
+        .then(function (THREE) {
+          clearTimeout(timer); if (timedOut) return;
+          host.innerHTML = "";
+          try {
+            SAEngine._build3D(THREE, host, frames, pal, ink);
+            if (btn) btn.innerHTML = "&#9673; Hide 3D";
+          } catch (err) {
+            fail("3D couldn't start here (" + ((err && err.message) ? String(err.message).slice(0, 90) : "WebGL unavailable") + "). The side &amp; front views above show the same movement.");
+          }
+        })
+        .catch(function () { clearTimeout(timer); if (!timedOut) fail("3D view needs an internet connection &mdash; the side &amp; front views above work offline."); });
     },
     _build3D: function (THREE, host, frames, pal, ink) {
       function rgbHex(c) { var r = saRGB(c); return (r[0] << 16) + (r[1] << 8) + r[2]; }
-      var W = host.clientWidth || 460, H = 280;
+      var W = Math.min(host.clientWidth || 460, 760), H = 290;
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });   // throws if WebGL is blocked
+      if (renderer.getContext && !renderer.getContext()) { throw new Error("WebGL context unavailable"); }
+      renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
+      renderer.setSize(W, H);
       var scene = new THREE.Scene();
-      var cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100); cam.position.set(0, 1.2, 11);
-      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1)); renderer.setSize(W, H); host.appendChild(renderer.domElement);
-      scene.add(new THREE.AmbientLight(0xffffff, 0.75));
-      var dl = new THREE.DirectionalLight(0xffffff, 0.9); dl.position.set(4, 8, 6); scene.add(dl);
-      var grid = new THREE.GridHelper(14, 14, 0x44506a, 0x2a3245); grid.position.y = -3.4; scene.add(grid);
+      var cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+      cam.position.set(0, 2.6, 11.5);
+      cam.lookAt(0, 2.4, 0);
+      host.appendChild(renderer.domElement);
+      scene.add(new THREE.AmbientLight(0xffffff, 1.15));
+      var dl = new THREE.DirectionalLight(0xffffff, 2.2); dl.position.set(4, 8, 6); scene.add(dl);
+      var fill = new THREE.DirectionalLight(0xffffff, 0.8); fill.position.set(-4, 3, -6); scene.add(fill);
+      var grid = new THREE.GridHelper(14, 14, 0x44506a, 0x2a3245); grid.position.y = -0.1; scene.add(grid);
       var group = new THREE.Group(); scene.add(group);
       var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.ac)), roughness: 0.5, metalness: 0.1 });
       var barMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(ink)), roughness: 0.4 });
@@ -1158,10 +1181,18 @@ if (!window.SAEngine) {
       var joints = {}, bones = [], jointKeys = ["head", "neck", "shoulder", "elbow", "hand", "hip", "knee", "ankle", "toe"];
       jointKeys.forEach(function (k) { var s = new THREE.Mesh(new THREE.SphereGeometry(k === "head" ? 0.62 : 0.26, 16, 16), mat); group.add(s); joints[k] = s; });
       var boneDefs = [["neck", "hip"], ["hip", "knee"], ["knee", "ankle"], ["ankle", "toe"], ["shoulder", "elbow"], ["elbow", "hand"]];
-      boneDefs.forEach(function () { var cylL = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); var cylR = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); group.add(cylL); group.add(cylR); bones.push([cylL, cylR]); });
+      boneDefs.forEach(function () { var cl = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); var cr = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); group.add(cl); group.add(cr); bones.push([cl, cr]); });
       var ZOFF = 0.55, YUP = new THREE.Vector3(0, 1, 0);
-      function place(cyl, a, b, z) { var av = a.clone(), bv = b.clone(); av.z = z; bv.z = z; var mid = av.clone().add(bv).multiplyScalar(0.5); cyl.position.copy(mid); var dir = bv.clone().sub(av); var len = dir.length(); cyl.scale.set(1, Math.max(0.001, len), 1); cyl.quaternion.setFromUnitVectors(YUP, dir.normalize()); }
-      // bar runs ACROSS the athlete (Z axis) — perpendicular to the sagittal plane
+      function place(cyl, a, b, z) {
+        var av = a.clone(), bv = b.clone(); av.z = z; bv.z = z;
+        var mid = av.clone().add(bv).multiplyScalar(0.5);
+        var dir = bv.clone().sub(av); var len = dir.length();
+        if (len < 0.001) { cyl.visible = false; return; }
+        cyl.visible = true; cyl.position.copy(mid);
+        cyl.scale.set(1, len, 1);
+        cyl.quaternion.setFromUnitVectors(YUP, dir.normalize());
+      }
+      // bar runs ACROSS the athlete (Z axis) -- perpendicular to the sagittal plane
       var barShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4.6, 12), barMat); barShaft.rotation.x = Math.PI / 2;
       var plate1 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat); var plate2 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat);
       plate1.rotation.x = Math.PI / 2; plate2.rotation.x = Math.PI / 2;
@@ -1173,23 +1204,33 @@ if (!window.SAEngine) {
         if (va.bar || vb.bar) { var ba = va.bar || vb.bar, bb = vb.bar || va.bar; var p = ba.clone().lerp(bb, f); barGroup.visible = true; barGroup.position.set(p.x, p.y, 0); } else { barGroup.visible = false; }
       }
       var verts = frames.map(frameVerts), nF = verts.length;
-      var rotY = 0.5, rotX = 0.05, down = false, lx = 0, ly = 0;
+      var rotY = 0.6, rotX = 0.04, down = false, lx = 0, ly = 0;
       renderer.domElement.style.cursor = "grab";
       renderer.domElement.addEventListener("pointerdown", function (e) { down = true; lx = e.clientX; ly = e.clientY; renderer.domElement.style.cursor = "grabbing"; });
       window.addEventListener("pointermove", function (e) { if (!down) return; rotY += (e.clientX - lx) * 0.01; rotX += (e.clientY - ly) * 0.008; rotX = Math.max(-0.8, Math.min(0.8, rotX)); lx = e.clientX; ly = e.clientY; });
       window.addEventListener("pointerup", function () { down = false; renderer.domElement.style.cursor = "grab"; });
-      var stopped = false, clock = 0, last = performance.now();
+      var stopped = false, clock = 0, last = performance.now(), drew = false;
+      host._stop = function () { stopped = true; try { renderer.dispose(); } catch (e) {} if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement); };
       function frame(now) {
         if (stopped) return;
-        var dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt * 0.55;
-        var phase = nF > 1 ? (clock % nF) : 0; var i = Math.floor(phase), j = (i + 1) % nF, f = saEase(phase - i);
-        applyFrame(verts[i], verts[j], f);
-        if (!down) rotY += dt * 0.25; group.rotation.y = rotY; group.rotation.x = rotX;
-        renderer.render(scene, cam); requestAnimationFrame(frame);
+        try {
+          var dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt * 0.55;
+          var phase = nF > 1 ? (clock % nF) : 0; var i = Math.floor(phase), j = (i + 1) % nF, f = saEase(phase - i);
+          applyFrame(verts[i], verts[j], f);
+          if (!down) rotY += dt * 0.25;
+          group.rotation.y = rotY; group.rotation.x = rotX;
+          renderer.render(scene, cam);
+          drew = true;
+        } catch (err) {
+          stopped = true;
+          try { host._stop(); } catch (e2) {}
+          host.innerHTML = '<div class="sa-3d-msg">3D stopped (' + ((err && err.message) ? String(err.message).slice(0, 90) : "render error") + "). The side &amp; front views above show the same movement.</div>";
+          return;
+        }
+        requestAnimationFrame(frame);
       }
       requestAnimationFrame(frame);
-      host._stop = function () { stopped = true; try { renderer.dispose(); } catch (e) {} if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement); };
-      window.addEventListener("resize", function () { var w = host.clientWidth || W; renderer.setSize(w, H); cam.aspect = w / H; cam.updateProjectionMatrix(); });
+      window.addEventListener("resize", function () { if (stopped) return; var w = Math.min(host.clientWidth || W, 760); renderer.setSize(w, H); cam.aspect = w / H; cam.updateProjectionMatrix(); });
     }
   };
 }
