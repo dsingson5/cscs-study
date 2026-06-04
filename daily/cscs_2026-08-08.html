@@ -710,6 +710,8 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* v2.1 (2026-06-04): side-view barbell rendered end-on (plate face + hub) — matches the sagittal viewing axis. */
 
 /* rebuild trigger 2026-06-04T21:32Z — publish side-view barbell orientation fix (steppers.py end-on plate) */
+
+/* rebuild trigger 2026-06-04T22:10Z — hardened 3D viewer (visible errors, lookAt framing, scroll-into-view) */
 </style>
 <style>:root {
   --bg: #090b0a;
@@ -1159,21 +1161,27 @@ if (!window.SAEngine) {
     },
     _build3D: function (THREE, host, frames, pal, ink) {
       function rgbHex(c) { var r = saRGB(c); return (r[0] << 16) + (r[1] << 8) + r[2]; }
+      frames = (frames || []).filter(function (Fx) { return Fx && Fx.j; });
+      if (!frames.length) { throw new Error("no pose frames"); }
       var W = Math.min(host.clientWidth || 460, 760), H = 290;
       var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });   // throws if WebGL is blocked
       if (renderer.getContext && !renderer.getContext()) { throw new Error("WebGL context unavailable"); }
       renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
       renderer.setSize(W, H);
       var scene = new THREE.Scene();
+      var camY = 2.6;
       var cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
-      cam.position.set(0, 2.6, 11.5);
-      cam.lookAt(0, 2.4, 0);
+      function aimCam() { cam.position.set(0, camY, 11.5); cam.lookAt(0, 2.3, 0); }
+      aimCam();
       host.appendChild(renderer.domElement);
       scene.add(new THREE.AmbientLight(0xffffff, 1.15));
       var dl = new THREE.DirectionalLight(0xffffff, 2.2); dl.position.set(4, 8, 6); scene.add(dl);
       var fill = new THREE.DirectionalLight(0xffffff, 0.8); fill.position.set(-4, 3, -6); scene.add(fill);
       var grid = new THREE.GridHelper(14, 14, 0x44506a, 0x2a3245); grid.position.y = -0.1; scene.add(grid);
-      var group = new THREE.Group(); scene.add(group);
+      // turntable: pivot spins about Y only, so the athlete NEVER tilts
+      // relative to the floor; vertical drag moves the camera instead.
+      var pivot = new THREE.Group(); scene.add(pivot);
+      var group = new THREE.Group(); pivot.add(group);
       var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.ac)), roughness: 0.5, metalness: 0.1 });
       var barMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(ink)), roughness: 0.4 });
       var plMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.a2)), roughness: 0.5 });
@@ -1192,35 +1200,50 @@ if (!window.SAEngine) {
         cyl.scale.set(1, len, 1);
         cyl.quaternion.setFromUnitVectors(YUP, dir.normalize());
       }
-      // bar runs ACROSS the athlete (Z axis) -- perpendicular to the sagittal plane
       var barShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4.6, 12), barMat); barShaft.rotation.x = Math.PI / 2;
       var plate1 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat); var plate2 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat);
       plate1.rotation.x = Math.PI / 2; plate2.rotation.x = Math.PI / 2;
       var barGroup = new THREE.Group(); barGroup.add(barShaft); barGroup.add(plate1); barGroup.add(plate2); plate1.position.z = -2.3; plate2.position.z = 2.3; group.add(barGroup);
-      function frameVerts(F) { var o = {}; jointKeys.forEach(function (k) { o[k] = V(F.j[k]); }); o.bar = F.bar ? V(F.bar) : null; return o; }
+      function frameVerts(F) { var o = {}; jointKeys.forEach(function (k) { o[k] = V(F.j[k] || [220, 206]); }); o.bar = F.bar ? V(F.bar) : null; return o; }
       function applyFrame(va, vb, f) {
+        if (!va || !vb) { return; }
         jointKeys.forEach(function (k) { var p = va[k].clone().lerp(vb[k], f); joints[k].position.set(p.x, p.y, 0); });
-        boneDefs.forEach(function (d, i) { var a = va[d[0]].clone().lerp(vb[d[0]], f); var b = va[d[1]].clone().lerp(vb[d[1]], f); place(bones[i][0], a, b, ZOFF); place(bones[i][1], a, b, -ZOFF); });
+        boneDefs.forEach(function (d, i2) { var a = va[d[0]].clone().lerp(vb[d[0]], f); var b = va[d[1]].clone().lerp(vb[d[1]], f); place(bones[i2][0], a, b, ZOFF); place(bones[i2][1], a, b, -ZOFF); });
         if (va.bar || vb.bar) { var ba = va.bar || vb.bar, bb = vb.bar || va.bar; var p = ba.clone().lerp(bb, f); barGroup.visible = true; barGroup.position.set(p.x, p.y, 0); } else { barGroup.visible = false; }
       }
-      var verts = frames.map(frameVerts), nF = verts.length;
-      var rotY = 0.6, rotX = 0.04, down = false, lx = 0, ly = 0;
+      var verts = frames.map(frameVerts), nF = verts.length, span = nF - 1;
+      // spin about the figure's own centre, not the world origin
+      var cx0 = (verts[0].hip.x + verts[0].ankle.x) / 2;
+      group.position.x = -cx0;
+      var rotY = 0.6, down = false, lx = 0, ly = 0;
       renderer.domElement.style.cursor = "grab";
       renderer.domElement.addEventListener("pointerdown", function (e) { down = true; lx = e.clientX; ly = e.clientY; renderer.domElement.style.cursor = "grabbing"; });
-      window.addEventListener("pointermove", function (e) { if (!down) return; rotY += (e.clientX - lx) * 0.01; rotX += (e.clientY - ly) * 0.008; rotX = Math.max(-0.8, Math.min(0.8, rotX)); lx = e.clientX; ly = e.clientY; });
+      window.addEventListener("pointermove", function (e) {
+        if (!down) return;
+        rotY += (e.clientX - lx) * 0.01;
+        camY = Math.max(0.8, Math.min(5.5, camY + (ly - e.clientY) * 0.02));   // vertical drag orbits the camera, never tilts the athlete
+        aimCam();
+        lx = e.clientX; ly = e.clientY;
+      });
       window.addEventListener("pointerup", function () { down = false; renderer.domElement.style.cursor = "grab"; });
-      var stopped = false, clock = 0, last = performance.now(), drew = false;
+      var stopped = false, clock = 0, last = performance.now();
       host._stop = function () { stopped = true; try { renderer.dispose(); } catch (e) {} if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement); };
       function frame(now) {
         if (stopped) return;
         try {
-          var dt = Math.min(0.05, (now - last) / 1000); last = now; clock += dt * 0.55;
-          var phase = nF > 1 ? (clock % nF) : 0; var i = Math.floor(phase), j = (i + 1) % nF, f = saEase(phase - i);
+          var dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now;   // clamp: first rAF timestamp can precede performance.now()
+          clock += dt * 0.5;
+          // pingpong: lift up (concentric), lower back down (eccentric) -- no
+          // wrap-around tween from lockout straight to setup.
+          var u = 0;
+          if (span > 0) { var cyc = clock % (2 * span); u = (cyc <= span) ? cyc : (2 * span - cyc); }
+          var i = Math.max(0, Math.min(span, Math.floor(u)));
+          var j = Math.min(span, i + 1);
+          var f = saEase(Math.max(0, Math.min(1, u - i)));
           applyFrame(verts[i], verts[j], f);
           if (!down) rotY += dt * 0.25;
-          group.rotation.y = rotY; group.rotation.x = rotX;
+          pivot.rotation.y = rotY;
           renderer.render(scene, cam);
-          drew = true;
         } catch (err) {
           stopped = true;
           try { host._stop(); } catch (e2) {}
