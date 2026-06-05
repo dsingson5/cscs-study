@@ -449,7 +449,7 @@ FRONTAL = {
         {"c": "good", "bar": [220, 82], "cue": "stand tall, locked", "j": {"head": [220, 58, 13], "neck": [220, 78], "hipC": [220, 138], "shL": [200, 88], "shR": [240, 88], "handL": [196, 80], "handR": [244, 80], "kneeL": [208, 170], "kneeR": [232, 170], "ankleL": [208, 205], "ankleR": [232, 205]}},
     ],
     "ex_deadlift": [
-        {"c": "ac", "bar": [220, 182], "cue": "grip just outside the knees", "j": {"head": [220, 86, 13], "neck": [220, 104], "hipC": [220, 150], "shL": [202, 112], "shR": [238, 112], "handL": [206, 180], "handR": [234, 180], "kneeL": [206, 172], "kneeR": [234, 172], "ankleL": [206, 206], "ankleR": [234, 206]}},
+        {"c": "ac", "bar": [220, 186], "cue": "grip just outside the knees", "j": {"head": [220, 86, 13], "neck": [220, 104], "hipC": [220, 150], "shL": [202, 112], "shR": [238, 112], "handL": [206, 186], "handR": [234, 186], "kneeL": [206, 172], "kneeR": [234, 172], "ankleL": [206, 206], "ankleR": [234, 206]}},
         {"c": "ac", "bar": [220, 150], "cue": "bar stays centered, hips square", "j": {"head": [220, 72, 13], "neck": [220, 90], "hipC": [220, 138], "shL": [204, 98], "shR": [236, 98], "handL": [208, 150], "handR": [232, 150], "kneeL": [210, 168], "kneeR": [230, 168], "ankleL": [208, 206], "ankleR": [232, 206]}},
         {"c": "good", "bar": [220, 128], "cue": "hips & shoulders level", "j": {"head": [220, 58, 13], "neck": [220, 76], "hipC": [220, 128], "shL": [206, 84], "shR": [234, 84], "handL": [208, 128], "handR": [232, 128], "kneeL": [212, 168], "kneeR": [228, 168], "ankleL": [210, 206], "ankleR": [230, 206]}},
     ],
@@ -459,7 +459,7 @@ FRONTAL = {
         {"c": "good", "bar": [220, 28], "cue": "stacked overhead, even", "j": {"head": [220, 64, 13], "neck": [220, 82], "hipC": [220, 140], "shL": [204, 90], "shR": [236, 90], "handL": [212, 28], "handR": [228, 28], "kneeL": [210, 172], "kneeR": [230, 172], "ankleL": [210, 205], "ankleR": [230, 205]}},
     ],
     "ex_clean": [
-        {"c": "ac", "bar": [220, 180], "cue": "pull the bar in close", "j": {"head": [220, 86, 13], "neck": [220, 104], "hipC": [220, 150], "shL": [202, 112], "shR": [238, 112], "handL": [206, 180], "handR": [234, 180], "kneeL": [206, 172], "kneeR": [234, 172], "ankleL": [206, 206], "ankleR": [234, 206]}},
+        {"c": "ac", "bar": [220, 186], "cue": "pull the bar in close", "j": {"head": [220, 86, 13], "neck": [220, 104], "hipC": [220, 150], "shL": [202, 112], "shR": [238, 112], "handL": [206, 186], "handR": [234, 186], "kneeL": [206, 172], "kneeR": [234, 172], "ankleL": [206, 206], "ankleR": [234, 206]}},
         {"c": "good", "bar": [220, 116], "cue": "triple extension — explode up", "j": {"head": [220, 54, 13], "neck": [220, 72], "hipC": [220, 120], "shL": [206, 80], "shR": [234, 80], "handL": [210, 118], "handR": [230, 118], "kneeL": [212, 162], "kneeR": [228, 162], "ankleL": [212, 206], "ankleR": [228, 206]}},
         {"c": "a2", "bar": [220, 82], "cue": "catch: elbows high, knees out", "j": {"head": [220, 72, 13], "neck": [220, 90], "hipC": [220, 150], "shL": [202, 98], "shR": [238, 98], "handL": [206, 86], "handR": [234, 86], "kneeL": [200, 176], "kneeR": [240, 176], "ankleL": [208, 206], "ankleR": [232, 206]}},
     ],
@@ -661,27 +661,27 @@ def s_squat():
 
 def s_deadlift():
     plate_y = lambda by: _plate(206, by)
-    setup = dict(head=(200, 98, 12), neck=(204, 110), shoulder=(208, 118), hip=(168, 150),
-                 knee=(212, 170), ankle=(206, 202), toe=(228, 206), elbow=(207, 148), hand=(206, 178))
-    breaks = dict(head=(202, 86, 12), neck=(206, 98), shoulder=(210, 106), hip=(176, 140),
-                  knee=(210, 166), ankle=(206, 202), toe=(228, 206), elbow=(208, 130), hand=(206, 156))
-    knees = dict(head=(199, 80, 12), neck=(203, 92), shoulder=(206, 100), hip=(190, 130),
-                 knee=(208, 162), ankle=(206, 202), toe=(226, 206), elbow=(206, 116), hand=(206, 132))
+    setup = dict(head=(216, 92, 12), neck=(208, 106), shoulder=(206, 114), hip=(170, 148),
+                 knee=(208, 170), ankle=(206, 202), toe=(228, 206), elbow=(206, 148), hand=(206, 186))
+    breaks = dict(head=(215, 84, 12), neck=(207, 98), shoulder=(205, 106), hip=(178, 136),
+                  knee=(207, 167), ankle=(206, 202), toe=(228, 206), elbow=(206, 136), hand=(206, 168))
+    knees = dict(head=(214, 78, 12), neck=(206, 92), shoulder=(204, 100), hip=(190, 128),
+                 knee=(206, 164), ankle=(206, 202), toe=(226, 206), elbow=(205, 128), hand=(206, 158))
     lock = dict(head=(206, 60, 13), neck=(206, 77), shoulder=(206, 84), hip=(206, 128),
-                knee=(206, 166), ankle=(206, 202), toe=(224, 206), elbow=(206, 104), hand=(206, 118))
+                knee=(206, 166), ankle=(206, 202), toe=(224, 206), elbow=(206, 116), hand=(206, 148))
     steps = [
         dict(label="Set up over the bar",
              desc="Bar over mid-foot, shins close. Hinge to grip just outside the knees. Hips higher than knees, shoulders just ahead of the bar, lats tight, flat back.",
-             svg=_title("SET-UP") + _guide(206) + _ground("bar over mid-foot") + _figure(setup) + plate_y(178) + _chip(290, 88, "flat back", AC)),
+             svg=_title("SET-UP") + _guide(206) + _ground("bar over mid-foot") + _figure(setup) + plate_y(186) + _chip(290, 88, "flat back", AC)),
         dict(label="Break from the floor — push the legs",
              desc="Drive the floor away with the legs to break the bar from the ground. The bar stays glued to the shins; hips and shoulders rise at the same rate.",
-             svg=_title("FIRST PULL") + _guide(206) + _ground() + _figure(breaks) + plate_y(156) + _arrow(150, 168, 150, 138, A2) + _chip(286, 100, "leg drive", AC)),
+             svg=_title("FIRST PULL") + _guide(206) + _ground() + _figure(breaks) + plate_y(168) + _arrow(150, 168, 150, 138, A2) + _chip(286, 100, "leg drive", AC)),
         dict(label="Bar passes the knees",
              desc="Once past the knees, drive the hips forward toward the bar. Keep it close — don't let it swing out or round the back.",
-             svg=_title("PAST KNEES") + _guide(206) + _ground() + _figure(knees) + plate_y(132) + _arrow(150, 150, 178, 120, A2) + _chip(286, 92, "hips in", AC)),
+             svg=_title("PAST KNEES") + _guide(206) + _ground() + _figure(knees) + plate_y(158) + _arrow(150, 150, 178, 120, A2) + _chip(286, 92, "hips in", AC)),
         dict(label="Lockout — stand tall, hips through",
              desc="Finish by squeezing the glutes and standing fully erect. Shoulders back, knees and hips locked. No leaning back or over-extending the spine.",
-             svg=_title("LOCKOUT") + _guide(206) + _ground() + _figure(lock, color=GOOD) + _plate(206, 118, "sa-pop") + _arrow(150, 150, 150, 100, GOOD) + _chip(296, 70, "GLUTES", GOOD)),
+             svg=_title("LOCKOUT") + _guide(206) + _ground() + _figure(lock, color=GOOD) + _plate(206, 148, "sa-pop") + _arrow(150, 150, 150, 100, GOOD) + _chip(296, 70, "GLUTES", GOOD)),
     ]
     return _stepper("ex_deadlift", "Conventional deadlift — pull sequence", steps,
                     "Bar travels in a straight vertical line, glued to the body. Hips and shoulders rise together off the floor.")
@@ -715,12 +715,12 @@ def s_press():
 
 
 def s_clean():
-    floor = dict(head=(200, 100, 12), neck=(204, 112), shoulder=(208, 120), hip=(170, 154),
-                 knee=(214, 170), ankle=(206, 202), toe=(228, 206), elbow=(207, 150), hand=(206, 180))
-    pull1 = dict(head=(202, 88, 12), neck=(206, 100), shoulder=(210, 108), hip=(180, 142),
-                 knee=(210, 166), ankle=(206, 202), toe=(226, 206), elbow=(208, 132), hand=(206, 156))
-    scoop = dict(head=(200, 76, 12), neck=(204, 90), shoulder=(206, 98), hip=(190, 124),
-                 knee=(214, 158), ankle=(206, 202), toe=(226, 206), elbow=(204, 116), hand=(206, 134))
+    floor = dict(head=(216, 94, 12), neck=(208, 108), shoulder=(206, 116), hip=(172, 152),
+                 knee=(210, 172), ankle=(206, 202), toe=(228, 206), elbow=(206, 150), hand=(206, 186))
+    pull1 = dict(head=(215, 86, 12), neck=(207, 100), shoulder=(205, 108), hip=(180, 140),
+                 knee=(208, 168), ankle=(206, 202), toe=(226, 206), elbow=(206, 138), hand=(206, 170))
+    scoop = dict(head=(212, 74, 12), neck=(205, 88), shoulder=(204, 96), hip=(192, 124),
+                 knee=(214, 158), ankle=(206, 202), toe=(226, 206), elbow=(205, 118), hand=(206, 140))
     ext = dict(head=(208, 50, 12), neck=(208, 64), shoulder=(208, 72), hip=(208, 116),
                knee=(208, 158), ankle=(206, 202), toe=(220, 206), elbow=(206, 92), hand=(206, 108))
     catch = dict(head=(206, 70, 13), neck=(206, 86), shoulder=(206, 94), hip=(196, 150),
@@ -730,13 +730,13 @@ def s_clean():
     steps = [
         dict(label="Start position",
              desc="Bar over mid-foot, hook grip just outside the knees. Hips higher than the knees, shoulders over or just in front of the bar, back flat and braced.",
-             svg=_title("START") + _guide(206) + _ground("bar over mid-foot") + _figure(floor) + _plate(206, 180) + _chip(290, 92, "flat back", AC)),
+             svg=_title("START") + _guide(206) + _ground("bar over mid-foot") + _figure(floor) + _plate(206, 186) + _chip(290, 92, "flat back", AC)),
         dict(label="First pull — floor to knee",
              desc="Push the floor away to lift the bar smoothly to knee height. Keep the back angle constant and the bar close; this is patient, not explosive yet.",
-             svg=_title("FIRST PULL") + _guide(206) + _ground() + _figure(pull1) + _plate(206, 156) + _arrow(150, 170, 150, 142, A2) + _chip(286, 96, "patient", AC)),
+             svg=_title("FIRST PULL") + _guide(206) + _ground() + _figure(pull1) + _plate(206, 170) + _arrow(150, 170, 150, 142, A2) + _chip(286, 96, "patient", AC)),
         dict(label="Scoop / transition (double-knee bend)",
              desc="As the bar passes the knees, the knees re-bend under the bar and the torso becomes vertical — loading the legs to explode (the 'power position').",
-             svg=_title("SCOOP") + _guide(206) + _ground() + _figure(scoop) + _plate(206, 134) + _chip(286, 100, "power position", A2, w=120)),
+             svg=_title("SCOOP") + _guide(206) + _ground() + _figure(scoop) + _plate(206, 140) + _chip(286, 100, "power position", A2, w=120)),
         dict(label="Second pull — triple extension",
              desc="Violently extend ankles, knees and hips and shrug — the jump that launches the bar upward. This is the explosive heart of the lift.",
              svg=_title("EXPLODE") + _ground() + _figure(ext, color=GOOD) + _plate(206, 108, "sa-rise") + _arrow(150, 170, 150, 70, GOOD, w=5) + _chip(286, 70, "triple ext!", GOOD, w=110)),
