@@ -661,12 +661,12 @@ def s_squat():
 
 def s_deadlift():
     plate_y = lambda by: _plate(206, by)
-    setup = dict(head=(170, 100, 12), neck=(176, 112), shoulder=(182, 120), hip=(150, 152),
-                 knee=(198, 170), ankle=(206, 202), toe=(228, 206), elbow=(194, 152), hand=(206, 178))
-    breaks = dict(head=(178, 92, 12), neck=(184, 104), shoulder=(190, 112), hip=(158, 140),
-                  knee=(202, 162), ankle=(206, 202), toe=(228, 206), elbow=(200, 140), hand=(206, 156))
-    knees = dict(head=(192, 78, 12), neck=(196, 92), shoulder=(200, 100), hip=(176, 126),
-                 knee=(206, 162), ankle=(206, 202), toe=(226, 206), elbow=(204, 116), hand=(206, 132))
+    setup = dict(head=(200, 98, 12), neck=(204, 110), shoulder=(208, 118), hip=(168, 150),
+                 knee=(212, 170), ankle=(206, 202), toe=(228, 206), elbow=(207, 148), hand=(206, 178))
+    breaks = dict(head=(202, 86, 12), neck=(206, 98), shoulder=(210, 106), hip=(176, 140),
+                  knee=(210, 166), ankle=(206, 202), toe=(228, 206), elbow=(208, 130), hand=(206, 156))
+    knees = dict(head=(199, 80, 12), neck=(203, 92), shoulder=(206, 100), hip=(190, 130),
+                 knee=(208, 162), ankle=(206, 202), toe=(226, 206), elbow=(206, 116), hand=(206, 132))
     lock = dict(head=(206, 60, 13), neck=(206, 77), shoulder=(206, 84), hip=(206, 128),
                 knee=(206, 166), ankle=(206, 202), toe=(224, 206), elbow=(206, 104), hand=(206, 118))
     steps = [
@@ -715,10 +715,10 @@ def s_press():
 
 
 def s_clean():
-    floor = dict(head=(170, 102, 12), neck=(176, 114), shoulder=(182, 122), hip=(152, 154),
-                 knee=(198, 172), ankle=(206, 202), toe=(228, 206), elbow=(194, 154), hand=(206, 180))
-    pull1 = dict(head=(184, 88, 12), neck=(190, 100), shoulder=(196, 108), hip=(166, 138),
-                 knee=(204, 164), ankle=(206, 202), toe=(226, 206), elbow=(202, 134), hand=(206, 156))
+    floor = dict(head=(200, 100, 12), neck=(204, 112), shoulder=(208, 120), hip=(170, 154),
+                 knee=(214, 170), ankle=(206, 202), toe=(228, 206), elbow=(207, 150), hand=(206, 180))
+    pull1 = dict(head=(202, 88, 12), neck=(206, 100), shoulder=(210, 108), hip=(180, 142),
+                 knee=(210, 166), ankle=(206, 202), toe=(226, 206), elbow=(208, 132), hand=(206, 156))
     scoop = dict(head=(200, 76, 12), neck=(204, 90), shoulder=(206, 98), hip=(190, 124),
                  knee=(214, 158), ankle=(206, 202), toe=(226, 206), elbow=(204, 116), hand=(206, 134))
     ext = dict(head=(208, 50, 12), neck=(208, 64), shoulder=(208, 72), hip=(208, 116),
@@ -1021,10 +1021,10 @@ def s_plyometrics():
 
 
 def s_speed():
-    drive = dict(head=(120, 70, 12), neck=(128, 84), shoulder=(136, 92), hip=(108, 128),
-                 knee=(150, 150), ankle=(180, 176), toe=(196, 178), elbow=(150, 96), hand=(168, 84))
-    build = dict(head=(160, 64, 12), neck=(162, 80), shoulder=(164, 88), hip=(150, 130),
-                 knee=(180, 156), ankle=(200, 188), toe=(214, 190), elbow=(178, 96), hand=(192, 84))
+    drive = dict(head=(148, 64, 12), neck=(140, 78), shoulder=(132, 86), hip=(108, 126),
+                 knee=(134, 156), ankle=(122, 190), toe=(138, 194), elbow=(150, 96), hand=(168, 84))
+    build = dict(head=(166, 60, 12), neck=(164, 76), shoulder=(162, 86), hip=(150, 128),
+                 knee=(176, 158), ankle=(170, 192), toe=(186, 195), elbow=(178, 96), hand=(192, 84))
     maxv = dict(head=(206, 56, 12), neck=(206, 72), shoulder=(206, 80), hip=(206, 124),
                 knee=(232, 150), ankle=(214, 188), toe=(228, 190), elbow=(186, 88), hand=(168, 78))
     decel = dict(head=(214, 78, 12), neck=(210, 94), shoulder=(206, 102), hip=(196, 144),
