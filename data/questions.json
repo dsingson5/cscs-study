@@ -425,6 +425,26 @@
       "q": "True or false: Static stretching immediately before a max-effort jump improves performance.",
       "a": "False. Static stretching held for 30+ seconds immediately pre-performance can transiently reduce power/force output by ~5%. Use dynamic warm-up instead.",
       "type": "applied"
+    },
+    {
+      "type": "recall",
+      "q": "What are the four stages of the RAMP warm-up, in order?",
+      "a": "Raise → Activate → Mobilise → Potentiate."
+    },
+    {
+      "type": "recall",
+      "q": "What is the goal of the 'Potentiate' stage of RAMP?",
+      "a": "Progressively faster, sport-specific efforts (build-up sprints, ramping loads) so the athlete starts the session primed and peaked rather than flat — exploiting post-activation potentiation."
+    },
+    {
+      "type": "applied",
+      "q": "Why use dynamic stretching rather than long static holds before power or strength work?",
+      "a": "Prolonged static stretching can transiently cut force and power output; dynamic movements raise temperature and take joints through sport-relevant ranges without that dip — prepping mobility while keeping the muscles switched on."
+    },
+    {
+      "type": "recall",
+      "q": "What does the 'Raise' stage of a warm-up accomplish physiologically?",
+      "a": "Low-intensity movement raises heart rate, core and muscle temperature, blood flow and joint synovial fluid, speeding nerve conduction and metabolic reactions so the body is ready for higher-intensity work."
     }
   ],
   "ex_squat": [
@@ -437,6 +457,31 @@
       "q": "Most common technical fault during the squat, and the typical cue to correct it.",
       "a": "Knee valgus (knees collapsing inward). Cue: 'knees out' or 'spread the floor.'",
       "type": "applied"
+    },
+    {
+      "type": "recall",
+      "q": "Order the back squat from the top: name the phases from set-up to lockout.",
+      "a": "Set-up & brace → descent (hips and knees flex together) → hit depth (hip crease at/below the knee) → drive up leading with the chest (bar over mid-foot) → lockout (hips and knees fully extended)."
+    },
+    {
+      "type": "recall",
+      "q": "Where should the barbell stay relative to the foot throughout a back squat, and why?",
+      "a": "Stacked over the mid-foot. It keeps the system balanced and minimizes the moment arm on the spine and knees; drifting forward shifts load onto the low back."
+    },
+    {
+      "type": "applied",
+      "q": "A lifter's chest falls and the hips shoot up first out of the bottom of the squat. Name the fault and the cue.",
+      "a": "A 'good-morning' / hips-rise-first fault (often weak quads or a lost brace). Cue 'chest up, drive the whole torso up together,' keep knees tracking out, and drop the load until depth is controlled."
+    },
+    {
+      "type": "recall",
+      "q": "Describe the breathing and bracing strategy for a heavy squat rep.",
+      "a": "Valsalva: big breath into the belly before descending, brace the trunk 360° (abs and obliques) to build intra-abdominal pressure, hold it through the rep, then exhale at/after lockout."
+    },
+    {
+      "type": "applied",
+      "q": "Why must the knees track over the toes (not collapse inward) during a squat?",
+      "a": "Tracking keeps knee, hip and ankle aligned so force is shared across the joint and valgus collapse (which stresses the MCL/ACL) is avoided; it also keeps the quads and glutes in strong leverage."
     }
   ],
   "ex_deadlift": [
@@ -449,6 +494,31 @@
       "q": "Why does the trap bar deadlift reduce L4-L5 shear compared to conventional?",
       "a": "Hands are at the sides (not in front of the body), allowing a more upright torso and shifting the load line closer to the spine — reducing the moment arm for low-back shear forces.",
       "type": "applied"
+    },
+    {
+      "type": "recall",
+      "q": "List the conventional deadlift sequence from set-up to lockout.",
+      "a": "Set-up over the bar (bar over mid-foot, shins close, hips above the knees, shoulders just ahead of the bar, flat braced back) → break from the floor with leg drive (hips and shoulders rise together) → bar passes the knees → drive the hips through to a tall lockout."
+    },
+    {
+      "type": "recall",
+      "q": "At deadlift set-up, where are the hips and shoulders relative to the bar and knees?",
+      "a": "Hips higher than the knees but below the shoulders; shoulders slightly ahead of (over) the bar; bar over mid-foot, against the shins."
+    },
+    {
+      "type": "applied",
+      "q": "The hips rise faster than the shoulders off the floor in a deadlift. Why is that a problem and how do you fix it?",
+      "a": "It turns the pull into a stiff-legged good-morning — more low-back shear and the bar drifts away. Fix: 'push the floor away' with the legs and keep the chest up so hips and shoulders rise at the same rate, bar glued to the shins."
+    },
+    {
+      "type": "recall",
+      "q": "What keeps the deadlift bar path efficient?",
+      "a": "A straight vertical line glued to the body — bar over mid-foot, dragged up the shins and thighs with the lats engaged. Letting it swing out lengthens the moment arm and rounds the back."
+    },
+    {
+      "type": "applied",
+      "q": "Compare conventional, sumo, and trap-bar deadlifts in trunk angle and low-back demand.",
+      "a": "Conventional: more horizontal torso, high hip-extensor/erector demand. Sumo: wider stance, more upright torso → shorter spinal moment arm (less low-back shear) but more adductor/quad demand. Trap-bar: most upright, friendliest to most lifters."
     }
   ],
   "ex_press": [
@@ -461,6 +531,26 @@
       "q": "Why is overhead press more demanding on lumbar stability than bench press?",
       "a": "The load is overhead, creating extension torque at the lumbar spine. Without active bracing, the lifter compensates with lumbar hyperextension.",
       "type": "applied"
+    },
+    {
+      "type": "recall",
+      "q": "Describe the overhead press bar path and the head movement that allows it.",
+      "a": "The bar travels in a straight vertical line over the mid-foot. As it clears the chin the head shifts back to let the bar pass the face, then pushes forward 'through the window' so the bar finishes stacked over the shoulders, hips and ankles."
+    },
+    {
+      "type": "recall",
+      "q": "What is the front-rack start position for the overhead press?",
+      "a": "Bar on the front delts, elbows slightly ahead of the bar, forearms vertical, glutes and abs braced with ribs down — a rigid column from the floor to the bar."
+    },
+    {
+      "type": "applied",
+      "q": "A presser's low back arches hard and the bar drifts forward at lockout. What's wrong and the cue?",
+      "a": "Loss of trunk bracing (rib flare/over-extension) and an incomplete bar path. Cue: squeeze glutes and abs to keep ribs down, and push the head 'through the window' so the bar finishes over the mid-foot, not out front."
+    },
+    {
+      "type": "recall",
+      "q": "How does the bench press 'stack' mirror the overhead press?",
+      "a": "Same straight-line force concept rotated horizontal: the bar moves over the shoulder joint with the forearm vertical at the bottom; the stack is wrist-over-elbow-over-shoulder instead of bar-over-mid-foot."
     }
   ],
   "ex_clean": [
@@ -473,6 +563,31 @@
       "q": "Why might Olympic-lift derivatives (e.g., mid-thigh pull) be preferred over full lifts for a Hyrox athlete?",
       "a": "Lower technical demand, similar power development benefit, less time investment to master, and the full catch (front rack) has minimal sport-specific carryover for Hyrox.",
       "type": "applied"
+    },
+    {
+      "type": "recall",
+      "q": "Name the six positions of the power clean in order.",
+      "a": "Start (over the bar) → first pull (floor to knee) → scoop/transition (double-knee bend, power position) → second pull (explosive triple extension + shrug) → catch in the front rack (quarter squat, elbows high) → recover to standing."
+    },
+    {
+      "type": "recall",
+      "q": "What is the 'second pull' and why is it the heart of the clean?",
+      "a": "The violent triple extension of ankles, knees and hips with a shrug — the jump that accelerates the bar upward. It produces the highest power output of the lift."
+    },
+    {
+      "type": "applied",
+      "q": "Why must the first pull of the clean be 'patient' rather than maximally explosive?",
+      "a": "The first pull sets position and keeps the bar close while preserving the back angle; exploding too early throws the bar forward and ruins the power position, so peak effort is saved for the second pull."
+    },
+    {
+      "type": "applied",
+      "q": "What does the 'scoop' / double-knee bend accomplish in the clean?",
+      "a": "As the bar passes the knees, the knees re-bend under the bar and the torso becomes vertical (power position), re-loading the legs and stretching the hip/knee extensors so the second pull can be maximally explosive."
+    },
+    {
+      "type": "recall",
+      "q": "Describe the catch position of a power clean.",
+      "a": "Bar caught on the front delts in a quarter-squat, elbows whipped through and high, torso upright, feet flat — then stand to finish."
     }
   ],
   "ex_alt_modes": [
@@ -485,6 +600,26 @@
       "q": "Why is the sled push useful for daily/high-frequency programming?",
       "a": "Minimal eccentric load → minimal muscle damage and DOMS → can be repeated frequently without compromising recovery. Provides high metabolic stimulus with low joint cost.",
       "type": "applied"
+    },
+    {
+      "type": "recall",
+      "q": "What are the technique priorities for a heavy sled push?",
+      "a": "A strong forward lean from the ankles with a braced neutral spine, arms relatively extended, and powerful alternating triple-extension leg drive through full ground contact — a low body angle to apply horizontal force."
+    },
+    {
+      "type": "applied",
+      "q": "Why is the sled push almost purely concentric, and what does that mean for recovery?",
+      "a": "There's little eccentric/braking component (you only push, never lower a load), so it causes far less muscle damage and soreness than equivalent eccentric work — allowing higher frequency and making it great for conditioning without a big recovery cost."
+    },
+    {
+      "type": "recall",
+      "q": "Coaching points for a loaded carry (farmer's or suitcase)?",
+      "a": "Tall posture, braced trunk, shoulders packed down, ribs stacked over the pelvis; resist lateral lean (especially the suitcase carry) — it's an anti-lateral-flexion/anti-rotation core task as much as a grip task."
+    },
+    {
+      "type": "applied",
+      "q": "How does the wall ball combine movement patterns, and what's the timing key?",
+      "a": "It's a front squat into an explosive overhead throw — triple extension transfers leg drive into the ball. The key is timing the throw to the squat's upward drive (use the legs), not muscling it with the arms."
     }
   ],
   "needs_analysis": [
@@ -540,6 +675,26 @@
       "q": "Suggested squat strength pre-requisite for performing depth jumps.",
       "a": "Approximately 1.5× body weight back squat.",
       "type": "recall"
+    },
+    {
+      "type": "recall",
+      "q": "Name the three phases of the stretch-shortening cycle in order.",
+      "a": "Eccentric (loading/lengthening, stores elastic energy) → amortization (brief transition) → concentric (shortening/explosive release)."
+    },
+    {
+      "type": "applied",
+      "q": "Why must the amortization phase be kept as short as possible?",
+      "a": "The longer the pause between lengthening and shortening, the more stored elastic energy leaks away as heat and the weaker the stretch-reflex contribution — so a long amortization erases the plyometric benefit."
+    },
+    {
+      "type": "recall",
+      "q": "Give a sensible intensity progression and the landing cue for plyometrics.",
+      "a": "Build a strength base first, then progress low-to-high: jumps in place → broad/box jumps → depth/reactive jumps. Land softly with bent knees and hips ('quiet landings') and keep ground-contact times short on reactive work."
+    },
+    {
+      "type": "applied",
+      "q": "Why does greater maximal strength improve jump and plyometric performance?",
+      "a": "More maximal force lets the athlete apply more force in the brief ground-contact window and stiffen the tendon to store and return more elastic energy, raising rate of force development and reactive output."
     }
   ],
   "speed_agility": [
@@ -552,6 +707,26 @@
       "q": "Difference between change-of-direction (CODS) and reactive agility.",
       "a": "CODS = pre-planned change of direction (closed loop). Reactive agility = unplanned response to a visual or auditory stimulus (open loop). Reactive agility transfers better to most field/court sports.",
       "type": "recall"
+    },
+    {
+      "type": "recall",
+      "q": "Contrast acceleration mechanics with max-velocity mechanics.",
+      "a": "Acceleration: big forward lean, long forceful ground contacts, triple-extension push behind the body. Max velocity: tall upright posture, high knee drive, brief contacts with a quick downward 'paw-back' applying force straight down."
+    },
+    {
+      "type": "applied",
+      "q": "What quality lets an athlete change direction sharply, and how do you train it?",
+      "a": "Eccentric strength to decelerate (absorb the brake) before re-accelerating. Train it by lowering the centre of mass with gather steps, planting hard, and developing eccentric/reactive strength so the cut is controlled, not a collision."
+    },
+    {
+      "type": "recall",
+      "q": "Define agility as used in the CSCS framework.",
+      "a": "A rapid, whole-body change of velocity or direction in response to a stimulus — it has both a physical (change-of-direction) and a perceptual/decision-making component."
+    },
+    {
+      "type": "applied",
+      "q": "Why is sprinting itself the most specific way to get faster?",
+      "a": "Top speed is governed by the force you put into the ground in very short contact times in a sprint-specific posture; only sprinting and closely related drills train that exact motor pattern, ground-contact mechanics and intermuscular coordination."
     }
   ],
   "aerobic_programming": [

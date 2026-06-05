@@ -712,3 +712,12 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* rebuild trigger 2026-06-05T01:14Z — anatomical pose fixes: forward shins, shoulders over bar (DL/clean), sprint drive foot under hips */
 
 /* rebuild trigger 2026-06-05T01:43Z — bar rests on floor, knee at bar line, chest proud (DL + clean) */
+
+
+/* ── Voice dictation mic button on answer boxes ── */
+.mic-btn { display: inline-flex; align-items: center; gap: 6px; margin: 7px 0 0; padding: 5px 12px; font-size: 11px; font-weight: 600; color: var(--text-dim); background: var(--bg); border: 1px solid var(--border); border-radius: 999px; cursor: pointer; transition: color .15s, border-color .15s, background .15s; }
+.mic-btn:hover { border-color: var(--accent); color: var(--accent); }
+.mic-btn .mic-ico { width: 13px; height: 13px; flex: none; }
+.mic-btn.listening { color: #fff; background: var(--bad); border-color: var(--bad); animation: saMicPulse 1.4s ease-out infinite; }
+@keyframes saMicPulse { 0% { box-shadow: 0 0 0 0 rgba(255,122,122,.45); } 70% { box-shadow: 0 0 0 8px rgba(255,122,122,0); } 100% { box-shadow: 0 0 0 0 rgba(255,122,122,0); } }
+.no-speech .mic-btn { display: none; }

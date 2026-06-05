@@ -446,6 +446,7 @@ function questionCardHTML(d, qid, opts) {
     '<span class="q-status" data-status-for="' + qid + '"></span>' + '<span class="q-last" data-last-for="' + qid + '" data-stable="' + escapeHtml(d.stable) + '"></span></div>' +
     '<div class="q-text">' + escapeHtml(d.q.q) + '</div>' +
     '<textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea>' +
+    '<button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button>' +
     '<div class="q-confidence"><span class="conf-label">How sure are you?</span>' +
     '<button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence(\'' + qid + '\',\'low\')">Low</button>' +
     '<button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence(\'' + qid + '\',\'med\')">Medium</button>' +
@@ -699,7 +700,64 @@ function hydrateLessonNav() {
   if (next && !window.__CSCS_NEXT) { next.classList.add("ln-disabled"); next.setAttribute("aria-disabled","true"); next.onclick = function(){ return false; }; }
 }
 
+
+/* ── Voice dictation (Web Speech API) — answer by speaking when you can't type.
+   Appends the transcript into the answer box and fires `input`, which runs
+   onAnswerInput → unlocks the gated Reveal exactly like typing would. Hidden
+   where the browser has no SpeechRecognition. Typing is always the fallback. ── */
+function speechSupported() { return ('SpeechRecognition' in window) || ('webkitSpeechRecognition' in window); }
+var __saRec = null, __saTA = null, __saBtn = null, __saBase = '';
+function saMicState(btn, on, msg) {
+  if (!btn) return;
+  btn.classList.toggle('listening', !!on);
+  btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  var l = btn.querySelector('.mic-lbl'); if (l) l.textContent = msg || (on ? 'Listening… tap to stop' : 'Speak');
+}
+function saStopMic() {
+  if (__saRec) { try { __saRec.onend = null; __saRec.stop(); } catch (e) {} }
+  if (__saBtn) saMicState(__saBtn, false);
+  __saRec = null; __saTA = null; __saBtn = null;
+}
+function toggleDictation(btn) {
+  if (!speechSupported()) { saMicState(btn, false, 'Voice not supported'); return; }
+  var q = btn && btn.closest ? btn.closest('.q') : null; if (!q) return;
+  var ta = q.querySelector('.q-answer'); if (!ta) return;
+  if (__saRec && __saTA === ta) { saStopMic(); return; }   // toggle off
+  if (__saRec) saStopMic();                                // switch cards
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var rec; try { rec = new SR(); } catch (e) { saMicState(btn, false, 'Voice not supported'); return; }
+  rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = true; rec.maxAlternatives = 1;
+  __saRec = rec; __saTA = ta; __saBtn = btn;
+  __saBase = ta.value ? (ta.value.replace(/\s+$/, '') + ' ') : '';
+  saMicState(btn, true);
+  rec.onresult = function (e) {
+    var fin = '', interim = '';
+    for (var i = e.resultIndex; i < e.results.length; i++) {
+      var t = e.results[i][0].transcript;
+      if (e.results[i].isFinal) fin += t; else interim += t;
+    }
+    if (fin) {
+      __saBase = (__saBase + fin).replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1');
+      __saBase = __saBase.replace(/\s*$/, '') + ' ';
+    }
+    ta.value = (__saBase + interim).replace(/\s+/g, ' ').replace(/^\s+/, '');
+    ta.dispatchEvent(new Event('input', { bubbles: true }));
+  };
+  rec.onerror = function (ev) {
+    var code = ev && ev.error;
+    var m = code === 'not-allowed' || code === 'service-not-allowed' ? 'Mic blocked — allow access'
+          : code === 'no-speech' ? 'Didn’t catch that — tap to retry' : 'Speak';
+    saMicState(btn, false, m);
+  };
+  rec.onend = function () {
+    if (__saTA) { __saTA.value = __saTA.value.replace(/\s+$/, ''); __saTA.dispatchEvent(new Event('input', { bubbles: true })); }
+    if (__saBtn === btn) saStopMic();
+  };
+  try { rec.start(); } catch (e) { saStopMic(); }
+}
+
 function bootRender() {
+  if (!speechSupported()) { try { document.documentElement.classList.add("no-speech"); } catch (e) {} }
   updateHeaderStats();
   renderDashboard();
   buildReviewQueue();
