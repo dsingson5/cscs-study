@@ -689,7 +689,7 @@ def s_deadlift():
 
 def s_press():
     rack = dict(head=(206, 60, 13), neck=(206, 77), shoulder=(206, 86), hip=(206, 140),
-                knee=(206, 172), ankle=(206, 204), toe=(224, 206), elbow=(186, 92), hand=(198, 76))
+                knee=(206, 172), ankle=(206, 204), toe=(224, 206), elbow=(202, 94), hand=(198, 76))
     mid = dict(head=(200, 64, 13), neck=(204, 80), shoulder=(206, 88), hip=(206, 140),
                knee=(206, 172), ankle=(206, 204), toe=(224, 206), elbow=(198, 70), hand=(204, 52))
     past = dict(head=(206, 64, 13), neck=(206, 80), shoulder=(206, 88), hip=(206, 140),
@@ -724,9 +724,9 @@ def s_clean():
     ext = dict(head=(208, 50, 12), neck=(208, 64), shoulder=(208, 72), hip=(208, 116),
                knee=(208, 158), ankle=(206, 202), toe=(220, 206), elbow=(206, 92), hand=(206, 108))
     catch = dict(head=(206, 70, 13), neck=(206, 86), shoulder=(206, 94), hip=(196, 150),
-                 knee=(220, 176), ankle=(206, 202), toe=(224, 206), elbow=(192, 84), hand=(200, 78))
+                 knee=(220, 176), ankle=(206, 202), toe=(224, 206), elbow=(224, 88), hand=(200, 78))
     stand = dict(head=(206, 60, 13), neck=(206, 77), shoulder=(206, 86), hip=(206, 138),
-                 knee=(206, 172), ankle=(206, 204), toe=(224, 206), elbow=(188, 90), hand=(198, 78))
+                 knee=(206, 172), ankle=(206, 204), toe=(224, 206), elbow=(222, 82), hand=(198, 78))
     steps = [
         dict(label="Start position",
              desc="Bar over mid-foot, hook grip just outside the knees. Hips higher than the knees, shoulders over or just in front of the bar, back flat and braced.",

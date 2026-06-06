@@ -721,3 +721,5 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .mic-btn.listening { color: #fff; background: var(--bad); border-color: var(--bad); animation: saMicPulse 1.4s ease-out infinite; }
 @keyframes saMicPulse { 0% { box-shadow: 0 0 0 0 rgba(255,122,122,.45); } 70% { box-shadow: 0 0 0 8px rgba(255,122,122,0); } 100% { box-shadow: 0 0 0 0 rgba(255,122,122,0); } }
 .no-speech .mic-btn { display: none; }
+
+/* rebuild trigger 2026-06-06T06:08Z — front-rack elbow fix: clean catch/recover + press rack elbows up & forward */
