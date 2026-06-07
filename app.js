@@ -627,27 +627,11 @@ function formatLastAnswered(ts) {
   if (!ts) return "";
   var when = new Date(ts);
   if (isNaN(when.getTime())) return "";
-  var nowD = manilaDate(new Date());
-  var thenD = manilaDate(when);
-  var nowT = nowD ? new Date(nowD + "T00:00:00").getTime() : NaN;
-  var thenT = thenD ? new Date(thenD + "T00:00:00").getTime() : NaN;
-  var dayDiff = (!isNaN(nowT) && !isNaN(thenT)) ? Math.round((nowT - thenT) / 86400000) : null;
-  var hhmm = "";
   try {
-    hhmm = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila",
-      hour: "numeric", minute: "2-digit" }).format(when);
-  } catch (e) {}
-  if (dayDiff === 0) return "Last answered today" + (hhmm ? " at " + hhmm : "");
-  if (dayDiff === 1) return "Last answered yesterday";
-  if (dayDiff && dayDiff > 1 && dayDiff <= 7) return "Last answered " + dayDiff + " days ago";
-  if (thenD) {
-    try {
-      var nice = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila",
-        month: "short", day: "numeric" }).format(when);
-      return "Last answered " + nice;
-    } catch (e) { return "Last answered " + thenD; }
-  }
-  return "";
+    var dateP = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila", year: "numeric", month: "short", day: "numeric" }).format(when);
+    var timeP = new Intl.DateTimeFormat("en-US", { timeZone: "Asia/Manila", hour: "numeric", minute: "2-digit" }).format(when);
+    return "Answered " + dateP + " at " + timeP;
+  } catch (e) { return "Answered " + ts; }
 }
 function latestLogTsFor(stable) {
   var s = getState();

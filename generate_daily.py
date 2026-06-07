@@ -27,6 +27,7 @@ import motifs
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 OUT = ROOT / "daily"
+LAST_PAGE_QIDS = []  # core question stable-ids on the last rendered page
 STYLES = ROOT / "styles.css"
 APP_JS = ROOT / "app.js"
 
@@ -207,7 +208,7 @@ def render_q_card(topic_id, orig_idx, q, qid, domain, label="Q", pretest=False):
         f'<div class="{cls}" data-qid="{qid}" data-stable="{esc(stable)}" data-domain="{domain}" data-qtype="{qtype}">'
         f'<div class="q-head"><span class="q-num">{label}</span><span class="q-type {qtype}">{qtype}</span>'
         f'<span class="q-domain">{esc(dom_name)}</span>'
-        f'<span class="q-status" data-status-for="{qid}"></span></div>'
+        f'<span class="q-status" data-status-for="{qid}"></span><span class="q-last" data-last-for="{qid}" data-stable="{esc(stable)}"></span></div>'
         f'<div class="q-text">{esc(q["q"])}</div>'
         f'<textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea>'
         f'<button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button>'
@@ -390,6 +391,19 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
                              "domain": topic_domain.get(ot, "ES")})
     practice_html = render_practice_section(pool, topic_domain)
 
+    # core question set for the completion-aware resume: a day is 'done'
+    # only when ALL of these are graded. Includes pretest + today-topic +
+    # review-topic questions; excludes the random cross-domain bonus draws.
+    _rtopics = {l['topic_id'] for _i, l in reviews}
+    _core = set()
+    for _oi, _q in pre_qs:
+        _core.add(t_topic + '__' + str(_oi))
+    for _it in pool:
+        if _it['topic_id'] == t_topic or _it['topic_id'] in _rtopics:
+            _core.add(_it['topic_id'] + '__' + str(_it['orig_idx']))
+    global LAST_PAGE_QIDS
+    LAST_PAGE_QIDS = sorted(_core)
+
     new_count = len(pre_qs) + len(pool)
 
     weekday = today.strftime("%A")
@@ -478,22 +492,24 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
          visitor doesn't get sent back to Day 1."""
     days = json.dumps(sorted(available))
     dtopic_json = json.dumps(dtopic or {})
-    # Inlined, minified for <head>. Resume to the EARLIEST lesson the user has
-    # not engaged with. A lesson DATE counts as done only if (a) it was touched
-    # on its own page (touchedDays) OR (b) the user has graded at least one card
-    # for THAT day's lesson topic. We deliberately ignore answer timestamps:
-    # being active on some calendar date does not mean that date's lesson was
-    # done (reviews from many days land on a single sitting). We also ALWAYS
-    # redirect to a real daily page so the prev/next links never resolve at the
-    # site root (which 404s).
-    # Sync-aware resume: pull the shared progress gist (baked id, readable
-    # without a token because it is an unlisted "secret" gist), UNION it with
-    # any local progress, and resume at the earliest unfinished lesson. This
-    # makes a brand-new device land on the right day instead of "today".
-    # Falls back to local-only (or today) on timeout / offline / error.
+    # Per-day CORE question stable-ids: a day counts as DONE only when the
+    # user has graded EVERY one of them. Baked so the redirect can decide
+    # completion from graded cards (local UNION remote) with no per-page
+    # bookkeeping. Falls back to touchedDays/topic if a day has no set.
+    _avail = set(available)
+    _dayq = {}
+    try:
+        _cp = DATA / 'day_completion.json'
+        if _cp.exists():
+            for _d, _ids in json.loads(_cp.read_text(encoding='utf-8')).items():
+                if _d in _avail:
+                    _dayq[_d] = _ids
+    except Exception:
+        _dayq = {}
+    dayq_json = json.dumps(_dayq)
     redirect = (
         '<script>(function(){'
-        'var DAYS=' + days + ';var DTOPIC=' + dtopic_json + ';var THIS="' + this_iso + '";'
+        'var DAYS=' + days + ';var DTOPIC=' + dtopic_json + ';var DAYQ=' + dayq_json + ';var THIS="' + this_iso + '";'
         'var GIST="f7cec859cb4ab8ba049297c925c2a959";var GFILE="cscs-progress.json";'
         'function mt(d){try{var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Manila",'
         'year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d||new Date());'
@@ -509,18 +525,21 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
         'setTimeout(function(){var o=document.getElementById("sa-resume");if(o&&o.parentNode)o.parentNode.removeChild(o);},8000);'
         '}catch(e){}'
         'function readLocal(){try{var raw=localStorage.getItem("cscs.state.v1");return raw?JSON.parse(raw):null;}catch(e){return null;}}'
-        'function harvest(s,reviewed,engaged){if(!s)return;var tt=s.touchedDays||{};for(var k in tt){if(tt[k])reviewed[k]=true;}'
-        'var cc=s.cards||{};for(var ck in cc){engaged[ck.split("__")[0]]=true;}}'
-        'function decide(reviewed,engaged,hasState){var tg=null;'
+        'function harvest(s,reviewed,engaged,cards){if(!s)return;var tt=s.touchedDays||{};for(var k in tt){if(tt[k])reviewed[k]=true;}'
+        'var cc=s.cards||{};for(var ck in cc){engaged[ck.split("__")[0]]=true;cards[ck]=true;}}'
+        'function complete(d,reviewed,engaged,cards){var qs=DAYQ[d];'
+        'if(qs&&qs.length){for(var i=0;i<qs.length;i++){if(!cards[qs[i]])return false;}return true;}'
+        'return reviewed[d]||(DTOPIC[d]&&engaged[DTOPIC[d]]);}'
+        'function decide(reviewed,engaged,cards,hasState){var tg=null;'
         'if(hasState){for(var i=0;i<DAYS.length;i++){var d=DAYS[i];if(d>today)break;'
-        'var done=reviewed[d]||(DTOPIC[d]&&engaged[DTOPIC[d]]);if(!done){tg=d;break;}}'
+        'if(!complete(d,reviewed,engaged,cards)){tg=d;break;}}'
         'if(!tg){tg=(DAYS.indexOf(today)!==-1)?today:DAYS[DAYS.length-1];}}'
         'else{if(DAYS.indexOf(today)!==-1)tg=today;else if(today>DAYS[DAYS.length-1])tg=DAYS[DAYS.length-1];else tg=DAYS[0];}'
         'return tg||THIS;}'
         'var local=readLocal();var settled=false;'
         'function finish(remote){if(settled)return;settled=true;'
-        'var reviewed={},engaged={};harvest(local,reviewed,engaged);harvest(remote,reviewed,engaged);'
-        'var hasState=!!(Object.keys(reviewed).length||Object.keys(engaged).length);go(decide(reviewed,engaged,hasState));}'
+        'var reviewed={},engaged={},cards={};harvest(local,reviewed,engaged,cards);harvest(remote,reviewed,engaged,cards);'
+        'var hasState=!!(Object.keys(reviewed).length||Object.keys(engaged).length||Object.keys(cards).length);go(decide(reviewed,engaged,cards,hasState));}'
         'var token="";try{token=localStorage.getItem("cscs.sync.token")||"";}catch(e){}'
         'var to=setTimeout(function(){finish(null);},4500);'
         'try{var hd={"Accept":"application/vnd.github+json"};if(token)hd["Authorization"]="token "+token;'
@@ -573,6 +592,15 @@ def main():
     today_lesson, deep_review = get_today_lesson(today_day, lessons)
     reviews = pick_review_lessons(today_day, lessons)
     html = render_html(today, today_day, today_lesson, deep_review, reviews, questions, meta, topic_domain)
+    try:
+        _cp = DATA / 'day_completion.json'
+        _comp = {}
+        if _cp.exists():
+            _comp = json.loads(_cp.read_text(encoding='utf-8'))
+        _comp[today.isoformat()] = LAST_PAGE_QIDS
+        _cp.write_text(json.dumps(_comp, ensure_ascii=False), encoding='utf-8')
+    except Exception:
+        pass
     OUT.mkdir(parents=True, exist_ok=True)
     dated_path = OUT / f"cscs_{today.isoformat()}.html"
     rolling_path = OUT / "cscs_today.html"
