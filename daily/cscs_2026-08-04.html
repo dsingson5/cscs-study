@@ -727,6 +727,8 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .mic-btn.listening { color: #fff; background: var(--bad); border-color: var(--bad); animation: saMicPulse 1.4s ease-out infinite; }
 @keyframes saMicPulse { 0% { box-shadow: 0 0 0 0 rgba(255,122,122,.45); } 70% { box-shadow: 0 0 0 8px rgba(255,122,122,0); } 100% { box-shadow: 0 0 0 0 rgba(255,122,122,0); } }
 .no-speech .mic-btn { display: none; }
+
+/* rebuild trigger 2026-06-06T06:08Z — front-rack elbow fix: clean catch/recover + press rack elbows up & forward */
 </style>
 <style>:root {
   --bg: #0b080a;
@@ -1544,7 +1546,7 @@ function hydrateLessonNav() {
    onAnswerInput → unlocks the gated Reveal exactly like typing would. Hidden
    where the browser has no SpeechRecognition. Typing is always the fallback. ── */
 function speechSupported() { return ('SpeechRecognition' in window) || ('webkitSpeechRecognition' in window); }
-var __saRec = null, __saTA = null, __saBtn = null, __saBase = '';
+var __saRec = null, __saTA = null, __saBtn = null, __saInitial = '';
 function saMicState(btn, on, msg) {
   if (!btn) return;
   btn.classList.toggle('listening', !!on);
@@ -1566,19 +1568,19 @@ function toggleDictation(btn) {
   var rec; try { rec = new SR(); } catch (e) { saMicState(btn, false, 'Voice not supported'); return; }
   rec.lang = 'en-US'; rec.interimResults = true; rec.continuous = true; rec.maxAlternatives = 1;
   __saRec = rec; __saTA = ta; __saBtn = btn;
-  __saBase = ta.value ? (ta.value.replace(/\s+$/, '') + ' ') : '';
+  __saInitial = ta.value ? (ta.value.replace(/\s+$/, '') + ' ') : '';
   saMicState(btn, true);
   rec.onresult = function (e) {
-    var fin = '', interim = '';
-    for (var i = e.resultIndex; i < e.results.length; i++) {
-      var t = e.results[i][0].transcript;
-      if (e.results[i].isFinal) fin += t; else interim += t;
+    // Rebuild the whole transcript from results[0] every event. Never keep a
+    // running buffer of finals — Chrome re-reports a growing result at index 0,
+    // so appending each tick duplicated every word ("linear linear is …").
+    var finalT = '', interim = '';
+    for (var i = 0; i < e.results.length; i++) {
+      var seg = e.results[i][0].transcript;
+      if (e.results[i].isFinal) finalT += seg + ' '; else interim += seg;
     }
-    if (fin) {
-      __saBase = (__saBase + fin).replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1');
-      __saBase = __saBase.replace(/\s*$/, '') + ' ';
-    }
-    ta.value = (__saBase + interim).replace(/\s+/g, ' ').replace(/^\s+/, '');
+    ta.value = (__saInitial + finalT + interim)
+      .replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1').replace(/^\s+/, '').replace(/\s+$/, '');
     ta.dispatchEvent(new Event('input', { bubbles: true }));
   };
   rec.onerror = function (ev) {
