@@ -515,7 +515,16 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
         'location.replace("daily/cscs_"+tg+".html");'
         '})();</script>'
     )
-    return base_html.replace("<head>", "<head>\n" + redirect, 1)
+    # The landing page must never be served stale from cache, or an old
+    # redirect script (with outdated resume logic) sends the user to the
+    # wrong day. GitHub Pages sets max-age=600; these discourage bfcache /
+    # heuristic caching so the browser revalidates the index each visit.
+    CACHE_META = (
+        '<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">'
+        '<meta http-equiv="Pragma" content="no-cache">'
+        '<meta http-equiv="Expires" content="0">'
+    )
+    return base_html.replace("<head>", "<head>\n" + CACHE_META + redirect, 1)
 
 
 def main():

@@ -1641,7 +1641,11 @@ function hydrateLessonNav() {
    onAnswerInput → unlocks the gated Reveal exactly like typing would. Hidden
    where the browser has no SpeechRecognition. Typing is always the fallback. ── */
 function speechSupported() { return ('SpeechRecognition' in window) || ('webkitSpeechRecognition' in window); }
-var __saRec = null, __saTA = null, __saBtn = null, __saInitial = '';
+var __saRec = null, __saTA = null, __saBtn = null, __saInitial = '', __saEditTA = null, __saEditFn = null;
+function saDetachEdit() {
+  if (__saEditTA && __saEditFn) { __saEditTA.removeEventListener('keydown', __saEditFn); __saEditTA.removeEventListener('paste', __saEditFn); }
+  __saEditTA = null; __saEditFn = null;
+}
 function saMicState(btn, on, msg) {
   if (!btn) return;
   btn.classList.toggle('listening', !!on);
@@ -1649,8 +1653,9 @@ function saMicState(btn, on, msg) {
   var l = btn.querySelector('.mic-lbl'); if (l) l.textContent = msg || (on ? 'Listening… tap to stop' : 'Speak');
 }
 function saStopMic() {
-  if (__saRec) { try { __saRec.onend = null; __saRec.stop(); } catch (e) {} }
+  if (__saRec) { try { __saRec.onresult = null; __saRec.onend = null; __saRec.onerror = null; __saRec.stop(); } catch (e) {} }
   if (__saBtn) saMicState(__saBtn, false);
+  saDetachEdit();
   __saRec = null; __saTA = null; __saBtn = null;
 }
 function toggleDictation(btn) {
@@ -1665,7 +1670,14 @@ function toggleDictation(btn) {
   __saRec = rec; __saTA = ta; __saBtn = btn;
   __saInitial = ta.value ? (ta.value.replace(/\s+$/, '') + ' ') : '';
   saMicState(btn, true);
+  // The instant the user edits the box by hand, stop listening so a late
+  // recognition result can't overwrite their edit.
+  __saEditFn = function () { saStopMic(); };
+  __saEditTA = ta;
+  ta.addEventListener('keydown', __saEditFn);
+  ta.addEventListener('paste', __saEditFn);
   rec.onresult = function (e) {
+    if (__saRec !== rec) return;   // ignore stray events after stop
     // Rebuild the whole transcript from results[0] every event. Never keep a
     // running buffer of finals — Chrome re-reports a growing result at index 0,
     // so appending each tick duplicated every word ("linear linear is …").
@@ -1685,7 +1697,6 @@ function toggleDictation(btn) {
     saMicState(btn, false, m);
   };
   rec.onend = function () {
-    if (__saTA) { __saTA.value = __saTA.value.replace(/\s+$/, ''); __saTA.dispatchEvent(new Event('input', { bubbles: true })); }
     if (__saBtn === btn) saStopMic();
   };
   try { rec.start(); } catch (e) { saStopMic(); }
