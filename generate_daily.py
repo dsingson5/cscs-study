@@ -353,7 +353,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 
     today_card = render_lesson_card(today_lesson, badge, badge_class, True, is_today=True)
 
-    # ── Spaced review lesson cards (content recap only; questions are pooled) ──
+    # ── Spaced review lesson cards (full recap incl. the topic animation; questions are pooled) ──
     review_html = ""
     if reviews:
         review_html = ('<div class="review-section">'
@@ -362,7 +362,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
                        '(Cepeda et al. 2008). Read the recap, then test yourself in the practice set below.</p>')
         for interval, lesson in reviews:
             label = SPACING_LABELS.get(interval, f"{interval}d review")
-            review_html += render_lesson_card(lesson, label, "badge-spaced", False)
+            review_html += render_lesson_card(lesson, label, "badge-spaced", True)
         review_html += "</div>"
 
     # ── Build the interleaved practice pool (exam-weighted, cross-domain) ──

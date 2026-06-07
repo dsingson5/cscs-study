@@ -729,6 +729,8 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .no-speech .mic-btn { display: none; }
 
 /* rebuild trigger 2026-06-06T06:08Z — front-rack elbow fix: clean catch/recover + press rack elbows up & forward */
+
+/* rebuild trigger 2026-06-07T06:35Z — sled-push animation for ex_alt_modes (June 2 / alternative modes) */
 </style>
 <style>:root {
   --bg: #120d0e;
@@ -890,10 +892,849 @@ body { background-image: linear-gradient(rgba(184, 143, 255, 0.04) 1px, transpar
   </g>
   <text x="55" y="38" fill="#d4b8ff" font-size="10" font-family="monospace">M  T  W  T  F  S  S</text>
 </svg><div class="motif-label">Periodization</div></div><div class="lesson-head"><span class="badge badge-new">Day 13 · New lesson</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 17 · pp. 485-505</span></div><h2>Resistance program — intensity &amp; volume</h2><p class="concept">%1RM and rep ranges: strength 1-6 reps at 85-100%; hypertrophy 6-12 at 65-85%; muscular endurance 12+ at &lt;65%; power 1-5 explosive at varied intensities (30-50% for ballistic, 75-90% for cleans). Volume = sets × reps × load. Weekly hard-set landmark (Schoenfeld): MV (maintenance) ≈ 6-10, MEV ≈ 10, MAV ≈ 12-20, MRV ≈ 20+ per muscle/wk for hypertrophy. Strength MRV lower.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Strength: 1-6 reps, 85-100% 1RM, 3-5 sets, long rest</li><li>Hypertrophy: 6-12 reps, 65-85%, 3-6 sets</li><li>Endurance: 12+ reps, &lt;65%, 2-3 sets</li><li>Power: 1-5 reps explosive, varied %</li><li>Volume landmarks: MV/MEV/MAV/MRV</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="20" x2="70" y2="20" stroke="#c9c9c9" stroke-width="3"/><rect x="14" y="10" width="14" height="20" fill="#404040" stroke="#c9c9c9"/><rect x="52" y="10" width="14" height="20" fill="#404040" stroke="#c9c9c9"/><text x="40" y="14" text-anchor="middle" fill="#ffd84a" font-size="9" font-weight="700">1RM</text></svg></div><div class="gloss-text"><div class="gloss-term">1RM</div><div class="gloss-def">One-rep maximum. The most weight you can move once. Many programs prescribe % 1RM for intensity.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="28" width="16" height="6" fill="#67e8b0" rx="1"/><rect x="30" y="20" width="16" height="14" fill="#ffb86b" rx="1"/><rect x="50" y="10" width="16" height="24" fill="#ff7a7a" rx="1"/></svg></div><div class="gloss-text"><div class="gloss-term">MEV / MAV / MRV</div><div class="gloss-def">Israetel volume landmarks. Minimum Effective / Maximum Adaptive / Maximum Recoverable Volume. Dose hypertrophy by sets/week.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g fill="#67e8b0"><rect x="14" y="12" width="6" height="20" rx="1"/><rect x="24" y="14" width="6" height="18" rx="1"/><rect x="34" y="10" width="6" height="22" rx="1"/><rect x="44" y="16" width="6" height="16" rx="1"/><rect x="54" y="12" width="6" height="20" rx="1"/><rect x="64" y="14" width="6" height="18" rx="1"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Hypertrophy rep range</div><div class="gloss-def">6–12 reps at 65–85% 1RM, 1–3 min rest. Sweet spot for muscle growth. Mechanical tension is the primary driver.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM sessions should sit in low-rep, moderate-set range (5×5, 4×6 patterns) — high stimulus, low recovery cost stacked on top of your conditioning load.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=TvDOXZYxk6k" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Mike Israetel — How Much Training Volume is Best? (MEV/MAV/MRV)</div><div class="m-cred">Renaissance Periodization · Israetel PhD</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=fOieQOp3o0A" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture 51 — Schoenfeld: Volume &amp; Frequency for Hypertrophy</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section>
-  <div class="review-section"><h2 class="rs-title">Spaced review</h2><p class="rs-sub">Concepts you met before, resurfacing at expanding intervals (Cepeda et al. 2008). Read the recap, then test yourself in the practice set below.</p><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 17 · pp. 470-485</span></div><h2>Resistance program — exercise selection</h2><p class="concept">Core exercises (multi-joint, large muscle): squat, deadlift, bench, OHP, row. Assistance (single-joint or smaller muscle). Structural exercises load the spine axially; power exercises are explosive (cleans, jumps). Sport-specific exercises mimic competitive movement patterns. Balance pushing/pulling, anterior/posterior, knee/hip dominance. Exercise order: power → core → assistance (most fatiguing → least).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Core: multi-joint, large muscle group, structural</li><li>Order: power → core → assistance</li><li>Balance push/pull, ant/post, knee/hip</li><li>Sport-specific should resemble actual movement</li><li>Single-joint exercises target weak links</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your sled push + KB swing + hinge variations are core/power; accessory single-joint lifts fill gaps.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=TvDOXZYxk6k" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Mike Israetel — How Much Training Volume is Best? (Mesocycle Design)</div><div class="m-cred">Renaissance Periodization · Israetel PhD</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=fOieQOp3o0A" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture 51 — Schoenfeld: Hypertrophy Programming</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 16 · pp. 421-450</span></div><h2>Alternative modes — kettlebell, sled, strongman</h2><p class="concept">KB swing: hip-hinge driven; bell floats with hip extension; not a squat. Goblet squat: front-loaded squat — good teaching tool. Turkish get-up: full-body integration. Sled push/drag: low eccentric load, high metabolic. Strongman (yoke, farmers, sandbag): odd-object, irregular loading; high-stability demand. Each has place in athletic training. Selection: match demand profile to sport.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>KB swing: hip hinge, NOT a squat</li><li>Sled: low eccentric → low DOMS, can do daily</li><li>Farmers: grip, posture, glute endurance</li><li>Yoke walk: spinal compression demand</li><li>Odd objects build trunk stability</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Sled push is highly Hyrox-specific. Low eccentric load means recovery cost is lower than the metabolic stress would suggest — useful as substitute for higher-impact intervals.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=tNn7AlPITOw" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — Deadlift Form Fixes (alternative implements)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: Strength Building Protocols</div><div class="m-cred">Stanford + Galpin</div></div></a></div></section><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 week back</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 15 · pp. 350-370</span></div><h2>Resistance technique — squat</h2><p class="concept">Back squat: bar on upper traps (high bar) or rear delts (low bar). Stance ~shoulder width, toes slight out. Cues: brace core (Valsalva for max effort), break at hips and knees together, descend keeping chest up, knees track over toes (not collapsed in). Depth ≥ parallel (femur). Drive through midfoot, hips and shoulders rise together. Spotters at sides for max attempts. Common faults: knee valgus, butt wink at bottom, forward lean.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bar position changes torque distribution between hips/knees</li><li>Parallel = femur parallel to floor</li><li>Valsalva increases intra-abdominal pressure → spine stability</li><li>Knee valgus is the most common fault; cue &#x27;knees out&#x27;</li><li>Spotters at sides, never directly behind, for max attempts</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#ff5e5e" stroke-width="2" fill="none"><line x1="22" y1="6" x2="30" y2="22"/><line x1="30" y1="22" x2="26" y2="34"/><line x1="58" y1="6" x2="50" y2="22"/><line x1="50" y1="22" x2="54" y2="34"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Knee valgus</div><div class="gloss-def">Most common squat fault — knees collapse inward. Cue: &#x27;knees out&#x27; / &#x27;spread the floor.&#x27; Reflects weak abductors or coordination issue.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="10" width="20" height="22" fill="none" stroke="#c9c9c9" stroke-width="2" rx="3"/><circle cx="40" cy="21" r="6" fill="#ffb86b" opacity="0.7"/></svg></div><div class="gloss-text"><div class="gloss-term">Valsalva</div><div class="gloss-def">Hold breath against closed glottis → ↑ intra-abdominal pressure → spine stability. Standard for max-effort lifts.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#c9c9c9" stroke-width="2" fill="none"><line x1="14" y1="14" x2="32" y2="22"/><line x1="32" y1="22" x2="28" y2="36"/><line x1="32" y1="22" x2="48" y2="22"/><line x1="48" y1="22" x2="66" y2="14"/><line x1="48" y1="22" x2="52" y2="36"/></g><line x1="14" y1="22" x2="66" y2="22" stroke="#67e8b0" stroke-width="1" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Parallel depth</div><div class="gloss-def">Hip crease at or below the top of the knee. CSCS standard. Squat below for more glute / posterior chain.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM session structure relies on squat fidelity — these technique points are non-negotiable for your hip-dominant Hyrox prep.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How To Squat Correctly (FIX MISTAKES!)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Schoenfeld: Mechanisms of Hypertrophy</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section></div>
+  <div class="review-section"><h2 class="rs-title">Spaced review</h2><p class="rs-sub">Concepts you met before, resurfacing at expanding intervals (Cepeda et al. 2008). Read the recap, then test yourself in the practice set below.</p><section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">Yesterday (24 hr)</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Ch 17 · pp. 470-485</span></div><h2>Resistance program — exercise selection</h2><p class="concept">Core exercises (multi-joint, large muscle): squat, deadlift, bench, OHP, row. Assistance (single-joint or smaller muscle). Structural exercises load the spine axially; power exercises are explosive (cleans, jumps). Sport-specific exercises mimic competitive movement patterns. Balance pushing/pulling, anterior/posterior, knee/hip dominance. Exercise order: power → core → assistance (most fatiguing → least).</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Core: multi-joint, large muscle group, structural</li><li>Order: power → core → assistance</li><li>Balance push/pull, ant/post, knee/hip</li><li>Sport-specific should resemble actual movement</li><li>Single-joint exercises target weak links</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your sled push + KB swing + hinge variations are core/power; accessory single-joint lifts fill gaps.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=TvDOXZYxk6k" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Mike Israetel — How Much Training Volume is Best? (Mesocycle Design)</div><div class="m-cred">Renaissance Periodization · Israetel PhD</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=fOieQOp3o0A" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture 51 — Schoenfeld: Hypertrophy Programming</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">3 days back</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 16 · pp. 421-450</span></div><h2>Alternative modes — kettlebell, sled, strongman</h2><p class="concept">KB swing: hip-hinge driven; bell floats with hip extension; not a squat. Goblet squat: front-loaded squat — good teaching tool. Turkish get-up: full-body integration. Sled push/drag: low eccentric load, high metabolic. Strongman (yoke, farmers, sandbag): odd-object, irregular loading; high-stability demand. Each has place in athletic training. Selection: match demand profile to sport.</p>
+<div class="widget" id="ex_alt_modes-stepper">
+  <div class="w-head"><span class="w-icon">&#9654;</span><span class="w-title">Sled push - drive sequence</span></div>
+  <div class="w-body">
+<script>
+/* ============================================================
+   SAEngine v2  (SA_V2)  — offline-first animated step engine.
+   New over v1:
+     - continuous joint TWEENING for figure steppers (Rive-style
+       state blending) so the athlete moves instead of jumping;
+     - drag-to-scrub on the stage + a range slider (GSAP-scrub idea);
+     - smoother eased cross-fade for diagram steppers;
+     - Sagittal <-> Frontal plane toggle for the lifts;
+     - progressive Three.js 3D view (CDN when online, graceful
+       offline fallback) for the lifts.
+   Figure keyframes are auto-extracted from the rendered SVG
+   (data-joints on .sa-fig), so the python step builders stay
+   untouched. Any failure degrades to the old discrete behaviour.
+   ============================================================ */
+if (!window.SAEngine) {
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function saEl(tag, attrs) {
+    var e = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+  function saVar(el, name, fb) {
+    try { var v = getComputedStyle(el).getPropertyValue(name).trim(); return v || fb; }
+    catch (e) { return fb; }
+  }
+  function saRGB(c) {
+    c = (c || "").trim();
+    if (c.charAt(0) === "#") {
+      if (c.length === 4) { return [parseInt(c[1] + c[1], 16), parseInt(c[2] + c[2], 16), parseInt(c[3] + c[3], 16)]; }
+      return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+    }
+    var m = c.match(/(\d+\.?\d*)/g);
+    if (m && m.length >= 3) { return [+m[0], +m[1], +m[2]]; }
+    return [94, 200, 255];
+  }
+  function saMix(a, b, t) {
+    var A = saRGB(a), B = saRGB(b);
+    return "rgb(" + Math.round(A[0] + (B[0] - A[0]) * t) + "," + Math.round(A[1] + (B[1] - A[1]) * t) + "," + Math.round(A[2] + (B[2] - A[2]) * t) + ")";
+  }
+  function saEase(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function lp(a, b, f) { return a + (b - a) * f; }
+  function lpt(a, b, f) { return [lp(a[0], b[0], f), lp(a[1], b[1], f)]; }
+
+  /* read sagittal keyframes straight out of the rendered scenes */
+  function extractFrames(scenes) {
+    var out = [], any = false;
+    for (var k = 0; k < scenes.length; k++) {
+      var fig = scenes[k].querySelector(".sa-fig[data-joints]");
+      if (!fig) { out.push(null); continue; }
+      any = true;
+      var fr = { c: fig.getAttribute("data-c") || "ac", bar: null };
+      try { fr.j = JSON.parse(fig.getAttribute("data-joints")); } catch (e) { return null; }
+      var db = fig.getAttribute("data-bar");
+      if (db) { var p = db.split(","); fr.bar = [+p[0], +p[1]]; }
+      else { var pl = scenes[k].querySelector(".sa-plate[data-bar]"); if (pl) { var pp = pl.getAttribute("data-bar").split(","); fr.bar = [+pp[0], +pp[1]]; } }
+      out.push(fr);
+    }
+    if (!any) return null;
+    var last = null;            // carry a frame across any annotation-only scene
+    for (var i = 0; i < out.length; i++) { if (out[i]) last = out[i]; else if (last) out[i] = last; }
+    for (var j2 = 0, seed = null; j2 < out.length; j2++) { if (!out[j2]) { if (!seed) { for (var z = 0; z < out.length; z++) { if (out[z]) { seed = out[z]; break; } } } out[j2] = seed; } }
+    return out;
+  }
+
+  /* ---------- side-view skeleton (mirrors python _figure) ---------- */
+  function buildSkelSide(svg, inkCol) {
+    var g = saEl("g", { "class": "sa-skel sa-skel-side" });
+    var la = { fill: "none", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" };
+    var lines = {};
+    ["nh", "hk", "ka", "at", "se", "eh"].forEach(function (id) { var ln = saEl("line", la); lines[id] = ln; g.appendChild(ln); });
+    var head = saEl("circle", {}); g.appendChild(head);
+    var barG = saEl("g", { "class": "sa-bar" });
+    // side view looks straight down the bar axis: render the bar END-ON
+    // (plate face + hub), not a front-view shaft with plates at both ends.
+    var plFill = saEl("circle", { r: 20, "fill-opacity": 0.25 });
+    var plRing = saEl("circle", { r: 20, fill: "none", "stroke-width": 3 });
+    var hub = saEl("circle", { r: 6, fill: inkCol });
+    barG.appendChild(plFill); barG.appendChild(plRing); barG.appendChild(hub);
+    g.appendChild(barG); svg.appendChild(g);
+    return { g: g, lines: lines, head: head, barG: barG, plFill: plFill, plRing: plRing, hub: hub };
+  }
+  function drawSide(r, A, B, f, color, a2) {
+    var ja = A.j, jb = B.j;
+    function J(key) { return lpt(ja[key], jb[key], f); }
+    var neck = J("neck"), hip = J("hip"), knee = J("knee"), ankle = J("ankle"), toe = J("toe"), sh = J("shoulder"), elb = J("elbow"), hand = J("hand");
+    function set(ln, p, q) { ln.setAttribute("x1", p[0]); ln.setAttribute("y1", p[1]); ln.setAttribute("x2", q[0]); ln.setAttribute("y2", q[1]); ln.setAttribute("stroke", color); }
+    set(r.lines.nh, neck, hip); set(r.lines.hk, hip, knee); set(r.lines.ka, knee, ankle); set(r.lines.at, ankle, toe); set(r.lines.se, sh, elb); set(r.lines.eh, elb, hand);
+    var hx = lp(ja.head[0], jb.head[0], f), hy = lp(ja.head[1], jb.head[1], f), hr = lp(ja.head[2], jb.head[2], f);
+    r.head.setAttribute("cx", hx); r.head.setAttribute("cy", hy); r.head.setAttribute("r", hr); r.head.setAttribute("fill", color);
+    if (A.bar || B.bar) {
+      var ba = A.bar || B.bar, bb = B.bar || A.bar;
+      var bx = lp(ba[0], bb[0], f), by = lp(ba[1], bb[1], f);
+      r.barG.style.opacity = (A.bar && B.bar) ? 1 : (A.bar ? (1 - f) : f);
+      r.plFill.setAttribute("cx", bx); r.plFill.setAttribute("cy", by); r.plFill.setAttribute("fill", a2);
+      r.plRing.setAttribute("cx", bx); r.plRing.setAttribute("cy", by); r.plRing.setAttribute("stroke", a2);
+      r.hub.setAttribute("cx", bx); r.hub.setAttribute("cy", by);
+    } else { r.barG.style.opacity = 0; }
+  }
+
+  /* ---------- frontal-view skeleton (symmetric) ---------- */
+  function buildSkelFront(svg, inkCol) {
+    var g = saEl("g", { "class": "sa-skel sa-skel-front" });
+    g.style.display = "none";
+    var la = { fill: "none", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" };
+    var lines = {};
+    ["torso", "legLU", "legLD", "legRU", "legRD", "armL", "armR"].forEach(function (id) { var ln = saEl("line", la); lines[id] = ln; g.appendChild(ln); });
+    var head = saEl("circle", {}); g.appendChild(head);
+    var barG = saEl("g", { "class": "sa-bar" });
+    var barLine = saEl("line", { "stroke-width": 5, "stroke-linecap": "round", stroke: inkCol });
+    var plL = saEl("circle", { r: 13 }), plR = saEl("circle", { r: 13 });
+    barG.appendChild(barLine); barG.appendChild(plL); barG.appendChild(plR); g.appendChild(barG);
+    var cue = saEl("text", { "class": "sa-cue-lbl", "text-anchor": "middle", "font-size": 11, "font-weight": 700 });
+    g.appendChild(cue); svg.appendChild(g);
+    return { g: g, lines: lines, head: head, barG: barG, barLine: barLine, plL: plL, plR: plR, cue: cue };
+  }
+  function drawFront(r, A, B, f, color, a2, accent) {
+    var ja = A.j, jb = B.j;
+    function J(key) { return lpt(ja[key], jb[key], f); }
+    var neck = J("neck"), hipC = J("hipC"), shL = J("shL"), shR = J("shR"), handL = J("handL"), handR = J("handR"), kneeL = J("kneeL"), kneeR = J("kneeR"), ankleL = J("ankleL"), ankleR = J("ankleR");
+    function set(ln, p, q) { ln.setAttribute("x1", p[0]); ln.setAttribute("y1", p[1]); ln.setAttribute("x2", q[0]); ln.setAttribute("y2", q[1]); ln.setAttribute("stroke", color); }
+    set(r.lines.torso, neck, hipC); set(r.lines.legLU, hipC, kneeL); set(r.lines.legLD, kneeL, ankleL); set(r.lines.legRU, hipC, kneeR); set(r.lines.legRD, kneeR, ankleR); set(r.lines.armL, shL, handL); set(r.lines.armR, shR, handR);
+    var hx = lp(ja.head[0], jb.head[0], f), hy = lp(ja.head[1], jb.head[1], f), hr = lp(ja.head[2], jb.head[2], f);
+    r.head.setAttribute("cx", hx); r.head.setAttribute("cy", hy); r.head.setAttribute("r", hr); r.head.setAttribute("fill", color);
+    if (A.bar || B.bar) {
+      var ba = A.bar || B.bar, bb = B.bar || A.bar;
+      var bx = lp(ba[0], bb[0], f), by = lp(ba[1], bb[1], f);
+      r.barG.style.opacity = (A.bar && B.bar) ? 1 : (A.bar ? (1 - f) : f);
+      r.barLine.setAttribute("x1", bx - 52); r.barLine.setAttribute("y1", by); r.barLine.setAttribute("x2", bx + 52); r.barLine.setAttribute("y2", by);
+      r.plL.setAttribute("cx", bx - 52); r.plL.setAttribute("cy", by); r.plL.setAttribute("fill", a2);
+      r.plR.setAttribute("cx", bx + 52); r.plR.setAttribute("cy", by); r.plR.setAttribute("fill", a2);
+    } else { r.barG.style.opacity = 0; }
+    var cueTxt = (f < 0.5 ? A.cue : B.cue) || "";
+    r.cue.textContent = cueTxt; r.cue.setAttribute("x", 220); r.cue.setAttribute("y", 226); r.cue.setAttribute("fill", accent); r.cue.style.opacity = cueTxt ? 0.92 : 0;
+  }
+
+  window.SA = {};
+  window.SAEngine = {
+    init: function (sid, steps, opts) {
+      try { this._init(sid, steps, opts || {}); }
+      catch (err) { try { this._fallback(sid, steps); } catch (e2) {} }
+    },
+    _fallback: function (sid, steps) {
+      var _fr0 = document.getElementById(sid); if (_fr0) _fr0.classList.remove("sa-figure-mode");
+      var root = document.getElementById(sid); if (!root) return;
+      var scenes = root.querySelectorAll(".sa-scene"), dots = root.querySelectorAll(".sa-dot");
+      var bar = document.getElementById(sid + "-bar"), curEl = document.getElementById(sid + "-cur");
+      var labEl = document.getElementById(sid + "-label"), desEl = document.getElementById(sid + "-desc");
+      var n = steps.length, cur = 0;
+      function show(i) {
+        cur = ((i % n) + n) % n;
+        for (var k = 0; k < scenes.length; k++) { scenes[k].classList.toggle("active", k === cur); scenes[k].style.opacity = ""; }
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle("active", d === cur); dots[d].classList.toggle("past", d < cur); }
+        if (bar) bar.style.width = ((cur + 1) / n * 100) + "%";
+        if (curEl) curEl.textContent = cur + 1;
+        if (labEl) labEl.textContent = steps[cur][0];
+        if (desEl) desEl.textContent = steps[cur][1];
+      }
+      window.SA[sid] = { next: function () { show(cur + 1); }, prev: function () { show(cur - 1); }, go: function (i) { show(i); }, auto: function () {}, plane: function () {}, three: function () {} };
+      for (var j = 0; j < dots.length; j++) { (function (b) { b.addEventListener("click", function () { show(parseInt(b.getAttribute("data-i"))); }); })(dots[j]); }
+      show(0);
+    },
+    _init: function (sid, steps, opts) {
+      var root = document.getElementById(sid); if (!root) return;
+      var stage = root.querySelector(".sa-stage");
+      var svg = root.querySelector(".sa-svg");
+      var scenes = root.querySelectorAll(".sa-scene");
+      var dots = root.querySelectorAll(".sa-dot");
+      var bar = document.getElementById(sid + "-bar");
+      var curEl = document.getElementById(sid + "-cur");
+      var labEl = document.getElementById(sid + "-label");
+      var desEl = document.getElementById(sid + "-desc");
+      var aBtn = document.getElementById(sid + "-autobtn");
+      var slider = document.getElementById(sid + "-scrub");
+      var cap = root.querySelector(".sa-caption");
+      var n = steps.length;
+      var framesS = extractFrames(scenes);
+      var framesF = opts.framesF || null;
+      var lift = !!opts.lift;
+      var t = 0, raf = null, playing = false, plane = "side";
+      var pal = { ac: saVar(stage, "--accent", "#5ec8ff"), a2: saVar(stage, "--accent-2", "#c08fff"), good: saVar(stage, "--good", "#67e8b0"), warn: saVar(stage, "--warn", "#ffb86b"), bad: saVar(stage, "--bad", "#ff7a7a") };
+      var ink = saVar(stage, "--text", "#e8ebf2");
+      function col(key) { return pal[key] || pal.ac; }
+      var skelS = null, skelF = null;
+      if (framesS) {
+        root.classList.add("sa-figure-mode");
+        skelS = buildSkelSide(svg, ink);
+        if (framesF) skelF = buildSkelFront(svg, ink);
+      }
+      function curFrames() { return (plane === "front" && framesF) ? framesF : framesS; }
+      function drawFig(tt) {
+        var F = curFrames(); if (!F) return;
+        var span = F.length - 1;
+        var u = (n > 1) ? (tt / (n - 1)) * span : 0;
+        var i = Math.max(0, Math.min(span, Math.floor(u)));
+        var j = Math.min(span, i + 1);
+        var f = saEase(u - i);
+        var A = F[i], B = F[j];
+        var c = saMix(col(A.c), col(B.c), f);
+        if (plane === "front" && skelF) { skelS.g.style.display = "none"; skelF.g.style.display = ""; drawFront(skelF, A, B, f, c, pal.a2, pal.good); }
+        else { if (skelF) skelF.g.style.display = "none"; skelS.g.style.display = ""; drawSide(skelS, A, B, f, c, pal.a2); }
+      }
+      function setScenes(tt, settle) {
+        if (scenes.length === 0) return;
+        if (plane === "front") { for (var q = 0; q < scenes.length; q++) { scenes[q].classList.remove("active"); scenes[q].style.opacity = "0"; } return; }
+        var near = Math.round(tt);
+        for (var k = 0; k < scenes.length; k++) {
+          var sc = scenes[k];
+          if (settle) { sc.classList.toggle("active", k === near); sc.style.opacity = ""; }
+          else { sc.classList.remove("active"); var d = Math.abs(k - tt); sc.style.opacity = d < 1 ? (1 - d).toFixed(3) : "0"; }
+        }
+      }
+      function updMeta(idx) {
+        if (bar) bar.style.width = ((idx + 1) / n * 100) + "%";
+        if (curEl) curEl.textContent = idx + 1;
+        if (labEl) labEl.textContent = steps[idx][0];
+        if (desEl) desEl.textContent = steps[idx][1];
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle("active", d === idx); dots[d].classList.toggle("past", d < idx); }
+        if (cap) { cap.classList.remove("flash"); void cap.offsetWidth; cap.classList.add("flash"); }
+      }
+      function render(tt, settle) {
+        t = Math.max(0, Math.min(n - 1, tt));
+        if (framesS) drawFig(t);
+        setScenes(t, settle);
+        if (slider && document.activeElement !== slider) slider.value = String(Math.round(t / (n - 1) * 1000));
+        if (settle) updMeta(Math.round(t));
+      }
+      function animateT(from, to, dur, done) {
+        if (raf) cancelAnimationFrame(raf);
+        var st = performance.now();
+        function loop(now) { var p = Math.min(1, (now - st) / dur), e = saEase(p); render(from + (to - from) * e, false); if (p < 1) raf = requestAnimationFrame(loop); else { raf = null; if (done) done(); } }
+        raf = requestAnimationFrame(loop);
+      }
+      function settleTo(target) { stopPlay(); animateT(t, target, 360, function () { render(target, true); }); }
+      function startPlay() {
+        playing = true; if (aBtn) aBtn.innerHTML = "&#9208; Pause";
+        var seq = (Math.round(t) >= n - 1) ? 0 : Math.round(t);
+        render(seq, true);
+        function stepNext() { if (!playing) return; if (seq >= n - 1) { stopPlay(); return; } animateT(seq, seq + 1, 900, function () { render(seq + 1, true); seq++; setTimeout(stepNext, 620); }); }
+        setTimeout(stepNext, 300);
+      }
+      function stopPlay() { playing = false; if (raf) { cancelAnimationFrame(raf); raf = null; } if (aBtn) aBtn.innerHTML = "&#9205; Auto-play"; }
+      function updPlaneBtn() { var pb = document.getElementById(sid + "-planebtn"); if (pb) { pb.innerHTML = (plane === "side" ? "&#8634; Front view" : "&#8634; Side view"); pb.classList.toggle("on", plane === "front"); } }
+      var api = {
+        next: function () { settleTo(Math.min(n - 1, Math.round(t) + 1)); },
+        prev: function () { settleTo(Math.max(0, Math.round(t) - 1)); },
+        go: function (i) { settleTo(Math.max(0, Math.min(n - 1, i))); },
+        auto: function () { if (playing) stopPlay(); else startPlay(); },
+        plane: function () { if (!framesF) return; plane = (plane === "side") ? "front" : "side"; root.setAttribute("data-plane", plane); updPlaneBtn(); render(t, true); },
+        three: function () { SAEngine._three(sid, framesS, pal, ink); }
+      };
+      if (slider) {
+        slider.addEventListener("input", function () { stopPlay(); render(slider.value / 1000 * (n - 1), false); });
+        slider.addEventListener("change", function () { settleTo(Math.round(t)); });
+      }
+      var dragging = false;
+      function px2t(clientX) { var rc = stage.getBoundingClientRect(); var x = (clientX - rc.left) / rc.width; return Math.max(0, Math.min(1, x)) * (n - 1); }
+      stage.addEventListener("pointerdown", function (e) { if (e.target.closest && e.target.closest("button")) return; dragging = true; try { stage.setPointerCapture(e.pointerId); } catch (x) {} stopPlay(); stage.classList.add("sa-grabbing"); render(px2t(e.clientX), false); });
+      stage.addEventListener("pointermove", function (e) { if (dragging) render(px2t(e.clientX), false); });
+      function endDrag() { if (!dragging) return; dragging = false; stage.classList.remove("sa-grabbing"); settleTo(Math.round(t)); }
+      stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag); stage.addEventListener("pointerleave", endDrag);
+      for (var jx = 0; jx < dots.length; jx++) { (function (b) { b.addEventListener("click", function () { api.go(parseInt(b.getAttribute("data-i"))); }); })(dots[jx]); }
+      window.SA[sid] = api;
+      updPlaneBtn();
+      render(0, true);
+    },
+    _three: function (sid, frames, pal, ink) {
+      var host = document.getElementById(sid + "-3d");
+      var btn = document.getElementById(sid + "-3dbtn");
+      if (!host || !frames) return;
+      if (host.getAttribute("data-on") === "1") {
+        host.setAttribute("data-on", "0"); host.style.display = "none";
+        if (host._stop) { host._stop(); host._stop = null; }
+        host.innerHTML = ""; if (btn) btn.innerHTML = "&#9673; 3D view"; return;
+      }
+      host.setAttribute("data-on", "1"); host.style.display = "block";
+      host.innerHTML = '<div class="sa-3d-msg">Loading 3D&hellip;</div>';
+      if (btn) btn.innerHTML = "&#9673; Loading&hellip;";
+      try { host.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (se) {}
+      function fail(msg) { host.innerHTML = '<div class="sa-3d-msg">' + msg + '</div>'; if (btn) btn.innerHTML = "&#9673; 3D view"; }
+      var timedOut = false;
+      var timer = setTimeout(function () { timedOut = true; fail("3D is taking too long to load &mdash; check the connection and press the button again. The side &amp; front views above work offline."); }, 14000);
+      import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js")
+        .then(function (THREE) {
+          clearTimeout(timer); if (timedOut) return;
+          host.innerHTML = "";
+          try {
+            SAEngine._build3D(THREE, host, frames, pal, ink);
+            if (btn) btn.innerHTML = "&#9673; Hide 3D";
+          } catch (err) {
+            fail("3D couldn't start here (" + ((err && err.message) ? String(err.message).slice(0, 90) : "WebGL unavailable") + "). The side &amp; front views above show the same movement.");
+          }
+        })
+        .catch(function () { clearTimeout(timer); if (!timedOut) fail("3D view needs an internet connection &mdash; the side &amp; front views above work offline."); });
+    },
+    _build3D: function (THREE, host, frames, pal, ink) {
+      function rgbHex(c) { var r = saRGB(c); return (r[0] << 16) + (r[1] << 8) + r[2]; }
+      frames = (frames || []).filter(function (Fx) { return Fx && Fx.j; });
+      if (!frames.length) { throw new Error("no pose frames"); }
+      var W = Math.min(host.clientWidth || 460, 760), H = 290;
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });   // throws if WebGL is blocked
+      if (renderer.getContext && !renderer.getContext()) { throw new Error("WebGL context unavailable"); }
+      renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
+      renderer.setSize(W, H);
+      var scene = new THREE.Scene();
+      var camY = 2.6;
+      var cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+      function aimCam() { cam.position.set(0, camY, 11.5); cam.lookAt(0, 2.3, 0); }
+      aimCam();
+      host.appendChild(renderer.domElement);
+      scene.add(new THREE.AmbientLight(0xffffff, 1.15));
+      var dl = new THREE.DirectionalLight(0xffffff, 2.2); dl.position.set(4, 8, 6); scene.add(dl);
+      var fill = new THREE.DirectionalLight(0xffffff, 0.8); fill.position.set(-4, 3, -6); scene.add(fill);
+      var grid = new THREE.GridHelper(14, 14, 0x44506a, 0x2a3245); grid.position.y = -0.1; scene.add(grid);
+      // turntable: pivot spins about Y only, so the athlete NEVER tilts
+      // relative to the floor; vertical drag moves the camera instead.
+      var pivot = new THREE.Group(); scene.add(pivot);
+      var group = new THREE.Group(); pivot.add(group);
+      var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.ac)), roughness: 0.5, metalness: 0.1 });
+      var barMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(ink)), roughness: 0.4 });
+      var plMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.a2)), roughness: 0.5 });
+      function V(j) { return new THREE.Vector3((j[0] - 220) / 26, (206 - j[1]) / 26, 0); }
+      var joints = {}, bones = [], jointKeys = ["head", "neck", "shoulder", "elbow", "hand", "hip", "knee", "ankle", "toe"];
+      jointKeys.forEach(function (k) { var s = new THREE.Mesh(new THREE.SphereGeometry(k === "head" ? 0.62 : 0.26, 16, 16), mat); group.add(s); joints[k] = s; });
+      var boneDefs = [["neck", "hip"], ["hip", "knee"], ["knee", "ankle"], ["ankle", "toe"], ["shoulder", "elbow"], ["elbow", "hand"]];
+      boneDefs.forEach(function () { var cl = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); var cr = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); group.add(cl); group.add(cr); bones.push([cl, cr]); });
+      var ZOFF = 0.55, YUP = new THREE.Vector3(0, 1, 0);
+      function place(cyl, a, b, z) {
+        var av = a.clone(), bv = b.clone(); av.z = z; bv.z = z;
+        var mid = av.clone().add(bv).multiplyScalar(0.5);
+        var dir = bv.clone().sub(av); var len = dir.length();
+        if (len < 0.001) { cyl.visible = false; return; }
+        cyl.visible = true; cyl.position.copy(mid);
+        cyl.scale.set(1, len, 1);
+        cyl.quaternion.setFromUnitVectors(YUP, dir.normalize());
+      }
+      var barShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4.6, 12), barMat); barShaft.rotation.x = Math.PI / 2;
+      var plate1 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat); var plate2 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat);
+      plate1.rotation.x = Math.PI / 2; plate2.rotation.x = Math.PI / 2;
+      var barGroup = new THREE.Group(); barGroup.add(barShaft); barGroup.add(plate1); barGroup.add(plate2); plate1.position.z = -2.3; plate2.position.z = 2.3; group.add(barGroup);
+      function frameVerts(F) { var o = {}; jointKeys.forEach(function (k) { o[k] = V(F.j[k] || [220, 206]); }); o.bar = F.bar ? V(F.bar) : null; return o; }
+      function applyFrame(va, vb, f) {
+        if (!va || !vb) { return; }
+        jointKeys.forEach(function (k) { var p = va[k].clone().lerp(vb[k], f); joints[k].position.set(p.x, p.y, 0); });
+        boneDefs.forEach(function (d, i2) { var a = va[d[0]].clone().lerp(vb[d[0]], f); var b = va[d[1]].clone().lerp(vb[d[1]], f); place(bones[i2][0], a, b, ZOFF); place(bones[i2][1], a, b, -ZOFF); });
+        if (va.bar || vb.bar) { var ba = va.bar || vb.bar, bb = vb.bar || va.bar; var p = ba.clone().lerp(bb, f); barGroup.visible = true; barGroup.position.set(p.x, p.y, 0); } else { barGroup.visible = false; }
+      }
+      var verts = frames.map(frameVerts), nF = verts.length, span = nF - 1;
+      // spin about the figure's own centre, not the world origin
+      var cx0 = (verts[0].hip.x + verts[0].ankle.x) / 2;
+      group.position.x = -cx0;
+      var rotY = 0.6, down = false, lx = 0, ly = 0;
+      renderer.domElement.style.cursor = "grab";
+      renderer.domElement.addEventListener("pointerdown", function (e) { down = true; lx = e.clientX; ly = e.clientY; renderer.domElement.style.cursor = "grabbing"; });
+      window.addEventListener("pointermove", function (e) {
+        if (!down) return;
+        rotY += (e.clientX - lx) * 0.01;
+        camY = Math.max(0.8, Math.min(5.5, camY + (ly - e.clientY) * 0.02));   // vertical drag orbits the camera, never tilts the athlete
+        aimCam();
+        lx = e.clientX; ly = e.clientY;
+      });
+      window.addEventListener("pointerup", function () { down = false; renderer.domElement.style.cursor = "grab"; });
+      var stopped = false, clock = 0, last = performance.now();
+      host._stop = function () { stopped = true; try { renderer.dispose(); } catch (e) {} if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement); };
+      function frame(now) {
+        if (stopped) return;
+        try {
+          var dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now;   // clamp: first rAF timestamp can precede performance.now()
+          clock += dt * 0.5;
+          // pingpong: lift up (concentric), lower back down (eccentric) -- no
+          // wrap-around tween from lockout straight to setup.
+          var u = 0;
+          if (span > 0) { var cyc = clock % (2 * span); u = (cyc <= span) ? cyc : (2 * span - cyc); }
+          var i = Math.max(0, Math.min(span, Math.floor(u)));
+          var j = Math.min(span, i + 1);
+          var f = saEase(Math.max(0, Math.min(1, u - i)));
+          applyFrame(verts[i], verts[j], f);
+          if (!down) rotY += dt * 0.25;
+          pivot.rotation.y = rotY;
+          renderer.render(scene, cam);
+        } catch (err) {
+          stopped = true;
+          try { host._stop(); } catch (e2) {}
+          host.innerHTML = '<div class="sa-3d-msg">3D stopped (' + ((err && err.message) ? String(err.message).slice(0, 90) : "render error") + "). The side &amp; front views above show the same movement.</div>";
+          return;
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+      window.addEventListener("resize", function () { if (stopped) return; var w = Math.min(host.clientWidth || W, 760); renderer.setSize(w, H); cam.aspect = w / H; cam.updateProjectionMatrix(); });
+    }
+  };
+}
+</script>
+<div class="step-anim" id="ex_alt_modes">
+  <div class="sa-stage"><svg viewBox="0 0 440 240" class="sa-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g class="sa-scene" data-step="0"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">SLED PUSH - SET-UP</text><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><text x="220" y="232" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">brace + lean from the ankles</text><g class="sa-pop"><rect x="292" y="188" width="50" height="18" rx="3" fill="var(--accent-2,#c08fff)" opacity="0.2"/><rect x="292" y="188" width="50" height="18" rx="3" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><circle cx="317" cy="197" r="11" fill="var(--accent-2,#c08fff)" opacity="0.3"/><circle cx="317" cy="197" r="11" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><line x1="298" y1="188" x2="298" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="332" y1="188" x2="332" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="294" y1="121" x2="336" y2="121" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/></g><g class="sa-pop sa-fig" data-joints='{"head":[256.0,100.0,12.0],"neck":[244.0,110.0],"shoulder":[238.0,116.0],"elbow":[272.0,118.0],"hand":[300.0,122.0],"hip":[200.0,148.0],"knee":[188.0,176.0],"ankle":[174.0,202.0],"toe":[162.0,206.0]}' data-c="ac"><g fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="244" y1="110" x2="200" y2="148"/><line x1="200" y1="148" x2="188" y2="176"/><line x1="188" y1="176" x2="174" y2="202"/><line x1="174" y1="202" x2="162" y2="206"/><line x1="238" y1="116" x2="272" y2="118"/><line x1="272" y1="118" x2="300" y2="122"/></g><circle cx="256" cy="100" r="12" fill="var(--accent,#5ec8ff)"/></g><g class="sa-pop"><rect x="60" y="64" width="84" height="24" rx="12" fill="var(--accent,#5ec8ff)" opacity="0.16"/><rect x="60" y="64" width="84" height="24" rx="12" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="1.4"/><text x="102" y="80" fill="var(--accent,#5ec8ff)" font-size="12" font-weight="700" text-anchor="middle">hips low</text></g></g><g class="sa-scene" data-step="1"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">DRIVE</text><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop"><rect x="292" y="188" width="50" height="18" rx="3" fill="var(--accent-2,#c08fff)" opacity="0.2"/><rect x="292" y="188" width="50" height="18" rx="3" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><circle cx="317" cy="197" r="11" fill="var(--accent-2,#c08fff)" opacity="0.3"/><circle cx="317" cy="197" r="11" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><line x1="298" y1="188" x2="298" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="332" y1="188" x2="332" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="294" y1="121" x2="336" y2="121" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/></g><g class="sa-pop sa-fig" data-joints='{"head":[266.0,114.0,12.0],"neck":[254.0,124.0],"shoulder":[248.0,128.0],"elbow":[276.0,126.0],"hand":[302.0,128.0],"hip":[204.0,150.0],"knee":[186.0,174.0],"ankle":[162.0,198.0],"toe":[150.0,202.0]}' data-c="a2"><g fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="254" y1="124" x2="204" y2="150"/><line x1="204" y1="150" x2="186" y2="174"/><line x1="186" y1="174" x2="162" y2="198"/><line x1="162" y1="198" x2="150" y2="202"/><line x1="248" y1="128" x2="276" y2="126"/><line x1="276" y1="126" x2="302" y2="128"/></g><circle cx="266" cy="114" r="12" fill="var(--accent-2,#c08fff)"/></g><g class="sa-pop"><rect x="60" y="64" width="96" height="24" rx="12" fill="var(--accent-2,#c08fff)" opacity="0.16"/><rect x="60" y="64" width="96" height="24" rx="12" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="1.4"/><text x="108" y="80" fill="var(--accent-2,#c08fff)" font-size="12" font-weight="700" text-anchor="middle">leg drive</text></g></g><g class="sa-scene" data-step="2"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">STRIDE</text><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop"><rect x="292" y="188" width="50" height="18" rx="3" fill="var(--accent-2,#c08fff)" opacity="0.2"/><rect x="292" y="188" width="50" height="18" rx="3" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><circle cx="317" cy="197" r="11" fill="var(--accent-2,#c08fff)" opacity="0.3"/><circle cx="317" cy="197" r="11" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><line x1="298" y1="188" x2="298" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="332" y1="188" x2="332" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="294" y1="121" x2="336" y2="121" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/></g><g class="sa-pop sa-fig" data-joints='{"head":[268.0,118.0,12.0],"neck":[256.0,128.0],"shoulder":[250.0,132.0],"elbow":[278.0,132.0],"hand":[302.0,132.0],"hip":[208.0,152.0],"knee":[192.0,176.0],"ankle":[176.0,200.0],"toe":[164.0,204.0]}' data-c="ac"><g fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="256" y1="128" x2="208" y2="152"/><line x1="208" y1="152" x2="192" y2="176"/><line x1="192" y1="176" x2="176" y2="200"/><line x1="176" y1="200" x2="164" y2="204"/><line x1="250" y1="132" x2="278" y2="132"/><line x1="278" y1="132" x2="302" y2="132"/></g><circle cx="268" cy="118" r="12" fill="var(--accent,#5ec8ff)"/></g><g class="sa-pop"><rect x="60" y="64" width="136" height="24" rx="12" fill="var(--accent,#5ec8ff)" opacity="0.16"/><rect x="60" y="64" width="136" height="24" rx="12" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="1.4"/><text x="128" y="80" fill="var(--accent,#5ec8ff)" font-size="12" font-weight="700" text-anchor="middle">short quick steps</text></g></g><g class="sa-scene" data-step="3"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">EXTENSION</text><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop"><rect x="292" y="188" width="50" height="18" rx="3" fill="var(--accent-2,#c08fff)" opacity="0.2"/><rect x="292" y="188" width="50" height="18" rx="3" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><circle cx="317" cy="197" r="11" fill="var(--accent-2,#c08fff)" opacity="0.3"/><circle cx="317" cy="197" r="11" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="2"/><line x1="298" y1="188" x2="298" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="332" y1="188" x2="332" y2="120" stroke="var(--accent-2,#c08fff)" stroke-width="4" stroke-linecap="round"/><line x1="294" y1="121" x2="336" y2="121" stroke="var(--text,#e8ebf2)" stroke-width="5" stroke-linecap="round"/></g><g class="sa-pop sa-fig" data-joints='{"head":[270.0,112.0,12.0],"neck":[258.0,122.0],"shoulder":[252.0,126.0],"elbow":[280.0,126.0],"hand":[304.0,126.0],"hip":[212.0,148.0],"knee":[192.0,168.0],"ankle":[162.0,194.0],"toe":[150.0,198.0]}' data-c="good"><g fill="none" stroke="var(--good,#67e8b0)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="258" y1="122" x2="212" y2="148"/><line x1="212" y1="148" x2="192" y2="168"/><line x1="192" y1="168" x2="162" y2="194"/><line x1="162" y1="194" x2="150" y2="198"/><line x1="252" y1="126" x2="280" y2="126"/><line x1="280" y1="126" x2="304" y2="126"/></g><circle cx="270" cy="112" r="12" fill="var(--good,#67e8b0)"/></g><g class="sa-pop"><rect x="60" y="64" width="156" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="60" y="64" width="156" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="138" y="80" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">full triple extension</text></g></g></svg><div class="sa-scrubhint">drag to scrub &#8596;</div></div>
+  <input type="range" class="sa-scrub" id="ex_alt_modes-scrub" min="0" max="1000" value="0" aria-label="Scrub the movement">
+  <div class="sa-progress"><div class="sa-bar" id="ex_alt_modes-bar"></div></div>
+  <div class="sa-dots"><button class="sa-dot" data-i="0">1</button><button class="sa-dot" data-i="1">2</button><button class="sa-dot" data-i="2">3</button><button class="sa-dot" data-i="3">4</button></div>
+  <div class="sa-caption">
+    <div class="sa-step-num">Step <span id="ex_alt_modes-cur">1</span> of 4</div>
+    <div class="sa-label" id="ex_alt_modes-label"></div>
+    <div class="sa-desc" id="ex_alt_modes-desc"></div>
+  </div>
+  <div class="w-controls">
+    <button onclick="SA['ex_alt_modes'].prev()">&#9664; Prev</button>
+    <button onclick="SA['ex_alt_modes'].next()">Next &#9654;</button>
+    <button onclick="SA['ex_alt_modes'].auto()" id="ex_alt_modes-autobtn">&#9205; Auto-play</button>
+  </div>
+</div>
+<script>SAEngine.init("ex_alt_modes", [["Set-up - low body, long arms", "Grip the posts, drop the hips and set a strong forward lean from the ankles with a braced, neutral spine. Arms stay relatively long - the legs do the pushing."], ["Drive - push the floor away", "Drive through the front foot with a powerful triple extension, body low and the lean aggressive. The whole system moves as one rigid unit."], ["Stride - short, fast steps", "Take short, choppy steps with high turnover. Keep ground contacts quick and the hips low so force goes horizontally into the sled, not up."], ["Extension - relentless leg drive", "Every push finishes in full triple extension of the driving leg. The sled push is almost all concentric - little eccentric load, so it is brutal to do but easy to recover from."]], {});</script>
+</div>
+  <div class="w-hint">A braced forward lean plus relentless leg drive. Almost all concentric (you only push, never lower a load), so it builds power and conditioning with little soreness - the headline Hyrox alternative mode.</div>
+</div>
+<div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>KB swing: hip hinge, NOT a squat</li><li>Sled: low eccentric → low DOMS, can do daily</li><li>Farmers: grip, posture, glute endurance</li><li>Yoke walk: spinal compression demand</li><li>Odd objects build trunk stability</li></ul></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Sled push is highly Hyrox-specific. Low eccentric load means recovery cost is lower than the metabolic stress would suggest — useful as substitute for higher-impact intervals.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=tNn7AlPITOw" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — Deadlift Form Fixes (alternative implements)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: Strength Building Protocols</div><div class="m-cred">Stanford + Galpin</div></div></a></div></section><section class="lesson-card reveal" data-domain="EX" style="--accent: #ffb86b; --accent-2: #ffd09a; --glow: rgba(255, 184, 107, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">1 week back</span><span class="domain-chip" style="background: rgba(255, 184, 107, 0.18); color: #ffb86b; border-color: #ffb86b66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-2 2 4 4 2-2 4 4-4 4-4-4 2-2-4-4-2 2-4-4z"/></svg>Exercise Technique</span><span class="domain">Ch 15 · pp. 350-370</span></div><h2>Resistance technique — squat</h2><p class="concept">Back squat: bar on upper traps (high bar) or rear delts (low bar). Stance ~shoulder width, toes slight out. Cues: brace core (Valsalva for max effort), break at hips and knees together, descend keeping chest up, knees track over toes (not collapsed in). Depth ≥ parallel (femur). Drive through midfoot, hips and shoulders rise together. Spotters at sides for max attempts. Common faults: knee valgus, butt wink at bottom, forward lean.</p>
+<div class="widget" id="ex_squat-stepper">
+  <div class="w-head"><span class="w-icon">&#9654;</span><span class="w-title">Back squat — phase by phase</span></div>
+  <div class="w-body">
+<script>
+/* ============================================================
+   SAEngine v2  (SA_V2)  — offline-first animated step engine.
+   New over v1:
+     - continuous joint TWEENING for figure steppers (Rive-style
+       state blending) so the athlete moves instead of jumping;
+     - drag-to-scrub on the stage + a range slider (GSAP-scrub idea);
+     - smoother eased cross-fade for diagram steppers;
+     - Sagittal <-> Frontal plane toggle for the lifts;
+     - progressive Three.js 3D view (CDN when online, graceful
+       offline fallback) for the lifts.
+   Figure keyframes are auto-extracted from the rendered SVG
+   (data-joints on .sa-fig), so the python step builders stay
+   untouched. Any failure degrades to the old discrete behaviour.
+   ============================================================ */
+if (!window.SAEngine) {
+  var SVGNS = "http://www.w3.org/2000/svg";
+  function saEl(tag, attrs) {
+    var e = document.createElementNS(SVGNS, tag);
+    for (var k in attrs) { e.setAttribute(k, attrs[k]); }
+    return e;
+  }
+  function saVar(el, name, fb) {
+    try { var v = getComputedStyle(el).getPropertyValue(name).trim(); return v || fb; }
+    catch (e) { return fb; }
+  }
+  function saRGB(c) {
+    c = (c || "").trim();
+    if (c.charAt(0) === "#") {
+      if (c.length === 4) { return [parseInt(c[1] + c[1], 16), parseInt(c[2] + c[2], 16), parseInt(c[3] + c[3], 16)]; }
+      return [parseInt(c.slice(1, 3), 16), parseInt(c.slice(3, 5), 16), parseInt(c.slice(5, 7), 16)];
+    }
+    var m = c.match(/(\d+\.?\d*)/g);
+    if (m && m.length >= 3) { return [+m[0], +m[1], +m[2]]; }
+    return [94, 200, 255];
+  }
+  function saMix(a, b, t) {
+    var A = saRGB(a), B = saRGB(b);
+    return "rgb(" + Math.round(A[0] + (B[0] - A[0]) * t) + "," + Math.round(A[1] + (B[1] - A[1]) * t) + "," + Math.round(A[2] + (B[2] - A[2]) * t) + ")";
+  }
+  function saEase(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+  function lp(a, b, f) { return a + (b - a) * f; }
+  function lpt(a, b, f) { return [lp(a[0], b[0], f), lp(a[1], b[1], f)]; }
+
+  /* read sagittal keyframes straight out of the rendered scenes */
+  function extractFrames(scenes) {
+    var out = [], any = false;
+    for (var k = 0; k < scenes.length; k++) {
+      var fig = scenes[k].querySelector(".sa-fig[data-joints]");
+      if (!fig) { out.push(null); continue; }
+      any = true;
+      var fr = { c: fig.getAttribute("data-c") || "ac", bar: null };
+      try { fr.j = JSON.parse(fig.getAttribute("data-joints")); } catch (e) { return null; }
+      var db = fig.getAttribute("data-bar");
+      if (db) { var p = db.split(","); fr.bar = [+p[0], +p[1]]; }
+      else { var pl = scenes[k].querySelector(".sa-plate[data-bar]"); if (pl) { var pp = pl.getAttribute("data-bar").split(","); fr.bar = [+pp[0], +pp[1]]; } }
+      out.push(fr);
+    }
+    if (!any) return null;
+    var last = null;            // carry a frame across any annotation-only scene
+    for (var i = 0; i < out.length; i++) { if (out[i]) last = out[i]; else if (last) out[i] = last; }
+    for (var j2 = 0, seed = null; j2 < out.length; j2++) { if (!out[j2]) { if (!seed) { for (var z = 0; z < out.length; z++) { if (out[z]) { seed = out[z]; break; } } } out[j2] = seed; } }
+    return out;
+  }
+
+  /* ---------- side-view skeleton (mirrors python _figure) ---------- */
+  function buildSkelSide(svg, inkCol) {
+    var g = saEl("g", { "class": "sa-skel sa-skel-side" });
+    var la = { fill: "none", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" };
+    var lines = {};
+    ["nh", "hk", "ka", "at", "se", "eh"].forEach(function (id) { var ln = saEl("line", la); lines[id] = ln; g.appendChild(ln); });
+    var head = saEl("circle", {}); g.appendChild(head);
+    var barG = saEl("g", { "class": "sa-bar" });
+    // side view looks straight down the bar axis: render the bar END-ON
+    // (plate face + hub), not a front-view shaft with plates at both ends.
+    var plFill = saEl("circle", { r: 20, "fill-opacity": 0.25 });
+    var plRing = saEl("circle", { r: 20, fill: "none", "stroke-width": 3 });
+    var hub = saEl("circle", { r: 6, fill: inkCol });
+    barG.appendChild(plFill); barG.appendChild(plRing); barG.appendChild(hub);
+    g.appendChild(barG); svg.appendChild(g);
+    return { g: g, lines: lines, head: head, barG: barG, plFill: plFill, plRing: plRing, hub: hub };
+  }
+  function drawSide(r, A, B, f, color, a2) {
+    var ja = A.j, jb = B.j;
+    function J(key) { return lpt(ja[key], jb[key], f); }
+    var neck = J("neck"), hip = J("hip"), knee = J("knee"), ankle = J("ankle"), toe = J("toe"), sh = J("shoulder"), elb = J("elbow"), hand = J("hand");
+    function set(ln, p, q) { ln.setAttribute("x1", p[0]); ln.setAttribute("y1", p[1]); ln.setAttribute("x2", q[0]); ln.setAttribute("y2", q[1]); ln.setAttribute("stroke", color); }
+    set(r.lines.nh, neck, hip); set(r.lines.hk, hip, knee); set(r.lines.ka, knee, ankle); set(r.lines.at, ankle, toe); set(r.lines.se, sh, elb); set(r.lines.eh, elb, hand);
+    var hx = lp(ja.head[0], jb.head[0], f), hy = lp(ja.head[1], jb.head[1], f), hr = lp(ja.head[2], jb.head[2], f);
+    r.head.setAttribute("cx", hx); r.head.setAttribute("cy", hy); r.head.setAttribute("r", hr); r.head.setAttribute("fill", color);
+    if (A.bar || B.bar) {
+      var ba = A.bar || B.bar, bb = B.bar || A.bar;
+      var bx = lp(ba[0], bb[0], f), by = lp(ba[1], bb[1], f);
+      r.barG.style.opacity = (A.bar && B.bar) ? 1 : (A.bar ? (1 - f) : f);
+      r.plFill.setAttribute("cx", bx); r.plFill.setAttribute("cy", by); r.plFill.setAttribute("fill", a2);
+      r.plRing.setAttribute("cx", bx); r.plRing.setAttribute("cy", by); r.plRing.setAttribute("stroke", a2);
+      r.hub.setAttribute("cx", bx); r.hub.setAttribute("cy", by);
+    } else { r.barG.style.opacity = 0; }
+  }
+
+  /* ---------- frontal-view skeleton (symmetric) ---------- */
+  function buildSkelFront(svg, inkCol) {
+    var g = saEl("g", { "class": "sa-skel sa-skel-front" });
+    g.style.display = "none";
+    var la = { fill: "none", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round" };
+    var lines = {};
+    ["torso", "legLU", "legLD", "legRU", "legRD", "armL", "armR"].forEach(function (id) { var ln = saEl("line", la); lines[id] = ln; g.appendChild(ln); });
+    var head = saEl("circle", {}); g.appendChild(head);
+    var barG = saEl("g", { "class": "sa-bar" });
+    var barLine = saEl("line", { "stroke-width": 5, "stroke-linecap": "round", stroke: inkCol });
+    var plL = saEl("circle", { r: 13 }), plR = saEl("circle", { r: 13 });
+    barG.appendChild(barLine); barG.appendChild(plL); barG.appendChild(plR); g.appendChild(barG);
+    var cue = saEl("text", { "class": "sa-cue-lbl", "text-anchor": "middle", "font-size": 11, "font-weight": 700 });
+    g.appendChild(cue); svg.appendChild(g);
+    return { g: g, lines: lines, head: head, barG: barG, barLine: barLine, plL: plL, plR: plR, cue: cue };
+  }
+  function drawFront(r, A, B, f, color, a2, accent) {
+    var ja = A.j, jb = B.j;
+    function J(key) { return lpt(ja[key], jb[key], f); }
+    var neck = J("neck"), hipC = J("hipC"), shL = J("shL"), shR = J("shR"), handL = J("handL"), handR = J("handR"), kneeL = J("kneeL"), kneeR = J("kneeR"), ankleL = J("ankleL"), ankleR = J("ankleR");
+    function set(ln, p, q) { ln.setAttribute("x1", p[0]); ln.setAttribute("y1", p[1]); ln.setAttribute("x2", q[0]); ln.setAttribute("y2", q[1]); ln.setAttribute("stroke", color); }
+    set(r.lines.torso, neck, hipC); set(r.lines.legLU, hipC, kneeL); set(r.lines.legLD, kneeL, ankleL); set(r.lines.legRU, hipC, kneeR); set(r.lines.legRD, kneeR, ankleR); set(r.lines.armL, shL, handL); set(r.lines.armR, shR, handR);
+    var hx = lp(ja.head[0], jb.head[0], f), hy = lp(ja.head[1], jb.head[1], f), hr = lp(ja.head[2], jb.head[2], f);
+    r.head.setAttribute("cx", hx); r.head.setAttribute("cy", hy); r.head.setAttribute("r", hr); r.head.setAttribute("fill", color);
+    if (A.bar || B.bar) {
+      var ba = A.bar || B.bar, bb = B.bar || A.bar;
+      var bx = lp(ba[0], bb[0], f), by = lp(ba[1], bb[1], f);
+      r.barG.style.opacity = (A.bar && B.bar) ? 1 : (A.bar ? (1 - f) : f);
+      r.barLine.setAttribute("x1", bx - 52); r.barLine.setAttribute("y1", by); r.barLine.setAttribute("x2", bx + 52); r.barLine.setAttribute("y2", by);
+      r.plL.setAttribute("cx", bx - 52); r.plL.setAttribute("cy", by); r.plL.setAttribute("fill", a2);
+      r.plR.setAttribute("cx", bx + 52); r.plR.setAttribute("cy", by); r.plR.setAttribute("fill", a2);
+    } else { r.barG.style.opacity = 0; }
+    var cueTxt = (f < 0.5 ? A.cue : B.cue) || "";
+    r.cue.textContent = cueTxt; r.cue.setAttribute("x", 220); r.cue.setAttribute("y", 226); r.cue.setAttribute("fill", accent); r.cue.style.opacity = cueTxt ? 0.92 : 0;
+  }
+
+  window.SA = {};
+  window.SAEngine = {
+    init: function (sid, steps, opts) {
+      try { this._init(sid, steps, opts || {}); }
+      catch (err) { try { this._fallback(sid, steps); } catch (e2) {} }
+    },
+    _fallback: function (sid, steps) {
+      var _fr0 = document.getElementById(sid); if (_fr0) _fr0.classList.remove("sa-figure-mode");
+      var root = document.getElementById(sid); if (!root) return;
+      var scenes = root.querySelectorAll(".sa-scene"), dots = root.querySelectorAll(".sa-dot");
+      var bar = document.getElementById(sid + "-bar"), curEl = document.getElementById(sid + "-cur");
+      var labEl = document.getElementById(sid + "-label"), desEl = document.getElementById(sid + "-desc");
+      var n = steps.length, cur = 0;
+      function show(i) {
+        cur = ((i % n) + n) % n;
+        for (var k = 0; k < scenes.length; k++) { scenes[k].classList.toggle("active", k === cur); scenes[k].style.opacity = ""; }
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle("active", d === cur); dots[d].classList.toggle("past", d < cur); }
+        if (bar) bar.style.width = ((cur + 1) / n * 100) + "%";
+        if (curEl) curEl.textContent = cur + 1;
+        if (labEl) labEl.textContent = steps[cur][0];
+        if (desEl) desEl.textContent = steps[cur][1];
+      }
+      window.SA[sid] = { next: function () { show(cur + 1); }, prev: function () { show(cur - 1); }, go: function (i) { show(i); }, auto: function () {}, plane: function () {}, three: function () {} };
+      for (var j = 0; j < dots.length; j++) { (function (b) { b.addEventListener("click", function () { show(parseInt(b.getAttribute("data-i"))); }); })(dots[j]); }
+      show(0);
+    },
+    _init: function (sid, steps, opts) {
+      var root = document.getElementById(sid); if (!root) return;
+      var stage = root.querySelector(".sa-stage");
+      var svg = root.querySelector(".sa-svg");
+      var scenes = root.querySelectorAll(".sa-scene");
+      var dots = root.querySelectorAll(".sa-dot");
+      var bar = document.getElementById(sid + "-bar");
+      var curEl = document.getElementById(sid + "-cur");
+      var labEl = document.getElementById(sid + "-label");
+      var desEl = document.getElementById(sid + "-desc");
+      var aBtn = document.getElementById(sid + "-autobtn");
+      var slider = document.getElementById(sid + "-scrub");
+      var cap = root.querySelector(".sa-caption");
+      var n = steps.length;
+      var framesS = extractFrames(scenes);
+      var framesF = opts.framesF || null;
+      var lift = !!opts.lift;
+      var t = 0, raf = null, playing = false, plane = "side";
+      var pal = { ac: saVar(stage, "--accent", "#5ec8ff"), a2: saVar(stage, "--accent-2", "#c08fff"), good: saVar(stage, "--good", "#67e8b0"), warn: saVar(stage, "--warn", "#ffb86b"), bad: saVar(stage, "--bad", "#ff7a7a") };
+      var ink = saVar(stage, "--text", "#e8ebf2");
+      function col(key) { return pal[key] || pal.ac; }
+      var skelS = null, skelF = null;
+      if (framesS) {
+        root.classList.add("sa-figure-mode");
+        skelS = buildSkelSide(svg, ink);
+        if (framesF) skelF = buildSkelFront(svg, ink);
+      }
+      function curFrames() { return (plane === "front" && framesF) ? framesF : framesS; }
+      function drawFig(tt) {
+        var F = curFrames(); if (!F) return;
+        var span = F.length - 1;
+        var u = (n > 1) ? (tt / (n - 1)) * span : 0;
+        var i = Math.max(0, Math.min(span, Math.floor(u)));
+        var j = Math.min(span, i + 1);
+        var f = saEase(u - i);
+        var A = F[i], B = F[j];
+        var c = saMix(col(A.c), col(B.c), f);
+        if (plane === "front" && skelF) { skelS.g.style.display = "none"; skelF.g.style.display = ""; drawFront(skelF, A, B, f, c, pal.a2, pal.good); }
+        else { if (skelF) skelF.g.style.display = "none"; skelS.g.style.display = ""; drawSide(skelS, A, B, f, c, pal.a2); }
+      }
+      function setScenes(tt, settle) {
+        if (scenes.length === 0) return;
+        if (plane === "front") { for (var q = 0; q < scenes.length; q++) { scenes[q].classList.remove("active"); scenes[q].style.opacity = "0"; } return; }
+        var near = Math.round(tt);
+        for (var k = 0; k < scenes.length; k++) {
+          var sc = scenes[k];
+          if (settle) { sc.classList.toggle("active", k === near); sc.style.opacity = ""; }
+          else { sc.classList.remove("active"); var d = Math.abs(k - tt); sc.style.opacity = d < 1 ? (1 - d).toFixed(3) : "0"; }
+        }
+      }
+      function updMeta(idx) {
+        if (bar) bar.style.width = ((idx + 1) / n * 100) + "%";
+        if (curEl) curEl.textContent = idx + 1;
+        if (labEl) labEl.textContent = steps[idx][0];
+        if (desEl) desEl.textContent = steps[idx][1];
+        for (var d = 0; d < dots.length; d++) { dots[d].classList.toggle("active", d === idx); dots[d].classList.toggle("past", d < idx); }
+        if (cap) { cap.classList.remove("flash"); void cap.offsetWidth; cap.classList.add("flash"); }
+      }
+      function render(tt, settle) {
+        t = Math.max(0, Math.min(n - 1, tt));
+        if (framesS) drawFig(t);
+        setScenes(t, settle);
+        if (slider && document.activeElement !== slider) slider.value = String(Math.round(t / (n - 1) * 1000));
+        if (settle) updMeta(Math.round(t));
+      }
+      function animateT(from, to, dur, done) {
+        if (raf) cancelAnimationFrame(raf);
+        var st = performance.now();
+        function loop(now) { var p = Math.min(1, (now - st) / dur), e = saEase(p); render(from + (to - from) * e, false); if (p < 1) raf = requestAnimationFrame(loop); else { raf = null; if (done) done(); } }
+        raf = requestAnimationFrame(loop);
+      }
+      function settleTo(target) { stopPlay(); animateT(t, target, 360, function () { render(target, true); }); }
+      function startPlay() {
+        playing = true; if (aBtn) aBtn.innerHTML = "&#9208; Pause";
+        var seq = (Math.round(t) >= n - 1) ? 0 : Math.round(t);
+        render(seq, true);
+        function stepNext() { if (!playing) return; if (seq >= n - 1) { stopPlay(); return; } animateT(seq, seq + 1, 900, function () { render(seq + 1, true); seq++; setTimeout(stepNext, 620); }); }
+        setTimeout(stepNext, 300);
+      }
+      function stopPlay() { playing = false; if (raf) { cancelAnimationFrame(raf); raf = null; } if (aBtn) aBtn.innerHTML = "&#9205; Auto-play"; }
+      function updPlaneBtn() { var pb = document.getElementById(sid + "-planebtn"); if (pb) { pb.innerHTML = (plane === "side" ? "&#8634; Front view" : "&#8634; Side view"); pb.classList.toggle("on", plane === "front"); } }
+      var api = {
+        next: function () { settleTo(Math.min(n - 1, Math.round(t) + 1)); },
+        prev: function () { settleTo(Math.max(0, Math.round(t) - 1)); },
+        go: function (i) { settleTo(Math.max(0, Math.min(n - 1, i))); },
+        auto: function () { if (playing) stopPlay(); else startPlay(); },
+        plane: function () { if (!framesF) return; plane = (plane === "side") ? "front" : "side"; root.setAttribute("data-plane", plane); updPlaneBtn(); render(t, true); },
+        three: function () { SAEngine._three(sid, framesS, pal, ink); }
+      };
+      if (slider) {
+        slider.addEventListener("input", function () { stopPlay(); render(slider.value / 1000 * (n - 1), false); });
+        slider.addEventListener("change", function () { settleTo(Math.round(t)); });
+      }
+      var dragging = false;
+      function px2t(clientX) { var rc = stage.getBoundingClientRect(); var x = (clientX - rc.left) / rc.width; return Math.max(0, Math.min(1, x)) * (n - 1); }
+      stage.addEventListener("pointerdown", function (e) { if (e.target.closest && e.target.closest("button")) return; dragging = true; try { stage.setPointerCapture(e.pointerId); } catch (x) {} stopPlay(); stage.classList.add("sa-grabbing"); render(px2t(e.clientX), false); });
+      stage.addEventListener("pointermove", function (e) { if (dragging) render(px2t(e.clientX), false); });
+      function endDrag() { if (!dragging) return; dragging = false; stage.classList.remove("sa-grabbing"); settleTo(Math.round(t)); }
+      stage.addEventListener("pointerup", endDrag); stage.addEventListener("pointercancel", endDrag); stage.addEventListener("pointerleave", endDrag);
+      for (var jx = 0; jx < dots.length; jx++) { (function (b) { b.addEventListener("click", function () { api.go(parseInt(b.getAttribute("data-i"))); }); })(dots[jx]); }
+      window.SA[sid] = api;
+      updPlaneBtn();
+      render(0, true);
+    },
+    _three: function (sid, frames, pal, ink) {
+      var host = document.getElementById(sid + "-3d");
+      var btn = document.getElementById(sid + "-3dbtn");
+      if (!host || !frames) return;
+      if (host.getAttribute("data-on") === "1") {
+        host.setAttribute("data-on", "0"); host.style.display = "none";
+        if (host._stop) { host._stop(); host._stop = null; }
+        host.innerHTML = ""; if (btn) btn.innerHTML = "&#9673; 3D view"; return;
+      }
+      host.setAttribute("data-on", "1"); host.style.display = "block";
+      host.innerHTML = '<div class="sa-3d-msg">Loading 3D&hellip;</div>';
+      if (btn) btn.innerHTML = "&#9673; Loading&hellip;";
+      try { host.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (se) {}
+      function fail(msg) { host.innerHTML = '<div class="sa-3d-msg">' + msg + '</div>'; if (btn) btn.innerHTML = "&#9673; 3D view"; }
+      var timedOut = false;
+      var timer = setTimeout(function () { timedOut = true; fail("3D is taking too long to load &mdash; check the connection and press the button again. The side &amp; front views above work offline."); }, 14000);
+      import("https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js")
+        .then(function (THREE) {
+          clearTimeout(timer); if (timedOut) return;
+          host.innerHTML = "";
+          try {
+            SAEngine._build3D(THREE, host, frames, pal, ink);
+            if (btn) btn.innerHTML = "&#9673; Hide 3D";
+          } catch (err) {
+            fail("3D couldn't start here (" + ((err && err.message) ? String(err.message).slice(0, 90) : "WebGL unavailable") + "). The side &amp; front views above show the same movement.");
+          }
+        })
+        .catch(function () { clearTimeout(timer); if (!timedOut) fail("3D view needs an internet connection &mdash; the side &amp; front views above work offline."); });
+    },
+    _build3D: function (THREE, host, frames, pal, ink) {
+      function rgbHex(c) { var r = saRGB(c); return (r[0] << 16) + (r[1] << 8) + r[2]; }
+      frames = (frames || []).filter(function (Fx) { return Fx && Fx.j; });
+      if (!frames.length) { throw new Error("no pose frames"); }
+      var W = Math.min(host.clientWidth || 460, 760), H = 290;
+      var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });   // throws if WebGL is blocked
+      if (renderer.getContext && !renderer.getContext()) { throw new Error("WebGL context unavailable"); }
+      renderer.setPixelRatio(Math.min(1.5, window.devicePixelRatio || 1));
+      renderer.setSize(W, H);
+      var scene = new THREE.Scene();
+      var camY = 2.6;
+      var cam = new THREE.PerspectiveCamera(42, W / H, 0.1, 100);
+      function aimCam() { cam.position.set(0, camY, 11.5); cam.lookAt(0, 2.3, 0); }
+      aimCam();
+      host.appendChild(renderer.domElement);
+      scene.add(new THREE.AmbientLight(0xffffff, 1.15));
+      var dl = new THREE.DirectionalLight(0xffffff, 2.2); dl.position.set(4, 8, 6); scene.add(dl);
+      var fill = new THREE.DirectionalLight(0xffffff, 0.8); fill.position.set(-4, 3, -6); scene.add(fill);
+      var grid = new THREE.GridHelper(14, 14, 0x44506a, 0x2a3245); grid.position.y = -0.1; scene.add(grid);
+      // turntable: pivot spins about Y only, so the athlete NEVER tilts
+      // relative to the floor; vertical drag moves the camera instead.
+      var pivot = new THREE.Group(); scene.add(pivot);
+      var group = new THREE.Group(); pivot.add(group);
+      var mat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.ac)), roughness: 0.5, metalness: 0.1 });
+      var barMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(ink)), roughness: 0.4 });
+      var plMat = new THREE.MeshStandardMaterial({ color: new THREE.Color(rgbHex(pal.a2)), roughness: 0.5 });
+      function V(j) { return new THREE.Vector3((j[0] - 220) / 26, (206 - j[1]) / 26, 0); }
+      var joints = {}, bones = [], jointKeys = ["head", "neck", "shoulder", "elbow", "hand", "hip", "knee", "ankle", "toe"];
+      jointKeys.forEach(function (k) { var s = new THREE.Mesh(new THREE.SphereGeometry(k === "head" ? 0.62 : 0.26, 16, 16), mat); group.add(s); joints[k] = s; });
+      var boneDefs = [["neck", "hip"], ["hip", "knee"], ["knee", "ankle"], ["ankle", "toe"], ["shoulder", "elbow"], ["elbow", "hand"]];
+      boneDefs.forEach(function () { var cl = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); var cr = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1, 12), mat); group.add(cl); group.add(cr); bones.push([cl, cr]); });
+      var ZOFF = 0.55, YUP = new THREE.Vector3(0, 1, 0);
+      function place(cyl, a, b, z) {
+        var av = a.clone(), bv = b.clone(); av.z = z; bv.z = z;
+        var mid = av.clone().add(bv).multiplyScalar(0.5);
+        var dir = bv.clone().sub(av); var len = dir.length();
+        if (len < 0.001) { cyl.visible = false; return; }
+        cyl.visible = true; cyl.position.copy(mid);
+        cyl.scale.set(1, len, 1);
+        cyl.quaternion.setFromUnitVectors(YUP, dir.normalize());
+      }
+      var barShaft = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 4.6, 12), barMat); barShaft.rotation.x = Math.PI / 2;
+      var plate1 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat); var plate2 = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 0.95, 0.18, 20), plMat);
+      plate1.rotation.x = Math.PI / 2; plate2.rotation.x = Math.PI / 2;
+      var barGroup = new THREE.Group(); barGroup.add(barShaft); barGroup.add(plate1); barGroup.add(plate2); plate1.position.z = -2.3; plate2.position.z = 2.3; group.add(barGroup);
+      function frameVerts(F) { var o = {}; jointKeys.forEach(function (k) { o[k] = V(F.j[k] || [220, 206]); }); o.bar = F.bar ? V(F.bar) : null; return o; }
+      function applyFrame(va, vb, f) {
+        if (!va || !vb) { return; }
+        jointKeys.forEach(function (k) { var p = va[k].clone().lerp(vb[k], f); joints[k].position.set(p.x, p.y, 0); });
+        boneDefs.forEach(function (d, i2) { var a = va[d[0]].clone().lerp(vb[d[0]], f); var b = va[d[1]].clone().lerp(vb[d[1]], f); place(bones[i2][0], a, b, ZOFF); place(bones[i2][1], a, b, -ZOFF); });
+        if (va.bar || vb.bar) { var ba = va.bar || vb.bar, bb = vb.bar || va.bar; var p = ba.clone().lerp(bb, f); barGroup.visible = true; barGroup.position.set(p.x, p.y, 0); } else { barGroup.visible = false; }
+      }
+      var verts = frames.map(frameVerts), nF = verts.length, span = nF - 1;
+      // spin about the figure's own centre, not the world origin
+      var cx0 = (verts[0].hip.x + verts[0].ankle.x) / 2;
+      group.position.x = -cx0;
+      var rotY = 0.6, down = false, lx = 0, ly = 0;
+      renderer.domElement.style.cursor = "grab";
+      renderer.domElement.addEventListener("pointerdown", function (e) { down = true; lx = e.clientX; ly = e.clientY; renderer.domElement.style.cursor = "grabbing"; });
+      window.addEventListener("pointermove", function (e) {
+        if (!down) return;
+        rotY += (e.clientX - lx) * 0.01;
+        camY = Math.max(0.8, Math.min(5.5, camY + (ly - e.clientY) * 0.02));   // vertical drag orbits the camera, never tilts the athlete
+        aimCam();
+        lx = e.clientX; ly = e.clientY;
+      });
+      window.addEventListener("pointerup", function () { down = false; renderer.domElement.style.cursor = "grab"; });
+      var stopped = false, clock = 0, last = performance.now();
+      host._stop = function () { stopped = true; try { renderer.dispose(); } catch (e) {} if (renderer.domElement && renderer.domElement.parentNode) renderer.domElement.parentNode.removeChild(renderer.domElement); };
+      function frame(now) {
+        if (stopped) return;
+        try {
+          var dt = Math.max(0, Math.min(0.05, (now - last) / 1000)); last = now;   // clamp: first rAF timestamp can precede performance.now()
+          clock += dt * 0.5;
+          // pingpong: lift up (concentric), lower back down (eccentric) -- no
+          // wrap-around tween from lockout straight to setup.
+          var u = 0;
+          if (span > 0) { var cyc = clock % (2 * span); u = (cyc <= span) ? cyc : (2 * span - cyc); }
+          var i = Math.max(0, Math.min(span, Math.floor(u)));
+          var j = Math.min(span, i + 1);
+          var f = saEase(Math.max(0, Math.min(1, u - i)));
+          applyFrame(verts[i], verts[j], f);
+          if (!down) rotY += dt * 0.25;
+          pivot.rotation.y = rotY;
+          renderer.render(scene, cam);
+        } catch (err) {
+          stopped = true;
+          try { host._stop(); } catch (e2) {}
+          host.innerHTML = '<div class="sa-3d-msg">3D stopped (' + ((err && err.message) ? String(err.message).slice(0, 90) : "render error") + "). The side &amp; front views above show the same movement.</div>";
+          return;
+        }
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+      window.addEventListener("resize", function () { if (stopped) return; var w = Math.min(host.clientWidth || W, 760); renderer.setSize(w, H); cam.aspect = w / H; cam.updateProjectionMatrix(); });
+    }
+  };
+}
+</script>
+<div class="step-anim" id="ex_squat">
+  <div class="sa-stage"><svg viewBox="0 0 440 240" class="sa-svg" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"><g class="sa-scene" data-step="0"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">SET-UP</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><text x="220" y="232" fill="var(--text-dim,#9ba3b4)" font-size="11" text-anchor="middle">weight over mid-foot</text><g class="sa-pop sa-fig" data-joints='{"head":[206.0,58.0,13.0],"neck":[206.0,75.0],"shoulder":[206.0,82.0],"elbow":[190.0,92.0],"hand":[192.0,80.0],"hip":[206.0,132.0],"knee":[206.0,168.0],"ankle":[206.0,202.0],"toe":[224.0,206.0]}' data-c="ac" data-bar="206,80"><g fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="206" y1="75" x2="206" y2="132"/><line x1="206" y1="132" x2="206" y2="168"/><line x1="206" y1="168" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="206" y1="82" x2="190" y2="92"/><line x1="190" y1="92" x2="192" y2="80"/></g><circle cx="206" cy="58" r="13" fill="var(--accent,#5ec8ff)"/><g><circle cx="206" cy="80" r="20" fill="var(--accent-2,#c08fff)" opacity="0.25"/><circle cx="206" cy="80" r="20" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="3"/><circle cx="206" cy="80" r="6" fill="var(--text,#e8ebf2)"/></g></g><g class="sa-pop"><rect x="296" y="64" width="46" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="296" y="64" width="46" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="319" y="80" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">BRACE</text></g></g><g class="sa-scene" data-step="1"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">DESCENT</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop sa-fig" data-joints='{"head":[212.0,66.0,13.0],"neck":[212.0,82.0],"shoulder":[212.0,90.0],"elbow":[196.0,100.0],"hand":[200.0,90.0],"hip":[198.0,146.0],"knee":[216.0,176.0],"ankle":[206.0,202.0],"toe":[224.0,206.0]}' data-c="ac" data-bar="212,88"><g fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="212" y1="82" x2="198" y2="146"/><line x1="198" y1="146" x2="216" y2="176"/><line x1="216" y1="176" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="212" y1="90" x2="196" y2="100"/><line x1="196" y1="100" x2="200" y2="90"/></g><circle cx="212" cy="66" r="13" fill="var(--accent,#5ec8ff)"/><g><circle cx="212" cy="88" r="20" fill="var(--accent-2,#c08fff)" opacity="0.25"/><circle cx="212" cy="88" r="20" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="3"/><circle cx="212" cy="88" r="6" fill="var(--text,#e8ebf2)"/></g></g><g class="sa-draw" stroke="var(--accent-2,#c08fff)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="150" y1="118" x2="150" y2="168"/><polyline points="145.206,159.224 150,168 154.794,159.224" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="286" y="150" width="72" height="24" rx="12" fill="var(--accent,#5ec8ff)" opacity="0.16"/><rect x="286" y="150" width="72" height="24" rx="12" fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="1.4"/><text x="322" y="166" fill="var(--accent,#5ec8ff)" font-size="12" font-weight="700" text-anchor="middle">hips back</text></g></g><g class="sa-scene" data-step="2"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">BOTTOM</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop sa-fig" data-joints='{"head":[220.0,84.0,13.0],"neck":[220.0,100.0],"shoulder":[220.0,108.0],"elbow":[204.0,118.0],"hand":[210.0,108.0],"hip":[196.0,180.0],"knee":[232.0,176.0],"ankle":[206.0,202.0],"toe":[224.0,206.0]}' data-c="a2" data-bar="220,106"><g fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="220" y1="100" x2="196" y2="180"/><line x1="196" y1="180" x2="232" y2="176"/><line x1="232" y1="176" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="220" y1="108" x2="204" y2="118"/><line x1="204" y1="118" x2="210" y2="108"/></g><circle cx="220" cy="84" r="13" fill="var(--accent-2,#c08fff)"/><g><circle cx="220" cy="106" r="20" fill="var(--accent-2,#c08fff)" opacity="0.25"/><circle cx="220" cy="106" r="20" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="3"/><circle cx="220" cy="106" r="6" fill="var(--text,#e8ebf2)"/></g></g><g class="sa-pop"><rect x="300" y="150" width="46" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="300" y="150" width="46" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="323" y="166" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">DEPTH</text></g><line x1="188" y1="180" x2="246" y2="180" stroke="var(--good,#67e8b0)" stroke-width="1.5" stroke-dasharray="3 4" opacity="0.8"/></g><g class="sa-scene" data-step="3"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">ASCENT</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop sa-fig" data-joints='{"head":[214.0,70.0,13.0],"neck":[214.0,86.0],"shoulder":[214.0,94.0],"elbow":[198.0,104.0],"hand":[202.0,94.0],"hip":[200.0,150.0],"knee":[218.0,178.0],"ankle":[206.0,202.0],"toe":[224.0,206.0]}' data-c="ac" data-bar="214,92"><g fill="none" stroke="var(--accent,#5ec8ff)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="214" y1="86" x2="200" y2="150"/><line x1="200" y1="150" x2="218" y2="178"/><line x1="218" y1="178" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="214" y1="94" x2="198" y2="104"/><line x1="198" y1="104" x2="202" y2="94"/></g><circle cx="214" cy="70" r="13" fill="var(--accent,#5ec8ff)"/><g><circle cx="214" cy="92" r="20" fill="var(--accent-2,#c08fff)" opacity="0.25"/><circle cx="214" cy="92" r="20" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="3"/><circle cx="214" cy="92" r="6" fill="var(--text,#e8ebf2)"/></g></g><g class="sa-draw" stroke="var(--good,#67e8b0)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="150" y1="168" x2="150" y2="108"/><polyline points="154.794,116.776 150,108 145.206,116.776" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="286" y="116" width="51" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="286" y="116" width="51" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="311.5" y="132" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">drive!</text></g></g><g class="sa-scene" data-step="4"><text x="220" y="26" fill="var(--text-dim,#9ba3b4)" font-size="13" font-weight="700" text-anchor="middle" letter-spacing="0.5">LOCKOUT</text><line x1="206" y1="40" x2="206" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="1.5" stroke-dasharray="4 5" opacity="0.35"/><line x1="40" y1="206" x2="400" y2="206" stroke="var(--text-dim,#9ba3b4)" stroke-width="2" opacity="0.5"/><g class="sa-pop sa-fig" data-joints='{"head":[206.0,58.0,13.0],"neck":[206.0,75.0],"shoulder":[206.0,82.0],"elbow":[190.0,92.0],"hand":[192.0,80.0],"hip":[206.0,132.0],"knee":[206.0,168.0],"ankle":[206.0,202.0],"toe":[224.0,206.0]}' data-c="good" data-bar="206,80"><g fill="none" stroke="var(--good,#67e8b0)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><line x1="206" y1="75" x2="206" y2="132"/><line x1="206" y1="132" x2="206" y2="168"/><line x1="206" y1="168" x2="206" y2="202"/><line x1="206" y1="202" x2="224" y2="206"/><line x1="206" y1="82" x2="190" y2="92"/><line x1="190" y1="92" x2="192" y2="80"/></g><circle cx="206" cy="58" r="13" fill="var(--good,#67e8b0)"/><g><circle cx="206" cy="80" r="20" fill="var(--accent-2,#c08fff)" opacity="0.25"/><circle cx="206" cy="80" r="20" fill="none" stroke="var(--accent-2,#c08fff)" stroke-width="3"/><circle cx="206" cy="80" r="6" fill="var(--text,#e8ebf2)"/></g></g><g class="sa-draw" stroke="var(--good,#67e8b0)" stroke-width="4" fill="none" stroke-linecap="round"><line x1="150" y1="150" x2="150" y2="92"/><polyline points="154.794,100.776 150,92 145.206,100.776" stroke-linejoin="round"/></g><g class="sa-pop"><rect x="296" y="64" width="46" height="24" rx="12" fill="var(--good,#67e8b0)" opacity="0.16"/><rect x="296" y="64" width="46" height="24" rx="12" fill="none" stroke="var(--good,#67e8b0)" stroke-width="1.4"/><text x="319" y="80" fill="var(--good,#67e8b0)" font-size="12" font-weight="700" text-anchor="middle">TALL</text></g></g></svg><div class="sa-scrubhint">drag to scrub &#8596;</div></div>
+  <input type="range" class="sa-scrub" id="ex_squat-scrub" min="0" max="1000" value="0" aria-label="Scrub the movement">
+  <div class="sa-progress"><div class="sa-bar" id="ex_squat-bar"></div></div>
+  <div class="sa-dots"><button class="sa-dot" data-i="0">1</button><button class="sa-dot" data-i="1">2</button><button class="sa-dot" data-i="2">3</button><button class="sa-dot" data-i="3">4</button><button class="sa-dot" data-i="4">5</button></div>
+  <div class="sa-caption">
+    <div class="sa-step-num">Step <span id="ex_squat-cur">1</span> of 5</div>
+    <div class="sa-label" id="ex_squat-label"></div>
+    <div class="sa-desc" id="ex_squat-desc"></div>
+  </div>
+  <div class="w-controls">
+    <button onclick="SA['ex_squat'].prev()">&#9664; Prev</button>
+    <button onclick="SA['ex_squat'].next()">Next &#9654;</button>
+    <button onclick="SA['ex_squat'].auto()" id="ex_squat-autobtn">&#9205; Auto-play</button>
+    <button class="sa-plane-btn" id="ex_squat-planebtn" onclick="SA['ex_squat'].plane()">&#8634; Front view</button>
+    <button class="sa-3d-btn" id="ex_squat-3dbtn" onclick="SA['ex_squat'].three()">&#9673; 3D view</button>
+  </div>
+  <div class="sa-3d" id="ex_squat-3d" data-on="0" style="display:none"></div>
+</div>
+<script>SAEngine.init("ex_squat", [["Set up & brace", "Bar on the upper traps, feet about shoulder-width, toes slightly out. Big breath into the belly, brace the core, neutral spine."], ["Descend — hips & knees together", "Break at the hips and knees at the same time and sit between the heels. Knees track over the toes; chest stays up."], ["Hit depth — hip crease below knee", "Reach full depth: the hip crease drops below the top of the knee. Keep tension — no bouncing or collapsing forward."], ["Drive up — lead with the chest", "Push the floor away and drive hips and shoulders up together so the bar travels straight up. Keep the chest tall."], ["Lockout & reset", "Stand fully tall — hips and knees extended, glutes squeezed. Reset the breath and brace before the next rep."]], {"framesF": [{"c": "ac", "bar": [220, 82], "cue": "stance set", "j": {"head": [220, 58, 13], "neck": [220, 78], "hipC": [220, 138], "shL": [200, 88], "shR": [240, 88], "handL": [196, 80], "handR": [244, 80], "kneeL": [208, 170], "kneeR": [232, 170], "ankleL": [208, 205], "ankleR": [232, 205]}}, {"c": "a2", "bar": [220, 120], "cue": "knees track out — not caving in", "j": {"head": [220, 98, 13], "neck": [220, 116], "hipC": [220, 176], "shL": [200, 124], "shR": [240, 124], "handL": [196, 118], "handR": [244, 118], "kneeL": [196, 178], "kneeR": [244, 178], "ankleL": [208, 205], "ankleR": [232, 205]}}, {"c": "good", "bar": [220, 82], "cue": "stand tall, locked", "j": {"head": [220, 58, 13], "neck": [220, 78], "hipC": [220, 138], "shL": [200, 88], "shR": [240, 88], "handL": [196, 80], "handR": [244, 80], "kneeL": [208, 170], "kneeR": [232, 170], "ankleL": [208, 205], "ankleR": [232, 205]}}], "lift": true});</script>
+</div>
+  <div class="w-hint">Hips and knees move together; the bar stays stacked over mid-foot the whole way.</div>
+</div>
+<div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Bar position changes torque distribution between hips/knees</li><li>Parallel = femur parallel to floor</li><li>Valsalva increases intra-abdominal pressure → spine stability</li><li>Knee valgus is the most common fault; cue &#x27;knees out&#x27;</li><li>Spotters at sides, never directly behind, for max attempts</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#ff5e5e" stroke-width="2" fill="none"><line x1="22" y1="6" x2="30" y2="22"/><line x1="30" y1="22" x2="26" y2="34"/><line x1="58" y1="6" x2="50" y2="22"/><line x1="50" y1="22" x2="54" y2="34"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Knee valgus</div><div class="gloss-def">Most common squat fault — knees collapse inward. Cue: &#x27;knees out&#x27; / &#x27;spread the floor.&#x27; Reflects weak abductors or coordination issue.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="30" y="10" width="20" height="22" fill="none" stroke="#c9c9c9" stroke-width="2" rx="3"/><circle cx="40" cy="21" r="6" fill="#ffb86b" opacity="0.7"/></svg></div><div class="gloss-text"><div class="gloss-term">Valsalva</div><div class="gloss-def">Hold breath against closed glottis → ↑ intra-abdominal pressure → spine stability. Standard for max-effort lifts.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><g stroke="#c9c9c9" stroke-width="2" fill="none"><line x1="14" y1="14" x2="32" y2="22"/><line x1="32" y1="22" x2="28" y2="36"/><line x1="32" y1="22" x2="48" y2="22"/><line x1="48" y1="22" x2="66" y2="14"/><line x1="48" y1="22" x2="52" y2="36"/></g><line x1="14" y1="22" x2="66" y2="22" stroke="#67e8b0" stroke-width="1" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Parallel depth</div><div class="gloss-def">Hip crease at or below the top of the knee. CSCS standard. Squat below for more glute / posterior chain.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your strength PM session structure relies on squat fidelity — these technique points are non-negotiable for your hip-dominant Hyrox prep.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=QDVdLGWktPU" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Squat University — How To Squat Correctly (FIX MISTAKES!)</div><div class="m-cred">Aaron Horschig DPT</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=hOWoAg8pG8E" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Iron Culture — Schoenfeld: Mechanisms of Hypertrophy</div><div class="m-cred">Schoenfeld PhD</div></div></a></div></section></div>
   <h2 style="margin: 26px 0 8px; font-size: 20px; font-weight: 700;">Practice questions</h2>
   <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Forced retrieval first, then grade yourself. Whatever you miss resurfaces on the FSRS-chosen day.</p>
-  <section class="question-block reveal"><h3>Interleaved practice</h3><p class="qs-sub">Mixed across domains by exam weight — this feels harder than drilling one topic, and that difficulty is the point: it roughly doubles what transfers to test day.</p><div class="qs"><div class="q" data-qid="px_0" data-stable="exercise_selection__0" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_0"></span></div><div class="q-text">What is the optimal exercise order within a single session?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_0','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_0','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_0','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_0" disabled onclick="revealQ('px_0')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_0')">I don't know</button></div><div class="q-reveal" id="reveal_px_0"><div class="reveal-label">Answer</div><div class="reveal-body">Power exercises (Olympic lifts, jumps) first → core exercises (multi-joint, large muscle: squat, deadlift, bench) → assistance/single-joint exercises last. Highest neural and technical demand goes first.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_0',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_0',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_0',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_0',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_1" data-stable="ex_alt_modes__4" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_1"></span></div><div class="q-text">Coaching points for a loaded carry (farmer&#x27;s or suitcase)?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_1','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_1','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_1','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_1" disabled onclick="revealQ('px_1')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_1')">I don't know</button></div><div class="q-reveal" id="reveal_px_1"><div class="reveal-label">Answer</div><div class="reveal-body">Tall posture, braced trunk, shoulders packed down, ribs stacked over the pelvis; resist lateral lean (especially the suitcase carry) — it&#x27;s an anti-lateral-flexion/anti-rotation core task as much as a grip task.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_1',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_1',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_1',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_1',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_2" data-stable="peds__2" data-domain="NT" data-qtype="recall"><div class="q-head"><span class="q-num">Q3</span><span class="q-type recall">recall</span><span class="q-domain">Nutrition</span><span class="q-status" data-status-for="px_2"></span></div><div class="q-text">Mechanism by which EPO improves endurance performance.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_2','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_2','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_2','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_2" disabled onclick="revealQ('px_2')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_2')">I don't know</button></div><div class="q-reveal" id="reveal_px_2"><div class="reveal-label">Answer</div><div class="reveal-body">Increases erythropoiesis → increased red cell mass → increased O₂-carrying capacity → increased VO₂max.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_2',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_2',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_2',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_2',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_3" data-stable="ex_alt_modes__3" data-domain="EX" data-qtype="applied"><div class="q-head"><span class="q-num">Q4</span><span class="q-type applied">applied</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_3"></span></div><div class="q-text">Why is the sled push almost purely concentric, and what does that mean for recovery?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_3','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_3','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_3','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_3" disabled onclick="revealQ('px_3')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_3')">I don't know</button></div><div class="q-reveal" id="reveal_px_3"><div class="reveal-label">Answer</div><div class="reveal-body">There&#x27;s little eccentric/braking component (you only push, never lower a load), so it causes far less muscle damage and soreness than equivalent eccentric work — allowing higher frequency and making it great for conditioning without a big recovery cost.</div><div class="q-selfexplain"><label>In your own words — why is this true?</label><textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_3',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_3',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_3',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_3',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_4" data-stable="ex_squat__5" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q5</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_4"></span></div><div class="q-text">Describe the breathing and bracing strategy for a heavy squat rep.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_4','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_4','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_4','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_4" disabled onclick="revealQ('px_4')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_4')">I don't know</button></div><div class="q-reveal" id="reveal_px_4"><div class="reveal-label">Answer</div><div class="reveal-body">Valsalva: big breath into the belly before descending, brace the trunk 360° (abs and obliques) to build intra-abdominal pressure, hold it through the rep, then exhale at/after lockout.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_4',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_4',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_4',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_4',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_5" data-stable="ex_squat__4" data-domain="EX" data-qtype="applied"><div class="q-head"><span class="q-num">Q6</span><span class="q-type applied">applied</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_5"></span></div><div class="q-text">A lifter&#x27;s chest falls and the hips shoot up first out of the bottom of the squat. Name the fault and the cue.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_5','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_5','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_5','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_5" disabled onclick="revealQ('px_5')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_5')">I don't know</button></div><div class="q-reveal" id="reveal_px_5"><div class="reveal-label">Answer</div><div class="reveal-body">A &#x27;good-morning&#x27; / hips-rise-first fault (often weak quads or a lost brace). Cue &#x27;chest up, drive the whole torso up together,&#x27; keep knees tracking out, and drop the load until depth is controlled.</div><div class="q-selfexplain"><label>In your own words — why is this true?</label><textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_5',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_5',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_5',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_5',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_6" data-stable="ex_clean__6" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q7</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_6"></span></div><div class="q-text">Describe the catch position of a power clean.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_6','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_6','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_6','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_6" disabled onclick="revealQ('px_6')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_6')">I don't know</button></div><div class="q-reveal" id="reveal_px_6"><div class="reveal-label">Answer</div><div class="reveal-body">Bar caught on the front delts in a quarter-squat, elbows whipped through and high, torso upright, feet flat — then stand to finish.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_6',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_6',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_6',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_6',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div></div></section>
+  <section class="question-block reveal"><h3>Interleaved practice</h3><p class="qs-sub">Mixed across domains by exam weight — this feels harder than drilling one topic, and that difficulty is the point: it roughly doubles what transfers to test day.</p><div class="qs"><div class="q" data-qid="px_0" data-stable="exercise_selection__0" data-domain="PD" data-qtype="recall"><div class="q-head"><span class="q-num">Q1</span><span class="q-type recall">recall</span><span class="q-domain">Program Design</span><span class="q-status" data-status-for="px_0"></span></div><div class="q-text">What is the optimal exercise order within a single session?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_0','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_0','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_0','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_0" disabled onclick="revealQ('px_0')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_0')">I don't know</button></div><div class="q-reveal" id="reveal_px_0"><div class="reveal-label">Answer</div><div class="reveal-body">Power exercises (Olympic lifts, jumps) first → core exercises (multi-joint, large muscle: squat, deadlift, bench) → assistance/single-joint exercises last. Highest neural and technical demand goes first.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_0',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_0',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_0',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_0',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_1" data-stable="ex_alt_modes__4" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q2</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_1"></span></div><div class="q-text">Coaching points for a loaded carry (farmer&#x27;s or suitcase)?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_1','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_1','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_1','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_1" disabled onclick="revealQ('px_1')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_1')">I don't know</button></div><div class="q-reveal" id="reveal_px_1"><div class="reveal-label">Answer</div><div class="reveal-body">Tall posture, braced trunk, shoulders packed down, ribs stacked over the pelvis; resist lateral lean (especially the suitcase carry) — it&#x27;s an anti-lateral-flexion/anti-rotation core task as much as a grip task.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_1',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_1',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_1',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_1',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_2" data-stable="peds__1" data-domain="NT" data-qtype="recall"><div class="q-head"><span class="q-num">Q3</span><span class="q-type recall">recall</span><span class="q-domain">Nutrition</span><span class="q-status" data-status-for="px_2"></span></div><div class="q-text">Why are oral 17α-alkylated anabolic steroids particularly hepatotoxic?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_2','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_2','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_2','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_2" disabled onclick="revealQ('px_2')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_2')">I don't know</button></div><div class="q-reveal" id="reveal_px_2"><div class="reveal-label">Answer</div><div class="reveal-body">The 17α-alkyl modification resists hepatic breakdown (allowing oral bioavailability) but stresses the liver — associated with cholestasis, peliosis hepatis, and hepatic tumors.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_2',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_2',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_2',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_2',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_3" data-stable="ex_alt_modes__3" data-domain="EX" data-qtype="applied"><div class="q-head"><span class="q-num">Q4</span><span class="q-type applied">applied</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_3"></span></div><div class="q-text">Why is the sled push almost purely concentric, and what does that mean for recovery?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_3','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_3','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_3','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_3" disabled onclick="revealQ('px_3')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_3')">I don't know</button></div><div class="q-reveal" id="reveal_px_3"><div class="reveal-label">Answer</div><div class="reveal-body">There&#x27;s little eccentric/braking component (you only push, never lower a load), so it causes far less muscle damage and soreness than equivalent eccentric work — allowing higher frequency and making it great for conditioning without a big recovery cost.</div><div class="q-selfexplain"><label>In your own words — why is this true?</label><textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_3',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_3',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_3',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_3',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_4" data-stable="ex_squat__5" data-domain="EX" data-qtype="recall"><div class="q-head"><span class="q-num">Q5</span><span class="q-type recall">recall</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_4"></span></div><div class="q-text">Describe the breathing and bracing strategy for a heavy squat rep.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_4','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_4','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_4','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_4" disabled onclick="revealQ('px_4')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_4')">I don't know</button></div><div class="q-reveal" id="reveal_px_4"><div class="reveal-label">Answer</div><div class="reveal-body">Valsalva: big breath into the belly before descending, brace the trunk 360° (abs and obliques) to build intra-abdominal pressure, hold it through the rep, then exhale at/after lockout.</div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_4',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_4',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_4',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_4',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_5" data-stable="ex_squat__4" data-domain="EX" data-qtype="applied"><div class="q-head"><span class="q-num">Q6</span><span class="q-type applied">applied</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_5"></span></div><div class="q-text">A lifter&#x27;s chest falls and the hips shoot up first out of the bottom of the squat. Name the fault and the cue.</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_5','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_5','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_5','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_5" disabled onclick="revealQ('px_5')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_5')">I don't know</button></div><div class="q-reveal" id="reveal_px_5"><div class="reveal-label">Answer</div><div class="reveal-body">A &#x27;good-morning&#x27; / hips-rise-first fault (often weak quads or a lost brace). Cue &#x27;chest up, drive the whole torso up together,&#x27; keep knees tracking out, and drop the load until depth is controlled.</div><div class="q-selfexplain"><label>In your own words — why is this true?</label><textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_5',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_5',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_5',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_5',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div><div class="q" data-qid="px_6" data-stable="ex_clean__5" data-domain="EX" data-qtype="applied"><div class="q-head"><span class="q-num">Q7</span><span class="q-type applied">applied</span><span class="q-domain">Exercise Technique</span><span class="q-status" data-status-for="px_6"></span></div><div class="q-text">What does the &#x27;scoop&#x27; / double-knee bend accomplish in the clean?</div><textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea><button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button><div class="q-confidence"><span class="conf-label">How sure are you?</span><button type="button" class="conf-btn" data-conf="low" onclick="pickConfidence('px_6','low')">Low</button><button type="button" class="conf-btn" data-conf="med" onclick="pickConfidence('px_6','med')">Medium</button><button type="button" class="conf-btn" data-conf="high" onclick="pickConfidence('px_6','high')">High</button></div><div class="q-actions"><button type="button" class="btn-reveal" id="revealbtn_px_6" disabled onclick="revealQ('px_6')">Reveal answer</button><button type="button" class="btn-idk" onclick="dontKnowQ('px_6')">I don't know</button></div><div class="q-reveal" id="reveal_px_6"><div class="reveal-label">Answer</div><div class="reveal-body">As the bar passes the knees, the knees re-bend under the bar and the torso becomes vertical (power position), re-loading the legs and stretching the hip/knee extensors so the second pull can be maximally explosive.</div><div class="q-selfexplain"><label>In your own words — why is this true?</label><textarea class="se-answer" placeholder="One sentence is enough. The attempt is what builds the memory." oninput="onSelfExplainInput(event)"></textarea></div><div class="q-rate"><div class="rate-label">How did that go? <span class="rate-hint">(this sets when you see it next)</span></div><button type="button" class="rate-btn rate-again" data-grade="1" onclick="rateQ('px_6',1)">Again<small>&lt;10m</small></button><button type="button" class="rate-btn rate-hard" data-grade="2" onclick="rateQ('px_6',2)">Hard<small></small></button><button type="button" class="rate-btn rate-good" data-grade="3" onclick="rateQ('px_6',3)">Good<small></small></button><button type="button" class="rate-btn rate-easy" data-grade="4" onclick="rateQ('px_6',4)">Easy<small></small></button></div><div class="rate-result"></div></div></div></div></section>
   <footer>
     Source: <i>Essentials of Strength Training and Conditioning</i> · Scheduling: <b>FSRS</b> (ts-fsrs) · spacing principle: Cepeda et al. 2008<br>
     <code>cscs_2026-06-05.html</code> · also written to <code>cscs_today.html</code> (rolling, for localStorage persistence)
