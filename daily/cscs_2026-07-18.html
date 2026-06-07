@@ -1775,6 +1775,15 @@ function mergeRemote(remote) {
     const rv = rstate.answers[k];
     if (!local.answers[k] || (rv && rv.length > (local.answers[k] || "").length)) { if (rv !== local.answers[k]) { local.answers[k] = rv; changed = true; } }
   }
+  // touchedDays: union — a lesson engaged on ANY device stays engaged.
+  // Without this, touchedDays was never merged and got clobbered on push,
+  // so the synced gist (and new devices) lost cross-device progress.
+  if (rstate.touchedDays) {
+    local.touchedDays = local.touchedDays || {};
+    for (const d in rstate.touchedDays) {
+      if (rstate.touchedDays[d] && !local.touchedDays[d]) { local.touchedDays[d] = true; changed = true; }
+    }
+  }
   // log: union by cardId+ts
   const seen = new Set(local.log.map(l => l.cardId + "|" + l.ts));
   (rstate.log || []).forEach(l => { const key = l.cardId + "|" + l.ts; if (!seen.has(key)) { local.log.push(l); seen.add(key); changed = true; } });
