@@ -1169,6 +1169,48 @@ def s_review():
 
 # ───────────────────────── dispatch ─────────────────────────
 
+def _sled(x=292):
+    return (
+        '<g class="sa-pop">'
+        '<rect x="%g" y="188" width="50" height="18" rx="3" fill="%s" opacity="0.2"/>'
+        '<rect x="%g" y="188" width="50" height="18" rx="3" fill="none" stroke="%s" stroke-width="2"/>'
+        '<circle cx="%g" cy="197" r="11" fill="%s" opacity="0.3"/>'
+        '<circle cx="%g" cy="197" r="11" fill="none" stroke="%s" stroke-width="2"/>'
+        '<line x1="%g" y1="188" x2="%g" y2="120" stroke="%s" stroke-width="4" stroke-linecap="round"/>'
+        '<line x1="%g" y1="188" x2="%g" y2="120" stroke="%s" stroke-width="4" stroke-linecap="round"/>'
+        '<line x1="%g" y1="121" x2="%g" y2="121" stroke="%s" stroke-width="5" stroke-linecap="round"/>'
+        '</g>'
+    ) % (x, A2, x, A2, x + 25, A2, x + 25, A2, x + 6, x + 6, A2, x + 40, x + 40, A2, x + 2, x + 44, INK)
+
+
+def s_alt_modes():
+    # sled push, side view, athlete driving a sled to the right (handle ~x300)
+    p1 = dict(head=(256, 100, 12), neck=(244, 110), shoulder=(238, 116), hip=(200, 148),
+              knee=(188, 176), ankle=(174, 202), toe=(162, 206), elbow=(272, 118), hand=(300, 122))
+    p2 = dict(head=(266, 114, 12), neck=(254, 124), shoulder=(248, 128), hip=(204, 150),
+              knee=(186, 174), ankle=(162, 198), toe=(150, 202), elbow=(276, 126), hand=(302, 128))
+    p3 = dict(head=(268, 118, 12), neck=(256, 128), shoulder=(250, 132), hip=(208, 152),
+              knee=(192, 176), ankle=(176, 200), toe=(164, 204), elbow=(278, 132), hand=(302, 132))
+    p4 = dict(head=(270, 112, 12), neck=(258, 122), shoulder=(252, 126), hip=(212, 148),
+              knee=(192, 168), ankle=(162, 194), toe=(150, 198), elbow=(280, 126), hand=(304, 126))
+    steps = [
+        dict(label="Set-up - low body, long arms",
+             desc="Grip the posts, drop the hips and set a strong forward lean from the ankles with a braced, neutral spine. Arms stay relatively long - the legs do the pushing.",
+             svg=_title("SLED PUSH - SET-UP") + _ground("brace + lean from the ankles") + _sled() + _figure(p1) + _chip(60, 64, "hips low", AC, w=84)),
+        dict(label="Drive - push the floor away",
+             desc="Drive through the front foot with a powerful triple extension, body low and the lean aggressive. The whole system moves as one rigid unit.",
+             svg=_title("DRIVE") + _ground() + _sled() + _figure(p2, color=A2) + _chip(60, 64, "leg drive", A2, w=96)),
+        dict(label="Stride - short, fast steps",
+             desc="Take short, choppy steps with high turnover. Keep ground contacts quick and the hips low so force goes horizontally into the sled, not up.",
+             svg=_title("STRIDE") + _ground() + _sled() + _figure(p3) + _chip(60, 64, "short quick steps", AC, w=136)),
+        dict(label="Extension - relentless leg drive",
+             desc="Every push finishes in full triple extension of the driving leg. The sled push is almost all concentric - little eccentric load, so it is brutal to do but easy to recover from.",
+             svg=_title("EXTENSION") + _ground() + _sled() + _figure(p4, color=GOOD) + _chip(60, 64, "full triple extension", GOOD, w=156)),
+    ]
+    return _stepper("ex_alt_modes", "Sled push - drive sequence", steps,
+                    "A braced forward lean plus relentless leg drive. Almost all concentric (you only push, never lower a load), so it builds power and conditioning with little soreness - the headline Hyrox alternative mode.")
+
+
 STEPPERS = {
     "ec_coupling": s_ec_coupling,
     "glycolysis": s_glycolysis,
@@ -1179,6 +1221,7 @@ STEPPERS = {
     "ex_deadlift": s_deadlift,
     "ex_press": s_press,
     "ex_clean": s_clean,
+    "ex_alt_modes": s_alt_modes,
     "plyometrics": s_plyometrics,
     "speed_agility": s_speed,
     "warmup": s_warmup,
