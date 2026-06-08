@@ -725,3 +725,8 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* rebuild trigger 2026-06-06T06:08Z — front-rack elbow fix: clean catch/recover + press rack elbows up & forward */
 
 /* rebuild trigger 2026-06-07T06:35Z — sled-push animation for ex_alt_modes (June 2 / alternative modes) */
+
+/* Drills & Games entry link */
+.games-cta{text-align:center;margin:2px 0 16px}
+.games-cta a{display:inline-block;font-size:12px;font-weight:600;color:var(--accent,#5ec8ff);border:1px solid var(--border);background:var(--surface);padding:8px 18px;border-radius:999px;text-decoration:none;transition:border-color .15s,box-shadow .15s,transform .15s}
+.games-cta a:hover{border-color:var(--accent,#5ec8ff);box-shadow:0 0 14px rgba(94,200,255,.18);transform:translateY(-1px)}

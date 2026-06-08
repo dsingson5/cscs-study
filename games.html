@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSCS Drills &amp; Games</title>
+<style>
+:root{
+  --bg:#0b0e14; --bg-2:#11151e; --surface:#161b26; --surface-2:#1b2230; --surface-3:#212a3a;
+  --border:#2a3346; --border-2:#33405a; --text:#e8ebf2; --text-dim:#9ba3b4; --text-dimmer:#6b7585;
+  --accent:#5ec8ff; --accent-2:#c08fff; --good:#67e8b0; --warn:#ffb86b; --bad:#ff7a7a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;}
+body{background:
+  radial-gradient(900px 500px at 80% -10%, rgba(94,200,255,.07), transparent 70%),
+  radial-gradient(700px 500px at -10% 10%, rgba(192,143,255,.06), transparent 70%), var(--bg);
+  min-height:100vh;}
+.wrap{max-width:880px;margin:0 auto;padding:22px 18px 80px;}
+a{color:var(--accent);text-decoration:none}
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+.topbar h1{font-size:20px;margin:0;letter-spacing:.2px;font-weight:800;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.topbar .sub{font-size:12px;color:var(--text-dim)}
+.spacer{flex:1}
+.back-study{font-size:12px;color:var(--text-dim);border:1px solid var(--border);padding:6px 12px;border-radius:999px;white-space:nowrap}
+.back-study:hover{border-color:var(--accent);color:var(--accent)}
+
+/* hub grid */
+.intro{font-size:13px;color:var(--text-dim);line-height:1.55;margin:0 0 18px;max-width:680px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.gcard{position:relative;text-align:left;cursor:pointer;background:var(--surface);
+  border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:14px;padding:16px 16px 14px;
+  transition:transform .15s,box-shadow .15s,border-color .15s;color:inherit;font:inherit;}
+.gcard:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(0,0,0,.35);border-color:var(--accent)}
+.gcard .gicon{font-size:22px;line-height:1;margin-bottom:8px}
+.gcard h3{margin:0 0 4px;font-size:15px;font-weight:700}
+.gcard p{margin:0;font-size:12px;color:var(--text-dim);line-height:1.45}
+.gcard .gmeta{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:10px;letter-spacing:.03em;padding:3px 8px;border-radius:999px;background:var(--surface-3);color:var(--text-dim);border:1px solid var(--border)}
+.tag.ev{color:var(--good);border-color:#27543f}
+.gcard .gbest{position:absolute;top:14px;right:14px;font-size:11px;color:var(--text-dimmer)}
+
+/* in-game shell */
+.game-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.btn{cursor:pointer;font:inherit;font-size:12px;font-weight:600;color:var(--text);background:var(--surface);
+  border:1px solid var(--border);border-radius:9px;padding:8px 14px;transition:all .15s}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#05101c;border:none;font-weight:700}
+.btn.primary:hover{filter:brightness(1.07);color:#05101c}
+.btn.ghost{background:transparent}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.game-title{font-size:16px;font-weight:800;margin:0}
+.game-sub{font-size:12px;color:var(--text-dim);margin:2px 0 0}
+.pickrow{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 14px}
+.chip{cursor:pointer;font-size:12px;padding:6px 13px;border-radius:999px;background:var(--surface);border:1px solid var(--border);color:var(--text-dim);transition:all .15s}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+.chip.on{background:var(--accent);color:#05101c;border-color:var(--accent);font-weight:700}
+.panel{background:var(--bg-2);border:1px solid var(--border);border-radius:14px;padding:18px}
+.scorebar{display:flex;align-items:center;gap:14px;margin-bottom:12px;font-size:13px;color:var(--text-dim);flex-wrap:wrap}
+.scorebar b{color:var(--text);font-variant-numeric:tabular-nums}
+.prog{height:6px;border-radius:999px;background:var(--surface-3);overflow:hidden;flex:1;min-width:120px}
+.prog>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .3s}
+
+/* generic items */
+.qtext{font-size:16px;font-weight:600;line-height:1.5;margin:4px 0 12px}
+.ans{width:100%;min-height:54px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:14px;resize:vertical}
+.ans:focus{outline:none;border-color:var(--accent)}
+.reveal{margin-top:12px;padding:12px 14px;border-radius:10px;background:var(--surface-3);border:1px solid var(--border);border-left:3px solid var(--good);font-size:14px;line-height:1.5;display:none}
+.reveal.show{display:block;animation:fade .3s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.muted{color:var(--text-dim);font-size:12px}
+.result{margin-top:14px;font-size:14px}
+.ok{color:var(--good)} .no{color:var(--bad)} .warnc{color:var(--warn)}
+
+/* draggable list (order / categorize) */
+.dnd-list{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.dnd-item{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border-2);
+  border-radius:10px;padding:11px 13px;font-size:14px;cursor:grab;user-select:none;touch-action:none;transition:background .12s,border-color .12s,box-shadow .12s}
+.dnd-item:hover{border-color:var(--accent)}
+.dnd-item .grip{color:var(--text-dimmer);font-size:15px;flex:none}
+.dnd-item.dragging{opacity:.4}
+.dnd-item.ghost{box-shadow:0 10px 26px rgba(0,0,0,.5);border-color:var(--accent);cursor:grabbing;position:fixed;z-index:999;pointer-events:none;width:auto}
+.dnd-item .num{flex:none;width:22px;height:22px;border-radius:50%;background:var(--surface-3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-dim)}
+.dnd-item.correct{border-color:var(--good);background:rgba(103,232,176,.08)}
+.dnd-item.wrong{border-color:var(--bad);background:rgba(255,122,122,.07)}
+.dropline{height:2px;background:var(--accent);border-radius:2px;margin:-5px 0}
+
+/* categorize bins */
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}
+.bin{background:var(--surface);border:1px dashed var(--border-2);border-radius:12px;padding:10px;min-height:90px}
+.bin.over{border-color:var(--accent);background:rgba(94,200,255,.06)}
+.bin h4{margin:0 0 8px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.bin .binitems{display:flex;flex-direction:column;gap:6px;min-height:30px}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.token{background:var(--surface-2);border:1px solid var(--border-2);border-radius:9px;padding:8px 11px;font-size:13px;cursor:grab;user-select:none;touch-action:none}
+.token:hover{border-color:var(--accent)}
+.token.sel{border-color:var(--accent);box-shadow:0 0 0 2px rgba(94,200,255,.25)}
+.token.correct{border-color:var(--good)} .token.wrong{border-color:var(--bad)}
+
+/* matching */
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.match-col{display:flex;flex-direction:column;gap:8px}
+.match-item{background:var(--surface);border:1px solid var(--border-2);border-radius:10px;padding:11px 13px;font-size:13.5px;cursor:pointer;transition:all .12s;line-height:1.4}
+.match-item:hover{border-color:var(--accent)}
+.match-item.sel{border-color:var(--accent);box-shadow:0 0 0 2px rgba(94,200,255,.25)}
+.match-item.done{opacity:.45;cursor:default;border-color:var(--good)}
+.match-item.flash-no{border-color:var(--bad);animation:shake .3s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* calc */
+.calc-formula{font-size:13px;color:var(--accent);background:rgba(94,200,255,.07);border:1px solid #234;border-radius:8px;padding:8px 12px;margin:8px 0;font-family:ui-monospace,Menlo,Consolas,monospace}
+.calc-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.calc-in input{width:140px;background:var(--bg);border:1px solid var(--border);border-radius:9px;color:var(--text);padding:9px 12px;font-size:15px;font-family:ui-monospace,monospace}
+.calc-in input:focus{outline:none;border-color:var(--accent)}
+.unit{color:var(--text-dim);font-size:13px}
+
+/* scenario */
+.scn-stem{font-size:14.5px;line-height:1.6;margin:4px 0 14px}
+.scn-ctx{font-size:12px;color:var(--text-dim);background:var(--surface);border-left:3px solid var(--accent-2);border-radius:8px;padding:10px 12px;margin-bottom:14px;line-height:1.5}
+.choices{display:flex;flex-direction:column;gap:9px}
+.choice{text-align:left;cursor:pointer;background:var(--surface);border:1px solid var(--border-2);border-radius:11px;padding:12px 14px;font:inherit;font-size:14px;color:var(--text);transition:all .12s;line-height:1.45}
+.choice:hover{border-color:var(--accent);transform:translateX(2px)}
+.choice.pick-good{border-color:var(--good);background:rgba(103,232,176,.08)}
+.choice.pick-bad{border-color:var(--bad);background:rgba(255,122,122,.07)}
+.choice.dim{opacity:.5}
+.fb{margin-top:14px;padding:13px 15px;border-radius:11px;font-size:14px;line-height:1.55;display:none}
+.fb.show{display:block;animation:fade .3s}
+.fb.good{background:rgba(103,232,176,.08);border:1px solid #2c5b46}
+.fb.bad{background:rgba(255,122,122,.07);border:1px solid #5b2c2c}
+.scn-score{font-size:13px;color:var(--text-dim);margin-top:6px}
+
+.done-card{text-align:center;padding:26px 18px}
+.done-card .big{font-size:40px;font-weight:800;background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.done-card .lab{color:var(--text-dim);font-size:13px;margin-top:4px}
+.row-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.foot{margin-top:30px;font-size:11px;color:var(--text-dimmer);line-height:1.6;border-top:1px solid var(--border);padding-top:14px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <h1>CSCS Drills &amp; Games</h1>
+    <span class="sub" id="topsub">retrieval &middot; sorting &middot; decisions</span>
+    <span class="spacer"></span>
+    <a class="back-study" href="index.html">&larr; Back to study</a>
+  </div>
+  <div id="app"></div>
+  <div class="foot">
+    Built on the learning science: every game forces <b>retrieval</b> or a <b>decision</b> (not passive review),
+    interleaves topics, and gives immediate feedback. These are practice drills &mdash; your spaced-repetition
+    lessons stay the backbone. Progress here is saved on this device only and never changes your lesson schedule.
+  </div>
+</div>
+<script>
+window.GD = {
+  // ───────── Order-the-Steps (procedural sequencing) ─────────
+  sequences: [
+    {id:"squat", topic:"Technique", title:"Back squat - phases", steps:[
+      "Set up & brace (bar on traps, big breath, neutral spine)",
+      "Descend - hips and knees flex together",
+      "Hit depth - hip crease below the knee",
+      "Drive up - lead with the chest, bar over mid-foot",
+      "Lockout - hips and knees fully extended"]},
+    {id:"deadlift", topic:"Technique", title:"Conventional deadlift - pull", steps:[
+      "Set up over the bar (bar over mid-foot, hips above knees, flat back)",
+      "Break from the floor - push the legs, hips and shoulders rise together",
+      "Bar passes the knees - drive the hips forward",
+      "Lockout - stand tall, glutes squeezed, hips through"]},
+    {id:"clean", topic:"Technique", title:"Power clean - positions", steps:[
+      "Start position over the bar (hook grip, flat braced back)",
+      "First pull - patient, floor to knee, back angle constant",
+      "Scoop / transition - double-knee bend into the power position",
+      "Second pull - explosive triple extension + shrug",
+      "Catch in the front rack (quarter squat, elbows high)",
+      "Recover to standing"]},
+    {id:"press", topic:"Technique", title:"Overhead press - bar path", steps:[
+      "Front-rack start (bar on delts, forearms vertical, braced)",
+      "Press & move the head back as the bar clears the chin",
+      "Bar passes the forehead - push the head through the window",
+      "Overhead lockout - bar stacked over shoulders, hips, ankles"]},
+    {id:"sled", topic:"Technique", title:"Sled push - drive", steps:[
+      "Set-up - low body, strong forward lean, long arms",
+      "Drive - push the floor away with powerful leg drive",
+      "Stride - short, fast steps, hips low",
+      "Extension - relentless full triple extension"]},
+    {id:"glyc", topic:"Bioenergetics", title:"Glycolysis - sequence", steps:[
+      "Glucose trapped as glucose-6-phosphate (spends 1 ATP)",
+      "PFK adds a 2nd ATP -> fructose-1,6-bisphosphate (rate-limiter)",
+      "Split into two 3-carbon G3P",
+      "Payoff: oxidize to pyruvate (+4 ATP, +2 NADH; net +2 ATP)",
+      "Fate: lactate (fast, low O2) or mitochondria (slow, with O2)"]},
+    {id:"oxphos", topic:"Bioenergetics", title:"Oxidative phosphorylation", steps:[
+      "Pyruvate enters mitochondrion as acetyl-CoA",
+      "Krebs cycle strips electrons (loads NADH & FADH2)",
+      "Electron transport chain pumps H+ across the inner membrane",
+      "ATP synthase cashes the H+ gradient for ATP",
+      "Oxygen is the final electron acceptor -> water"]},
+    {id:"heart", topic:"Cardio", title:"Blood flow through the heart", steps:[
+      "Right atrium (deoxygenated blood returns from the body)",
+      "Right ventricle",
+      "Lungs (drop CO2, pick up O2)",
+      "Left atrium",
+      "Left ventricle",
+      "Aorta -> out to the whole body"]},
+    {id:"eccoupling", topic:"Neuromuscular", title:"Excitation-contraction coupling", steps:[
+      "Action potential travels down the motoneuron",
+      "ACh released into the synaptic cleft",
+      "Sarcolemma depolarizes",
+      "Signal spreads down the T-tubules",
+      "Sarcoplasmic reticulum releases Ca2+",
+      "Ca2+ binds troponin -> tropomyosin shifts, sites exposed",
+      "Cross-bridge cycling - contraction (ATP powers it)"]},
+    {id:"ramp", topic:"Programming", title:"RAMP warm-up", steps:[
+      "Raise - body temperature, HR, blood flow",
+      "Activate - switch on key muscles",
+      "Mobilise - dynamic, sport-relevant range of motion",
+      "Potentiate - ramp to near-competition speed"]},
+    {id:"ssc", topic:"Programming", title:"Stretch-shortening cycle", steps:[
+      "Eccentric - load the spring (store elastic energy)",
+      "Amortization - keep it brief",
+      "Concentric - explosive release + stretch reflex"]},
+    {id:"rehab", topic:"Programming", title:"Tissue healing stages", steps:[
+      "Acute / inflammation - protect & de-swell",
+      "Repair / proliferation - restore ROM, light load",
+      "Remodeling - progressive overload rebuilds strength",
+      "Return to sport - criteria-based, not calendar-based"]},
+    {id:"needs", topic:"Programming", title:"Program design order", steps:[
+      "Needs analysis of the SPORT (movements, energy systems, injury sites)",
+      "Needs analysis of the ATHLETE (training status, testing, history)",
+      "Exercise selection",
+      "Set training frequency",
+      "Order the exercises",
+      "Set load & volume, then rest periods"]}
+  ],
+
+  // ───────── Sort-the-Bins (categorize / taxonomy) ─────────
+  sorts: [
+    {id:"fiber", topic:"Physiology", title:"Muscle fiber type", bins:["Type I (slow)","Type IIx (fast)"], items:[
+      ["High fatigue resistance","Type I (slow)"],["Lots of mitochondria / oxidative","Type I (slow)"],
+      ["Red (high myoglobin)","Type I (slow)"],["Best for marathon / Z2","Type I (slow)"],["Low peak force","Type I (slow)"],
+      ["Highest force & power","Type IIx (fast)"],["Fast to fatigue","Type IIx (fast)"],
+      ["Glycolytic / low mitochondria","Type IIx (fast)"],["Recruited for a 1RM or sprint","Type IIx (fast)"],["White (low myoglobin)","Type IIx (fast)"]]},
+    {id:"energy", topic:"Bioenergetics", title:"Primary energy system by effort", bins:["Phosphagen","Glycolytic","Oxidative"], items:[
+      ["100 m sprint (~10 s)","Phosphagen"],["A heavy 1-3 rep set","Phosphagen"],["A single shot-put throw","Phosphagen"],
+      ["400 m run (~50 s)","Glycolytic"],["A Hyrox station ~60-90 s all-out","Glycolytic"],["30-60 s of burpees","Glycolytic"],
+      ["A marathon","Oxidative"],["Zone 2 ride, 60 min","Oxidative"],["A 5-min row","Oxidative"]]},
+    {id:"classify", topic:"Technique", title:"Exercise classification", bins:["Core (structural)","Assistance"], items:[
+      ["Back squat","Core (structural)"],["Deadlift","Core (structural)"],["Power clean","Core (structural)"],["Push press","Core (structural)"],
+      ["Biceps curl","Assistance"],["Leg extension","Assistance"],["Lateral raise","Assistance"],["Calf raise","Assistance"]]},
+    {id:"goal", topic:"Programming", title:"Training goal by load & reps", bins:["Max strength","Hypertrophy","Power","Muscular endurance"], items:[
+      ["~85%+ 1RM, <=6 reps","Max strength"],["~67-85% 1RM, 6-12 reps","Hypertrophy"],
+      ["Explosive, ~75-90% 1RM, 1-5 reps","Power"],["<=67% 1RM, >=12 reps","Muscular endurance"],
+      ["5x3 @ 88%","Max strength"],["4x10 @ 70%","Hypertrophy"],["5x2 jump squat, fast","Power"],["3x20 @ 50%","Muscular endurance"]]},
+    {id:"hormone", topic:"Endocrine", title:"Anabolic vs catabolic", bins:["Anabolic","Catabolic"], items:[
+      ["Testosterone","Anabolic"],["Growth hormone / IGF-1","Anabolic"],["Insulin","Anabolic"],
+      ["Cortisol","Catabolic"],["Glucagon","Catabolic"],["Epinephrine (mobilizes fuel)","Catabolic"]]},
+    {id:"concurrent", topic:"Hybrid", title:"Concurrent-training cue: which limits which?", bins:["Endurance can blunt this","Less interference"], items:[
+      ["Maximal strength gains","Endurance can blunt this"],["Hypertrophy with high endurance volume","Endurance can blunt this"],
+      ["Power / RFD with heavy fatigue","Endurance can blunt this"],["Aerobic adaptations from strength work","Less interference"],
+      ["Z2 mitochondrial work","Less interference"]]}
+  ],
+
+  // ───────── Match-Up (paired associates) ─────────
+  matches: [
+    {id:"muscle", topic:"Anatomy", title:"Muscle -> primary action", pairs:[
+      ["Biceps brachii","Elbow flexion"],["Gastrocnemius","Plantarflexion"],["Rectus femoris","Knee extension"],
+      ["Gluteus maximus","Hip extension"],["Latissimus dorsi","Shoulder extension/adduction"],["Hamstrings","Knee flexion / hip extension"]]},
+    {id:"hormone", topic:"Endocrine", title:"Hormone -> effect", pairs:[
+      ["Testosterone","Anabolic - protein synthesis"],["Cortisol","Catabolic - protein breakdown"],["Insulin","Glucose uptake & storage"],
+      ["Growth hormone","Lipolysis, IGF-1 release"],["Epinephrine","Glycogenolysis, fight-or-flight"],["Glucagon","Raises blood glucose"]]},
+    {id:"terms", topic:"Concepts", title:"Term -> definition", pairs:[
+      ["1RM","Max load for one rep"],["LT2 / MLSS","Highest sustainable steady-state lactate"],["VO2max","Max rate of O2 uptake"],
+      ["SSC","Eccentric -> amortization -> concentric"],["Valsalva","Braced breath-hold for intra-abdominal pressure"],["Specificity","Adaptations specific to the imposed demand"]]},
+    {id:"tests", topic:"Testing", title:"Test -> what it measures", pairs:[
+      ["Vertical jump","Lower-body power"],["1RM bench press","Upper-body max strength"],["40-yd dash","Acceleration / speed"],
+      ["Yo-Yo / beep test","Aerobic capacity"],["Pro-agility (5-10-5)","Change of direction"],["Sit-and-reach","Flexibility"]]},
+    {id:"fuel", topic:"Bioenergetics", title:"System -> fuel & timing", pairs:[
+      ["Phosphagen","Stored ATP-PCr, ~0-10 s"],["Fast glycolysis","Glucose -> lactate, ~10 s-2 min"],["Oxidative","Carbs & fat + O2, sustained"]]}
+  ],
+
+  // ───────── Rapid Recall (timed retrieval) ─────────
+  recall: [
+    {q:"Depth criterion for a 'parallel' back squat?",a:"Hip crease at or below the top of the knee (femur parallel)."},
+    {q:"Most common squat fault + the cue?",a:"Knee valgus (knees cave in). Cue: 'knees out' / spread the floor."},
+    {q:"Which pull of the clean is the explosive one?",a:"The second pull - violent triple extension + shrug."},
+    {q:"Net ATP and NADH from glycolysis per glucose?",a:"Net +2 ATP and +2 NADH (plus pyruvate)."},
+    {q:"Rate-limiting enzyme of glycolysis?",a:"Phosphofructokinase (PFK)."},
+    {q:"Final electron acceptor in the electron transport chain?",a:"Oxygen (forms water)."},
+    {q:"What ion triggers cross-bridge cycling?",a:"Calcium (Ca2+), released from the sarcoplasmic reticulum."},
+    {q:"NSCA exam domain with the largest weighting?",a:"Program Design (~40%)."},
+    {q:"Order of the size principle of recruitment?",a:"Small (Type I) motor units first, then larger (Type II) as force demand rises."},
+    {q:"Three phases of the stretch-shortening cycle?",a:"Eccentric, amortization, concentric."},
+    {q:"Why keep amortization short in a plyometric?",a:"A long pause leaks stored elastic energy as heat and weakens the stretch reflex."},
+    {q:"Estimate HRmax from age (rough field formula)?",a:"220 - age (rough; individual variation is large)."},
+    {q:"Karvonen target-HR formula?",a:"HRrest + intensity x (HRmax - HRrest)."},
+    {q:"Rep range & load for max strength?",a:"<=6 reps at ~>=85% 1RM."},
+    {q:"Rep range & load for hypertrophy?",a:"~6-12 reps at ~67-85% 1RM."},
+    {q:"What does specificity (SAID) mean for Hyrox?",a:"Train the actual demands - running fatigued + the stations (sled, carries, wall ball)."},
+    {q:"Anabolic vs catabolic: cortisol is...?",a:"Catabolic (promotes protein breakdown, raises blood glucose)."},
+    {q:"What is LT2 / MLSS?",a:"The highest intensity where blood lactate stays in steady state."},
+    {q:"Primary fuel for Zone 2 training?",a:"Predominantly fat oxidation (aerobic), sparing glycogen."},
+    {q:"Concurrent-training interference: what's most blunted?",a:"Maximal strength and power/RFD, when endurance volume/fatigue is high."},
+    {q:"Valsalva maneuver - what does it create and risk?",a:"Intra-abdominal pressure to brace the spine; transiently spikes blood pressure."},
+    {q:"Bracing order before a heavy squat?",a:"Big breath into the belly, brace 360 degrees, then descend."},
+    {q:"Core vs assistance exercise - define core.",a:"A structural, multi-joint lift that loads the axial skeleton (squat, deadlift, cleans)."},
+    {q:"What does a vertical jump test assess?",a:"Lower-body power."},
+    {q:"Two needs-analysis questions, in order?",a:"1) What does the SPORT demand? 2) What does the ATHLETE bring?"},
+    {q:"Sled push - eccentric load and recovery cost?",a:"Almost no eccentric load -> little soreness, can train at high frequency."},
+    {q:"Polarized (80/20) split - measured by what?",a:"Session count, not minutes - ~80% easy, ~20% hard."},
+    {q:"What does the size of a motor unit's neuron tell you?",a:"Larger neuron = higher threshold = recruited later, innervates Type II fibers."},
+    {q:"Epley 1RM estimate formula?",a:"1RM = weight x (1 + reps/30)."},
+    {q:"Why is the deadlift bar kept over mid-foot?",a:"Keeps the moment arm short - minimizes low-back shear and keeps balance."}
+  ],
+
+  // ───────── Faded Calc Drills (applied math) ─────────
+  calc: [
+    {id:"epley1", topic:"1RM", prompt:"You lifted 100 kg for 5 reps. Estimate the 1RM (Epley).",
+      formula:"1RM = weight x (1 + reps/30)", answer:116.7, tol:1.5, unit:"kg",
+      worked:"100 x (1 + 5/30) = 100 x 1.167 = 116.7 kg"},
+    {id:"epley2", topic:"1RM", prompt:"Front squat: 80 kg x 8 reps. Estimate the 1RM (Epley).",
+      formula:"1RM = weight x (1 + reps/30)", answer:101.3, tol:1.5, unit:"kg",
+      worked:"80 x (1 + 8/30) = 80 x 1.267 = 101.3 kg"},
+    {id:"brzycki", topic:"1RM", prompt:"Bench: 100 kg x 5. Estimate the 1RM (Brzycki).",
+      formula:"1RM = weight x 36 / (37 - reps)", answer:112.5, tol:1.5, unit:"kg",
+      worked:"100 x 36 / (37 - 5) = 3600 / 32 = 112.5 kg"},
+    {id:"load1", topic:"%1RM", prompt:"Squat 1RM is 140 kg. Prescribe 80% for the day.",
+      formula:"load = 1RM x %", answer:112, tol:0.5, unit:"kg",
+      worked:"140 x 0.80 = 112 kg"},
+    {id:"load2", topic:"%1RM", prompt:"OHP 1RM 60 kg. Program 5x5 at 75%. What load?",
+      formula:"load = 1RM x %", answer:45, tol:0.5, unit:"kg",
+      worked:"60 x 0.75 = 45 kg"},
+    {id:"hrmax", topic:"Zones", prompt:"Athlete is 30. Estimate HRmax (220-age).",
+      formula:"HRmax = 220 - age", answer:190, tol:0.5, unit:"bpm",
+      worked:"220 - 30 = 190 bpm"},
+    {id:"pct_hrmax", topic:"Zones", prompt:"HRmax 190. What is 70% of HRmax?",
+      formula:"target = HRmax x %", answer:133, tol:1, unit:"bpm",
+      worked:"190 x 0.70 = 133 bpm"},
+    {id:"karvonen", topic:"Zones", prompt:"HRmax 190, resting HR 50. Target HR at 70% (Karvonen)?",
+      formula:"HRrest + % x (HRmax - HRrest)", answer:148, tol:1.5, unit:"bpm",
+      worked:"50 + 0.70 x (190 - 50) = 50 + 98 = 148 bpm"},
+    {id:"work", topic:"Work/Power", prompt:"Lift 80 kg through 0.5 m. Work done? (g = 9.81)",
+      formula:"Work = m x g x distance", answer:392, tol:3, unit:"J",
+      worked:"80 x 9.81 x 0.5 = 392.4 J"},
+    {id:"power", topic:"Work/Power", prompt:"That 392 J lift took 0.8 s. Mean power?",
+      formula:"Power = Work / time", answer:490, tol:5, unit:"W",
+      worked:"392.4 / 0.8 = 490.5 W"},
+    {id:"vload", topic:"Volume", prompt:"5 sets x 5 reps x 100 kg. Volume load?",
+      formula:"Volume load = sets x reps x load", answer:2500, tol:1, unit:"kg",
+      worked:"5 x 5 x 100 = 2500 kg"},
+    {id:"reps_pct", topic:"%1RM", prompt:"You can do exactly 10 clean reps. Approx %1RM (Epley back-solve)?",
+      formula:"%1RM = 1 / (1 + reps/30)", answer:75, tol:2, unit:"%",
+      worked:"1 / (1 + 10/30) = 1/1.333 = 0.75 -> ~75%"}
+  ],
+
+  // ───────── Play the Coach (branching decisions) ─────────
+  scenarios: [
+    {id:"insoccer", topic:"In-season", title:"In-season collegiate soccer",
+     context:"A starting collegiate soccer midfielder, mid-competitive season, 1-2 matches per week. You get them 2 short sessions/week. Goal: keep them fast and powerful and healthy through the season.",
+     steps:[
+       {stem:"What should the in-season resistance emphasis be?",
+        choices:[
+          {t:"Maintain strength & power with low volume",ok:true,fb:"Right. In-season you maintain qualities with minimal effective dose - low volume, high quality - so you don't add fatigue that hurts match performance."},
+          {t:"Push a hypertrophy block to add size",ok:false,fb:"No - high-volume hypertrophy adds fatigue and soreness that degrades match play. Save accumulation for the off-season."},
+          {t:"Deload completely - no lifting",ok:false,fb:"No - detraining sets in within weeks. A small maintenance dose preserves strength/power far better than nothing."}]},
+       {stem:"Pick the best main exercises for the session.",
+        choices:[
+          {t:"Trap-bar jump / power clean + a heavy hinge, few reps",ok:true,fb:"Yes - multi-joint, power-biased, low reps. High intent, low fatigue - exactly the in-season maintenance profile."},
+          {t:"Leg extensions, curls, and calf raises to failure",ok:false,fb:"No - single-joint isolation to failure adds soreness without maintaining the power qualities soccer needs."},
+          {t:"A 5x5 back-squat grinder at RPE 9",ok:false,fb:"No - that's an off-season strength stimulus; the fatigue cost is too high mid-season."}]},
+       {stem:"Where do you place the hard lifting relative to matches?",
+        choices:[
+          {t:"Early in the week, 48h+ from the next match",ok:true,fb:"Correct - leave at least ~48h so residual fatigue clears before competition."},
+          {t:"The day before the match for potentiation",ok:false,fb:"Risky - a heavy session the day before usually leaves more fatigue than potentiation for most athletes."},
+          {t:"Right after the match while warm",ok:false,fb:"Generally no - post-match they're already depleted; quality and recovery both suffer."}]}
+     ]},
+    {id:"hyrox", topic:"Hybrid", title:"Your Hyrox build (concurrent training)",
+     context:"A hybrid athlete prepping for Hyrox: needs strength for the stations AND a big aerobic engine, training ~5-6 days/week. Sleep is the binding recovery constraint. Frameworks: Z2 mitochondrial work, polarized cardio, durability.",
+     steps:[
+       {stem:"How do you sequence a same-day hard strength + hard interval session?",
+        choices:[
+          {t:"Separate them by several hours, or put them on different days",ok:true,fb:"Best. The interference effect is worst when hard endurance immediately precedes/follows hard strength. Separation (or different days) protects both."},
+          {t:"Always do the long run first, strength second when wrecked",ok:false,fb:"No - doing strength under heavy aerobic fatigue blunts the strength stimulus and raises injury risk."},
+          {t:"Superset heavy squats with the threshold intervals",ok:false,fb:"No - that maximizes interference and fatigue; quality of both collapses."}]},
+       {stem:"How should the easy aerobic volume be dosed (polarized)?",
+        choices:[
+          {t:"~80% of sessions truly easy (Zone 2), ~20% genuinely hard",ok:true,fb:"Yes - polarized by session count. Most volume easy builds the mitochondrial base; a small dose of hard work drives the top end."},
+          {t:"Most sessions in the 'grey zone' tempo - moderately hard",ok:false,fb:"No - chronic moderate work accumulates fatigue without the benefits of either truly easy or truly hard training."},
+          {t:"All high-intensity intervals, skip easy work",ok:false,fb:"No - you'd miss the aerobic/mitochondrial base and bury yourself in fatigue."}]},
+       {stem:"The plan looks great but sleep is short this block. What gives?",
+        choices:[
+          {t:"Cut the hard-session volume first; protect sleep",ok:true,fb:"Right. Sleep is the binding constraint - under-recovered hard work just digs a hole. Reduce intensity volume before sacrificing sleep."},
+          {t:"Add caffeine and keep every hard session",ok:false,fb:"No - masking fatigue while under-sleeping raises illness/injury risk and stalls adaptation."},
+          {t:"Add a 7th hard day to make up progress",ok:false,fb:"No - more load with less recovery is the opposite of what an under-slept block needs."}]},
+       {stem:"What makes the strength work race-specific for Hyrox?",
+        choices:[
+          {t:"Sled push/pull, loaded carries, and lunges under fatigue",ok:true,fb:"Yes - specificity (SAID). Train the actual station patterns, and sometimes when already fatigued, to mirror the race."},
+          {t:"Max-effort bench press and biceps work",ok:false,fb:"No - low transfer to the Hyrox stations, which are lower-body push/carry dominant."},
+          {t:"Only machine circuits at low intensity",ok:false,fb:"No - too little specificity and intent to drive the strength the stations demand."}]}
+     ]},
+    {id:"novice", topic:"Beginner", title:"Brand-new lifter, off-season",
+     context:"A healthy but untrained adult, no lifting history, 3 days/week available, off-season with months before anything competitive. Goal: a durable foundation.",
+     steps:[
+       {stem:"What's the first training priority?",
+        choices:[
+          {t:"Movement quality + anatomical adaptation (technique, tendons, work capacity)",ok:true,fb:"Correct. Novices need motor learning and connective-tissue adaptation first; loading comes after the pattern is sound."},
+          {t:"Test a true 1RM on day one to set percentages",ok:false,fb:"No - maximal testing on an untrained, unskilled lifter is high-risk and the numbers won't be valid yet."},
+          {t:"Jump straight into a high-volume bodybuilding split",ok:false,fb:"No - excessive volume on a beginner just creates soreness; they progress on far less."}]},
+       {stem:"How do you progress load early on?",
+        choices:[
+          {t:"Small, frequent increases - novices adapt session to session",ok:true,fb:"Yes - linear progression works because beginners adapt quickly; add a little load as technique holds."},
+          {t:"Keep load fixed for 12 weeks to be safe",ok:false,fb:"No - without progressive overload there's no driving stimulus; they'll stall."},
+          {t:"Auto-regulate with advanced RPE/velocity from week 1",ok:false,fb:"Premature - beginners can't yet rate effort or grind reps reliably; keep it simple."}]}
+     ]},
+    {id:"rehab", topic:"Return", title:"Returning from a hamstring strain",
+     context:"An athlete is 4 weeks past a moderate hamstring strain, pain-free walking, cleared by medical for progressive loading. They want to sprint again.",
+     steps:[
+       {stem:"What governs the return-to-sprint progression?",
+        choices:[
+          {t:"Objective criteria - strength, ROM, control - not the calendar",ok:true,fb:"Right. Criteria-based progression (restored strength symmetry, full ROM, control, confidence) is safer than 'it's been X weeks.'"},
+          {t:"A fixed 6-week timeline regardless of testing",ok:false,fb:"No - calendars ignore the individual's actual tissue readiness and raise re-injury risk."},
+          {t:"Full-speed sprints now to test it",ok:false,fb:"No - max sprinting is the highest hamstring demand; you build to it, you don't test into it cold."}]},
+       {stem:"How is load reintroduced to the healing tissue?",
+        choices:[
+          {t:"Gradual, progressive loading along lines of stress",ok:true,fb:"Yes - controlled progressive load drives the remodeling phase so tissue heals aligned and strong."},
+          {t:"Complete rest until it feels 100%",ok:false,fb:"No - prolonged unloading weakens the tissue; healing tissue needs graded stimulus."},
+          {t:"Max eccentric hamstring loading immediately",ok:false,fb:"No - too much too soon risks re-tear; build the eccentric capacity progressively."}]}
+     ]}
+  ]
+};
+</script>
+<script>
+(function(){
+"use strict";
+var GD=window.GD, APP=document.getElementById('app'), SUB=document.getElementById('topsub');
+function $(s,r){return (r||document).querySelector(s);}
+function el(t,a,kids){var e=document.createElement(t);a=a||{};for(var k in a){var v=a[k];
+  if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k==='text')e.textContent=v;
+  else if(k.slice(0,2)==='on'&&typeof v==='function')e.addEventListener(k.slice(2),v);else if(v!=null)e.setAttribute(k,v);}
+  (kids||[]).forEach(function(c){if(c==null)return;e.appendChild(typeof c==='string'?document.createTextNode(c):c);});return e;}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function clear(){APP.innerHTML='';}
+function norm(s){return String(s).toLowerCase().replace(/[^a-z0-9]/g,'');}
+
+// light per-device progress, completely separate from cscs.state.v1 (FSRS)
+var PKEY='cscs.games.v1';
+function loadP(){try{return JSON.parse(localStorage.getItem(PKEY))||{best:{},plays:{}};}catch(e){return {best:{},plays:{}};}}
+function saveP(p){try{localStorage.setItem(PKEY,JSON.stringify(p));}catch(e){}}
+function record(gid,pct){var p=loadP();p.plays[gid]=(p.plays[gid]||0)+1;if(pct!=null){pct=Math.round(pct);if(p.best[gid]==null||pct>p.best[gid])p.best[gid]=pct;}saveP(p);}
+
+var GAMES=[
+ {id:'order',icon:'🔢',name:'Order the Steps',desc:'Drag the phases of a lift, pathway, or plan into the right sequence.',tags:['Sequencing'],ev:'Strong',start:gameOrder},
+ {id:'sort',icon:'🗂️',name:'Sort the Bins',desc:'Drop each item into the right category — fiber types, energy systems, exercise classes.',tags:['Categorize'],ev:'Strong',start:gameSort},
+ {id:'match',icon:'🔗',name:'Match-Up',desc:'Pair muscles to actions, hormones to effects, terms to definitions.',tags:['Paired recall'],ev:'Good',start:gameMatch},
+ {id:'recall',icon:'⚡',name:'Rapid Recall',desc:'Fast retrieval against a gentle clock. The testing effect, distilled.',tags:['Retrieval'],ev:'Very strong',start:gameRecall},
+ {id:'calc',icon:'🧮',name:'Calc Drills',desc:'1RM, %1RM loads, HR zones, work & power — worked example, then faded.',tags:['Applied math'],ev:'Strong',start:gameCalc},
+ {id:'coach',icon:'🧠',name:'Play the Coach',desc:'Branching program-design decisions with rubric feedback. The transfer format.',tags:['Decisions'],ev:'Best evidence',start:gameCoach}
+];
+
+function showHub(){
+  clear(); SUB.textContent='retrieval · sorting · decisions';
+  APP.appendChild(el('p',{class:'intro',html:'Pick a drill. Each one makes you <b>retrieve</b> or <b>decide</b> — the parts that actually build memory and transfer. Mix them up; your spaced-repetition lessons stay the backbone.'}));
+  var p=loadP();
+  var grid=el('div',{class:'grid'});
+  GAMES.forEach(function(g){
+    var best=p.best[g.id]; var plays=p.plays[g.id]||0;
+    var card=el('button',{class:'gcard','aria-label':g.name,onclick:function(){g.start();}},[
+      el('div',{class:'gicon',html:g.icon}),
+      el('h3',{text:g.name}),
+      el('p',{text:g.desc}),
+      el('div',{class:'gmeta'}, g.tags.map(function(t){return el('span',{class:'tag',text:t});}).concat([el('span',{class:'tag ev',text:'Evidence: '+g.ev})]))
+    ]);
+    if(best!=null) card.appendChild(el('div',{class:'gbest',text:'best '+best+'%'}));
+    grid.appendChild(card);
+  });
+  APP.appendChild(grid);
+}
+
+function gameShell(g, subtitle){
+  clear(); SUB.textContent=g.name;
+  var head=el('div',{class:'game-head'},[
+    el('button',{class:'btn ghost',onclick:showHub,html:'← Menu'}),
+    el('div',{},[el('div',{class:'game-title',text:g.name}), subtitle?el('div',{class:'game-sub',text:subtitle}):null])
+  ]);
+  APP.appendChild(head);
+  var body=el('div',{}); APP.appendChild(body); return body;
+}
+
+/* ---------- pointer-drag reorder (Order the Steps) ---------- */
+function enableReorder(list){
+  var dragging=null,ghost=null,offY=0;
+  list.addEventListener('pointerdown',function(e){
+    var item=e.target.closest('.dnd-item'); if(!item)return;
+    dragging=item; var r=item.getBoundingClientRect(); offY=e.clientY-r.top;
+    item.classList.add('dragging');
+    ghost=item.cloneNode(true); ghost.classList.add('ghost'); ghost.style.width=r.width+'px';
+    ghost.style.left=r.left+'px'; ghost.style.top=r.top+'px'; document.body.appendChild(ghost);
+    try{list.setPointerCapture(e.pointerId);}catch(x){}
+    window.addEventListener('pointermove',onMove); window.addEventListener('pointerup',onUp); e.preventDefault();
+  });
+  function onMove(e){
+    if(!ghost)return; ghost.style.top=(e.clientY-offY)+'px';
+    var its=Array.prototype.slice.call(list.querySelectorAll('.dnd-item')).filter(function(x){return x!==dragging;});
+    var placed=false;
+    for(var i=0;i<its.length;i++){var r=its[i].getBoundingClientRect(); if(e.clientY<r.top+r.height/2){list.insertBefore(dragging,its[i]);placed=true;break;}}
+    if(!placed)list.appendChild(dragging);
+  }
+  function onUp(){
+    window.removeEventListener('pointermove',onMove); window.removeEventListener('pointerup',onUp);
+    if(dragging)dragging.classList.remove('dragging'); if(ghost){ghost.remove();ghost=null;}
+    dragging=null;
+    Array.prototype.slice.call(list.querySelectorAll('.dnd-item .num')).forEach(function(n,i){n.textContent=i+1;});
+  }
+}
+
+/* ===================== ORDER THE STEPS ===================== */
+var orderState={};
+function gameOrder(){
+  var g=GAMES[0]; var body=gameShell(g,'Drag the cards into the correct order, then check.');
+  function load(seq){
+    body.innerHTML='';
+    var order=shuffle(seq.steps.map(function(s,i){return i;}));
+    // avoid an accidental already-correct shuffle for short lists
+    if(seq.steps.length>2 && order.every(function(v,i){return v===i;})) order=shuffle(order);
+    var panel=el('div',{class:'panel'});
+    panel.appendChild(el('div',{class:'scorebar'},[el('span',{html:'<b>'+seq.title+'</b>'}),el('span',{class:'tag',text:seq.topic})]));
+    var list=el('ul',{class:'dnd-list'});
+    order.forEach(function(idx,pos){
+      list.appendChild(el('li',{class:'dnd-item','data-i':idx},[
+        el('span',{class:'num',text:String(pos+1)}),
+        el('span',{class:'grip',html:'☰'}),
+        el('span',{text:seq.steps[idx]})]));
+    });
+    panel.appendChild(list); enableReorder(list);
+    var result=el('div',{class:'result'});
+    var actions=el('div',{class:'row-actions'},[
+      el('button',{class:'btn primary',text:'Check order',onclick:function(){
+        var items=Array.prototype.slice.call(list.querySelectorAll('.dnd-item'));
+        var correct=0; items.forEach(function(it,pos){var ok=(+it.getAttribute('data-i'))===pos;it.classList.toggle('correct',ok);it.classList.toggle('wrong',!ok);if(ok)correct++;});
+        var pct=Math.round(correct/items.length*100);
+        result.innerHTML=''; result.appendChild(el('span',{class:correct===items.length?'ok':(pct>=60?'warnc':'no'),html:(correct===items.length?'✓ Perfect — correct order!':correct+' of '+items.length+' in the right spot ('+pct+'%)')}));
+        record(g.id,pct);
+      }}),
+      el('button',{class:'btn',text:'Reveal',onclick:function(){
+        var items=Array.prototype.slice.call(list.querySelectorAll('.dnd-item'));
+        items.forEach(function(it){it.remove();});
+        seq.steps.forEach(function(s,i){list.appendChild(el('li',{class:'dnd-item correct','data-i':i},[el('span',{class:'num',text:String(i+1)}),el('span',{class:'grip',html:'☰'}),el('span',{text:s})]));});
+        result.innerHTML='<span class="muted">Correct order shown.</span>';
+      }}),
+      el('button',{class:'btn',text:'New ↻',onclick:function(){load(GD.sequences[Math.floor(Math.random()*GD.sequences.length)]);}})
+    ]);
+    panel.appendChild(result); panel.appendChild(actions); body.appendChild(panel);
+  }
+  load(GD.sequences[Math.floor(Math.random()*GD.sequences.length)]);
+}
+
+/* ===================== SORT THE BINS ===================== */
+function gameSort(){
+  var g=GAMES[1]; var body=gameShell(g,'Tap a card, then tap the bin it belongs in. (Tap a placed card to send it back.)');
+  function load(set){
+    body.innerHTML='';
+    var panel=el('div',{class:'panel'});
+    panel.appendChild(el('div',{class:'scorebar'},[el('span',{html:'<b>'+set.title+'</b>'}),el('span',{class:'tag',text:set.topic})]));
+    var sel={tok:null};
+    var pool=el('div',{class:'pool'});
+    var lookup={};
+    shuffle(set.items).forEach(function(pair){
+      var tok=el('div',{class:'token',text:pair[0]}); lookup[pair[0]]=pair[1];
+      tok.addEventListener('click',function(e){
+        e.stopPropagation();
+        if(tok.parentNode.classList.contains('binitems')){ pool.appendChild(tok); tok.classList.remove('correct','wrong'); return; }
+        if(sel.tok===tok){tok.classList.remove('sel');sel.tok=null;return;}
+        if(sel.tok)sel.tok.classList.remove('sel'); sel.tok=tok; tok.classList.add('sel');
+      });
+      pool.appendChild(tok);
+    });
+    var poolWrap=el('div',{},[el('div',{class:'muted',text:'Items'}),pool]);
+    panel.appendChild(poolWrap);
+    var bins=el('div',{class:'bins'});
+    set.bins.forEach(function(bn){
+      var items=el('div',{class:'binitems'});
+      var bin=el('div',{class:'bin'},[el('h4',{text:bn}),items]);
+      bin.addEventListener('click',function(){ if(sel.tok){items.appendChild(sel.tok);sel.tok.classList.remove('sel');sel.tok=null;} });
+      bins.appendChild(bin);
+    });
+    panel.appendChild(bins);
+    var result=el('div',{class:'result'});
+    var actions=el('div',{class:'row-actions'},[
+      el('button',{class:'btn primary',text:'Check',onclick:function(){
+        var placed=Array.prototype.slice.call(bins.querySelectorAll('.token')); var total=set.items.length, correct=0;
+        placed.forEach(function(tok){var binName=tok.closest('.bin').querySelector('h4').textContent; var ok=lookup[tok.textContent]===binName; tok.classList.toggle('correct',ok); tok.classList.toggle('wrong',!ok); if(ok)correct++;});
+        var unplaced=pool.querySelectorAll('.token').length;
+        var pct=Math.round(correct/total*100);
+        result.innerHTML='';
+        result.appendChild(el('span',{class:correct===total?'ok':(pct>=60?'warnc':'no'),html:(correct===total?'✓ All sorted correctly!':correct+' of '+total+' correct'+(unplaced?' ('+unplaced+' still unplaced)':'')+' — '+pct+'%')}));
+        record(g.id,pct);
+      }}),
+      el('button',{class:'btn',text:'Reveal',onclick:function(){
+        Array.prototype.slice.call(bins.querySelectorAll('.token')).forEach(function(t){pool.appendChild(t);t.classList.remove('correct','wrong','sel');});
+        set.bins.forEach(function(bn,bi){var binItems=bins.querySelectorAll('.binitems')[bi];set.items.forEach(function(pair){if(pair[1]===bn){var t=Array.prototype.slice.call(pool.querySelectorAll('.token')).filter(function(x){return x.textContent===pair[0];})[0];if(t){binItems.appendChild(t);t.classList.add('correct');}}});});
+        result.innerHTML='<span class="muted">Correct categories shown.</span>';
+      }}),
+      el('button',{class:'btn',text:'New ↻',onclick:function(){load(GD.sorts[Math.floor(Math.random()*GD.sorts.length)]);}})
+    ]);
+    panel.appendChild(result); panel.appendChild(actions); body.appendChild(panel);
+  }
+  load(GD.sorts[Math.floor(Math.random()*GD.sorts.length)]);
+}
+
+/* ===================== MATCH-UP ===================== */
+function gameMatch(){
+  var g=GAMES[2]; var body=gameShell(g,'Tap an item on the left, then its partner on the right.');
+  function load(set){
+    body.innerHTML='';
+    var panel=el('div',{class:'panel'});
+    panel.appendChild(el('div',{class:'scorebar'},[el('span',{html:'<b>'+set.title+'</b>'}),el('span',{class:'tag',text:set.topic}),el('span',{class:'prog'},[el('span',{})])]));
+    var prog=panel.querySelector('.prog>span');
+    var grid=el('div',{class:'match-grid'});
+    var leftCol=el('div',{class:'match-col'}), rightCol=el('div',{class:'match-col'});
+    var sel={left:null}; var done=0, tries=0, total=set.pairs.length;
+    set.pairs.forEach(function(pr,i){
+      var L=el('button',{class:'match-item','data-k':i,text:pr[0]});
+      L.addEventListener('click',function(){ if(L.classList.contains('done'))return; if(sel.left)sel.left.classList.remove('sel'); sel.left=L; L.classList.add('sel'); });
+      leftCol.appendChild(L);
+    });
+    shuffle(set.pairs.map(function(pr,i){return i;})).forEach(function(i){
+      var R=el('button',{class:'match-item','data-k':i,text:set.pairs[i][1]});
+      R.addEventListener('click',function(){
+        if(R.classList.contains('done'))return; if(!sel.left)return; tries++;
+        if(sel.left.getAttribute('data-k')===String(i)){
+          sel.left.classList.add('done'); sel.left.classList.remove('sel'); R.classList.add('done'); sel.left=null; done++;
+          prog.style.width=Math.round(done/total*100)+'%';
+          if(done===total){var acc=Math.round(total/tries*100); record(g.id,acc); finish(acc);}
+        } else { R.classList.add('flash-no'); var rr=R; setTimeout(function(){rr.classList.remove('flash-no');},320); }
+      });
+      rightCol.appendChild(R);
+    });
+    grid.appendChild(leftCol); grid.appendChild(rightCol); panel.appendChild(grid);
+    var result=el('div',{class:'result'}); panel.appendChild(result);
+    var actions=el('div',{class:'row-actions'},[el('button',{class:'btn',text:'New ↻',onclick:function(){load(GD.matches[Math.floor(Math.random()*GD.matches.length)]);}})]);
+    panel.appendChild(actions); body.appendChild(panel);
+    function finish(acc){ result.innerHTML=''; result.appendChild(el('span',{class:acc>=80?'ok':'warnc',html:'✓ All matched in '+tries+' taps — '+acc+'% efficiency'})); }
+  }
+  load(GD.matches[Math.floor(Math.random()*GD.matches.length)]);
+}
+
+/* ===================== RAPID RECALL ===================== */
+function gameRecall(){
+  var g=GAMES[3]; var body=gameShell(g,'Recall it, reveal, then grade yourself. Gentle clock — no penalty.');
+  var items=shuffle(GD.recall).slice(0,10), i=0, got=0;
+  function show(){
+    body.innerHTML='';
+    if(i>=items.length){ var pct=Math.round(got/items.length*100); record(g.id,pct);
+      body.appendChild(el('div',{class:'panel done-card'},[el('div',{class:'big',text:got+'/'+items.length}),el('div',{class:'lab',text:'recalled this round ('+pct+'%)'}),
+        el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Play again',onclick:gameRecall}),el('button',{class:'btn',text:'Menu',onclick:showHub})])]));
+      return; }
+    var it=items[i];
+    var panel=el('div',{class:'panel'});
+    panel.appendChild(el('div',{class:'scorebar'},[el('span',{html:'Q <b>'+(i+1)+'</b> / '+items.length}),el('span',{html:'recalled <b>'+got+'</b>'}),el('span',{class:'prog'},[el('span',{style:'width:'+Math.round(i/items.length*100)+'%'})]),el('span',{class:'muted',id:'clk'})]));
+    panel.appendChild(el('div',{class:'qtext',text:it.q}));
+    var ta=el('textarea',{class:'ans',placeholder:'Say or type your answer first…'}); panel.appendChild(ta);
+    var rev=el('div',{class:'reveal'},[el('div',{html:'<b>Answer.</b> '+it.a})]);
+    var revealed={v:false};
+    var grade=el('div',{class:'row-actions hidden'},[
+      el('button',{class:'btn primary',text:'✓ Got it',onclick:function(){got++;i++;show();}}),
+      el('button',{class:'btn',text:'✗ Missed',onclick:function(){i++;show();}})]);
+    var revBtn=el('button',{class:'btn primary',text:'Reveal answer',onclick:function(){revealed.v=true;rev.classList.add('show');grade.classList.remove('hidden');revBtn.classList.add('hidden');}});
+    panel.appendChild(el('div',{class:'row-actions'},[revBtn,el('button',{class:'btn',text:'Skip',onclick:function(){i++;show();}})]));
+    panel.appendChild(rev); panel.appendChild(grade); body.appendChild(panel);
+    // gentle 30s clock (visual only)
+    var t=30, clk=panel.querySelector('#clk');
+    var iv=setInterval(function(){ if(!document.body.contains(panel)){clearInterval(iv);return;} t--; clk.textContent=t>0?(t+'s'):'time — reveal when ready'; if(t<=0)clearInterval(iv); },1000);
+    clk.textContent='30s';
+  }
+  show();
+}
+
+/* ===================== CALC DRILLS ===================== */
+function gameCalc(){
+  var g=GAMES[4]; var body=gameShell(g,'Worked example first, then the formula fades. Answers within a small tolerance count.');
+  var items=shuffle(GD.calc), i=0, correct=0;
+  function show(){
+    body.innerHTML='';
+    if(i>=items.length){ var pct=Math.round(correct/items.length*100); record(g.id,pct);
+      body.appendChild(el('div',{class:'panel done-card'},[el('div',{class:'big',text:correct+'/'+items.length}),el('div',{class:'lab',text:'calculations correct ('+pct+'%)'}),
+        el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Play again',onclick:gameCalc}),el('button',{class:'btn',text:'Menu',onclick:showHub})])]));
+      return; }
+    var it=items[i]; var faded=i>=2;
+    var panel=el('div',{class:'panel'});
+    panel.appendChild(el('div',{class:'scorebar'},[el('span',{html:'<b>'+(i+1)+'</b> / '+items.length}),el('span',{class:'tag',text:it.topic}),el('span',{html:'correct <b>'+correct+'</b>'})]));
+    panel.appendChild(el('div',{class:'qtext',text:it.prompt}));
+    var formula=el('div',{class:'calc-formula',text:it.formula});
+    if(faded){ formula.classList.add('hidden');
+      panel.appendChild(el('button',{class:'btn ghost',text:'Show formula',onclick:function(e){formula.classList.toggle('hidden');e.target.textContent=formula.classList.contains('hidden')?'Show formula':'Hide formula';}})); }
+    panel.appendChild(formula);
+    var inp=el('input',{type:'text',inputmode:'decimal',placeholder:'answer'});
+    var row=el('div',{class:'calc-in'},[inp,el('span',{class:'unit',text:it.unit})]);
+    panel.appendChild(row);
+    var rev=el('div',{class:'reveal'});
+    var next=el('div',{class:'row-actions hidden'},[el('button',{class:'btn primary',text:'Next →',onclick:function(){i++;show();}})]);
+    function check(){
+      var v=parseFloat(String(inp.value).replace(/[, ]/g,'')); var ok=isFinite(v)&&Math.abs(v-it.answer)<=it.tol;
+      if(ok)correct++; inp.style.borderColor=ok?'var(--good)':'var(--bad)';
+      rev.classList.remove('show'); rev.classList.add('show'); rev.style.borderLeftColor=ok?'var(--good)':'var(--bad)';
+      rev.innerHTML='<b class="'+(ok?'ok':'no')+'">'+(ok?'✓ Correct':'✗ '+(isFinite(v)?'Not quite':'Enter a number'))+'</b> — answer: <b>'+it.answer+' '+it.unit+'</b><br><span class="muted">'+it.worked+'</span>';
+      next.classList.remove('hidden'); chkBtn.classList.add('hidden');
+    }
+    var chkBtn=el('button',{class:'btn primary',text:'Check',onclick:check});
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter'&&!next.classList.contains('hidden')===false){if(!chkBtn.classList.contains('hidden'))check();}});
+    panel.appendChild(el('div',{class:'row-actions'},[chkBtn]));
+    panel.appendChild(rev); panel.appendChild(next); body.appendChild(panel);
+    inp.focus();
+  }
+  show();
+}
+
+/* ===================== PLAY THE COACH ===================== */
+function gameCoach(){
+  var g=GAMES[5]; var body=gameShell(g,'Read the case, make the call, get the rationale. You are the strength coach.');
+  function menu(){
+    body.innerHTML='';
+    var panel=el('div',{class:'panel'});
+    panel.appendChild(el('p',{class:'intro',text:'Choose a case:'}));
+    var list=el('div',{class:'choices'});
+    GD.scenarios.forEach(function(sc){
+      list.appendChild(el('button',{class:'choice',onclick:function(){play(sc);}},[el('b',{text:sc.title}),el('div',{class:'muted',text:sc.topic})]));
+    });
+    panel.appendChild(list); body.appendChild(panel);
+  }
+  function play(sc){
+    var step=0, score=0;
+    function render(){
+      body.innerHTML='';
+      var panel=el('div',{class:'panel'});
+      panel.appendChild(el('div',{class:'scorebar'},[el('span',{html:'<b>'+sc.title+'</b>'}),el('span',{html:'decision <b>'+(step+1)+'</b> / '+sc.steps.length}),el('span',{class:'prog'},[el('span',{style:'width:'+Math.round(step/sc.steps.length*100)+'%'})])]));
+      if(step===0) panel.appendChild(el('div',{class:'scn-ctx',text:sc.context}));
+      if(step>=sc.steps.length){
+        var pct=Math.round(score/sc.steps.length*100); record(g.id,pct);
+        var grade=pct>=90?'Head coach':pct>=70?'Solid call':pct>=50?'Keep studying':'Review the principles';
+        panel.appendChild(el('div',{class:'done-card'},[el('div',{class:'big',text:score+'/'+sc.steps.length}),el('div',{class:'lab',text:'right calls — '+grade+' ('+pct+'%)'}),
+          el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Another case',onclick:menu}),el('button',{class:'btn',text:'Replay',onclick:function(){play(sc);}}),el('button',{class:'btn',text:'Menu',onclick:showHub})])]));
+        body.appendChild(panel); return;
+      }
+      var st=sc.steps[step];
+      panel.appendChild(el('div',{class:'scn-stem',text:st.stem}));
+      var choices=el('div',{class:'choices'});
+      var fb=el('div',{class:'fb'});
+      var nextRow=el('div',{class:'row-actions hidden'},[el('button',{class:'btn primary',text:(step+1<sc.steps.length?'Next decision →':'See result →'),onclick:function(){step++;render();}})]);
+      st.choices.forEach(function(ch){
+        var b=el('button',{class:'choice',text:ch.t,onclick:function(){
+          Array.prototype.slice.call(choices.children).forEach(function(c){c.classList.add('dim');c.disabled=true;});
+          b.classList.remove('dim'); b.classList.add(ch.ok?'pick-good':'pick-bad');
+          if(ch.ok)score++; else { // also highlight the correct one
+            Array.prototype.slice.call(choices.children).forEach(function(c,ci){if(st.choices[ci].ok){c.classList.remove('dim');c.classList.add('pick-good');}});
+          }
+          fb.className='fb show '+(ch.ok?'good':'bad'); fb.innerHTML='<b class="'+(ch.ok?'ok':'no')+'">'+(ch.ok?'✓ Good call.':'✗ Not the best call.')+'</b> '+ch.fb;
+          nextRow.classList.remove('hidden');
+        }}); choices.appendChild(b);
+      });
+      panel.appendChild(choices); panel.appendChild(fb); panel.appendChild(nextRow); body.appendChild(panel);
+    }
+    render();
+  }
+  menu();
+}
+
+window.addEventListener('error',function(){/* keep hub usable */});
+showHub();
+})();
+</script>
+</body>
+</html>

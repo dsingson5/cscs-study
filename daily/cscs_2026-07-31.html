@@ -731,6 +731,11 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* rebuild trigger 2026-06-06T06:08Z — front-rack elbow fix: clean catch/recover + press rack elbows up & forward */
 
 /* rebuild trigger 2026-06-07T06:35Z — sled-push animation for ex_alt_modes (June 2 / alternative modes) */
+
+/* Drills & Games entry link */
+.games-cta{text-align:center;margin:2px 0 16px}
+.games-cta a{display:inline-block;font-size:12px;font-weight:600;color:var(--accent,#5ec8ff);border:1px solid var(--border);background:var(--surface);padding:8px 18px;border-radius:999px;text-decoration:none;transition:border-color .15s,box-shadow .15s,transform .15s}
+.games-cta a:hover{border-color:var(--accent,#5ec8ff);box-shadow:0 0 14px rgba(94,200,255,.18);transform:translateY(-1px)}
 </style>
 <style>:root {
   --bg: #060a07;
@@ -796,6 +801,7 @@ body {
     <div class="session-goal">Today: <b id="goal-new">3</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
   <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day 69 &middot; July 31, 2026</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
+  <div class="games-cta"><a href="games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a></div>
   <div class="study-tip">
     <b>How to use this:</b> recall and type an answer <b>before</b> you reveal — the reveal stays locked until you commit.
     After the answer, grade yourself <b>Again / Hard / Good / Easy</b>; that grade schedules the card with
