@@ -8,6 +8,8 @@ widget into a lesson card.
 from __future__ import annotations
 
 import steppers
+import biomech
+import biomech3d
 
 
 def _wrap(widget_id: str, title: str, body: str, hint: str = "") -> str:
@@ -1021,4 +1023,11 @@ def render(topic_id: str) -> str:
     fn = WIDGETS.get(topic_id)
     if fn:
         parts.append(fn())
+    # --- biomech additions (interactive predict-then-check SVG + procedural 3D) ---
+    bm = biomech.render(topic_id)
+    if bm:
+        parts.append(bm)
+    bm3 = biomech3d.render(topic_id)
+    if bm3:
+        parts.append(bm3)
     return "\n".join(parts)
