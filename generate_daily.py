@@ -436,7 +436,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
     <div class="session-goal">Today: <b id="goal-new">{new_count}</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
   <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day {today_day} &middot; {date_str}</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
-  <div class="games-cta"><a href="games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a></div>
+  <div class="games-cta"><a href="../games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a></div>
   <div class="study-tip">
     <b>How to use this:</b> recall and type an answer <b>before</b> you reveal — the reveal stays locked until you commit.
     After the answer, grade yourself <b>Again / Hard / Good / Easy</b>; that grade schedules the card with
@@ -562,6 +562,9 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
         '<meta http-equiv="Pragma" content="no-cache">'
         '<meta http-equiv="Expires" content="0">'
     )
+    # Root landing page lives beside games.html, not inside daily/ — undo
+    # the daily-relative prefix for this one output.
+    base_html = base_html.replace('href="../games.html"', 'href="games.html"')
     return base_html.replace("<head>", "<head>\n" + CACHE_META + redirect, 1)
 
 
