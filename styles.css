@@ -730,3 +730,5 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .games-cta{text-align:center;margin:2px 0 16px}
 .games-cta a{display:inline-block;font-size:12px;font-weight:600;color:var(--accent,#5ec8ff);border:1px solid var(--border);background:var(--surface);padding:8px 18px;border-radius:999px;text-decoration:none;transition:border-color .15s,box-shadow .15s,transform .15s}
 .games-cta a:hover{border-color:var(--accent,#5ec8ff);box-shadow:0 0 14px rgba(94,200,255,.18);transform:translateY(-1px)}
+
+/* rebuild trigger 2026-06-13T09:09Z - games: show "done today" + last-played per game */

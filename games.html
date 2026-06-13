@@ -42,6 +42,11 @@ a{color:var(--accent);text-decoration:none}
 .tag{font-size:10px;letter-spacing:.03em;padding:3px 8px;border-radius:999px;background:var(--surface-3);color:var(--text-dim);border:1px solid var(--border)}
 .tag.ev{color:var(--good);border-color:#27543f}
 .gcard .gbest{position:absolute;top:14px;right:14px;font-size:11px;color:var(--text-dimmer)}
+.gcard .gwhen{margin-top:9px;font-size:11px;color:var(--text-dim);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.gcard .gwhen .never{color:var(--text-dimmer);font-style:italic}
+.today{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.02em;color:#04201a;background:var(--good);padding:2px 8px;border-radius:999px}
+.game-sub.when-line{margin-top:4px}
+.game-sub.when-line .today{vertical-align:middle}
 
 /* in-game shell */
 .game-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
@@ -449,7 +454,9 @@ function norm(s){return String(s).toLowerCase().replace(/[^a-z0-9]/g,'');}
 var PKEY='cscs.games.v1';
 function loadP(){try{return JSON.parse(localStorage.getItem(PKEY))||{best:{},plays:{}};}catch(e){return {best:{},plays:{}};}}
 function saveP(p){try{localStorage.setItem(PKEY,JSON.stringify(p));}catch(e){}}
-function record(gid,pct){var p=loadP();p.plays[gid]=(p.plays[gid]||0)+1;if(pct!=null){pct=Math.round(pct);if(p.best[gid]==null||pct>p.best[gid])p.best[gid]=pct;}saveP(p);}
+function record(gid,pct){var p=loadP();p.plays[gid]=(p.plays[gid]||0)+1;p.last=p.last||{};p.last[gid]=new Date().toISOString();if(pct!=null){pct=Math.round(pct);p.best=p.best||{};if(p.best[gid]==null||pct>p.best[gid])p.best[gid]=pct;}saveP(p);}
+function gManilaDay(d){try{var p=new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Manila',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(d||new Date());var o={};p.forEach(function(x){o[x.type]=x.value;});return o.year+'-'+o.month+'-'+o.day;}catch(e){return null;}}
+function gFmtWhen(iso){if(!iso)return null;var d=new Date(iso);if(isNaN(d.getTime()))return null;try{var dt=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Manila',year:'numeric',month:'short',day:'numeric'}).format(d);var tm=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Manila',hour:'numeric',minute:'2-digit'}).format(d);return {date:dt,time:tm,today:gManilaDay(d)===gManilaDay(new Date())};}catch(e){return {date:String(iso),time:'',today:false};}}
 
 var GAMES=[
  {id:'order',icon:'🔢',name:'Order the Steps',desc:'Drag the phases of a lift, pathway, or plan into the right sequence.',tags:['Sequencing'],ev:'Strong',start:gameOrder},
@@ -466,7 +473,7 @@ function showHub(){
   var p=loadP();
   var grid=el('div',{class:'grid'});
   GAMES.forEach(function(g){
-    var best=p.best[g.id]; var plays=p.plays[g.id]||0;
+    var best=p.best[g.id]; var plays=p.plays[g.id]||0; var when=gFmtWhen((p.last||{})[g.id]);
     var card=el('button',{class:'gcard','aria-label':g.name,onclick:function(){g.start();}},[
       el('div',{class:'gicon',html:g.icon}),
       el('h3',{text:g.name}),
@@ -474,6 +481,10 @@ function showHub(){
       el('div',{class:'gmeta'}, g.tags.map(function(t){return el('span',{class:'tag',text:t});}).concat([el('span',{class:'tag ev',text:'Evidence: '+g.ev})]))
     ]);
     if(best!=null) card.appendChild(el('div',{class:'gbest',text:'best '+best+'%'}));
+    var whenEl=el('div',{class:'gwhen'});
+    if(when){ if(when.today){ whenEl.appendChild(el('span',{class:'today',html:'&#10003; Done today'})); whenEl.appendChild(el('span',{class:'gwhen-t',text:' · last at '+when.time})); } else { whenEl.appendChild(el('span',{class:'gwhen-t',text:'Last played '+when.date+' at '+when.time})); } }
+    else { whenEl.appendChild(el('span',{class:'gwhen-t never',text:'Not played yet'})); }
+    card.appendChild(whenEl);
     grid.appendChild(card);
   });
   APP.appendChild(grid);
@@ -483,7 +494,7 @@ function gameShell(g, subtitle){
   clear(); SUB.textContent=g.name;
   var head=el('div',{class:'game-head'},[
     el('button',{class:'btn ghost',onclick:showHub,html:'← Menu'}),
-    el('div',{},[el('div',{class:'game-title',text:g.name}), subtitle?el('div',{class:'game-sub',text:subtitle}):null])
+    el('div',{},[el('div',{class:'game-title',text:g.name}), subtitle?el('div',{class:'game-sub',text:subtitle}):null, (function(){var w=gFmtWhen((loadP().last||{})[g.id]); if(!w)return null; return el('div',{class:'game-sub when-line',html:(w.today?'<span class="today">&#10003; Done today</span> &middot; last at '+w.time:'Last played '+w.date+' at '+w.time)});})()])
   ]);
   APP.appendChild(head);
   var body=el('div',{}); APP.appendChild(body); return body;
