@@ -208,7 +208,7 @@ def render_q_card(topic_id, orig_idx, q, qid, domain, label="Q", pretest=False):
         f'<div class="{cls}" data-qid="{qid}" data-stable="{esc(stable)}" data-domain="{domain}" data-qtype="{qtype}">'
         f'<div class="q-head"><span class="q-num">{label}</span><span class="q-type {qtype}">{qtype}</span>'
         f'<span class="q-domain">{esc(dom_name)}</span>'
-        f'<span class="q-status" data-status-for="{qid}"></span><span class="q-last" data-last-for="{qid}" data-stable="{esc(stable)}"></span></div>'
+        f'<span class="q-status" data-status-for="{qid}"></span><span class="q-last" data-last-for="{qid}" data-stable="{esc(stable)}"></span><span class="q-next" data-stable="{esc(stable)}"></span></div>'
         f'<div class="q-text">{esc(q["q"])}</div>'
         f'<textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea>'
         f'<button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button>'

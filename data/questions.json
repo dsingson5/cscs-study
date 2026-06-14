@@ -486,7 +486,7 @@
   ],
   "ex_deadlift": [
     {
-      "q": "Compare conventional vs sumo deadlift in terms of joint demand.",
+      "q": "Compare conventional vs sumo deadlift in terms of trunk angle and muscle demand.",
       "a": "Conventional: greater low-back shear, more posterior chain (hamstrings, glutes). Sumo: more vertical torso, less low-back shear, more adductor and quad demand.",
       "type": "recall"
     },

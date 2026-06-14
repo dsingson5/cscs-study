@@ -358,11 +358,16 @@ function rateQ(qid, grade) {
   const nextDays = Math.max(0, Math.round((new Date(r.card.due) - new Date()) / 86400000));
   const note = root.querySelector(".rate-result");
   if (note) {
-    note.textContent = grade === 1
-      ? "Back in ~10 min. That's the point — forgetting is where the learning happens."
-      : "Next review in " + (nextDays < 1 ? "today" : nextDays + " day" + (nextDays === 1 ? "" : "s")) + ".";
+    var __due = r.card.due;
+    note.innerHTML = (grade === 1
+      ? "Back in ~10 min - forgetting is where the learning happens. "
+      : "Next review " + relDueLong(__due) + " &middot; " + fmtDueAbs(__due) + ". ")
+      + '<button type="button" class="cd-open">&#9201; Countdown</button>';
+    var __b = note.querySelector(".cd-open");
+    if (__b) __b.addEventListener("click", function(){ openCountdown(__due); });
     note.classList.add("shown");
   }
+  refreshNextReviewFor(stable);
   root.classList.add("rated");
   updateHeaderStats();
   renderDashboard();
@@ -443,7 +448,7 @@ function questionCardHTML(d, qid, opts) {
     '<span class="q-type ' + qtype + '">' + qtype + '</span>' +
     '<span class="q-domain">' + (DOMAIN_NAME[d.domain] || d.domain) + '</span>' +
     '<span class="pr-meta">' + meta + '</span>' +
-    '<span class="q-status" data-status-for="' + qid + '"></span>' + '<span class="q-last" data-last-for="' + qid + '" data-stable="' + escapeHtml(d.stable) + '"></span></div>' +
+    '<span class="q-status" data-status-for="' + qid + '"></span>' + '<span class="q-last" data-last-for="' + qid + '" data-stable="' + escapeHtml(d.stable) + '"></span><span class="q-next" data-stable="' + escapeHtml(d.stable) + '"></span></div>' +
     '<div class="q-text">' + escapeHtml(d.q.q) + '</div>' +
     '<textarea class="q-answer" placeholder="Recall and type your answer first…" oninput="onAnswerInput(event)"></textarea>' +
     '<button type="button" class="mic-btn" aria-pressed="false" title="Answer by voice" onclick="toggleDictation(this)"><svg class="mic-ico" viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V6a3 3 0 1 0-6 0v5a3 3 0 0 0 3 3z"></path><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg><span class="mic-lbl">Speak</span></button>' +
@@ -751,12 +756,53 @@ function toggleDictation(btn) {
   try { rec.start(); } catch (e) { saStopMic(); }
 }
 
+/* -- Next-review countdown: show when a graded card returns, with a live modal -- */
+function fmtDueAbs(iso){try{var d=new Date(iso);var dt=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Manila',year:'numeric',month:'short',day:'numeric'}).format(d);var tm=new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Manila',hour:'numeric',minute:'2-digit'}).format(d);return dt+' at '+tm;}catch(e){return '';}}
+function fmtCountdown(ms){if(ms<=0)return 'available now';var s=Math.floor(ms/1000);var d=Math.floor(s/86400);s-=d*86400;var h=Math.floor(s/3600);s-=h*3600;var m=Math.floor(s/60);s-=m*60;function p(n){return (n<10?'0':'')+n;}if(d>0)return d+'d '+p(h)+'h '+p(m)+'m '+p(s)+'s';if(h>0)return p(h)+'h '+p(m)+'m '+p(s)+'s';return p(m)+'m '+p(s)+'s';}
+function relDueLong(iso){var ms=new Date(iso)-new Date();if(ms<=0)return 'now';var days=Math.round(ms/86400000);if(days<1){var h=Math.round(ms/3600000);return h<1?'in <1h':'in ~'+h+'h';}return 'in '+days+' day'+(days===1?'':'s');}
+function relDueShort(ms){if(ms<=0)return 'now';var days=Math.floor(ms/86400000);if(days>=1)return days+'d';var h=Math.floor(ms/3600000);if(h>=1)return h+'h';var m=Math.max(1,Math.floor(ms/60000));return m+'m';}
+var __cdTimer=null;
+function cdEsc(e){if(e.key==='Escape')closeCountdown();}
+function closeCountdown(){if(__cdTimer){clearInterval(__cdTimer);__cdTimer=null;}var ov=document.getElementById('cd-modal');if(ov&&ov.parentNode)ov.parentNode.removeChild(ov);document.removeEventListener('keydown',cdEsc);}
+function openCountdown(iso){
+  closeCountdown();
+  var due=new Date(iso);if(isNaN(due.getTime()))return;
+  var ov=document.createElement('div');ov.id='cd-modal';ov.className='cd-overlay';
+  ov.innerHTML='<div class="cd-card" role="dialog" aria-modal="true" aria-label="Next review countdown">'
+    +'<button class="cd-x" type="button" aria-label="Close">&times;</button>'
+    +'<div class="cd-lab">This card returns in</div>'
+    +'<div class="cd-time" id="cd-time">--</div>'
+    +'<div class="cd-abs">'+fmtDueAbs(iso)+' (Manila)</div>'
+    +'<div class="cd-note">Spaced repetition sets the gap from how well you knew it. Letting it fade a little before review is what makes the memory stick.</div>'
+    +'</div>';
+  document.body.appendChild(ov);
+  ov.addEventListener('click',function(e){if(e.target===ov)closeCountdown();});
+  ov.querySelector('.cd-x').addEventListener('click',closeCountdown);
+  function tick(){var t=document.getElementById('cd-time');if(!t){closeCountdown();return;}var ms=due-new Date();t.textContent=fmtCountdown(ms);t.classList.toggle('cd-now',ms<=0);}
+  tick();__cdTimer=setInterval(tick,1000);
+  document.addEventListener('keydown',cdEsc);
+}
+function nextDueFor(stable){var s=getState();var c=s&&s.cards&&s.cards[stable];if(!c||!c.due)return null;return c.due;}
+function fillNext(elm){
+  var stable=elm.dataset.stable;var iso=nextDueFor(stable);
+  if(!iso){elm.textContent='';elm.style.display='none';return;}
+  elm.style.display='';var ms=new Date(iso)-new Date();
+  var lab=ms<=0?'due now':'next in '+relDueShort(ms);
+  elm.innerHTML='';
+  var b=document.createElement('button');b.type='button';b.className='q-next-btn';b.title='See when this card returns';b.innerHTML='&#9201; '+lab;
+  b.addEventListener('click',function(){openCountdown(iso);});
+  elm.appendChild(b);
+}
+function hydrateNextReview(){var list=document.querySelectorAll('.q-next[data-stable]');for(var i=0;i<list.length;i++)fillNext(list[i]);}
+function refreshNextReviewFor(stable){var sel='.q-next[data-stable="'+(window.CSS&&CSS.escape?CSS.escape(stable):stable)+'"]';var list=document.querySelectorAll(sel);for(var i=0;i<list.length;i++)fillNext(list[i]);}
+
 function bootRender() {
   if (!speechSupported()) { try { document.documentElement.classList.add("no-speech"); } catch (e) {} }
   updateHeaderStats();
   renderDashboard();
   buildReviewQueue();
   hydrateLastAnswered();
+  hydrateNextReview();
   hydrateLessonNav();
 }
 
