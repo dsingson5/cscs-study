@@ -754,6 +754,34 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .cd-time.cd-now{background:none;color:var(--good)}
 .cd-abs{font-size:12px;color:var(--text-dim)}
 .cd-note{font-size:11px;color:var(--text-dimmer);line-height:1.5;margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+
+.session-summary.is-clickable .stat{cursor:pointer;border-radius:8px;transition:background .15s,transform .15s}
+.session-summary.is-clickable .stat:hover{background:rgba(94,200,255,.07);transform:translateY(-1px)}
+.session-summary.is-clickable .stat:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sched-open{display:block;width:100%;margin:-16px 0 26px;padding:9px 14px;font:inherit;font-size:12px;color:var(--accent);background:linear-gradient(135deg,rgba(94,200,255,.06),transparent);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.sched-open:hover{border-color:var(--accent);box-shadow:0 0 12px rgba(94,200,255,.15)}
+.sch-overlay{position:fixed;inset:0;z-index:9998;display:flex;align-items:center;justify-content:center;background:rgba(5,8,14,.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);animation:cdIn .18s ease}
+.sch-card{position:relative;display:flex;flex-direction:column;max-width:520px;width:92%;max-height:84vh;background:var(--surface,#161b26);border:1px solid var(--border);border-radius:16px;padding:22px 20px 16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.sch-x{position:absolute;top:8px;right:12px;background:transparent;border:none;color:var(--text-dim);font-size:24px;line-height:1;cursor:pointer}
+.sch-x:hover{color:var(--text)}
+.sch-title{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.sch-subtitle{font-size:12px;color:var(--text-dim);margin:2px 0 12px}
+.sch-scroll{overflow-y:auto;-webkit-overflow-scrolling:touch;margin:0 -6px;padding:0 6px}
+.sch-hero{text-align:center;background:rgba(94,200,255,.06);border:1px solid var(--border);border-radius:12px;padding:14px 12px;margin-bottom:6px}
+.sch-hero-lab{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-dim)}
+.sch-hero-time{font-size:28px;font-weight:800;font-variant-numeric:tabular-nums;margin:4px 0;background:linear-gradient(90deg,var(--accent,#5ec8ff),var(--accent-2,#c08fff));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sch-hero-time.sch-now{background:none;color:var(--good)}
+.sch-hero-q{font-size:12px;color:var(--text-dim);line-height:1.4}
+.sch-sec{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-dimmer);font-weight:700;margin:14px 4px 6px}
+.sch-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--bg-2,#0f1419);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:6px;cursor:pointer;font:inherit;transition:border-color .15s,transform .15s}
+.sch-row:hover{border-color:var(--accent);transform:translateX(2px)}
+.sch-q{flex:1;font-size:13px;color:var(--text);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sch-meta{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+.sch-badge{font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--accent);white-space:nowrap}
+.sch-badge.now{color:var(--good)}
+.sch-abs{font-size:10px;color:var(--text-dimmer);white-space:nowrap}
+.sch-empty{font-size:13px;color:var(--text-dim);text-align:center;padding:28px 12px;line-height:1.5}
+.sch-foot{font-size:11px;color:var(--text-dimmer);line-height:1.5;margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
 </style>
 <style>:root {
   --bg: #060a07;
@@ -834,12 +862,13 @@ body {
     </div>
   </div>
   <div id="cscs-dashboard"></div>
-  <div class="session-summary">
+  <div class="session-summary" id="session-summary">
     <div class="stat"><b>0</b>new lessons</div>
     <div class="stat"><b>0</b>spaced reviews</div>
     <div class="stat"><b>3</b>questions</div>
     <div class="stat"><b id="self-score">0</b>passed today</div>
   </div>
+  <button type="button" class="sched-open">&#9201; View full review schedule &mdash; what&rsquo;s coming back &amp; when</button>
   <div id="personal-reviews"></div>
   
   <section class="lesson-card reveal" data-domain="PD" style="--accent: #c08fff; --accent-2: #d8b8ff; --glow: rgba(192, 143, 255, 0.18);"><div class="lesson-head"><span class="badge badge-review">Deep Review</span><span class="domain-chip" style="background: rgba(192, 143, 255, 0.18); color: #c08fff; border-color: #c08fff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M14 7h7v7"/></svg>Program Design &amp; Testing</span><span class="domain">Beyond the text · intervals · Seiler &amp; Tønnessen 2009; Buchheit &amp; Laursen 2013</span></div><h2>HIIT &amp; interval prescription (long intervals, supra-MLSS)</h2><p class="concept">High-intensity intervals manipulate work duration, intensity, recovery duration and recovery intensity to target a system. For raising threshold/VO₂max, longer reps (4-8 min) at supra-MLSS with short recoveries accumulate the most time near VO₂max while staying repeatable. The first rep should feel almost too easy — pacing is the skill. Recovery is set to keep the SERIES on target, not to fully recover. The aim of threshold/VO₂max intervals is supra-MLSS metabolic stress, not all-out efforts that fail early.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Variables: work duration, work intensity, recovery duration, recovery intensity</li><li>Long reps (4-8 min) supra-MLSS maximize time near VO₂max</li><li>Rep 1 should feel too easy — even pacing beats heroic fades</li><li>Recovery keeps the SERIES on target, not full recovery</li><li>Threshold/VO₂max work is controlled supra-MLSS, not all-out sprints</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#ff7a7a' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg></div><div class="gloss-text"><div class="gloss-term">Supra-MLSS</div><div class="gloss-def">Intensity above maximal lactate steady state — lactate accumulates, forcing adaptation. The target of long intervals.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#5ec8ff'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#ff7a7a'/></svg></div><div class="gloss-text"><div class="gloss-term">Work:rest ratio</div><div class="gloss-def">Ratio of effort to recovery duration; for long aerobic intervals recovery only partially restores between reps.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='14' cy='20' r='6' fill='#67e8b0'/><circle cx='38' cy='20' r='6' fill='#67e8b0'/><circle cx='62' cy='20' r='6' fill='#67e8b0'/></svg></div><div class="gloss-text"><div class="gloss-term">Time near VO₂max</div><div class="gloss-def">Total minutes spent close to maximal oxygen uptake — the key dose for VO₂max intervals.</div></div></div></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your data shows 4×8 chronically under-paced (HR 146-151 vs ~170 target) while 6-min and 7-min reps are your sweet spots — so you anchor on 6×5 + 7×4. Target the 4×8 at HR 170-175 mean, lactate 7-10 mmol, 2-min recoveries, supra-MLSS.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=bxEaAbcO64s" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Stephen Seiler — Polarized Training 101</div><div class="m-cred">Fast Talk Labs · Seiler PhD</div></div></a><a class="media-link audio" href="https://www.youtube.com/watch?v=Ju3McjlSoAg" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Most of Your Training Should Be EASY — Dr. Stephen Seiler</div><div class="m-cred">Floris Gierman + Seiler</div></div></a></div></section>
@@ -1662,6 +1691,86 @@ function fillNext(elm){
 function hydrateNextReview(){var list=document.querySelectorAll('.q-next[data-stable]');for(var i=0;i<list.length;i++)fillNext(list[i]);}
 function refreshNextReviewFor(stable){var sel='.q-next[data-stable="'+(window.CSS&&CSS.escape?CSS.escape(stable):stable)+'"]';var list=document.querySelectorAll(sel);for(var i=0;i<list.length;i++)fillNext(list[i]);}
 
+
+/* -- Full review schedule: every scheduled card, soonest-due first -- */
+function __cscsQMap(){return (window.__CSCS_QUESTIONS)||{};}
+function qMetaForStable(stable){
+  var parts=String(stable).split("__");var idx=parts.pop();var topic=parts.join("__");
+  var qm=__cscsQMap();var arr=qm[topic];var item=arr&&arr[+idx];
+  var pretty=topic.replace(/_/g," ").replace(/\b\w/g,function(c){return c.toUpperCase();});
+  return {q:(item&&item.q)?item.q:(pretty+" · Q"+((+idx)+1)),topic:pretty};
+}
+function collectSchedule(){
+  var s=getState();var cards=(s&&s.cards)||{};var now=Date.now();var out=[];
+  for(var k in cards){if(!Object.prototype.hasOwnProperty.call(cards,k))continue;
+    var c=cards[k];if(!c||!c.due)continue;var t=new Date(c.due).getTime();if(isNaN(t))continue;
+    var m=qMetaForStable(k);out.push({stable:k,iso:c.due,ms:t-now,t:t,q:m.q,topic:m.topic});}
+  out.sort(function(a,b){return a.t-b.t;});return out;
+}
+var __schTimer=null;
+function schEsc(e){if(e.key==='Escape'){if(document.getElementById('cd-modal'))return;closeSchedule();}}
+function closeSchedule(){if(__schTimer){clearInterval(__schTimer);__schTimer=null;}var ov=document.getElementById('sch-modal');if(ov&&ov.parentNode)ov.parentNode.removeChild(ov);document.removeEventListener('keydown',schEsc);}
+function schRowHTML(it){
+  var soon=it.ms<=0;
+  var badge=soon?'<span class="sch-badge now">due now</span>':'<span class="sch-badge">in '+relDueShort(it.ms)+'</span>';
+  var abs=soon?'available now':fmtDueAbs(it.iso);
+  return '<button type="button" class="sch-row" data-iso="'+escapeHtml(it.iso)+'">'
+    +'<span class="sch-q">'+escapeHtml(it.q)+'</span>'
+    +'<span class="sch-meta">'+badge+'<span class="sch-abs">'+escapeHtml(abs)+'</span></span>'
+    +'</button>';
+}
+function openSchedule(){
+  closeSchedule();
+  var list=collectSchedule();var up=[],dueNow=[];
+  for(var i=0;i<list.length;i++){(list[i].ms<=0?dueNow:up).push(list[i]);}
+  var body='';
+  if(!list.length){
+    body='<div class="sch-empty">No reviews scheduled yet. Grade a few questions and they’ll line up here, soonest first.</div>';
+  }else{
+    if(up.length){
+      var hero=up[0];
+      body+='<div class="sch-hero"><div class="sch-hero-lab">Next card returns in</div>'
+        +'<div class="sch-hero-time" id="sch-hero-time" data-iso="'+escapeHtml(hero.iso)+'">--</div>'
+        +'<div class="sch-hero-q">'+escapeHtml(hero.q)+'</div></div>';
+      body+='<div class="sch-sec">Coming up · '+up.length+'</div>';
+      for(var u=0;u<up.length;u++)body+=schRowHTML(up[u]);
+    }
+    if(dueNow.length){
+      body+='<div class="sch-sec">Due now · '+dueNow.length+'</div>';
+      for(var n=0;n<dueNow.length;n++)body+=schRowHTML(dueNow[n]);
+    }
+  }
+  var sub=list.length?(list.length+' card'+(list.length===1?'':'s')+' tracked · soonest first'):'Nothing tracked yet';
+  var ov=document.createElement('div');ov.id='sch-modal';ov.className='sch-overlay';
+  ov.innerHTML='<div class="sch-card" role="dialog" aria-modal="true" aria-label="Review schedule">'
+    +'<button class="sch-x" type="button" aria-label="Close">&times;</button>'
+    +'<div class="sch-title">Review schedule</div>'
+    +'<div class="sch-subtitle">'+sub+'</div>'
+    +'<div class="sch-scroll">'+body+'</div>'
+    +'<div class="sch-foot">Gaps widen as recall gets stronger — letting a memory fade a little before you see it again is what locks it in.</div>'
+    +'</div>';
+  document.body.appendChild(ov);
+  ov.addEventListener('click',function(e){if(e.target===ov)closeSchedule();});
+  ov.querySelector('.sch-x').addEventListener('click',closeSchedule);
+  var rows=ov.querySelectorAll('.sch-row');
+  for(var r=0;r<rows.length;r++){rows[r].addEventListener('click',function(){var iso=this.getAttribute('data-iso');if(iso)openCountdown(iso);});}
+  function tick(){var h=document.getElementById('sch-hero-time');if(!h)return;var ms=new Date(h.getAttribute('data-iso'))-new Date();h.textContent=fmtCountdown(ms);h.classList.toggle('sch-now',ms<=0);}
+  tick();__schTimer=setInterval(tick,1000);
+  document.addEventListener('keydown',schEsc);
+}
+function wireScheduleOpeners(){
+  var box=document.querySelector('.session-summary');
+  if(box){box.classList.add('is-clickable');
+    var stats=box.querySelectorAll('.stat');
+    for(var i=0;i<stats.length;i++){(function(st){
+      st.setAttribute('role','button');st.setAttribute('tabindex','0');st.title='See your full review schedule';
+      st.addEventListener('click',openSchedule);
+      st.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openSchedule();}});
+    })(stats[i]);}}
+  var btn=document.querySelector('.sched-open');
+  if(btn)btn.addEventListener('click',openSchedule);
+}
+
 function bootRender() {
   if (!speechSupported()) { try { document.documentElement.classList.add("no-speech"); } catch (e) {} }
   updateHeaderStats();
@@ -1669,6 +1778,7 @@ function bootRender() {
   buildReviewQueue();
   hydrateLastAnswered();
   hydrateNextReview();
+  wireScheduleOpeners();
   hydrateLessonNav();
 }
 

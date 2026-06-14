@@ -796,6 +796,86 @@ function fillNext(elm){
 function hydrateNextReview(){var list=document.querySelectorAll('.q-next[data-stable]');for(var i=0;i<list.length;i++)fillNext(list[i]);}
 function refreshNextReviewFor(stable){var sel='.q-next[data-stable="'+(window.CSS&&CSS.escape?CSS.escape(stable):stable)+'"]';var list=document.querySelectorAll(sel);for(var i=0;i<list.length;i++)fillNext(list[i]);}
 
+
+/* -- Full review schedule: every scheduled card, soonest-due first -- */
+function __cscsQMap(){return (window.__CSCS_QUESTIONS)||{};}
+function qMetaForStable(stable){
+  var parts=String(stable).split("__");var idx=parts.pop();var topic=parts.join("__");
+  var qm=__cscsQMap();var arr=qm[topic];var item=arr&&arr[+idx];
+  var pretty=topic.replace(/_/g," ").replace(/\b\w/g,function(c){return c.toUpperCase();});
+  return {q:(item&&item.q)?item.q:(pretty+" · Q"+((+idx)+1)),topic:pretty};
+}
+function collectSchedule(){
+  var s=getState();var cards=(s&&s.cards)||{};var now=Date.now();var out=[];
+  for(var k in cards){if(!Object.prototype.hasOwnProperty.call(cards,k))continue;
+    var c=cards[k];if(!c||!c.due)continue;var t=new Date(c.due).getTime();if(isNaN(t))continue;
+    var m=qMetaForStable(k);out.push({stable:k,iso:c.due,ms:t-now,t:t,q:m.q,topic:m.topic});}
+  out.sort(function(a,b){return a.t-b.t;});return out;
+}
+var __schTimer=null;
+function schEsc(e){if(e.key==='Escape'){if(document.getElementById('cd-modal'))return;closeSchedule();}}
+function closeSchedule(){if(__schTimer){clearInterval(__schTimer);__schTimer=null;}var ov=document.getElementById('sch-modal');if(ov&&ov.parentNode)ov.parentNode.removeChild(ov);document.removeEventListener('keydown',schEsc);}
+function schRowHTML(it){
+  var soon=it.ms<=0;
+  var badge=soon?'<span class="sch-badge now">due now</span>':'<span class="sch-badge">in '+relDueShort(it.ms)+'</span>';
+  var abs=soon?'available now':fmtDueAbs(it.iso);
+  return '<button type="button" class="sch-row" data-iso="'+escapeHtml(it.iso)+'">'
+    +'<span class="sch-q">'+escapeHtml(it.q)+'</span>'
+    +'<span class="sch-meta">'+badge+'<span class="sch-abs">'+escapeHtml(abs)+'</span></span>'
+    +'</button>';
+}
+function openSchedule(){
+  closeSchedule();
+  var list=collectSchedule();var up=[],dueNow=[];
+  for(var i=0;i<list.length;i++){(list[i].ms<=0?dueNow:up).push(list[i]);}
+  var body='';
+  if(!list.length){
+    body='<div class="sch-empty">No reviews scheduled yet. Grade a few questions and they’ll line up here, soonest first.</div>';
+  }else{
+    if(up.length){
+      var hero=up[0];
+      body+='<div class="sch-hero"><div class="sch-hero-lab">Next card returns in</div>'
+        +'<div class="sch-hero-time" id="sch-hero-time" data-iso="'+escapeHtml(hero.iso)+'">--</div>'
+        +'<div class="sch-hero-q">'+escapeHtml(hero.q)+'</div></div>';
+      body+='<div class="sch-sec">Coming up · '+up.length+'</div>';
+      for(var u=0;u<up.length;u++)body+=schRowHTML(up[u]);
+    }
+    if(dueNow.length){
+      body+='<div class="sch-sec">Due now · '+dueNow.length+'</div>';
+      for(var n=0;n<dueNow.length;n++)body+=schRowHTML(dueNow[n]);
+    }
+  }
+  var sub=list.length?(list.length+' card'+(list.length===1?'':'s')+' tracked · soonest first'):'Nothing tracked yet';
+  var ov=document.createElement('div');ov.id='sch-modal';ov.className='sch-overlay';
+  ov.innerHTML='<div class="sch-card" role="dialog" aria-modal="true" aria-label="Review schedule">'
+    +'<button class="sch-x" type="button" aria-label="Close">&times;</button>'
+    +'<div class="sch-title">Review schedule</div>'
+    +'<div class="sch-subtitle">'+sub+'</div>'
+    +'<div class="sch-scroll">'+body+'</div>'
+    +'<div class="sch-foot">Gaps widen as recall gets stronger — letting a memory fade a little before you see it again is what locks it in.</div>'
+    +'</div>';
+  document.body.appendChild(ov);
+  ov.addEventListener('click',function(e){if(e.target===ov)closeSchedule();});
+  ov.querySelector('.sch-x').addEventListener('click',closeSchedule);
+  var rows=ov.querySelectorAll('.sch-row');
+  for(var r=0;r<rows.length;r++){rows[r].addEventListener('click',function(){var iso=this.getAttribute('data-iso');if(iso)openCountdown(iso);});}
+  function tick(){var h=document.getElementById('sch-hero-time');if(!h)return;var ms=new Date(h.getAttribute('data-iso'))-new Date();h.textContent=fmtCountdown(ms);h.classList.toggle('sch-now',ms<=0);}
+  tick();__schTimer=setInterval(tick,1000);
+  document.addEventListener('keydown',schEsc);
+}
+function wireScheduleOpeners(){
+  var box=document.querySelector('.session-summary');
+  if(box){box.classList.add('is-clickable');
+    var stats=box.querySelectorAll('.stat');
+    for(var i=0;i<stats.length;i++){(function(st){
+      st.setAttribute('role','button');st.setAttribute('tabindex','0');st.title='See your full review schedule';
+      st.addEventListener('click',openSchedule);
+      st.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openSchedule();}});
+    })(stats[i]);}}
+  var btn=document.querySelector('.sched-open');
+  if(btn)btn.addEventListener('click',openSchedule);
+}
+
 function bootRender() {
   if (!speechSupported()) { try { document.documentElement.classList.add("no-speech"); } catch (e) {} }
   updateHeaderStats();
@@ -803,6 +883,7 @@ function bootRender() {
   buildReviewQueue();
   hydrateLastAnswered();
   hydrateNextReview();
+  wireScheduleOpeners();
   hydrateLessonNav();
 }
 

@@ -451,12 +451,13 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
     </div>
   </div>
   <div id="cscs-dashboard"></div>
-  <div class="session-summary">
+  <div class="session-summary" id="session-summary">
     <div class="stat"><b>{1 if not deep_review else 0}</b>new lesson{"s" if deep_review else ""}</div>
     <div class="stat"><b>{len(reviews)}</b>spaced reviews</div>
     <div class="stat"><b>{new_count}</b>questions</div>
     <div class="stat"><b id="self-score">0</b>passed today</div>
   </div>
+  <button type="button" class="sched-open">&#9201; View full review schedule &mdash; what&rsquo;s coming back &amp; when</button>
   <div id="personal-reviews"></div>
   {pretest_html}
   {today_card}
