@@ -383,7 +383,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
         others = [t for t in questions if t not in present]
         rng = random.Random(today_day * 13)
         rng.shuffle(others)
-        for ot in others[:2]:
+        for ot in others[:0]:  # off-lesson cross-domain draws disabled: keep the daily set = today's lesson + due reviews
             ot_qs = sample_questions(ot, questions, 1, today_day * 17 + hash(ot) % 100)
             if ot_qs:
                 oi, q = ot_qs[0]

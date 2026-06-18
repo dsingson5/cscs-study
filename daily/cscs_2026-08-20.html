@@ -782,6 +782,16 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .sch-abs{font-size:10px;color:var(--text-dimmer);white-space:nowrap}
 .sch-empty{font-size:13px;color:var(--text-dim);text-align:center;padding:28px 12px;line-height:1.5}
 .sch-foot{font-size:11px;color:var(--text-dimmer);line-height:1.5;margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+
+.q-deferred{display:none}
+.question-block.show-deferred .q-deferred,.pretest-section.show-deferred .q-deferred{display:block}
+.defer-note{display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;background:linear-gradient(135deg,rgba(94,200,255,.06),transparent);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:10px;padding:11px 14px;margin:0 0 14px;font-size:12.5px;color:var(--text-dim);line-height:1.5}
+.defer-note.all-done{border-left-color:var(--good)}
+.defer-note .dn-txt{flex:1;min-width:200px}
+.defer-note b{color:var(--text);font-weight:700}
+.defer-note .dn-link{color:var(--accent);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.defer-note .dn-toggle{flex-shrink:0;font:inherit;font-size:11px;color:var(--accent);background:transparent;border:1px solid var(--border);border-radius:999px;padding:4px 12px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.defer-note .dn-toggle:hover{border-color:var(--accent);box-shadow:0 0 8px rgba(94,200,255,.18)}
 </style>
 <style>:root {
   --bg: #f0eaeb;
@@ -1855,6 +1865,66 @@ function wireScheduleOpeners(){
   if(btn)btn.addEventListener('click',openSchedule);
 }
 
+
+/* -- Daily load discipline: require only what's NEW or actually DUE today.
+   The static pretest/practice sections are stamped by day-number and don't
+   know your FSRS state, so they re-show cards you already cleared (now
+   scheduled far out) every visit. Reviewing a card before it's due is massed
+   practice; the spacing is what makes it stick. So we collapse anything that
+   is scheduled for later (already learned) and keep new + genuinely-due. A
+   card is only "not due" because you graded it before, and day-completion
+   counts a card as done once it's ever been graded -- so hiding these never
+   traps the day. -- */
+function gateStaticPractice(){
+  var st=getState();var cards=(st&&st.cards)||{};var now=Date.now();
+  var sections=document.querySelectorAll('.pretest-section, .question-block');
+  var totalVisible=0;
+  for(var s=0;s<sections.length;s++){
+    var sec=sections[s];
+    var qcards=sec.querySelectorAll('.q[data-stable]');
+    var deferred=0, visible=0;
+    for(var i=0;i<qcards.length;i++){
+      var q=qcards[i];
+      if(q.classList.contains('rated')){visible++;continue;} // answered this session: keep w/ its result
+      var c=cards[q.getAttribute('data-stable')];
+      var notDue=!!(c&&c.due&&new Date(c.due).getTime()>now);
+      if(notDue){q.classList.add('q-deferred');deferred++;}
+      else{q.classList.remove('q-deferred');visible++;}
+    }
+    totalVisible+=visible;
+    addDeferNote(sec, deferred, visible);
+  }
+  try{
+    var stats=document.querySelectorAll('.session-summary .stat');
+    for(var k=0;k<stats.length;k++){
+      var b=stats[k].querySelector('b');
+      if(b&&!b.id&&/questions/i.test(stats[k].textContent)){b.textContent=totalVisible;}
+    }
+  }catch(e){}
+}
+function addDeferNote(sec, deferred, visible){
+  var old=sec.querySelector('.defer-note');if(old&&old.parentNode)old.parentNode.removeChild(old);
+  sec.classList.remove('show-deferred');
+  if(deferred<=0)return;
+  var qs=sec.querySelector('.qs');if(!qs)return;
+  var allDone=visible===0;
+  var plural=deferred===1?'':'s';
+  var msg=allDone
+    ? '<b>Caught up here.</b> '+deferred+' card'+plural+' scheduled for later — hidden so you’re not re-answering early. The spacing is the method working.'
+    : '<b>'+visible+'</b> to do now · <b>'+deferred+'</b> scheduled for later, hidden — you already know '+(deferred===1?'it':'them')+' well enough that today would be too soon.';
+  var note=document.createElement('div');note.className='defer-note'+(allDone?' all-done':'');
+  note.innerHTML='<span class="dn-txt">'+msg+' <span class="dn-link">Review schedule</span> has the return dates.</span>'
+    +'<button type="button" class="dn-toggle">Show '+deferred+' hidden</button>';
+  qs.parentNode.insertBefore(note, qs);
+  var btn=note.querySelector('.dn-toggle');
+  btn.addEventListener('click',function(){
+    var on=sec.classList.toggle('show-deferred');
+    btn.textContent=on?('Hide '+deferred+' scheduled'):('Show '+deferred+' hidden');
+  });
+  var lnk=note.querySelector('.dn-link');
+  if(lnk&&typeof openSchedule==='function'){lnk.style.cursor='pointer';lnk.addEventListener('click',function(){openSchedule();});}
+}
+
 function bootRender() {
   if (!speechSupported()) { try { document.documentElement.classList.add("no-speech"); } catch (e) {} }
   updateHeaderStats();
@@ -1863,6 +1933,7 @@ function bootRender() {
   hydrateLastAnswered();
   hydrateNextReview();
   wireScheduleOpeners();
+  gateStaticPractice();
   hydrateLessonNav();
 }
 
