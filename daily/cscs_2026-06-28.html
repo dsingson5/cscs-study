@@ -1420,8 +1420,8 @@ if (!window.SAEngine) {
   <div class="w-hint">Hips and knees move together; the bar stays stacked over mid-foot the whole way.</div>
 </div>
 
-<div class="widget bm-w" id="fb11598"><div class="w-head"><span class="w-icon">📐</span><span class="w-title">Free-body diagram — where does the load line fall?</span></div><div class="w-body">
-<svg viewBox="0 0 360 240" class="w-svg" id="fb11598-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:250px">
+<div class="widget bm-w" id="fb14683"><div class="w-head"><span class="w-icon">📐</span><span class="w-title">Free-body diagram — where does the load line fall?</span></div><div class="w-body">
+<svg viewBox="0 0 360 240" class="w-svg" id="fb14683-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:250px">
   <!-- floor -->
   <line x1="20" y1="210" x2="340" y2="210" stroke="var(--text-dim,#9ba3b4)" stroke-width="2"/>
   <!-- foot -->
@@ -1433,56 +1433,56 @@ if (!window.SAEngine) {
   <text x="180" y="200" fill="var(--good,#67e8b0)" font-size="9" text-anchor="middle">midfoot</text>
   <!-- stick lifter: ankle(180,210) knee hip shoulder + bar -->
   <g stroke="var(--accent,#5ec8ff)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <polyline id="fb11598-leg" points="180,210 150,160 178,120 172,70"/>
+    <polyline id="fb14683-leg" points="180,210 150,160 178,120 172,70"/>
   </g>
-  <circle id="fb11598-knee" cx="150" cy="160" r="4" fill="var(--accent,#5ec8ff)"/>
-  <circle id="fb11598-hip" cx="178" cy="120" r="4" fill="var(--accent,#5ec8ff)"/>
+  <circle id="fb14683-knee" cx="150" cy="160" r="4" fill="var(--accent,#5ec8ff)"/>
+  <circle id="fb14683-hip" cx="178" cy="120" r="4" fill="var(--accent,#5ec8ff)"/>
   <!-- barbell on the back / over a point -->
-  <circle id="fb11598-bar" cx="180" cy="78" r="8" fill="var(--warn,#ffb86b)"/>
-  <text id="fb11598-barlbl" x="196" y="74" fill="var(--warn,#ffb86b)" font-size="9">bar</text>
+  <circle id="fb14683-bar" cx="180" cy="78" r="8" fill="var(--warn,#ffb86b)"/>
+  <text id="fb14683-barlbl" x="196" y="74" fill="var(--warn,#ffb86b)" font-size="9">bar</text>
   <!-- GRF / load vertical line -->
-  <line id="fb11598-grf" x1="180" y1="210" x2="180" y2="60" stroke="var(--bad,#ff7a7a)" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <line id="fb14683-grf" x1="180" y1="210" x2="180" y2="60" stroke="var(--bad,#ff7a7a)" stroke-width="1.5" stroke-dasharray="5 4"/>
   <text x="270" y="120" fill="var(--bad,#ff7a7a)" font-size="9" text-anchor="middle">load line</text>
   <text x="270" y="133" fill="var(--bad,#ff7a7a)" font-size="9" text-anchor="middle">(stays vertical)</text>
 </svg>
 <style>
-#fb11598 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
-#fb11598 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
-#fb11598 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
+#fb14683 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
+#fb14683 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+#fb14683 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
   padding:9px 12px;border-radius:9px;border:1px solid var(--border-2,#2d3548);
   background:var(--surface-2,rgba(255,255,255,.03));color:var(--text);
   transition:border-color .15s,background .15s,transform .1s;line-height:1.35}
-#fb11598 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
-#fb11598 .bm-opt:disabled{cursor:default}
-#fb11598 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
-#fb11598 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
-#fb11598 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
-#fb11598 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
+#fb14683 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
+#fb14683 .bm-opt:disabled{cursor:default}
+#fb14683 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
+#fb14683 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
+#fb14683 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
+#fb14683 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
   background:rgba(94,200,255,.07);border-left:3px solid var(--accent);font-size:12.5px;
   color:var(--text-dim,#9ba3b4);line-height:1.5}
-#fb11598 .bm-reveal.show{display:block;animation:bmfade .35s ease}
-#fb11598 .bm-reveal b{color:var(--text)}
-#fb11598 .bm-reveal .bm-why{color:var(--warn)}
-#fb11598 .bm-controls{margin-top:10px}
-#fb11598 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
-#fb11598 .bm-controls label b{color:var(--text)}
-#fb11598 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
+#fb14683 .bm-reveal.show{display:block;animation:bmfade .35s ease}
+#fb14683 .bm-reveal b{color:var(--text)}
+#fb14683 .bm-reveal .bm-why{color:var(--warn)}
+#fb14683 .bm-controls{margin-top:10px}
+#fb14683 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
+#fb14683 .bm-controls label b{color:var(--text)}
+#fb14683 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
   background:var(--surface-3,#2d3548);border-radius:999px;outline:none;cursor:pointer;margin-top:4px}
-#fb11598 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
+#fb14683 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
   border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent)}
-#fb11598 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
+#fb14683 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
   background:var(--accent);border:none;cursor:pointer}
-#fb11598 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
-#fb11598 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
+#fb14683 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
+#fb14683 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
   border:1px solid var(--border-2,#2d3548);background:transparent;color:var(--text-dim,#9ba3b4)}
-#fb11598 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
-#fb11598 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
-#fb11598 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
+#fb14683 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
+#fb14683 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
+#fb14683 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
 @keyframes bmfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 </style>
 <div class="bm-q">Side view of a squat. For the most efficient, balanced lift, the barbell should stay vertically aligned over which point of the foot?</div><div class="bm-opts"><button class="bm-opt" data-correct="0"><span class="bm-tag">A</span>The toes / ball of the foot</button><button class="bm-opt" data-correct="1"><span class="bm-tag">B</span>The midfoot</button><button class="bm-opt" data-correct="0"><span class="bm-tag">C</span>The heel</button></div><div class="bm-reveal"><b>Over the midfoot.</b> Gravity on the bar acts in a straight vertical line. If that line falls through the midfoot, the whole system is balanced and the knee- and hip-extensor moment arms (horizontal distance from each joint to the line) stay moderate. <span class='bm-why'>Why it matters:</span> let the bar drift toward the toes and the <b>knee</b> moment arm balloons — quad torque demand spikes and you fight to stay balanced. Toggle the buttons to see the load line and joint distances shift. Same rule governs the deadlift (bar over midfoot, against the shins) and your sled drive (keep the resultant force line efficient).</div>
 <script>(function(){
-  var root=document.getElementById("fb11598");if(!root)return;
+  var root=document.getElementById("fb14683");if(!root)return;
   var opts=root.querySelectorAll(".bm-opt");
   var rev=root.querySelector(".bm-reveal");
   var answered=false;
@@ -1496,20 +1496,20 @@ if (!window.SAEngine) {
       if(b.getAttribute("data-correct")!=="1")b.classList.add("is-wrong");
       if(rev)rev.classList.add("show");
       var hook=root.querySelector("[data-after-answer]");
-      if(hook&&window["fb11598after"])window["fb11598after"]();
+      if(hook&&window["fb14683after"])window["fb14683after"]();
     });
   });
 })();</script>
-<div class="bm-toggle" data-after-answer><button class="bm-tbtn active" id="fb11598-good">Bar over midfoot</button><button class="bm-tbtn" id="fb11598-drift">Bar drifts forward</button></div><div class="bm-read" id="fb11598-msg">Balanced: the load line falls through the midfoot — knee &amp; hip moment arms stay modest and sharable.</div>
+<div class="bm-toggle" data-after-answer><button class="bm-tbtn active" id="fb14683-good">Bar over midfoot</button><button class="bm-tbtn" id="fb14683-drift">Bar drifts forward</button></div><div class="bm-read" id="fb14683-msg">Balanced: the load line falls through the midfoot — knee &amp; hip moment arms stay modest and sharable.</div>
 <script>(function(){
-  var root=document.getElementById("fb11598");if(!root)return;
-  var grf=root.querySelector("#fb11598-grf"),
-      bar=root.querySelector("#fb11598-bar"),
-      barlbl=root.querySelector("#fb11598-barlbl"),
-      msg=root.querySelector("#fb11598-msg"),
-      gb=root.querySelector("#fb11598-good"),
-      db=root.querySelector("#fb11598-drift"),
-      leg=root.querySelector("#fb11598-leg");
+  var root=document.getElementById("fb14683");if(!root)return;
+  var grf=root.querySelector("#fb14683-grf"),
+      bar=root.querySelector("#fb14683-bar"),
+      barlbl=root.querySelector("#fb14683-barlbl"),
+      msg=root.querySelector("#fb14683-msg"),
+      gb=root.querySelector("#fb14683-good"),
+      db=root.querySelector("#fb14683-drift"),
+      leg=root.querySelector("#fb14683-leg");
   function set(mode){
     if(mode==="good"){
       gb.classList.add("active");db.classList.remove("active");
@@ -1530,7 +1530,7 @@ if (!window.SAEngine) {
   gb.addEventListener("click",function(){set("good");});
   db.addEventListener("click",function(){set("drift");});
 })();</script></div></div>
-<div class="widget bm-w" id="bp28763"><div class="w-head"><span class="w-icon">🏋️</span><span class="w-title">Bar-path tracer — pick the efficient path</span></div><div class="w-body">
+<div class="widget bm-w" id="bp21782"><div class="w-head"><span class="w-icon">🏋️</span><span class="w-title">Bar-path tracer — pick the efficient path</span></div><div class="w-body">
 <svg viewBox="0 0 360 220" class="w-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:230px">
   <line x1="40" y1="200" x2="320" y2="200" stroke="var(--text-dim,#9ba3b4)" stroke-width="2"/>
   <text x="180" y="216" fill="var(--text-dim,#9ba3b4)" font-size="9" text-anchor="middle">midfoot reference (dotted = ideal vertical path)</text>
@@ -1548,43 +1548,43 @@ if (!window.SAEngine) {
   <text x="300" y="132" fill="var(--bad,#ff7a7a)" font-size="9" text-anchor="middle">horizontal</text>
 </svg>
 <style>
-#bp28763 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
-#bp28763 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
-#bp28763 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
+#bp21782 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
+#bp21782 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+#bp21782 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
   padding:9px 12px;border-radius:9px;border:1px solid var(--border-2,#2d3548);
   background:var(--surface-2,rgba(255,255,255,.03));color:var(--text);
   transition:border-color .15s,background .15s,transform .1s;line-height:1.35}
-#bp28763 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
-#bp28763 .bm-opt:disabled{cursor:default}
-#bp28763 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
-#bp28763 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
-#bp28763 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
-#bp28763 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
+#bp21782 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
+#bp21782 .bm-opt:disabled{cursor:default}
+#bp21782 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
+#bp21782 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
+#bp21782 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
+#bp21782 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
   background:rgba(94,200,255,.07);border-left:3px solid var(--accent);font-size:12.5px;
   color:var(--text-dim,#9ba3b4);line-height:1.5}
-#bp28763 .bm-reveal.show{display:block;animation:bmfade .35s ease}
-#bp28763 .bm-reveal b{color:var(--text)}
-#bp28763 .bm-reveal .bm-why{color:var(--warn)}
-#bp28763 .bm-controls{margin-top:10px}
-#bp28763 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
-#bp28763 .bm-controls label b{color:var(--text)}
-#bp28763 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
+#bp21782 .bm-reveal.show{display:block;animation:bmfade .35s ease}
+#bp21782 .bm-reveal b{color:var(--text)}
+#bp21782 .bm-reveal .bm-why{color:var(--warn)}
+#bp21782 .bm-controls{margin-top:10px}
+#bp21782 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
+#bp21782 .bm-controls label b{color:var(--text)}
+#bp21782 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
   background:var(--surface-3,#2d3548);border-radius:999px;outline:none;cursor:pointer;margin-top:4px}
-#bp28763 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
+#bp21782 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
   border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent)}
-#bp28763 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
+#bp21782 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
   background:var(--accent);border:none;cursor:pointer}
-#bp28763 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
-#bp28763 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
+#bp21782 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
+#bp21782 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
   border:1px solid var(--border-2,#2d3548);background:transparent;color:var(--text-dim,#9ba3b4)}
-#bp28763 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
-#bp28763 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
-#bp28763 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
+#bp21782 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
+#bp21782 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
+#bp21782 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
 @keyframes bmfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 </style>
 <div class="bm-q">Two bar paths from the floor to lockout. <b>Which one is more mechanically efficient?</b></div><div class="bm-opts"><button class="bm-opt" data-correct="1"><span class="bm-tag">A</span>Path A — the straight vertical line over the midfoot</button><button class="bm-opt" data-correct="0"><span class="bm-tag">B</span>Path B — the forward-looping curve</button><button class="bm-opt" data-correct="0"><span class="bm-tag">C</span>Both cost the same; only the weight matters</button></div><div class="bm-reveal"><b>Path A (the straight vertical line).</b> The most mechanically efficient bar path is as close to vertical over the midfoot as the lift allows. <span class='bm-why'>Why it matters:</span> every centimetre the bar travels horizontally is work that doesn't raise the load and that lengthens a joint moment arm — more torque demand, more energy cost, more chance of missing the lift. Path B's forward loop wastes horizontal travel and spikes joint torque mid-pull. (In the deadlift the bar still tracks the shins; “vertical” means over the midfoot, not literally grazing a plumb line.)</div>
 <script>(function(){
-  var root=document.getElementById("bp28763");if(!root)return;
+  var root=document.getElementById("bp21782");if(!root)return;
   var opts=root.querySelectorAll(".bm-opt");
   var rev=root.querySelector(".bm-reveal");
   var answered=false;
@@ -1598,7 +1598,7 @@ if (!window.SAEngine) {
       if(b.getAttribute("data-correct")!=="1")b.classList.add("is-wrong");
       if(rev)rev.classList.add("show");
       var hook=root.querySelector("[data-after-answer]");
-      if(hook&&window["bp28763after"])window["bp28763after"]();
+      if(hook&&window["bp21782after"])window["bp21782after"]();
     });
   });
 })();</script>
