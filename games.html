@@ -30,6 +30,14 @@ a{color:var(--accent);text-decoration:none}
 
 /* hub grid */
 .intro{font-size:13px;color:var(--text-dim);line-height:1.55;margin:0 0 18px;max-width:680px}
+.todayfocus{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 18px;padding:12px 16px;background:linear-gradient(135deg,rgba(94,200,255,.10),rgba(192,143,255,.08));border:1px solid var(--border-2);border-radius:12px;max-width:680px}
+.todayfocus .tlabel{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.todayfocus .ttitle{font-size:14px;color:var(--text);font-weight:600}
+.todayfocus .tday{font-size:11px;color:var(--text-dimmer)}
+.todayfocus .trec{display:flex;flex-wrap:wrap;gap:8px;width:100%;margin-top:2px}
+.todayfocus .trec button{font:600 12px/1 inherit;color:var(--text);background:var(--surface-2);border:1px solid var(--border);border-radius:999px;padding:7px 12px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.todayfocus .trec button:hover{border-color:var(--accent);color:var(--accent)}
+.todayfocus .trec .tnote{font-size:11px;color:var(--text-dimmer);align-self:center}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .gcard{position:relative;text-align:left;cursor:pointer;background:var(--surface);
   border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:14px;padding:16px 16px 14px;
@@ -240,6 +248,15 @@ window.GD = {
       "Set training frequency",
       "Order the exercises",
       "Set load & volume, then rest periods"]}
+  ,
+    { id:"onerm_test", topic:"Testing", days:[36], title:"1RM test protocol",
+      steps:[ "General + specific warm-up", "Warm-up set ~5 reps at ~50% estimated 1RM", "2-3 reps at ~80%, 2-4 min rest", "Increase load; attempt a single, 2-4 min rest", "Add small load and re-attempt (spotters ready)", "Record the heaviest full-ROM single (within 3-5 attempts)" ] },
+    { id:"sprint", topic:"Speed", days:[38], title:"Sprint phases (0 to top speed)",
+      steps:[ "Acceleration - big forward lean, long powerful pushes", "Transition - posture rises, stride lengthens", "Maximum velocity - tall, cyclic, vertical force", "Maintenance - hold form as fatigue creeps in" ] },
+    { id:"rts_ladder", topic:"Rehab", days:[39], title:"Return-to-sport loading ladder",
+      steps:[ "Isometric loading (pain-free holds)", "Isotonic - controlled concentric/eccentric", "Isokinetic / heavier dynamic", "SSC & plyometric (don't rush this stage)", "Sport-specific drills at speed", "Return to sport - criteria met, not calendar" ] },
+    { id:"facility_flow", topic:"Facility", days:[40], title:"Weight-room traffic flow",
+      steps:[ "Stretching / warm-up area", "Free-weight area (platforms, racks)", "Resistance machines", "Aerobic / conditioning area" ] }
   ],
 
   // ───────── Sort-the-Bins (categorize / taxonomy) ─────────
@@ -267,6 +284,16 @@ window.GD = {
       ["Maximal strength gains","Endurance can blunt this"],["Hypertrophy with high endurance volume","Endurance can blunt this"],
       ["Power / RFD with heavy fatigue","Endurance can blunt this"],["Aerobic adaptations from strength work","Less interference"],
       ["Z2 mitochondrial work","Less interference"]]}
+  ,
+    { id:"intensity_zones", topic:"Endurance", days:[43,44], title:"Training intensity zones",
+      bins:["Below LT1 (easy)","LT1-LT2 (grey/threshold)","Above LT2 (hard)"],
+      items:[ ["Conversational, all-day pace","Below LT1 (easy)"], ["~2 mmol/L lactate, base of Zone 2","Below LT1 (easy)"], ["Comfortably-hard tempo, sweet spot","LT1-LT2 (grey/threshold)"], ["~4 mmol/L, MLSS / ~1-hr pace","LT1-LT2 (grey/threshold)"], ["VO2max intervals, 3-5 min hard","Above LT2 (hard)"], ["The zone polarized training AVOIDS overusing","LT1-LT2 (grey/threshold)"], ["Where ~80% of polarized sessions live","Below LT1 (easy)"] ] },
+    { id:"test_measures", topic:"Testing", days:[36,37], title:"What does the test measure?",
+      bins:["Anaerobic power/capacity","Aerobic capacity","Body composition"],
+      items:[ ["Wingate 30-s cycle","Anaerobic power/capacity"], ["Margaria-Kalamen stair sprint","Anaerobic power/capacity"], ["300-yard shuttle","Anaerobic power/capacity"], ["12-min Cooper run","Aerobic capacity"], ["Multistage beep test","Aerobic capacity"], ["Jackson-Pollock skinfolds","Body composition"], ["BodPod / DEXA","Body composition"] ] },
+    { id:"interference", topic:"Hybrid", days:[46], title:"Concurrent training: interference?",
+      bins:["Blunts strength gains","Little/no interference"],
+      items:[ ["High-volume threshold running before lifting","Blunts strength gains"], ["Hard intervals same session as heavy squats","Blunts strength gains"], ["Heavy lifting's effect on aerobic gains","Little/no interference"], ["Easy Zone-2 volume on separate days","Little/no interference"], ["AMPK strongly up-regulated near lifting","Blunts strength gains"], ["Separating modes by 6+ hours","Little/no interference"] ] }
   ],
 
   // ───────── Match-Up (paired associates) ─────────
@@ -285,6 +312,13 @@ window.GD = {
       ["Yo-Yo / beep test","Aerobic capacity"],["Pro-agility (5-10-5)","Change of direction"],["Sit-and-reach","Flexibility"]]},
     {id:"fuel", topic:"Bioenergetics", title:"System -> fuel & timing", pairs:[
       ["Phosphagen","Stored ATP-PCr, ~0-10 s"],["Fast glycolysis","Glucose -> lactate, ~10 s-2 min"],["Oxidative","Carbs & fat + O2, sustained"]]}
+  ,
+    { id:"field_tests", topic:"Testing", days:[36,37,38], title:"Field test -> what it measures", pairs:[
+      ["Vertical jump (Sargent)","Lower-body power"], ["Wingate","Anaerobic power & capacity"], ["1.5-mile / Cooper","Aerobic capacity (VO2max)"], ["Pro-agility / T-test","Change-of-direction speed"], ["Margaria-Kalamen","Anaerobic power (stairs)"], ["300-yard shuttle","Anaerobic capacity"] ] },
+    { id:"threshold_terms", topic:"Endurance", days:[43,44,45,46], title:"Endurance term -> meaning", pairs:[
+      ["LT1","First lactate rise; top of easy Zone 2"], ["LT2 / MLSS","Highest steady-state lactate; ~1-hr pace"], ["VO2max","Max rate of oxygen use"], ["PGC-1a","Master switch for mitochondrial biogenesis"], ["mTOR","Drives muscle protein synthesis"], ["AMPK","Energy-sensor favoring endurance adaptation"] ] },
+    { id:"facility_specs", topic:"Facility", days:[40], title:"Facility spec -> value", pairs:[
+      ["Space per athlete","~100 sq ft"], ["Ceiling height for Olympic lifts","12+ ft"], ["Lighting","50-100 foot-candles"], ["Walkway width","~36 in"], ["Mirror clearance above floor","~20 in"] ] }
   ],
 
   // ───────── Rapid Recall (timed retrieval) ─────────
@@ -319,6 +353,21 @@ window.GD = {
     {q:"What does the size of a motor unit's neuron tell you?",a:"Larger neuron = higher threshold = recruited later, innervates Type II fibers."},
     {q:"Epley 1RM estimate formula?",a:"1RM = weight x (1 + reps/30)."},
     {q:"Why is the deadlift bar kept over mid-foot?",a:"Keeps the moment arm short - minimizes low-back shear and keeps balance."}
+  ,
+    {q:"Return-to-sport: calendar date or criteria?",a:"Criteria - pain-free ROM, >=90% limb symmetry, psychological readiness, sport-specific testing. Time heals tissue but doesn't confirm readiness."},
+    {q:"The three tissue-healing phases in order?",a:"Inflammation (0-6 d) -> proliferation/repair (3 d-3 wk) -> remodeling (3 wk-1 yr+)."},
+    {q:"Which SSC/plyo mistake ends rehab early?",a:"Rushing into fast stretch-shortening work before eccentric capacity is rebuilt - a common re-injury trigger."},
+    {q:"Polarized training is defined by what unit?",a:"Session COUNT, not minutes - roughly 80% of sessions easy (below LT1), ~20% hard (above LT2)."},
+    {q:"What is the polarized 'grey zone'?",a:"The moderate LT1-LT2 band that over-eager athletes overuse - hard enough to fatigue, not easy enough to recover, not hard enough to peak VO2max."},
+    {q:"LT1 vs LT2 lactate heuristics?",a:"LT1 ~2 mmol/L (aerobic threshold, top of easy); LT2 ~4 mmol/L (MLSS, sustainable ~30-60 min)."},
+    {q:"Why anchor zones to measured thresholds, not %HRmax?",a:"Threshold HR varies widely between people and drifts with fitness, heat and fatigue - generic %HRmax tables misplace the zones."},
+    {q:"What does Zone 2 maximally stimulate, and why?",a:"Mitochondrial biogenesis & fat oxidation in Type I fibers - repeated Z2 volume up-regulates PGC-1a, capillaries and MCT1 lactate-clearance transporters."},
+    {q:"The molecular basis of the interference effect?",a:"Endurance activates AMPK (favoring mitochondria); resistance activates mTOR (favoring hypertrophy). High endurance load can blunt mTOR - so strength suffers, not aerobic."},
+    {q:"Is the interference effect symmetric?",a:"No - heavy resistance training does NOT meaningfully impair aerobic adaptation; the blunting runs endurance -> strength."},
+    {q:"Four elements a negligence claim needs?",a:"Duty, breach of duty, causation, and damages - all four."},
+    {q:"What is a facility EAP?",a:"Emergency Action Plan - venue-specific, posted, and practiced, covering who does what in an emergency."},
+    {q:"Minimum floor space per athlete in the weight room?",a:"About 100 square feet per athlete."},
+    {q:"Sprint acceleration vs max-velocity posture?",a:"Acceleration: big forward lean, long pushes (~0-20 m). Max velocity: tall and upright, cyclic action, vertical force into the ground."}
   ],
 
   // ───────── Faded Calc Drills (applied math) ─────────
@@ -359,6 +408,19 @@ window.GD = {
     {id:"reps_pct", topic:"%1RM", prompt:"You can do exactly 10 clean reps. Approx %1RM (Epley back-solve)?",
       formula:"%1RM = 1 / (1 + reps/30)", answer:75, tol:2, unit:"%",
       worked:"1 / (1 + 10/30) = 1/1.333 = 0.75 -> ~75%"}
+  ,
+    { id:"lsi", topic:"Rehab", days:[39], prompt:"Injured-leg press 1RM 140 kg; healthy leg 175 kg. Limb Symmetry Index?",
+      formula:"LSI = injured / uninjured x 100", answer:80, tol:1, unit:"%",
+      worked:"140 / 175 x 100 = 80% - below the ~90% return-to-sport gate, so not cleared yet." },
+    { id:"facility_cap", topic:"Facility", days:[40], prompt:"A 2400 sq ft weight room. Max athletes at the 100 sq ft/athlete standard?",
+      formula:"athletes = area / 100", answer:24, tol:0, unit:"athletes",
+      worked:"2400 / 100 = 24 athletes at one time." },
+    { id:"polarized_split", topic:"Endurance", days:[43], prompt:"12 training sessions this week, polarized 80/20. About how many are EASY?",
+      formula:"easy = sessions x 0.80", answer:10, tol:0.5, unit:"sessions",
+      worked:"12 x 0.80 = ~10 easy (below LT1); the other ~2 are hard (above LT2)." },
+    { id:"speed_rest", topic:"Speed", days:[38], prompt:"A 40 m max sprint takes ~6 s. Rest at a 1:12 work:rest for full recovery?",
+      formula:"rest = work x 12", answer:72, tol:2, unit:"s",
+      worked:"6 s x 12 = 72 s - near-full recovery keeps every rep at true top speed." }
   ],
 
   // ───────── Play the Coach (branching decisions) ─────────
@@ -434,6 +496,57 @@ window.GD = {
           {t:"Complete rest until it feels 100%",ok:false,fb:"No - prolonged unloading weakens the tissue; healing tissue needs graded stimulus."},
           {t:"Max eccentric hamstring loading immediately",ok:false,fb:"No - too much too soon risks re-tear; build the eccentric capacity progressively."}]}
      ]}
+  ,
+    { id:"facility", topic:"Facility", days:[40], title:"Design the weight room",
+      context:"You're laying out a new strength-and-conditioning facility for a team that Olympic-lifts and does conditioning circuits.",
+      steps:[
+        { stem:"How much floor space do you plan per athlete training at once?",
+          choices:[
+            { t:"About 100 sq ft each", ok:true, fb:"Correct - ~100 sq ft/athlete is the planning standard for safe simultaneous training." },
+            { t:"About 25 sq ft each", ok:false, fb:"Too tight - crowding raises injury risk and blocks safe barbell paths." },
+            { t:"Space doesn't need planning", ok:false, fb:"No - density is a primary safety and flow decision." } ] },
+        { stem:"The platforms will be used for cleans and snatches. Minimum ceiling?",
+          choices:[
+            { t:"12+ ft over the platforms", ok:true, fb:"Right - overhead lifts need 12+ ft; 10 ft is the bare minimum elsewhere." },
+            { t:"8 ft is fine everywhere", ok:false, fb:"Unsafe over platforms - a locked-out snatch needs far more clearance." } ] },
+        { stem:"What's the sensible traffic flow through the room?",
+          choices:[
+            { t:"Stretch -> free weights -> machines -> cardio", ok:true, fb:"Good - warm-up first, heaviest/most-skilled work while fresh, then machines and conditioning." },
+            { t:"Cardio -> free weights -> stretch", ok:false, fb:"No - pre-fatiguing on cardio compromises the heavy lifting that needs freshness and skill." } ] } ] },
+    { id:"rts", topic:"Rehab", days:[39], title:"Clear the hamstring for return",
+      context:"A sprinter is 8 weeks past a grade-2 hamstring strain. The physio has handed off; you own the return-to-sport bridge.",
+      steps:[
+        { stem:"He 'feels ready' and wants max-velocity sprints today. First check?",
+          choices:[
+            { t:"Objective criteria - pain-free ROM, >=90% strength symmetry, sport testing", ok:true, fb:"Yes - readiness is criteria-based, not how he feels or the calendar." },
+            { t:"Just send him - 8 weeks is plenty", ok:false, fb:"No - a fixed timeline ignores whether the tissue and strength have actually recovered." } ] },
+        { stem:"Strength test: injured leg is 82% of the healthy side. Decision?",
+          choices:[
+            { t:"Hold max-velocity work; keep building the deficit toward >=90%", ok:true, fb:"Correct - 82% LSI is below the gate; sprinting max velocity now risks re-tear." },
+            { t:"Proceed - close enough", ok:false, fb:"No - the last 8% of symmetry is exactly the margin that fails under sprint loads." } ] },
+        { stem:"He clears the gates. How do you reintroduce max sprinting?",
+          choices:[
+            { t:"Progress through SSC/plyo, then build sprint volume gradually", ok:true, fb:"Right - respect the SSC stage and ramp exposure; don't jump straight to full-volume top-end work." },
+            { t:"Full sprint session immediately", ok:false, fb:"No - one big exposure after a lay-off is a classic re-injury pattern." } ] } ] },
+    { id:"polarized", topic:"Hybrid", days:[43,44,45], title:"Fix the grey-zone athlete",
+      context:"A hybrid athlete trains 10-12 sessions/week but is stagnant and always a bit tired. Their easy runs sit at a 'comfortably hard' tempo.",
+      steps:[
+        { stem:"What's the core distribution problem?",
+          choices:[
+            { t:"Too many sessions in the LT1-LT2 grey zone", ok:true, fb:"Exactly - moderate-everything fatigues without the adaptations of true easy or true hard work." },
+            { t:"Not enough moderate tempo work", ok:false, fb:"Opposite - the grey zone is already the overused band." } ] },
+        { stem:"You move them toward polarized. What ratio, measured how?",
+          choices:[
+            { t:"~80% easy / ~20% hard, counted by SESSIONS", ok:true, fb:"Right - polarized is defined by session count, most easy (below LT1), a minority genuinely hard (above LT2)." },
+            { t:"80% of MINUTES at threshold", ok:false, fb:"No - that's a threshold model, and it's minutes not sessions; polarized deliberately limits the middle." } ] },
+        { stem:"How should the easy days actually feel now?",
+          choices:[
+            { t:"Conversational, below LT1 - genuinely easy", ok:true, fb:"Yes - real recovery pace protects the quality of the hard days and drives the Zone-2 mitochondrial base." },
+            { t:"Still a solid tempo so they aren't wasted", ok:false, fb:"That's the grey-zone trap again - easy must be easy for the model to work." } ] },
+        { stem:"They also lift heavy 3x/week. How do you protect strength from interference?",
+          choices:[
+            { t:"Separate hard endurance from lifting (different days or 6+ h apart)", ok:true, fb:"Correct - proximity drives interference; spacing lets mTOR work without AMPK suppression. Heavy lifting won't hurt the aerobic side." },
+            { t:"Do threshold intervals right before squats", ok:false, fb:"Worst case - pre-fatigue plus peak interference blunts the strength stimulus." } ] } ] }
   ]
 };
 </script>
@@ -467,9 +580,48 @@ var GAMES=[
  {id:'coach',icon:'🧠',name:'Play the Coach',desc:'Branching program-design decisions with rubric feedback. The transfer format.',tags:['Decisions'],ev:'Best evidence',start:gameCoach}
 ];
 
+// ---- Today's focus: name the current curriculum day (Manila) + surface the
+// drills tagged for this lesson block. Read-only: only Date + GD, never FSRS.
+var LESSONS={36:"Test administration - strength & power",37:"Test administration - endurance & body comp",38:"Speed & agility training",39:"Rehabilitation & reconditioning",40:"Facility design & layout",41:"Facility policies & legal",42:"Phase 1 integration review",43:"Polarized training & intensity distribution",44:"Lactate thresholds & zone anchoring",45:"Zone 2, mitochondria & fat oxidation",46:"Concurrent training & the interference effect",47:"Endurance performance determinants",48:"Durability & decoupling",49:"HIIT & interval design",50:"HYROX demands & pacing",51:"Sled - force-velocity",52:"Hybrid periodization",53:"Heat & thermoregulation",54:"Recovery, HRV & sleep"};
+function curriculumDay(){
+  try{
+    var nowM=new Date(Date.now()+8*36e5); // Asia/Manila (no DST)
+    var todayUTC=Date.UTC(nowM.getUTCFullYear(),nowM.getUTCMonth(),nowM.getUTCDate());
+    return Math.floor((todayUTC-Date.UTC(2026,4,24))/864e5)+1; // Day 1 = 2026-05-24
+  }catch(e){return null;}
+}
+var MODE_SRC={order:'sequences',sort:'sorts',match:'matches',calc:'calc',coach:'scenarios'};
+function todayFocus(){
+  var day=curriculumDay(); if(day==null||day<1) return null;
+  var lo=day-3, hi=day+3; // this lesson block
+  var recs=[];
+  GAMES.forEach(function(g){
+    var src=MODE_SRC[g.id]; if(!src) return;
+    var n=(GD[src]||[]).filter(function(it){return (it.days||[]).some(function(d){return d>=lo&&d<=hi;});}).length;
+    if(n>0) recs.push({g:g,n:n});
+  });
+  var title=LESSONS[day]||('Day '+day);
+  var box=el('div',{class:'todayfocus'},[
+    el('div',{},[
+      el('div',{class:'tlabel',text:"Today's focus"}),
+      el('div',{class:'ttitle',text:'Day '+day+' - '+title}),
+      el('div',{class:'tday',text: recs.length? 'Fresh drills tuned to this block:' : 'Pick any drill below to practice.'})
+    ])
+  ]);
+  if(recs.length){
+    var row=el('div',{class:'trec'});
+    recs.forEach(function(r){ row.appendChild(el('button',{onclick:function(){r.g.start();}},[
+      el('span',{html:r.g.icon}), el('span',{text:r.g.name})
+    ])); });
+    row.appendChild(el('span',{class:'tnote',text:'+ Rapid Recall has fresh items too'}));
+    box.appendChild(row);
+  }
+  return box;
+}
 function showHub(){
   clear(); SUB.textContent='retrieval · sorting · decisions';
   APP.appendChild(el('p',{class:'intro',html:'Pick a drill. Each one makes you <b>retrieve</b> or <b>decide</b> — the parts that actually build memory and transfer. Mix them up; your spaced-repetition lessons stay the backbone.'}));
+  var _tf=todayFocus(); if(_tf) APP.appendChild(_tf);
   var p=loadP();
   var grid=el('div',{class:'grid'});
   GAMES.forEach(function(g){
