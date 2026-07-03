@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "CSCS 4th Edition — 26-Week Spaced-Repetition Curriculum",
+    "title": "CSCS — 26-Week Spaced-Repetition Curriculum (5th ed. 2026 · July 2025 exam blueprint)",
     "start_date": "2026-05-24",
     "source_pdf": "vdoc.pub_essentials-of-strength-training-and-conditioning-4th-edition.pdf",
     "spacing_intervals_days": [
@@ -44,7 +44,8 @@
         "days": "43-54"
       }
     ],
-    "ordering": "training-relevance priority (reordered 2026-05-23 from David's chapter ranking)"
+    "ordering": "training-relevance priority (reordered 2026-05-23 from David's chapter ranking)",
+    "edition_note": "Aligned to the NSCA CSCS exam blueprint (Detailed Content Outline) effective July 1, 2025. The Essentials of Strength Training and Conditioning 5th edition (Feb 2026) is now the current text; the exam is blueprint-based, not edition-based, so 4th- and 5th-edition study both map to the tested content."
   },
   "lessons": {
     "1": {
@@ -261,9 +262,9 @@
       ],
       "training_link": "Your strength PM session structure relies on squat fidelity — these technique points are non-negotiable for your hip-dominant Hyrox prep.",
       "video": {
-        "title": "Squat University — How To Squat Correctly (FIX MISTAKES!)",
-        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
-        "credibility": "Aaron Horschig DPT"
+        "title": "Human Kinetics — How to perform a barbell back squat",
+        "url": "https://www.youtube.com/watch?v=Fsn8U97Zskg",
+        "credibility": "Human Kinetics — NSCA publisher"
       },
       "audio": {
         "title": "Iron Culture — Schoenfeld: Mechanisms of Hypertrophy",
@@ -305,9 +306,9 @@
       ],
       "training_link": "Trap bar deadlift is the highest-ROI lift for your hybrid demands — high power output, low joint cost.",
       "video": {
-        "title": "Squat University — How to Deadlift Properly (Conventional & Sumo)",
-        "url": "https://www.youtube.com/watch?v=tNn7AlPITOw",
-        "credibility": "Aaron Horschig DPT"
+        "title": "Human Kinetics — How to perform a barbell deadlift",
+        "url": "https://www.youtube.com/watch?v=eEEZ9FxEE24",
+        "credibility": "Human Kinetics — NSCA publisher"
       },
       "audio": {
         "title": "Huberman Lab — Galpin: Strength Protocols",
@@ -332,9 +333,9 @@
       ],
       "training_link": "OHP is technique-heavy and underused — but for shoulder durability across a long training career it's worth keeping in.",
       "video": {
-        "title": "Squat University — How To Squat Correctly (technique principles)",
-        "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
-        "credibility": "Aaron Horschig DPT"
+        "title": "Human Kinetics — How to perform a bench press",
+        "url": "https://www.youtube.com/watch?v=youP6XYUCUQ",
+        "credibility": "Human Kinetics — NSCA publisher"
       },
       "audio": {
         "title": "Iron Culture 51 — Schoenfeld: Maximizing Hypertrophy",
@@ -359,9 +360,9 @@
       ],
       "training_link": "Likely overkill for Hyrox — high learning cost vs return. Kettlebell swing or jump squat may deliver triple-extension power with lower complexity.",
       "video": {
-        "title": "Galpin — Optimal Protocols (power & technique)",
-        "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-optimal-protocols-to-build-strength-and-grow-muscles",
-        "credibility": "Huberman + Galpin"
+        "title": "Human Kinetics — How to perform the power clean",
+        "url": "https://www.youtube.com/watch?v=9yXBzxqSZHY",
+        "credibility": "Human Kinetics — NSCA publisher"
       },
       "audio": {
         "title": "Iron Culture 236 — Galpin: Muscle Fiber Types & Training",
@@ -386,9 +387,9 @@
       ],
       "training_link": "Sled push is highly Hyrox-specific. Low eccentric load means recovery cost is lower than the metabolic stress would suggest — useful as substitute for higher-impact intervals.",
       "video": {
-        "title": "Squat University — Deadlift Form Fixes (alternative implements)",
-        "url": "https://www.youtube.com/watch?v=tNn7AlPITOw",
-        "credibility": "Aaron Horschig DPT"
+        "title": "Human Kinetics — How to perform the trap bar deadlift (alternative implement)",
+        "url": "https://www.youtube.com/watch?v=76l_MOLqiiI",
+        "credibility": "Human Kinetics — NSCA publisher"
       },
       "audio": {
         "title": "Huberman Lab — Galpin: Strength Building Protocols",
@@ -1196,7 +1197,7 @@
       "domain": "ES",
       "chapter": "Ch 7",
       "page_refs": "pp. 145-160",
-      "key_concept": "Children: can train safely with proper supervision; resistance training does NOT stunt growth. Pre-pubertal gains are largely neural. Adolescents: peak adaptability post-puberty. Older adults: respond to resistance training similarly to younger but slower; counteracts sarcopenia; emphasize multi-joint, moderate load progressing to heavier. Female athletes: similar relative strength gains; absolute differences mostly from hormonal (testosterone) profile and lean mass distribution. Female athlete triad / RED-S: energy deficiency → menstrual dysfunction → low BMD.",
+      "key_concept": "Children: can train safely with proper supervision; resistance training does NOT stunt growth. Pre-pubertal gains are largely neural. Adolescents: peak adaptability post-puberty. Older adults: respond to resistance training similarly to younger but slower; counteracts sarcopenia; emphasize multi-joint, moderate load progressing to heavier. Female athletes: similar relative strength gains; absolute differences mostly from hormonal (testosterone) profile and lean mass distribution. Female athlete triad / RED-S: energy deficiency → menstrual dysfunction → low BMD. [5th ed. 2026: age and sex differences, combined in the 4th edition, are now two standalone chapters (Ch 7 age, Ch 8 sex) — reflecting the exam blueprint's individual-differences emphasis by biological age, training age, and biological sex.]",
       "key_facts": [
         "Pediatric resistance training is SAFE with supervision",
         "Sarcopenia begins ~30s, accelerates >50",
@@ -1989,7 +1990,7 @@
       "domain": "PD",
       "chapter": "Beyond the text · recovery",
       "page_refs": "Plews 2013; Walker 2017",
-      "key_concept": "Adaptation happens during recovery, not the session — so recovery capacity caps trainable load. Heart-rate variability (HRV) indexes parasympathetic (recovery) tone: a rising multi-week trend tracks positive adaptation, while a suppressed morning HRV flags incomplete recovery and argues for easing that day (readiness-guided training beats rigid plans). Sleep is the single largest recovery lever — it drives growth-hormone release, memory consolidation, and autonomic restoration; chronic sleep debt blunts adaptation and raises injury and illness risk more than almost any training variable.",
+      "key_concept": "Adaptation happens during recovery, not the session — so recovery capacity caps trainable load. Heart-rate variability (HRV) indexes parasympathetic (recovery) tone: a rising multi-week trend tracks positive adaptation, while a suppressed morning HRV flags incomplete recovery and argues for easing that day (readiness-guided training beats rigid plans). Sleep is the single largest recovery lever — it drives growth-hormone release, memory consolidation, and autonomic restoration; chronic sleep debt blunts adaptation and raises injury and illness risk more than almost any training variable. [5th ed. 2026: recovery is now anchored by a new standalone chapter, 'Overreaching, Overtraining, and Recovery' — functional overreaching (planned, super-compensates) vs non-functional overreaching → overtraining syndrome (OTS); restoration strategies are the through-line.]",
       "key_facts": [
         "Adaptation occurs in recovery — recovery capacity caps trainable load",
         "HRV indexes parasympathetic (recovery) tone; watch the trend, not one day",
