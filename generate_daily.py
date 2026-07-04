@@ -135,11 +135,14 @@ def relevant_lessons(lessons):
             if lessons[k].get("relevant", True)]
 
 
-def pick_review_lessons(today_day, lessons):
+def pick_review_lessons(today_day, lessons, seen_through=0):
+    """Spaced recaps of prior lessons. Any lesson on a day <= seen_through is a
+    lesson the learner has declared 'done and not to be re-reviewed' (meta
+    seen_through_day), so it is never resurfaced as a spaced recap."""
     out = []
     for s in SPACING_DAYS:
         t = today_day - s
-        if t < 1:
+        if t < 1 or t <= seen_through:
             continue
         if str(t) in lessons and lessons[str(t)].get("relevant", True):
             out.append((s, lessons[str(t)]))
@@ -698,7 +701,7 @@ def main():
     for t in questions:
         topic_domain.setdefault(t, "ES")
     today_lesson, deep_review = get_today_lesson(today_day, lessons)
-    reviews = pick_review_lessons(today_day, lessons)
+    reviews = pick_review_lessons(today_day, lessons, meta.get("seen_through_day", 0))
     html = render_html(today, today_day, today_lesson, deep_review, reviews, questions, meta, topic_domain)
     try:
         _cp = DATA / 'day_completion.json'
