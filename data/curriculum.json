@@ -42,6 +42,11 @@
     "phase": 5,
     "name": "Advanced applied — your training model, beyond the textbook",
     "days": "43-54"
+   },
+   {
+    "phase": 6,
+    "name": "5th-edition additions — new & expanded chapters",
+    "days": "55-59"
    }
   ],
   "ordering": "training-relevance priority (reordered 2026-05-23 from David's chapter ranking)",
@@ -1366,9 +1371,7 @@
     "Fiber SIZE can ↓ ~20% with marathon training while function maintained; Type IIx→IIa shift",
     "Plasma/blood volume ↑, hemoglobin mass ↑, but hematocrit may ↓ (dilution)",
     "Detraining: VO₂max ↓ 4-14% short-term (<4wk), 6-20% long-term — driven by ↓blood vol, ↓SV, ↓max Q, ↑submax HR",
-    "Running (impact) builds bone; cycling/swimming (weight-supported) do not",
-    "Smoking impairs aerobic performance: nicotine constricts bronchioles (↑airway resistance), increases mucus secretion/swelling, and paralyzes respiratory-tract cilia (↓clearance of particles/fluids).",
-    "Vaping (e-cigarettes) delivers a nicotine aerosol → catecholamine release ↑HR & ↑BP; it is now the most common nicotine modality in youth, and its long-term aerobic-training effects are still under-researched."
+    "Running (impact) builds bone; cycling/swimming (weight-supported) do not"
    ],
    "training_link": "Your Jan→May trajectory (HRV +59%, RHR -9) is this central+peripheral remodeling in real time — bigger SV, fuller plasma volume, more mitochondria. With base solidified, your next gains come from LT and economy, not VO₂max: sub-threshold 10×1000m and short-recovery 4×8 above MLSS push the OBLA point up. For Hyrox, remember fiber SIZE may shrink under high aerobic volume — keep concurrent strength in to defend the sled/carry stations.",
    "video": {
@@ -1416,11 +1419,6 @@
      "term": "Exercise economy",
      "def": "O₂ (energy) cost of a fixed pace/power. Improves via biomechanics + neuromuscular efficiency; can separate two athletes with equal VO₂max and LT.",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Nicotine (smoking / vaping)",
-     "def": "Constricts bronchioles (↑airway resistance), ↑mucus, and paralyzes airway cilia; catecholamine-driven ↑HR/BP. All detrimental to aerobic performance — vaping is not a 'safe' aerobic alternative.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 8 C40 8 30 16 30 24 a10 10 0 0 0 20 0 C50 16 40 8 40 8Z\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"1.6\"/><line x1=\"24\" y1=\"30\" x2=\"56\" y2=\"12\" stroke=\"#e0556b\" stroke-width=\"2.4\"/></svg>"
     }
    ],
    "relevant": true,
@@ -1894,9 +1892,7 @@
     "Static stretch hold 15-30 s (30 s optimal, diminishing returns beyond); mild discomfort not pain",
     "Weekly stretch VOLUME (frequency) > single-session duration for ROM gains; PNF exception = ~1 session/wk",
     "PNF: hold-relax-with-agonist-contraction most effective (reciprocal + autogenic inhibition); isometric 3-6 s at ≤20% MVC",
-    "No consistent stretching–injury-prevention link; both hypo- and hyper-flexibility ↑ injury risk",
-    "Beyond temperature and blood-flow effects, a warm-up can activate the nervous system: a brief high-intensity 'conditioning' contraction acutely potentiates subsequent power — postactivation potentiation (PAP) / postactivation performance enhancement (PAPE).",
-    "PAPE depends on load, volume, rest interval, and training status: too little rest → fatigue dominates (no benefit); enough rest for fatigue to clear (~minutes) → the potentiation shows; too much → the effect fades."
+    "No consistent stretching–injury-prevention link; both hypo- and hyper-flexibility ↑ injury risk"
    ],
    "training_link": "For your Hyrox and 4x8 strength days, build the warm-up as RAMP, not stretching: Raise with sled-mimic or run drills, Activate & Mobilize through squat/lunge/hinge patterns, then Potentiate with build-up runs and ramping loads (50/70/90%) so rep-1 or the first station feels primed, not flat. Skip long static holds before power work — save PNF/static ROM for post-session or separate recovery days.",
    "video": {
@@ -1951,16 +1947,6 @@
      "term": "Reciprocal inhibition",
      "def": "Reflexive relaxation of a muscle when its antagonist contracts; contributes to the extra ROM in hold-relax-with-agonist-contraction PNF.",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Postactivation potentiation (PAP)",
-     "def": "A heavy or explosive conditioning contraction transiently raises muscle force/power output for a subsequent effort — the nervous-system 'priming' rationale for a potentiation warm-up.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L24 30 L30 10 L36 30 L70 30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"10\" r=\"2.5\" fill=\"#5ec8ff\"/></svg>"
-    },
-    {
-     "term": "PAPE (performance enhancement)",
-     "def": "The voluntary-performance version of PAP: an acute power boost after a conditioning activity, seen once fatigue from that activity dissipates.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L20 30 L24 16 L28 30 L44 30\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><path d=\"M44 30 L60 18\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\" stroke-dasharray=\"3 2\"/><circle cx=\"60\" cy=\"18\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
     }
    ],
    "figures": [
@@ -1970,13 +1956,6 @@
     "Figure 15.1",
     "Figure 15.6",
     "Figure 15.10"
-   ],
-   "resources": [
-    {
-     "title": "NSCA Exercise Technique Video Library",
-     "url": "https://www.nsca.com/education/nsca-videos/",
-     "credibility": "NSCA (certifying body)"
-    }
    ]
   },
   "26": {
@@ -2452,46 +2431,67 @@
    ]
   },
   "32": {
-   "title": "Age and sex differences in training response",
+   "title": "Age-related differences (youth & older adults)",
    "topic_id": "age_sex",
    "domain": "ES",
-   "chapter": "Ch 7-8 (5E)",
-   "page_refs": "5E Ch 7 — Youth/Older Adults; Ch 8 — Sex-Related Differences",
-   "key_concept": "Trainability persists across the lifespan, but the mechanism shifts. Preadolescents gain strength mainly via NEURAL adaptation (↑motor-unit activation/recruitment/firing), not hypertrophy — low androgens cap muscle growth; resistance training is safe with supervision and does NOT harm growth plates. Post-puberty, boys' testosterone (~600 vs ~20-60 ng/100mL) drives hypertrophy and diverges strength from girls. Older adults face sarcopenia/dynapenia (power falls faster than strength) yet respond strongly to progressive RT. Females show similar RELATIVE strength/hypertrophy gains; absolute gaps trace to lean-mass distribution and hormones, not trainability.",
+   "chapter": "Ch 7 (5E)",
+   "page_refs": "5E Ch 7 — Youth Populations (YPD model, growth/maturation, youth RT), Older Adults (sarcopenia, trainability, program design)",
+   "key_concept": "Trainability persists across the lifespan but the mechanism shifts with age. Preadolescents gain strength mainly via NEURAL adaptation (↑motor-unit recruitment/firing/synchronization + motor-skill/coordination), not hypertrophy — low circulating androgens (T ~20-60 vs ~600 ng/100mL post-puberty in boys) cap muscle growth. The 5E frames youth training around the YPD model and long-term athletic development, using biological maturation (PHV, not chronological age) to individualize and manage the injury spike around the growth spurt. Older adults lose muscle mass (sarcopenia), strength (dynapenia, with power falling FASTER than strength), and bone (osteopenia→osteoporosis), yet respond strongly to progressive RT at any age — even into their 90s.",
    "key_facts": [
-    "Preadolescent strength gains = mostly NEURAL; hypertrophy limited by low circulating androgens",
-    "RT is SAFE with supervision; epiphyseal-plate fractures only in unsupervised heavy overhead lifts — none in guideline-adhering studies",
-    "PHV (peak height velocity): ~11.9 yr girls, ~13.8 yr boys; injury risk ↑ around PHV",
-    "Testosterone: preadolescent ~20-60 ng/100mL both sexes → adolescent males ~600; females stay unchanged",
-    "Untrained gains ~30-40% over 8-20 wk; adolescents attain ~50% larger absolute strength gains than children",
-    "Sarcopenia = age-related muscle loss (starts ~30s); dynapenia = strength loss; power declines FASTER than strength",
-    "Osteopenia = BMD −1 to −2.5 SD; osteoporosis = below −2.5 SD of young-adult mean",
-    "Female strength: relative to fat-free mass, sex differences largely DISAPPEAR; lower body closer to males than upper body",
-    "Current 5E evidence does NOT support modifying RT prescription by menstrual-cycle phase"
+    "YPD model (Lloyd & Oliver): ALL fitness qualities trainable at ALL stages → train strength + motor skill concomitantly, not hierarchically",
+    "Biological maturation > chronological age; 2 same-age kids can differ ~5 yr biologically",
+    "PHV (peak height velocity) mean ~11.9 yr girls, ~13.8 yr boys; girls start puberty ~2 yr earlier; injury risk ↑ around PHV",
+    "Preadolescent strength gains = NEURAL; hypertrophy limited by low T/GH/IGF; T rises to ~600 ng/100mL in adolescent boys, unchanged in girls",
+    "Untrained youth strength gains ~30-40% over 8-20 wk; adolescents attain ~50% larger ABSOLUTE gains than children; peak strength gains ~1.2 yr after PHV in boys",
+    "Epiphyseal-plate fracture peaks near PHV; NONE reported in guideline-adhering youth RT studies — 'stunts growth' is a myth; RT ↑ bone density",
+    "Sarcopenia = progressive skeletal-muscle loss (CSA ↓ after age 30, type II selective denervation); dynapenia = strength loss; power declines FASTER than strength",
+    "Osteopenia = BMD −1 to −2.5 SD of young-adult mean; osteoporosis = below −2.5 SD",
+    "Older adults: even 87-96 yr olds ↑ strength in 8 wk; high-velocity/power RT ↑ power > slow RT; sex gaps in gains vanish/reverse on a RELATIVE scale",
+    "Senior RT Rx: progress to 2-3 sets × 6-12 reps at 70-85% 1RM, 2-3×/wk; avoid Valsalva; 48-72 h recovery; RT alone doesn't cut falls — add balance + flexibility"
    ],
-   "training_link": "Not your demographic directly, but the absolute-vs-relative-strength lens is exactly how you should read crew data — normalize Hyrox strength loads to bodyweight/fat-free mass before comparing your female athletes to yourself, or you'll misjudge trainability. For older or youth clients, program power explicitly (it decays first) and treat RT as a lifelong dose: gains detrain fast in both youth and seniors, so keep a minimum maintenance stimulus year-round.",
+   "training_link": "When you coach a mixed-age hybrid crew, group and progress youth by biological maturation, not birthday — screen for PHV, measure height ~every 3 months (monthly near PHV), and cut volume/intensity while reinforcing clean patterns during the growth spurt when overuse-injury risk peaks. Load your masters Hyrox athletes hard too: progress them toward 2-3 sets × 6-12 at 70-85% 1RM plus high-velocity power work to fight dynapenia, but pair RT with balance and flexibility (RT alone won't cut falls), coach away from the Valsalva, and give 48-72 h between heavy sessions.",
    "video": {
     "title": "Huberman Lab: Galpin — How to Build Strength, Muscle Size & Endurance",
     "url": "https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance",
     "credibility": "Stanford + Galpin"
    },
-   "audio": {
-    "title": "Stronger By Science Podcast — Episode 9: Hormonal Contraceptives, Training Adaptations",
-    "url": "https://www.strongerbyscience.com/podcast-episode-9/",
-    "credibility": "Nuckols + Trexler PhD"
-   },
    "relevant": false,
-   "notes_5e": "5E splits the former single age-and-sex chapter into two standalone chapters (Ch 7 age, Ch 8 sex), reframes strength differences around absolute-vs-relative (fat-free-mass) comparisons, adds dynapenia and detailed female injury/health sections, moves RED-S to Ch 11, and concludes current evidence does NOT support menstrual-cycle-phase-based RT prescription.",
+   "notes_5e": "NEW in the 5th edition: Ch 7 is a standalone Age-Related Differences chapter (split from the old combined age/sex chapter), reorganized around the YPD model, long-term athletic development, and updated older-adult sarcopenia/dynapenia and power-training evidence.",
    "glossary": [
     {
+     "term": "Youth physical development (YPD) model",
+     "def": "Framework holding that every fitness quality is trainable at every developmental stage, so youth programs should be multifaceted and develop strength and motor skill together rather than in sequence.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 34 L20 34 L34 18 L50 12 L68 8\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><circle cx=\"68\" cy=\"8\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
+    },
+    {
+     "term": "Long-term athletic development (LTAD)",
+     "def": "NSCA-endorsed approach of building athleticism over years to raise fitness, reduce injury risk, and improve health, favoring broad multi-sport exposure over early specialization.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 34 L20 34 L34 18 L50 12 L68 8\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><circle cx=\"68\" cy=\"8\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
+    },
+    {
      "term": "Peak height velocity (PHV)",
-     "def": "Age of maximum growth rate during the pubertal spurt (~11.9 yr girls, ~13.8 yr boys). A key maturity marker; injury risk rises around it.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M10 30 C24 30 40 24 66 8\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><line x1=\"10\" y1=\"30\" x2=\"70\" y2=\"30\" stroke=\"#9fb2c8\" stroke-width=\"1\"/><line x1=\"10\" y1=\"6\" x2=\"10\" y2=\"34\" stroke=\"#9fb2c8\" stroke-width=\"1\"/></svg>"
+     "def": "Age of maximum growth rate during the pubertal spurt (~11.9 yr girls, ~13.8 yr boys); a key maturity marker and window of elevated injury risk.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 34 L20 34 L34 18 L50 12 L68 8\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><circle cx=\"68\" cy=\"8\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
+    },
+    {
+     "term": "Biological maturation",
+     "def": "Progress toward a mature state — assessed by skeletal, sexual, or somatic (physique) age — a more accurate basis than chronological age for grouping and testing youth.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Training age",
+     "def": "Length of time a person has consistently followed a formal, supervised resistance program; distinct from chronological or biological age.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Epiphyseal (growth) plate",
+     "def": "Growth cartilage near the ends of long bones; long bones stop lengthening once it fully ossifies. Vulnerable to fracture, especially around PHV, but not in well-supervised RT.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 34 L20 34 L34 18 L50 12 L68 8\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><circle cx=\"68\" cy=\"8\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
     },
     {
      "term": "Sarcopenia",
-     "def": "Progressive, generalized loss of skeletal muscle mass and function with aging, linked to falls, fractures, disability, and mortality.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+     "def": "Progressive, generalized loss of skeletal-muscle mass and function with aging, linked to falls, fractures, disability, and mortality.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"10\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><circle cx=\"52\" cy=\"20\" r=\"6\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><path d=\"M36 20h10\" stroke=\"#3a4a5e\" stroke-width=\"1.4\"/></svg>"
     },
     {
      "term": "Dynapenia",
@@ -2500,36 +2500,21 @@
     },
     {
      "term": "Osteoporosis",
-     "def": "Low bone mineral density below −2.5 SD of the young-adult mean, with heightened fracture risk; osteopenia is the −1 to −2.5 SD range.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Biological maturation",
-     "def": "Progress toward mature state (skeletal, sexual, or somatic age); more accurate than chronological age for grouping/testing youth.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Training age",
-     "def": "Length of time an athlete has consistently followed a formal, supervised resistance program — separate from chronological/biological age.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Estradiol",
-     "def": "Primary estrogen in menstruating females; protects skeletal muscle, promotes protein synthesis over degradation, and enhances RT sensitivity.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Absolute vs relative strength",
-     "def": "Absolute = total force (males higher via larger fibers); relative = normalized to body weight or fat-free mass, where sex differences shrink or vanish.",
+     "def": "Bone mineral density below −2.5 SD of the young-adult mean, with heightened fracture risk; osteopenia is the −1 to −2.5 SD range.",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
     }
    ],
    "figures": [
     "Figure 7.1",
     "Table 7.1",
-    "Figure 8.1",
-    "Table 8.1",
-    "Table 8.2"
+    "Figure 7.2"
+   ],
+   "resources": [
+    {
+     "title": "NSCA — Youth Training & Long-Term Athletic Development",
+     "url": "https://www.nsca.com/about-us/position-statements/youth-training-and-long-term-athletic-development/",
+     "credibility": "NSCA position statement"
+    }
    ]
   },
   "33": {
@@ -2550,10 +2535,7 @@
     "Catastrophe (Hardy): somatic arousal = inverted-U, but with HIGH cognitive anxiety → sudden crash, not gradual decline; calming doesn't fully restore",
     "Reversal (Kerr): interpretation of arousal (excitement vs dread), not just amount, drives its effect",
     "MAS (approach success, seek ~50% odds) vs MAF (avoid shame, pick very easy/very hard tasks)",
-    "Fitts & Posner stages: cognitive → associative → autonomous (automaticity); process goals > outcome goals for skill & anxiety",
-    "The 5E adds mental-health guidance: the S&C coach recognizes changes in behavior/statements and refers to the allied team (counselor/psychologist) — three tiers: emergent threat (e.g., suicidal ideation) → mental-health concern → applied-performance concern.",
-    "Psychological impact of injury: injured athletes commonly experience depression, anxiety and fear of reinjury, and loss of athletic identity — which can prolong recovery and delay return to sport.",
-    "Stress–injury model (Williams & Andersen): personality, history of stressors, and coping resources shape the stress response that raises injury risk; interventions target that stress response."
+    "Fitts & Posner stages: cognitive → associative → autonomous (automaticity); process goals > outcome goals for skill & anxiety"
    ],
    "training_link": "Your race-week arousal target is personal — find your Hyrox IZOF, not a generic peak. If you run flat, pump arousal with music/self-talk before the start; if you spiral, use diaphragmatic breathing to drop somatic arousal and dodge the catastrophe crash mid-race. Anchor to process goals (split pace, transition routine, wall-ball rhythm) instead of a finish time, and run instructional self-talk on the compromised stations while trusting automaticity on the run.",
    "video": {
@@ -2606,16 +2588,6 @@
      "term": "Selective attention",
      "def": "Suppressing task-irrelevant cues to process task-relevant ones — what athletes call 'focus'. Nideffer maps focus on two axes: direction (internal-external) × width (broad-narrow).",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
-    },
-    {
-     "term": "Stress–injury model",
-     "def": "Williams & Andersen: personality + history of stressors + coping resources modulate the stress response that elevates injury risk. Basis for psychological injury-prevention.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#5ec8ff\"><circle cx=\"14\" cy=\"10\" r=\"3\"/><circle cx=\"14\" cy=\"20\" r=\"3\"/><circle cx=\"14\" cy=\"30\" r=\"3\"/></g><path d=\"M18 10 L40 20 M18 20 L40 20 M18 30 L40 20\" stroke=\"#3a4a5e\" stroke-width=\"1.3\"/><circle cx=\"46\" cy=\"20\" r=\"6\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"1.8\"/><path d=\"M52 20h16\" stroke=\"#ffb86b\" stroke-width=\"1.8\"/></svg>"
-    },
-    {
-     "term": "Psychological response to injury",
-     "def": "Depression, anxiety, fear of reinjury, and loss of athletic identity after injury — can slow rehab and delay return-to-play even once tissue has healed.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 8 C48 20 54 26 54 31 a14 14 0 0 1-28 0 C26 26 32 20 40 8Z\" fill=\"#ffb86b\" opacity=\".55\"/><path d=\"M34 22c3 3 9 3 12 0\" stroke=\"#0b1220\" stroke-width=\"1.4\" fill=\"none\"/></svg>"
     }
    ],
    "relevant": false,
@@ -2624,13 +2596,6 @@
     "Figure 9.1",
     "Figure 9.2",
     "Table 9.1"
-   ],
-   "resources": [
-    {
-     "title": "NSCA — Considering the Mental Health of Athletes",
-     "url": "https://www.nsca.com/education/articles/nsca-coach/considering-the-mental-health-of-athletes/",
-     "credibility": "NSCA (certifying body)"
-    }
    ]
   },
   "34": {
@@ -3072,8 +3037,7 @@
     "Eccentric loading → mechanotransduction → ↑collagen synthesis; eccentrics ↓hamstring-strain risk",
     "CKC (foot fixed, e.g. squat) = functional/multi-joint stability; OKC (foot free, e.g. leg ext) = isolate one joint",
     "RTS: side-to-side deficit <10% (LSI ≥90%) in strength/function; prior injury = top reinjury risk factor",
-    "DAPRE: 4 sets off 6RM (10×50%, 6×75%, max×100%, then set-3 reps set the set-4 & next-session load)",
-    "Reconditioning is physical AND psychological: fear of reinjury, depression, and loss of identity can stall return-to-play and raise reinjury risk even after tissue has healed — integrate psychological support with progressive loading."
+    "DAPRE: 4 sets off 6RM (10×50%, 6×75%, max×100%, then set-3 reps set the set-4 & next-session load)"
    ],
    "training_link": "Treat these load-vs-phase rules as your everyday progression logic, not just injury care — any new Hyrox stimulus (first sled-heavy block, adding eccentrics, ramping wall-ball volume) is 'healing tissue' that wants controlled overload, not a spike. If you tweak a hamstring on a run, POLICE it early, keep the uninjured half of your engine training (upper body, opposite leg, bike), then rebuild eccentric → concentric → speed before you sprint again. Coach your athletes to an LSI ≥90% and pain-free sport-specific testing before RTS, not just to 'pain gone' — pain resolves well before the tissue does.",
    "video": {
@@ -3142,13 +3106,6 @@
     "Table 23.3",
     "Figure 23.6",
     "Figure 23.8"
-   ],
-   "resources": [
-    {
-     "title": "NSCA — Considering the Mental Health of Athletes",
-     "url": "https://www.nsca.com/education/articles/nsca-coach/considering-the-mental-health-of-athletes/",
-     "credibility": "NSCA (certifying body)"
-    }
    ]
   },
   "40": {
@@ -4204,12 +4161,7 @@
     "Not all underperformance = OT; mistimed peak, undertraining, illness, RED-S all mimic it",
     "Monitor tiers: Cat I daily/cheap/fast → Cat II every few days → Cat III occasional/intrusive; escalate only if flagged",
     "Recovery = cut volume/intensity (mandatory); OR recovers ~1 wk, severe OT up to 4 wk (RE) or months–year (endurance volume)",
-    "Recovery-strategy evidence (Table 24.4): modifying the program is rated 'Most strong'; quality sleep and training taper are both 'Strong'; HRV/RHR are Cat-I cardiovascular readiness markers",
-    "Overreaching = short-term ↓performance from accumulated load; overtraining (OT) is the process of loading beyond recovery capacity.",
-    "Functional overreaching (FOR): planned overload → brief ↓performance → supercompensation ABOVE baseline after a taper (days–~2 wks). Beneficial and intentional.",
-    "Nonfunctional overreaching (NFOR): same acute neural/structural/hormonal responses, but performance stays depressed for weeks–months with no positive adaptation until rest.",
-    "Overtraining syndrome (OTS): the end result — long-term (months+) performance decrement + maladaptation; a diagnosis of exclusion (rule out illness, iron/thyroid, under-fuelling).",
-    "Path: load matched to recovery → FOR → supercompensation; load unmatched → NFOR → OTS. The variable you control is recovery, not just training."
+    "Recovery-strategy evidence (Table 24.4): modifying the program is rated 'Most strong'; quality sleep and training taper are both 'Strong'; HRV/RHR are Cat-I cardiovascular readiness markers"
    ],
    "training_link": "Map your monitoring the way Ch 24 does: WHOOP HRV + RHR are your Category-I daily markers (HRV +59%, RHR -9 bpm Jan→May = real adaptation, resistance phase working). But watch the trend, not one noisy morning. Sleep is your genuine limiter (median ~5.5h vs ~9.8h need) — one of the strongest-evidence recovery levers in Table 24.4, behind only modifying the program itself — which is why v9.8 gates any load bump behind a 7-day-median readiness check, keeping your Hyrox blocks in functional-OR territory instead of tipping into NFOR before race day.",
    "video": {
@@ -4257,21 +4209,6 @@
      "term": "Sleep debt",
      "def": "Accumulated shortfall vs sleep need; erodes quality sleep, which Table 24.4 rates as a strongly-supported recovery strategy, and raises injury/illness and OTS risk.",
      "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#ff7a7a'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#5ec8ff'/></svg>"
-    },
-    {
-     "term": "Functional overreaching (FOR)",
-     "def": "Planned short-term overload: performance dips, then rebounds above baseline after recovery/taper. The intended mechanism behind an overload-then-taper block.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 24 C18 24 20 32 30 32 C42 32 42 12 60 12\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"8\" y1=\"24\" x2=\"72\" y2=\"24\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/><circle cx=\"60\" cy=\"12\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
-    },
-    {
-     "term": "Nonfunctional overreaching (NFOR)",
-     "def": "Prolonged overload without adequate recovery: performance stagnates for weeks–months with no positive adaptation. Maladaptive; a warning sign en route to OTS.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 20 C18 20 22 30 34 31 C50 32 56 31 70 31\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><line x1=\"8\" y1=\"20\" x2=\"72\" y2=\"20\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
-    },
-    {
-     "term": "Overtraining syndrome (OTS)",
-     "def": "Long-term performance decline plus maladaptation from a chronic stress-vs-recovery imbalance; a diagnosis of exclusion needing extended recovery.",
-     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 12 L24 12 L24 20 L40 20 L40 28 L56 28 L56 34 L72 34\" fill=\"none\" stroke=\"#e0556b\" stroke-width=\"2\"/></svg>"
     }
    ],
    "relevant": true,
@@ -4284,7 +4221,85 @@
     "Figure 24.15",
     "Table 24.4",
     "Figure 24.16"
+   ]
+  },
+  "55": {
+   "title": "Overreaching, overtraining & the overtraining syndrome",
+   "topic_id": "overtraining_syndrome",
+   "domain": "PD",
+   "chapter": "Ch 24 (5E)",
+   "page_refs": "5E Ch 24 — Overreaching, Overtraining & Recovery (GAS/periodization; OT vs OTS; SOTS/POTS; FOR/NFOR; allostatic load; performance & physiological markers; monitoring questionnaires; recovery strategies)",
+   "key_concept": "Overtraining (OT) is the PROCESS — training/non-training stress exceeding recovery — and the overtraining syndrome (OTS) is the RESULT, a maladaptive cluster of signs/symptoms whose defining feature is long-term performance decrement (weeks-months). It sits on a continuum with overreaching (OR), a milder version recovering in days-weeks. Functional OR (FOR) is deliberate, short-term overload → supercompensation and is a useful tool; nonfunctional OR (NFOR) yields no benefit, only baseline return after longer recovery. This maps onto Selye's GAS (alarm→resistance→adaptation). Non-training stressors sum into an allostatic load. Two ANS forms: sympathetic (SOTS, strength/power) and parasympathetic (POTS, endurance).",
+   "key_facts": [
+    "OT = process; OTS = result. Long-term performance impairment REQUIRED for OTS (weeks-months recovery).",
+    "OR = same definition, less severe → recovery days-weeks. FOR → supercompensation (beneficial); NFOR → only baseline return, no gain (not beneficial).",
+    "Severity/recovery continuum: acute fatigue → FOR → NFOR → OTS. Volume-dominant → endurance/POTS; intensity-dominant → strength-power/SOTS.",
+    "SOTS: ↑epinephrine response to exercise → chronic catecholamines → β2-receptor down-regulation → ↓muscle contractility; seen w/ resistance OT.",
+    "POTS ('Addisonoid'): parasympathetic dominance, ↓cortisol, ↓resting HR, adrenal exhaustion (blunted epinephrine); endurance athletes, huge volumes; recovery up to a year.",
+    "Performance sensitivity: speed (sprint) drops FIRST → power next → max strength LAST (strength well-protected). RFD, aerobic/anaerobic endurance, cognition also hit.",
+    "Allostatic load = cumulative wear-and-tear; antecedents (sleep, nutrition, travel, job, illness) sum into total stress; can cause OR result from OTS.",
+    "Not all underperformance = overtraining: mistimed peaking, undertraining, poor tactics, illness also underperform without OT.",
+    "Subjective questionnaires (POMS/RESTQ) may beat objective tests; hormones indicate STRESS not OT specifically.",
+    "Recovery = mandatory ↓volume/intensity or cessation; OR ~1 wk, high-intensity RE OT ~4 wk, high-volume running months-year. Modifying the program (↓volume/frequency/intensity/cessation) rated 'most strong'; sleep 'strong'; carbohydrates the top-rated diet factor ('promising')."
    ],
+   "training_link": "When you program a Hyrox mesocycle with a deliberate high-volume block, you are betting on functional overreaching — so schedule the recovery/taper that turns the dip into supercompensation, or it becomes NFOR with no payoff. Track cheap daily signals (bar velocity at a fixed load, sprint/first-step speed, a short RESTQ or POMS check) because speed and power fade before strength does. And read the whole allostatic load — travel, sleep, work stress on your athletes — not just gym volume, before blaming a bad session on overtraining.",
+   "glossary": [
+    {
+     "term": "Overtraining (OT)",
+     "def": "The process of accumulating training/non-training stress beyond the individual's recovery capacity, which can produce the overtraining syndrome.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 12 L24 12 L24 20 L40 20 L40 28 L56 28 L56 34 L72 34\" fill=\"none\" stroke=\"#e0556b\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Overtraining syndrome (OTS)",
+     "def": "The resulting cluster of physiological/psychological maladaptation symptoms, defined by long-term (weeks-months) performance impairment.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 12 L24 12 L24 20 L40 20 L40 28 L56 28 L56 34 L72 34\" fill=\"none\" stroke=\"#e0556b\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Functional overreaching (FOR)",
+     "def": "Deliberate short-term overload causing transient performance dips that rebound to a supercompensated higher level; a beneficial training strategy.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 24 C18 24 20 32 30 32 C42 32 42 12 60 12\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"8\" y1=\"24\" x2=\"72\" y2=\"24\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
+    },
+    {
+     "term": "Nonfunctional overreaching (NFOR)",
+     "def": "Overreaching with greater fatigue and longer recovery that returns only to baseline with no performance gain; unnecessary stress.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 24 C18 24 20 32 30 32 C42 32 42 12 60 12\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"8\" y1=\"24\" x2=\"72\" y2=\"24\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
+    },
+    {
+     "term": "Sympathetic OTS (SOTS)",
+     "def": "Overtraining form marked by increased epinephrine response and β2-receptor down-regulation; typical of high-intensity strength/power training.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 20 h10 l4 -10 4 20 4 -14 4 14 4 -8 h30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"1.8\"/></svg>"
+    },
+    {
+     "term": "Parasympathetic OTS (POTS)",
+     "def": "Overtraining form (Addisonoid) with parasympathetic dominance, low cortisol and resting HR, and blunted adrenaline; typical of high-volume endurance work.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 20 h10 l4 -10 4 20 4 -14 4 14 4 -8 h30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"1.8\"/></svg>"
+    },
+    {
+     "term": "Allostatic load",
+     "def": "The cumulative wear-and-tear on the body from all stress antecedents, training and non-training, that together can tip an athlete into OTS.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Underperformance",
+     "def": "Performance below expectation from any cause; overtraining is only one type, not synonymous with all underperformance.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Supercompensation",
+     "def": "Rebound of performance above baseline after adequate recovery from an overload block; the payoff of functional overreaching.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 24 C18 24 20 32 30 32 C42 32 42 12 60 12\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"8\" y1=\"24\" x2=\"72\" y2=\"24\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
+    }
+   ],
+   "figures": [
+    "Table 24.1",
+    "Table 24.2",
+    "Table 24.3",
+    "Table 24.4",
+    "Figure 24.6",
+    "Figure 24.12"
+   ],
+   "relevant": true,
+   "notes_5e": "This is an entirely NEW standalone 5E chapter (Ch 24) dedicated to overreaching/overtraining/recovery — the 4th edition scattered these ideas across periodization; the 5E adds the FOR/NFOR distinction, SOTS/POTS split, allostatic-load framing, and dedicated monitoring-questionnaire and recovery-strategy tables.",
    "resources": [
     {
      "title": "NSCA — Functional & Nonfunctional Overreaching and Overtraining",
@@ -4292,6 +4307,320 @@
      "credibility": "NSCA (certifying body)"
     }
    ]
+  },
+  "56": {
+   "title": "CNS activation & potentiation (PAP/PAPE) before training",
+   "topic_id": "cns_priming",
+   "domain": "EX",
+   "chapter": "Ch 15 (5E)",
+   "page_refs": "5E Ch 15 — Potentiation phase / Central Nervous System Preparatory Exercises (RAMP potentiate phase, PAPE, CNS preparatory exercises, Tables 15.2/15.3)",
+   "key_concept": "The potentiation phase is the 3rd RAMP phase (Raise, Activate and Mobilize, Potentiate): a progressive, high-intensity, sport-specific ramp that primes the CNS for high force and speed and is often omitted from traditional warm-ups. It rests on muscle's history-dependence — the treppe/staircase effect, where consecutive contractions net a rise in contractile force and make the motor neuron more sensitive to action potentials, so muscle activates with decreased neural input. Augmenting this with a low-volume, high-intensity conditioning bout can yield postactivation performance enhancement (PAPE): a transient residual force enhancement. Because that same preconditioning activity also generates fatigue (fitness-fatigue theory), a net benefit appears only once fatigue dissipates within a rest window. Response is highly individual and the evidence equivocal, so guidelines are tentative.",
+   "key_facts": [
+    "RAMP = Raise, Activate and Mobilize, Potentiate; potentiation is phase 3, critical to speed/power performance yet often omitted from traditional warm-ups.",
+    "Potentiation is a non-temperature-related warm-up effect (the chapter lists postactivation potentiation among the non-temperature effects, alongside increased blood flow and raised baseline oxygen consumption).",
+    "Basis = history-dependence of force: the staircase/treppe effect (consecutive contractions net a rise in contractile force) makes the motor neuron more sensitive to action potentials, so muscle is activated with decreased neural input.",
+    "PAPE (postactivation performance enhancement) is an acute rise in neuromuscular performance from a low-volume conditioning stimulus, giving residual force enhancement; the chapter attributes it to several mechanisms — myosin light-chain phosphorylation, pennation-angle change, higher-threshold motor-unit recruitment, enhanced H-wave amplitude, and increased neurotransmitter release/efficiency.",
+    "The preconditioning activity generates BOTH PAPE AND fatigue (fitness-fatigue theory); this potentiation-vs-fatigue balance must guide PAPE-based warm-up design, and a benefit shows only after fatigue clears.",
+    "Modalities that can stimulate PAPE = resistance exercise, variable resistance, isometrics, resisted and assisted sprinting, plyometrics; most research uses heavy resistance exercise at 60-90% 1RM (e.g. back squat), with effects mostly reported on sprint and/or jump performance.",
+    "Rest window is load/volume/status-dependent: higher intensity likely yields greater potentiation but also greater fatigue, requiring longer recovery (Tables 15.2/15.3 list rest ~1-12 min).",
+    "Contrast-type methodologies pair a conditioning activity with a similar main activity (e.g. back squat -> countermovement jump; see Tables 15.2/15.3); pairings that generate less PAPE but need less recovery are often more applicable within a session.",
+    "The stimulatory effect is likely greater in well-trained athletes with high speed and power capacities; effects are highly variable, should be prescribed individually, and some athletes may not benefit at all.",
+    "Precompetition priming = a low-volume, high-intensity session some hours or even days (perhaps up to ~48 h) before competition to prime the CNS; noted as proposed but with limited research and outside the chapter's warm-up scope."
+   ],
+   "training_link": "For a Hyrox athlete, treat the last stretch of your warm-up as the potentiate phase — don't just jog and stretch, ramp progressively into sled-pace pushes, wall-ball throws, or short sprint accelerations so the CNS is primed before the gun. If you experiment with a heavy conditioning bout to potentiate (e.g. a trap-bar pull before broad jumps), respect the rest window: intensity buys potentiation but also fatigue, so give higher loads more recovery and test each athlete individually — some gain nothing. A lighter contrast-type pairing that needs less recovery is usually more practical mid-session than a 12-minute rest after a heavy squat.",
+   "glossary": [
+    {
+     "term": "PAPE",
+     "def": "Postactivation performance enhancement: an acute, transient rise in neuromuscular performance following a low-volume conditioning stimulus, reflecting residual force enhancement from the prior activity.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L24 30 L30 10 L36 30 L70 30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"10\" r=\"2.5\" fill=\"#5ec8ff\"/></svg>"
+    },
+    {
+     "term": "Postactivation potentiation",
+     "def": "A non-temperature-related warm-up effect: the acute enhancement of muscle performance following prior activity, the underlying phenomenon that CNS preparatory exercises seek to exploit.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L24 30 L30 10 L36 30 L70 30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"10\" r=\"2.5\" fill=\"#5ec8ff\"/></svg>"
+    },
+    {
+     "term": "Conditioning (preconditioning) activity",
+     "def": "The augmented, typically high-intensity activity performed to elicit potentiation before the target performance movement; it can generate both PAPE and fatigue.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "CNS preparatory exercise",
+     "def": "An augmented activity added to the potentiation phase to enhance readiness for a subsequent task via a positive transient performance response.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Treppe (staircase) effect",
+     "def": "The net rise in contractile force across consecutive contractions from muscle's contractile history, which makes the motor neuron more sensitive to action potentials.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Fitness-fatigue theory",
+     "def": "A preconditioning activity produces both a potentiation aftereffect and a fatigue aftereffect; the observed outcome is the net balance of the two over time.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Contrast-type methodology",
+     "def": "Pairing a preconditioning activity with a biomechanically similar main activity to exploit potentiation; pairings that generate less PAPE but require less recovery are often more session-practical.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L24 30 L30 10 L36 30 L70 30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"10\" r=\"2.5\" fill=\"#5ec8ff\"/></svg>"
+    },
+    {
+     "term": "Precompetition priming",
+     "def": "A low-volume, high-intensity session performed some hours or days (perhaps up to ~48 h) before competition to prime the CNS for a potential residual force enhancement.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 32 C28 30 44 20 70 8\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "RAMP protocol",
+     "def": "Warm-up framework of the Raise, Activate and Mobilize, and Potentiate phases; the potentiate phase houses CNS preparation.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 32 C28 30 44 20 70 8\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/></svg>"
+    }
+   ],
+   "figures": [
+    "Table 15.1",
+    "Table 15.2",
+    "Table 15.3"
+   ],
+   "relevant": true,
+   "notes_5e": "NEW in 5E: an expanded potentiate-phase section introduces the modern term PAPE, the fitness-fatigue rest-window logic, CNS preparatory exercise combination tables (15.2/15.3), and precompetition priming — content largely absent from the 4th edition's warm-up chapter.",
+   "video": {
+    "title": "Postactivation Potentiation Explained (Complex / French Contrast)",
+    "url": "https://www.youtube.com/watch?v=AgfSsQFVJYI",
+    "credibility": "The Movement System · CSCS"
+   },
+   "resources": [
+    {
+     "title": "NSCA Exercise Technique Video Library",
+     "url": "https://www.nsca.com/education/nsca-videos/",
+     "credibility": "NSCA (certifying body)"
+    }
+   ]
+  },
+  "57": {
+   "title": "Sex-related differences",
+   "topic_id": "sex_differences",
+   "domain": "ES",
+   "chapter": "Ch 8 (5E)",
+   "page_refs": "5E Ch 8 — Physical Changes in Early Adulthood; Injury & Health Considerations (ACL, PFPS, bone stress, concussion, PFD); Training Responses & Adaptations; The Menstrual Cycle; Resistance Training Considerations",
+   "key_concept": "5E splits sex differences into its own standalone chapter. Core message: absolute strength gap (esp. upper body) reflects body-composition/anthropometric differences, NOT lesser trainability. When strength is normalized to fat-free mass or muscle cross-sectional area, sex differences largely disappear; lower-body strength/body-weight is near-equal, upper-body still somewhat lower. Females hypertrophy similarly short-term (≤16 wk) despite low testosterone. Higher female risk of ACL, PFPS, bone stress injuries, concussion (longer recovery), and pelvic-floor dysfunction. Estradiol is muscle-protective. Best evidence says do NOT modify resistance prescription by menstrual-cycle phase.",
+   "key_facts": [
+    "Absolute strength: F < M, but upper-body gap > lower-body gap; F upper-body strength stays lower even relative to body weight",
+    "Normalize to fat-free mass or muscle CSA → sex strength differences mostly disappear; F have similar fiber number, strength/muscle-volume similar",
+    "Short-term (≤16 wk) hypertrophy (CSA) similar between sexes despite F low testosterone; MPS still stimulated",
+    "ACL: absolute injuries ↑ in males, but relative rate ~2× higher in females; main driver = neuromuscular deficiency → dynamic knee valgus (most noncontact)",
+    "PFPS ~2× more common in F; bone stress injuries ↑ in F (monitor RED-S, vit D, early specialization)",
+    "Concussion: ↑ incidence in some F sports, longer recovery/prolonged symptoms; more equipment/surface contact (player-to-player similar)",
+    "Urinary incontinence: F athletes 5× vs male athletes, 2.7× vs sedentary F; ~27% UI prevalence; Kegels + core",
+    "Estradiol = muscle-protective (antioxidant, membrane stabilizer, ↓ damage, ↑ MPS); both high AND low estradiol harmful",
+    "F: ↑ type I fibers, ~30% greater mitochondrial respiration, more fatigue-resistant in endurance despite lower VO2max/body-size",
+    "Meta-analyses: NO systematic menstrual-phase effect in trained athletes → do NOT program by cycle phase",
+    "Cortisol response to acute exercise attenuated in F (↑ sensitivity); resting GH higher in F than M"
+   ],
+   "training_link": "When you program for your female Hyrox athletes, load them exactly as hard as the men — normalize to fat-free mass and their relative strength is comparable, so periodize progressive overload the same way, especially for upper-body pulling/pressing where the true gap sits. Prioritize year-round neuromuscular, plyometric, and landing/cutting mechanics work to cut ACL and PFPS risk, and monitor for RED-S, bone-stress symptoms, and pelvic-floor issues. Do NOT gate training loads to menstrual-cycle phase; the evidence doesn't support it — individualize by symptoms and recovery instead.",
+   "glossary": [
+    {
+     "term": "Absolute vs relative strength",
+     "def": "Absolute = raw load lifted; relative = normalized to body weight, fat-free mass, or muscle CSA. Sex gaps shrink or vanish when made relative.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Dynamic knee valgus",
+     "def": "Inward collapse of the knee on landing/cutting from neuromuscular deficiency; the chief modifiable driver of female ACL risk.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M30 8 L30 20 L44 32\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"20\" r=\"3\" fill=\"#ffb86b\"/></svg>"
+    },
+    {
+     "term": "Estradiol",
+     "def": "Primary estrogen in menstruating females; protects skeletal muscle from damage and promotes protein synthesis over degradation.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Patellofemoral pain syndrome (PFPS)",
+     "def": "Pain from the patellofemoral joint (runner's/jumper's knee); ~2× more common in female athletes, linked to hip mechanics.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Bone stress injury",
+     "def": "Overuse injury from repetitive loading causing abnormal bone remodeling (incl. stress fractures); more frequent in females, tied to RED-S risk.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"30\" y=\"8\" width=\"8\" height=\"26\" rx=\"3\" fill=\"#5ec8ff\"/><rect x=\"30\" y=\"8\" width=\"8\" height=\"8\" rx=\"3\" fill=\"#ffb86b\"/></svg>"
+    },
+    {
+     "term": "Pelvic floor dysfunction (PFD)",
+     "def": "Impairment of pelvic-floor muscles; most commonly urinary and stress urinary incontinence, elevated in female athletes.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Stress urinary incontinence (SUI)",
+     "def": "Involuntary urine loss triggered by physical exertion; rises with high-impact, high-load sport.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Eumenorrheic",
+     "def": "Having a normal, regular menstrual cycle; the population in which cycle-phase performance effects are studied.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "RED-S",
+     "def": "Relative energy deficiency in sport; low energy availability harming bone health and multiple systems (see Ch 11).",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"30\" y=\"8\" width=\"8\" height=\"26\" rx=\"3\" fill=\"#5ec8ff\"/><rect x=\"30\" y=\"8\" width=\"8\" height=\"8\" rx=\"3\" fill=\"#ffb86b\"/></svg>"
+    }
+   ],
+   "figures": [
+    "Figure 8.1"
+   ],
+   "relevant": false,
+   "notes_5e": "NEW in 5E: sex differences are broken out into a dedicated standalone chapter (split from the old combined age/sex chapter), adding current material on ACL/PFPS/bone-stress/concussion/pelvic-floor risk, RED-S, and the meta-analytic verdict against menstrual-phase-based programming.",
+   "video": {
+    "title": "Dr. Stacy Sims — Women Are Not Small Men (TEDx)",
+    "url": "https://www.youtube.com/watch?v=e5LYGzKUPlE",
+    "credibility": "TEDxTauranga · Stacy Sims, PhD"
+   }
+  },
+  "58": {
+   "title": "Mental health & the psychological impact of injury",
+   "topic_id": "mental_health_injury",
+   "domain": "ES",
+   "chapter": "Ch 9 (5E)",
+   "page_refs": "5E Ch 9 — Mental Health and Strength and Conditioning; Psychological Impact of Injury in Sport",
+   "key_concept": "5E charges the S&C coach with a defined, non-clinical mental-health role: OBSERVE (signs/symptoms of anxiety, depression, stress) → ASSESS duration + disruption → REFER to the right professional. Signs = coach-observable (↓effort, pacing); symptoms = self-reported (fatigue, worry). Referral tiers by severity: performance coach/CMPC (skills only) → counselor → psychologist (chronic/clinical). For injury, the Williams & Andersen stress-and-injury model names 3 pre-injury moderators — personality, stressor history, coping resources — that shape the stress response and injury risk. Post-injury, athletes cycle through fear of reinjury, lost athletic identity, grief; return-to-play readiness = realistic expectations + ↑self-efficacy + ↓anxiety.",
+   "key_facts": [
+    "Mental-health research on athletes exploded: ~74 pubs (2003) → >1,100 (2023).",
+    "Student-athlete risk (one study): depression 22.3%, anxiety 12.5%, low self-esteem 8%.",
+    "Mental health = emotional + psychological + social well-being; NOT merely absence of illness.",
+    "Signs = coach-observable outcomes; symptoms = self-reported feelings/sensations.",
+    "Depression vs anxiety distinguisher: anhedonia + hopelessness/helplessness + low energy.",
+    "3-step coach process: (1) classify ABCs (affect/behavior/cognitions); (2) duration (>2-3 wk) + disruption (sleep/eating/social); (3) refer.",
+    "Referral tiers: performance coach/CMPC (attention-based skills, no clinical) → counselor (state-licensed, interpersonal/CBT) → psychologist (testing, chronic issues).",
+    "Subclinical = low-level, <1 wk, no disruption to sleep/eating/social → manage in-house; chronic/severe → refer + loop in sports-med staff.",
+    "Williams & Andersen stress-and-injury model: personality + stressor history + coping resources → stress response → injury risk.",
+    "RTP readiness = realistic expectations + high self-efficacy + low anxiety; favor process-oriented, autonomy-supportive approach.",
+    "Athletic identity: ~40% of student-athletes (2022) draw high self-worth from sport → injury threatens identity.",
+    "Academic stress (exam periods) linked to significant ↑ in physical injuries in >100 D-I football players."
+   ],
+   "training_link": "As a hybrid/Hyrox coach you sit closer to your athletes than most staff, so learn to spot signs (a normally sharp athlete's effort drops, they go quiet, they skip sessions) versus symptoms they report to you. Run the 3-step play: note the ABCs, check whether it has persisted >2-3 weeks and is bleeding into sleep/food/relationships, then refer up the tier — you coach skills, you do not diagnose. Post-injury, build a process-goal, autonomy-supportive block that rebuilds self-efficacy on scary tasks (sled sprints, jumps, cutting) to defuse fear of reinjury before pushing load.",
+   "glossary": [
+    {
+     "term": "Sign",
+     "def": "An observable outcome the coach can readily assess (e.g., reduced effort, nervous pacing).",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Symptom",
+     "def": "A self-reported feeling or sensation from the athlete (e.g., tiredness, worry, less power).",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Anhedonia",
+     "def": "Loss of pleasure/emotion; the key marker separating depression from anxiety.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Subclinical distress",
+     "def": "Low-level, short-term (<1 wk) mental/emotional distress that does not disrupt sleep, eating, or social roles.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "ABCs",
+     "def": "Affect (mood/emotion), Behavior (movements/actions), and Cognitions (thoughts) a coach classifies when screening distress.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "CMPC",
+     "def": "Certified Mental Performance Consultant (AASP); delivers psychological skills like goal-setting and imagery, not clinical care.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Stress-and-injury model",
+     "def": "Williams & Andersen framework: personality, stressor history, and coping resources moderate the stress response and predispose to injury.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Athletic identity",
+     "def": "The degree to which self-worth is derived from athletic participation; high identity heightens injury's psychological toll.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Return-to-play readiness",
+     "def": "Psychological + physical fitness to compete again, marked by realistic expectations, high self-efficacy, and low anxiety.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    }
+   ],
+   "figures": [
+    "Table 9.1"
+   ],
+   "relevant": false,
+   "notes_5e": "The 5th edition newly adds an entire coach-facing mental-health section (signs/symptoms table, 3-step observe-assess-refer process, referral tiers, and case studies) plus expanded psychological-impact-of-injury coverage (stress-and-injury model, cognitive-appraisal factors, return-to-play readiness) that were absent from the 4th edition.",
+   "resources": [
+    {
+     "title": "NSCA — Considering the Mental Health of Athletes",
+     "url": "https://www.nsca.com/education/articles/nsca-coach/considering-the-mental-health-of-athletes/",
+     "credibility": "NSCA (certifying body)"
+    }
+   ]
+  },
+  "59": {
+   "title": "Smoking, vaping & aerobic training",
+   "topic_id": "smoking_vaping_aerobic",
+   "domain": "ES",
+   "chapter": "Ch 6 (5E)",
+   "page_refs": "5E Ch 6 — External Factors Affecting Aerobic Adaptation: Smoking and Vaping",
+   "key_concept": "Smoking and vaping are external factors that blunt aerobic adaptation and performance. Smoking → ↓VO2, impaired HR response, ↓muscular endurance, ↑COPD/bronchitis/emphysema risk (even in teens). Nicotine constricts bronchioles (↑airway resistance), ↑mucus/swelling from smoke irritation, and paralyzes respiratory cilia so debris accumulates. Carbon monoxide binds hemoglobin (forms carboxyhemoglobin, higher affinity than O2), ↓O2-carrying capacity → ↓max exercise capacity + ↑submaximal CV strain, and ↑catecholamines (↑HR/BP). Vaping = nicotine aerosol without combustion; lower toxicant quantity but real short-term harm, catecholamine-driven ↑HR/BP/contractility, ↓VO2peak and slower runs; long-term data are scarce.",
+   "key_facts": [
+    "Smoking research in athletes is sparse — active people tend to avoid it fearing performance/disease harm",
+    "Smokers vs nonsmokers: ↓O2 uptake, impaired HR response to exercise, ↓muscular endurance",
+    "Smoking ↑ risk of COPD, chronic bronchitis, emphysema; decrements seen even in teenagers → harm is fast",
+    "Detrimental respiratory effects of smoking: nicotine bronchiole constriction and/or ↑fluid secretion+swelling in bronchial tree from smoke irritation (both ↑airway resistance), plus nicotine paralysis of respiratory cilia (debris accumulates)",
+    "Carbon monoxide (CO) has higher Hb affinity than O2 → carboxyhemoglobin ↓ O2 delivery to muscle → ↓max capacity, ↑submaximal CV response",
+    "CO also → impaired hemodynamic response + ↑catecholamine release → ↑HR/BP",
+    "Vaping = inhaling nicotine+flavoring aerosol from an e-cigarette/vape pen; heats liquid, NO combustion",
+    "Vaping = most common nicotine modality in youth; 27-50% of U.S. high schoolers in 2019 reported vaping",
+    "Vapor toxicants lower in quantity than cigarettes, but >99% of products contain nicotine → catecholamine-driven ↑HR, ↑BP, ↑contractility/workload",
+    "Vaping outcomes: ↓VO2peak, ↓chronotropic response, ↓O2 extraction, lung inflammation/cellular damage; slower 2-mile (3.1 km) run times — even slower than cigarette smokers; long-term data extremely limited (no large prospective cohort)"
+   ],
+   "training_link": "If you coach a hybrid or Hyrox athlete who smokes or vapes, expect a real ceiling on the run legs and the ski/row: reduced VO2peak, blunted HR response, and impaired O2 delivery all cap the aerobic engine that Hyrox lives on. Frame cessation as a direct performance lever, not just a health nag — cite the slower 2-mile times and lower O2 extraction. When interpreting an athlete's HR data, remember nicotine's catecholamine surge inflates resting/submaximal HR and BP, so a vaper's numbers can mislead your zone and readiness reads.",
+   "glossary": [
+    {
+     "term": "Carboxyhemoglobin",
+     "def": "Hemoglobin bound to carbon monoxide instead of oxygen; because CO binds Hb more tightly than O2, it lowers the blood's oxygen-carrying capacity.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Airway resistance",
+     "def": "Opposition to airflow through the respiratory passages; raised by nicotine-induced bronchiole constriction and by mucus and swelling.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Respiratory cilia",
+     "def": "Hair-like projections lining the airways that sweep out mucus, foreign particles, and debris; nicotine paralyzes them, letting debris accumulate.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 8 C40 8 30 16 30 24 a10 10 0 0 0 20 0 C50 16 40 8 40 8Z\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"1.6\"/><line x1=\"24\" y1=\"30\" x2=\"56\" y2=\"12\" stroke=\"#e0556b\" stroke-width=\"2.4\"/></svg>"
+    },
+    {
+     "term": "Vaping",
+     "def": "Inhaling an aerosol (usually nicotine plus flavoring) from an e-cigarette or vape pen that heats a liquid to vapor without the combustion of a burning cigarette.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 8 C40 8 30 16 30 24 a10 10 0 0 0 20 0 C50 16 40 8 40 8Z\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"1.6\"/><line x1=\"24\" y1=\"30\" x2=\"56\" y2=\"12\" stroke=\"#e0556b\" stroke-width=\"2.4\"/></svg>"
+    },
+    {
+     "term": "Catecholamines",
+     "def": "Sympathetic hormones (epinephrine, norepinephrine) whose nicotine-stimulated release raises heart rate, blood pressure, and cardiac contractility.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Chronotropic response",
+     "def": "The heart-rate response to a stimulus such as exercise; reduced in vape users, indicating a blunted rise in HR during effort.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Emphysema",
+     "def": "A chronic obstructive lung disease marked by destruction of alveolar walls and loss of gas-exchange surface; smoking is a primary cause.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "VO2peak",
+     "def": "The highest oxygen uptake measured during an exercise test; a marker of cardiorespiratory fitness shown to be lower in regular vapers.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    }
+   ],
+   "figures": [],
+   "relevant": false,
+   "notes_5e": "NEW in the 5th edition: a dedicated 'Smoking and Vaping' subsection under external factors affecting aerobic adaptation adds vaping/e-cigarette physiology (nicotine aerosol, youth prevalence, catecholamine CV effects, VO2peak/run decrements) that the 4th edition did not cover."
   }
  }
 }
