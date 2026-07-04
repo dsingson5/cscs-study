@@ -24,12 +24,46 @@ import widgets
 import themes
 import motifs
 
+def render_fig_strip(lesson):
+    """Thumbnails of the 5E figures/tables chosen for this lesson -> lightbox."""
+    labels = lesson.get("figures") or []
+    cards = ""
+    for lab in labels:
+        f = FIGS.get(lab)
+        if not f:
+            continue
+        url = FIG_BASE + f["file"]
+        cap = f'{f["label"]} — {f["caption"]}' if f.get("caption") else f["label"]
+        cards += (f'<figure class="fig-thumb" data-full="{esc(url)}" data-cap="{esc(cap)}" '
+                  f'tabindex="0" role="button" aria-label="{esc(cap)}">'
+                  f'<img loading="lazy" src="{esc(url)}" alt="{esc(f["label"])}">'
+                  f'<figcaption>{esc(f["label"])}</figcaption></figure>')
+    if not cards:
+        return ""
+    return ('<div class="fig-strip"><div class="fig-title">Figures from the 5th edition '
+            '<span class="fig-hint">tap to enlarge</span></div>'
+            f'<div class="fig-row">{cards}</div></div>')
+
 ROOT = Path(__file__).resolve().parent
 DATA = ROOT / "data"
 OUT = ROOT / "daily"
 LAST_PAGE_QIDS = []  # core question stable-ids on the last rendered page
 STYLES = ROOT / "styles.css"
 APP_JS = ROOT / "app.js"
+
+# ── 5th-edition figure library (extracted high-res scans in ./figures) ──────────
+FIG_BASE = "../figures/"                    # relative: daily pages live in /daily/
+FIG_MANIFEST = ROOT / "figures" / "manifest.json"
+try:
+    _figs_list = json.loads(FIG_MANIFEST.read_text(encoding="utf-8"))
+except Exception:
+    _figs_list = []
+FIGS = {f["label"]: f for f in _figs_list}          # "Figure 3.1" -> record
+FIGS_BY_CH = {}
+for _f in _figs_list:
+    FIGS_BY_CH.setdefault(_f["chapter"], []).append(_f)
+
+
 
 SPACING_DAYS = [1, 3, 7, 14, 30, 90]
 SPACING_LABELS = {
@@ -169,12 +203,13 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
         items = ""
         for i, g in enumerate(lesson["glossary"]):
             items += (f'<div class="gloss-card" style="animation-delay: {i*0.08:.2f}s">'
-                      f'<div class="gloss-svg">{g["svg"]}</div>'
+                      f'<div class="gloss-svg">{g.get("svg","")}</div>'
                       f'<div class="gloss-text"><div class="gloss-term">{esc(g["term"])}</div>'
                       f'<div class="gloss-def">{esc(g["def"])}</div></div></div>')
         glossary_html = (f'<div class="glossary"><div class="gloss-title">Visual glossary</div>'
                          f'<div class="gloss-grid">{items}</div></div>')
 
+    fig_html = render_fig_strip(lesson)
     return (f'<section class="lesson-card reveal{motif_class}" data-domain="{domain}" '
             f'style="--accent: {theme["accent"]}; --accent-2: {theme["accent_2"]}; --glow: {theme["glow"]};">'
             f'{hero_html}'
@@ -185,6 +220,7 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
             f'{widget_html}'
             f'<div class="facts"><div class="facts-title">Key facts to memorize</div><ul>{facts}</ul></div>'
             f'{glossary_html}'
+            f'{fig_html}'
             f'{tl_html}<div class="media">{media}</div></section>')
 
 
@@ -436,7 +472,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
     <div class="session-goal">Today: <b id="goal-new">{new_count}</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
   <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day {today_day} &middot; {date_str}</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
-  <div class="games-cta"><a href="../games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a></div>
+  <div class="games-cta"><a href="../games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a><a href="../figures.html" style="margin-left:10px">&#128444;&#65039; 5E Figure Library &mdash; every diagram &amp; table</a></div>
   <div class="study-tip">
     <b>How to use this:</b> recall and type an answer <b>before</b> you reveal — the reveal stays locked until you commit.
     After the answer, grade yourself <b>Again / Hard / Good / Easy</b>; that grade schedules the card with
@@ -466,7 +502,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
   <p style="font-size: 13px; color: var(--text-dim); margin: 0 0 14px;">Forced retrieval first, then grade yourself. Whatever you miss resurfaces on the FSRS-chosen day.</p>
   {practice_html}
   <footer>
-    Source: <i>Essentials of Strength Training and Conditioning</i> · Scheduling: <b>FSRS</b> (ts-fsrs) · spacing principle: Cepeda et al. 2008<br>
+    Source: <i>Essentials of Strength Training and Conditioning</i>, 5th ed. (NSCA) · Scheduling: <b>FSRS</b> (ts-fsrs) · spacing principle: Cepeda et al. 2008<br>
     <code>cscs_{today.isoformat()}.html</code> · also written to <code>cscs_today.html</code> (rolling, for localStorage persistence)
   </footer>
 </div>
@@ -569,6 +605,65 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
     return base_html.replace("<head>", "<head>\n" + CACHE_META + redirect, 1)
 
 
+
+def build_gallery_html():
+    """Standalone, self-contained browsable gallery of every 5E figure & table."""
+    CH_TITLES = {1:"Structure & Function of Body Systems",2:"Biomechanics of Resistance Exercise",3:"Bioenergetics of Exercise & Training",4:"Endocrine Responses to Resistance Training",5:"Adaptations to Anaerobic Training",6:"Adaptations to Aerobic Training",7:"Age-Related Differences",8:"Sex-Related Differences",9:"Psychological Foundations",10:"Basic Nutritional Factors",11:"Nutrition Strategies for Performance",12:"Performance-Enhancing Substances",13:"Test Selection & Administration",14:"Scoring & Interpretation of Tests",15:"Warm-Up, Mobility & Flexibility",16:"Exercise Technique: Free Weight & Machine",17:"Exercise Technique: Alternative Modes",18:"Program Design: Resistance Training",19:"Program Design: Plyometrics",20:"Program Design: Speed & Agility",21:"Program Design: Aerobic & Metabolic",22:"Periodization",23:"Rehabilitation & Reconditioning",24:"Overreaching, Overtraining & Recovery",25:"Facility Design & Layout",26:"Facility Policies & Legal Issues"}
+    css = STYLES.read_text(encoding="utf-8")
+    js = APP_JS.read_text(encoding="utf-8")
+    theme = themes.for_day(1)
+    sections = ""
+    total = 0
+    for ch in sorted(FIGS_BY_CH):
+        recs = sorted(FIGS_BY_CH[ch], key=lambda r: (0 if r["kind"] == "FIGURE" else 1,
+                      int(r["number"].split(".")[1])))
+        cards = ""
+        for f in recs:
+            total += 1
+            url = "figures/" + f["file"]
+            cap = f'{f["label"]} — {f["caption"]}' if f.get("caption") else f["label"]
+            cards += (f'<figure class="fig-thumb gal" data-full="{esc(url)}" data-cap="{esc(cap)}" '
+                      f'data-search="{esc((f["label"]+" "+f.get("caption","")).lower())}" '
+                      f'tabindex="0" role="button" aria-label="{esc(cap)}">'
+                      f'<img loading="lazy" src="{esc(url)}" alt="{esc(f["label"])}">'
+                      f'<figcaption>{esc(f["label"])}<span class="gal-cap">{esc(f.get("caption",""))}</span></figcaption>'
+                      f'</figure>')
+        sections += (f'<section class="gal-ch" data-ch="{ch}"><h2>Chapter {ch} · {esc(CH_TITLES.get(ch, ""))}</h2>'
+                     f'<div class="fig-row gal-row">{cards}</div></section>')
+    return f'''<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSCS — 5th Edition Figure Library</title>
+<style>{css}</style><style>{themes.render_overrides(theme)}</style>
+<style>.gal-wrap{{max-width:1200px;margin:0 auto;padding:20px 16px 80px}}
+.gal-head h1{{font-size:24px;margin:0 0 4px}}.gal-head p{{color:var(--text-dim);font-size:13px;margin:0 0 16px}}
+.gal-search{{width:100%;max-width:420px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);
+background:var(--card);color:var(--text);font:inherit;margin-bottom:18px}}
+.gal-ch h2{{font-size:16px;margin:26px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}}
+.gal-row{{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}}
+.fig-thumb.gal{{margin:0}}.fig-thumb.gal img{{max-height:150px}}
+.gal-cap{{display:block;font-size:10px;color:var(--text-dim);font-weight:400;margin-top:2px;line-height:1.25}}
+.gal-empty{{display:none}}</style>
+</head><body class="{theme["body_class"]}">
+<div class="gal-wrap">
+<div class="gal-head"><a href="./" style="color:var(--accent);font-size:12px;text-decoration:none">&larr; Back to today\u2019s study</a>
+<h1>5th Edition Figure Library</h1>
+<p>{total} figures &amp; tables extracted from <i>Essentials of Strength Training and Conditioning</i>, 5th ed. — tap any image to enlarge. For your personal study reference.</p>
+<input class="gal-search" type="search" placeholder="Search figures &amp; tables\u2026 (e.g. fiber, squat, VO2)" oninput="galFilter(this.value)"></div>
+{sections}
+<div class="gal-empty" id="gal-empty" style="color:var(--text-dim);padding:20px">No matches.</div>
+</div>
+<script>
+function galFilter(q){{q=(q||"").trim().toLowerCase();var any=false;
+document.querySelectorAll(".fig-thumb.gal").forEach(function(el){{
+var hit=!q||el.dataset.search.indexOf(q)>=0;el.style.display=hit?"":"none";if(hit)any=true;}});
+document.querySelectorAll(".gal-ch").forEach(function(s){{
+var vis=s.querySelectorAll(".fig-thumb.gal:not([style*=\'none\'])").length;s.style.display=vis?"":"none";}});
+document.getElementById("gal-empty").style.display=any?"none":"block";}}
+</script>
+<script>{js}</script>
+</body></html>'''
+
 def main():
     import argparse
     parser = argparse.ArgumentParser()
@@ -631,7 +726,10 @@ def main():
     index_path.write_text(build_index_html(html, available, today.isoformat(), _lesson_dates), encoding="utf-8")
     print(f"Wrote {dated_path}")
     print(f"Wrote {rolling_path} (rolling)")
+    gallery_path = ROOT / "figures.html"
+    gallery_path.write_text(build_gallery_html(), encoding="utf-8")
     print(f"Wrote {index_path} (GitHub Pages entry)")
+    print(f"Wrote {gallery_path} (figure gallery)")
     return 0
 
 

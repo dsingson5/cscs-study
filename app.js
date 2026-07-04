@@ -1243,3 +1243,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 100);
   });
 })();
+
+/* 5E-FIGBOX — lightbox for extracted 5th-edition figures & tables */
+(function(){
+  function ensureBox(){
+    var b=document.getElementById("cscs-figbox");
+    if(b) return b;
+    b=document.createElement("div"); b.id="cscs-figbox"; b.className="figbox";
+    b.innerHTML='<span class="fb-hint">Esc or tap to close</span>'+
+      '<button class="fb-x" aria-label="Close" type="button">\u00d7</button>'+
+      '<img alt=""><div class="fb-cap"></div>';
+    document.body.appendChild(b);
+    b.addEventListener("click", function(e){ if(e.target===b||e.target.classList.contains("fb-x")) closeFig(); });
+    return b;
+  }
+  window.openFig=function(src,cap){
+    var b=ensureBox();
+    b.querySelector("img").src=src;
+    b.querySelector(".fb-cap").textContent=cap||"";
+    b.classList.add("open"); document.body.style.overflow="hidden";
+  };
+  window.closeFig=function(){
+    var b=document.getElementById("cscs-figbox");
+    if(b){ b.classList.remove("open"); b.querySelector("img").src=""; }
+    document.body.style.overflow="";
+  };
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeFig(); });
+  document.addEventListener("click", function(e){
+    var t=e.target.closest(".fig-thumb"); if(t) window.openFig(t.dataset.full, t.dataset.cap);
+  });
+  document.addEventListener("keydown", function(e){
+    if((e.key==="Enter"||e.key===" ")&&document.activeElement&&document.activeElement.classList.contains("fig-thumb")){
+      e.preventDefault(); var t=document.activeElement; window.openFig(t.dataset.full,t.dataset.cap);
+    }
+  });
+})();
