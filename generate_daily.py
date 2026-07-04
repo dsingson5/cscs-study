@@ -70,8 +70,11 @@ try:
     _gh = GAMES_HTML.read_text(encoding="utf-8")
     _fm = _re2.search(r"window\.FOCUS_MAP=(\{.*?\});</script>", _gh, _re2.S).group(1)
     GAMES_TOPICS = set(_re2.findall(r'"([a-z0-9_]+)":\[', _fm))
+    import hashlib as _hl
+    GAMES_VER = _hl.md5(_gh.encode("utf-8")).hexdigest()[:8]
 except Exception:
     GAMES_TOPICS = set()
+    GAMES_VER = "0"
 
 
 def render_drills(lesson, is_today):
@@ -84,8 +87,8 @@ def render_drills(lesson, is_today):
     return (f'<div class="drills-embed"><div class="drills-title">Practice drills for this topic '
             f'<span class="drills-hint">active retrieval &amp; decisions</span></div>'
             f'<iframe class="drill-frame" data-focus="{esc(tid)}" loading="lazy" '
-            f'title="Practice drills for this topic" src="../games.html?focus={esc(tid)}&amp;embed=1" '
-            f'style="width:100%;border:0;height:220px;overflow:hidden"></iframe></div>')
+            f'title="Practice drills for this topic" src="../games.html?focus={esc(tid)}&amp;embed=1&amp;v={GAMES_VER}" '
+            f'style="width:100%;border:0;height:120px;overflow:hidden"></iframe></div>')
 
 
 

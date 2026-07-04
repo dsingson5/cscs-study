@@ -152,7 +152,7 @@ a{color:var(--accent);text-decoration:none}
 .foot{margin-top:30px;font-size:11px;color:var(--text-dimmer);line-height:1.6;border-top:1px solid var(--border);padding-top:14px}
 .hidden{display:none!important}
 /* 5E-EMBED */
-body.embed{background:transparent!important}
+body.embed{background:transparent!important;min-height:0!important;height:auto!important}
 body.embed .topbar,body.embed footer{display:none!important}
 body.embed .wrap{padding:6px 2px 4px!important;max-width:none!important}
 body.embed #app{min-height:0!important}
@@ -577,7 +577,7 @@ function focusKeys(t){return (window.FOCUS_MAP&&window.FOCUS_MAP[t])||[];}
 function keyOf(src,it,i){return src+':'+(it&&it.id!=null?it.id:i);}
 function poolFor(src){var all=GD[src]||[];if(!FOCUS_TOPIC)return all;var ks=focusKeys(FOCUS_TOPIC);if(!ks.length)return all;var f=all.filter(function(it,i){return ks.indexOf(keyOf(src,it,i))>=0;});return f.length?f:all;}
 function modeHasFocus(gid){var src=SRC_OF[gid];if(!src)return false;var ks=focusKeys(FOCUS_TOPIC);if(!ks.length)return false;return (GD[src]||[]).some(function(it,i){return ks.indexOf(keyOf(src,it,i))>=0;});}
-function postHeight(){try{if(window.parent&&window.parent!==window){window.parent.postMessage({cscsGames:true,focus:FOCUS_TOPIC,height:Math.ceil(document.documentElement.getBoundingClientRect().height)},'*');}}catch(e){}}
+function postHeight(){try{if(window.parent&&window.parent!==window){var _a=document.getElementById('app');var _h=_a?_a.getBoundingClientRect().bottom:document.body.scrollHeight;window.parent.postMessage({cscsGames:true,focus:FOCUS_TOPIC,height:Math.ceil(_h)+6},'*');}}catch(e){}}
 function HOME(){ if(FOCUS_TOPIC){showFocusDrills();} else {showHub();} }
 function showFocusDrills(){
   clear(); if(SUB)SUB.textContent='drills for this topic';
