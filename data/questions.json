@@ -992,6 +992,16 @@
    "q": "The 5E notes a downside of multisport training for neuromuscular adaptation — what is it?",
    "a": "Triathletes show less refined, more variable muscle coactivation than single-sport athletes, reflecting interference in neuromuscular adaptation.",
    "type": "applied"
+  },
+  {
+   "q": "How does smoking impair aerobic capacity?",
+   "a": "Nicotine constricts bronchioles (↑airway resistance), increases mucus/swelling, and paralyzes cilia (↓clearance) — reducing effective ventilation and O₂ delivery.",
+   "type": "recall"
+  },
+  {
+   "q": "Why is vaping not a safe substitute for an endurance athlete?",
+   "a": "It still delivers nicotine → catecholamine release (↑HR/BP) and airway effects; long-term aerobic impact is under-studied, so it carries the same core risks without an evidence base for safety.",
+   "type": "applied"
   }
  ],
  "age_sex": [
@@ -1136,6 +1146,16 @@
    "q": "How does diaphragmatic breathing lower arousal physiologically?",
    "a": "Deep, rhythmic belly breathing shifts autonomic balance toward parasympathetic dominance and vagal tone (via brainstem respiratory-cardiac feedback), lowering heart rate and muscle tension — countering the sympathetic fight-or-flight response.",
    "type": "recall"
+  },
+  {
+   "q": "Name the three factors in the Williams & Andersen stress–injury model.",
+   "a": "Personality, history of stressors, and coping resources — together they shape the stress response that raises injury risk.",
+   "type": "recall"
+  },
+  {
+   "q": "An athlete shows withdrawal and hopelessness after an ACL tear. What is the S&C coach's role?",
+   "a": "Recognize it as a mental-health concern, provide support, and refer to a qualified professional on the allied team — the coach supports and refers, they do not diagnose or treat.",
+   "type": "applied"
   }
  ],
  "macros": [
@@ -1624,6 +1644,16 @@
   {
    "q": "How does greater ROM potentially aid power output?",
    "a": "Applying force over a greater ROM increases impulse by extending the time force is applied — but only if paired with the force capacity to control that range.",
+   "type": "applied"
+  },
+  {
+   "q": "What is PAP/PAPE and why include it in a warm-up before explosive work?",
+   "a": "A brief high-intensity conditioning contraction that acutely potentiates subsequent power output; it 'primes' the nervous system so the following jump/sprint/lift is more forceful.",
+   "type": "recall"
+  },
+  {
+   "q": "You do a heavy single, jump 30 s later and feel flat, but jump great at ~4 min. Why?",
+   "a": "At 30 s residual fatigue still outweighs potentiation; by ~4 min fatigue clears and the PAPE effect dominates. The rest interval must let fatigue dissipate for the potentiation to show.",
    "type": "applied"
   }
  ],
@@ -2665,6 +2695,11 @@
    "q": "What is arthrogenic inhibition and why does it matter in rehab?",
    "a": "Joint swelling reflexively inhibits the alpha motor neuron, causing muscle weakness/atrophy — so controlling edema early is key to restoring activation.",
    "type": "recall"
+  },
+  {
+   "q": "Why monitor an athlete's psychology during return-to-play, not just tissue healing?",
+   "a": "Fear of reinjury, depression, and loss of athletic identity can slow progress and increase reinjury risk even when the tissue has structurally healed — readiness is physical and psychological.",
+   "type": "applied"
   }
  ],
  "facility_design": [
@@ -3634,6 +3669,21 @@
   {
    "q": "Why act on the HRV trend rather than a single morning reading?",
    "a": "A one-day dip is noisy (sleep timing, stress, alcohol, measurement error). A rising multi-week trend tracks positive adaptation; a sustained suppression flags incomplete recovery — that's the signal worth easing load for.",
+   "type": "applied"
+  },
+  {
+   "q": "Distinguish functional from nonfunctional overreaching.",
+   "a": "FOR = planned short-term ↓performance that rebounds ABOVE baseline after recovery/taper (beneficial). NFOR = performance stays depressed for weeks–months with no positive adaptation (maladaptive).",
+   "type": "recall"
+  },
+  {
+   "q": "An athlete's performance is still depressed 6 weeks after a hard block despite rest days. FOR, NFOR, or heading to OTS?",
+   "a": "NFOR trending toward OTS — a functional overreach rebounds within days to ~2 weeks; a weeks-to-months depression signals nonfunctional overreaching or early overtraining syndrome. Offload, monitor, rule out non-training causes.",
+   "type": "applied"
+  },
+  {
+   "q": "What single variable separates functional from nonfunctional overreaching?",
+   "a": "Recovery. The training overload can be identical; whether it becomes beneficial (FOR) or maladaptive (NFOR/OTS) depends on whether recovery is matched to the load.",
    "type": "applied"
   }
  ]

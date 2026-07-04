@@ -1366,7 +1366,9 @@
     "Fiber SIZE can ↓ ~20% with marathon training while function maintained; Type IIx→IIa shift",
     "Plasma/blood volume ↑, hemoglobin mass ↑, but hematocrit may ↓ (dilution)",
     "Detraining: VO₂max ↓ 4-14% short-term (<4wk), 6-20% long-term — driven by ↓blood vol, ↓SV, ↓max Q, ↑submax HR",
-    "Running (impact) builds bone; cycling/swimming (weight-supported) do not"
+    "Running (impact) builds bone; cycling/swimming (weight-supported) do not",
+    "Smoking impairs aerobic performance: nicotine constricts bronchioles (↑airway resistance), increases mucus secretion/swelling, and paralyzes respiratory-tract cilia (↓clearance of particles/fluids).",
+    "Vaping (e-cigarettes) delivers a nicotine aerosol → catecholamine release ↑HR & ↑BP; it is now the most common nicotine modality in youth, and its long-term aerobic-training effects are still under-researched."
    ],
    "training_link": "Your Jan→May trajectory (HRV +59%, RHR -9) is this central+peripheral remodeling in real time — bigger SV, fuller plasma volume, more mitochondria. With base solidified, your next gains come from LT and economy, not VO₂max: sub-threshold 10×1000m and short-recovery 4×8 above MLSS push the OBLA point up. For Hyrox, remember fiber SIZE may shrink under high aerobic volume — keep concurrent strength in to defend the sled/carry stations.",
    "video": {
@@ -1414,6 +1416,11 @@
      "term": "Exercise economy",
      "def": "O₂ (energy) cost of a fixed pace/power. Improves via biomechanics + neuromuscular efficiency; can separate two athletes with equal VO₂max and LT.",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Nicotine (smoking / vaping)",
+     "def": "Constricts bronchioles (↑airway resistance), ↑mucus, and paralyzes airway cilia; catecholamine-driven ↑HR/BP. All detrimental to aerobic performance — vaping is not a 'safe' aerobic alternative.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 8 C40 8 30 16 30 24 a10 10 0 0 0 20 0 C50 16 40 8 40 8Z\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"1.6\"/><line x1=\"24\" y1=\"30\" x2=\"56\" y2=\"12\" stroke=\"#e0556b\" stroke-width=\"2.4\"/></svg>"
     }
    ],
    "relevant": true,
@@ -1887,13 +1894,15 @@
     "Static stretch hold 15-30 s (30 s optimal, diminishing returns beyond); mild discomfort not pain",
     "Weekly stretch VOLUME (frequency) > single-session duration for ROM gains; PNF exception = ~1 session/wk",
     "PNF: hold-relax-with-agonist-contraction most effective (reciprocal + autogenic inhibition); isometric 3-6 s at ≤20% MVC",
-    "No consistent stretching–injury-prevention link; both hypo- and hyper-flexibility ↑ injury risk"
+    "No consistent stretching–injury-prevention link; both hypo- and hyper-flexibility ↑ injury risk",
+    "Beyond temperature and blood-flow effects, a warm-up can activate the nervous system: a brief high-intensity 'conditioning' contraction acutely potentiates subsequent power — postactivation potentiation (PAP) / postactivation performance enhancement (PAPE).",
+    "PAPE depends on load, volume, rest interval, and training status: too little rest → fatigue dominates (no benefit); enough rest for fatigue to clear (~minutes) → the potentiation shows; too much → the effect fades."
    ],
    "training_link": "For your Hyrox and 4x8 strength days, build the warm-up as RAMP, not stretching: Raise with sled-mimic or run drills, Activate & Mobilize through squat/lunge/hinge patterns, then Potentiate with build-up runs and ramping loads (50/70/90%) so rep-1 or the first station feels primed, not flat. Skip long static holds before power work — save PNF/static ROM for post-session or separate recovery days.",
    "video": {
-    "title": "Squat University — How To Squat Correctly (FIX MISTAKES) — includes warm-up",
-    "url": "https://www.youtube.com/watch?v=QDVdLGWktPU",
-    "credibility": "Aaron Horschig DPT"
+    "title": "NSCA — Dynamic Warm-Up Drill: Power Skip",
+    "url": "https://www.nsca.com/education/videos/dynamic-warm-up-drill-power-skip/",
+    "credibility": "NSCA (certifying body)"
    },
    "audio": {
     "title": "Huberman Lab — Galpin: Optimal Protocols (warm-up & potentiation)",
@@ -1942,6 +1951,16 @@
      "term": "Reciprocal inhibition",
      "def": "Reflexive relaxation of a muscle when its antagonist contracts; contributes to the extra ROM in hold-relax-with-agonist-contraction PNF.",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Postactivation potentiation (PAP)",
+     "def": "A heavy or explosive conditioning contraction transiently raises muscle force/power output for a subsequent effort — the nervous-system 'priming' rationale for a potentiation warm-up.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L24 30 L30 10 L36 30 L70 30\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><circle cx=\"30\" cy=\"10\" r=\"2.5\" fill=\"#5ec8ff\"/></svg>"
+    },
+    {
+     "term": "PAPE (performance enhancement)",
+     "def": "The voluntary-performance version of PAP: an acute power boost after a conditioning activity, seen once fatigue from that activity dissipates.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 30 L20 30 L24 16 L28 30 L44 30\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><path d=\"M44 30 L60 18\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\" stroke-dasharray=\"3 2\"/><circle cx=\"60\" cy=\"18\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
     }
    ],
    "figures": [
@@ -1951,6 +1970,13 @@
     "Figure 15.1",
     "Figure 15.6",
     "Figure 15.10"
+   ],
+   "resources": [
+    {
+     "title": "NSCA Exercise Technique Video Library",
+     "url": "https://www.nsca.com/education/nsca-videos/",
+     "credibility": "NSCA (certifying body)"
+    }
    ]
   },
   "26": {
@@ -2524,7 +2550,10 @@
     "Catastrophe (Hardy): somatic arousal = inverted-U, but with HIGH cognitive anxiety → sudden crash, not gradual decline; calming doesn't fully restore",
     "Reversal (Kerr): interpretation of arousal (excitement vs dread), not just amount, drives its effect",
     "MAS (approach success, seek ~50% odds) vs MAF (avoid shame, pick very easy/very hard tasks)",
-    "Fitts & Posner stages: cognitive → associative → autonomous (automaticity); process goals > outcome goals for skill & anxiety"
+    "Fitts & Posner stages: cognitive → associative → autonomous (automaticity); process goals > outcome goals for skill & anxiety",
+    "The 5E adds mental-health guidance: the S&C coach recognizes changes in behavior/statements and refers to the allied team (counselor/psychologist) — three tiers: emergent threat (e.g., suicidal ideation) → mental-health concern → applied-performance concern.",
+    "Psychological impact of injury: injured athletes commonly experience depression, anxiety and fear of reinjury, and loss of athletic identity — which can prolong recovery and delay return to sport.",
+    "Stress–injury model (Williams & Andersen): personality, history of stressors, and coping resources shape the stress response that raises injury risk; interventions target that stress response."
    ],
    "training_link": "Your race-week arousal target is personal — find your Hyrox IZOF, not a generic peak. If you run flat, pump arousal with music/self-talk before the start; if you spiral, use diaphragmatic breathing to drop somatic arousal and dodge the catastrophe crash mid-race. Anchor to process goals (split pace, transition routine, wall-ball rhythm) instead of a finish time, and run instructional self-talk on the compromised stations while trusting automaticity on the run.",
    "video": {
@@ -2577,6 +2606,16 @@
      "term": "Selective attention",
      "def": "Suppressing task-irrelevant cues to process task-relevant ones — what athletes call 'focus'. Nideffer maps focus on two axes: direction (internal-external) × width (broad-narrow).",
      "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"24\" cy=\"20\" r=\"9\" fill=\"none\" stroke=\"#5ec8ff\" stroke-width=\"2\"/><path d=\"M40 20h22M54 13l8 7-8 7\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/></svg>"
+    },
+    {
+     "term": "Stress–injury model",
+     "def": "Williams & Andersen: personality + history of stressors + coping resources modulate the stress response that elevates injury risk. Basis for psychological injury-prevention.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><g fill=\"#5ec8ff\"><circle cx=\"14\" cy=\"10\" r=\"3\"/><circle cx=\"14\" cy=\"20\" r=\"3\"/><circle cx=\"14\" cy=\"30\" r=\"3\"/></g><path d=\"M18 10 L40 20 M18 20 L40 20 M18 30 L40 20\" stroke=\"#3a4a5e\" stroke-width=\"1.3\"/><circle cx=\"46\" cy=\"20\" r=\"6\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"1.8\"/><path d=\"M52 20h16\" stroke=\"#ffb86b\" stroke-width=\"1.8\"/></svg>"
+    },
+    {
+     "term": "Psychological response to injury",
+     "def": "Depression, anxiety, fear of reinjury, and loss of athletic identity after injury — can slow rehab and delay return-to-play even once tissue has healed.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M40 8 C48 20 54 26 54 31 a14 14 0 0 1-28 0 C26 26 32 20 40 8Z\" fill=\"#ffb86b\" opacity=\".55\"/><path d=\"M34 22c3 3 9 3 12 0\" stroke=\"#0b1220\" stroke-width=\"1.4\" fill=\"none\"/></svg>"
     }
    ],
    "relevant": false,
@@ -2585,6 +2624,13 @@
     "Figure 9.1",
     "Figure 9.2",
     "Table 9.1"
+   ],
+   "resources": [
+    {
+     "title": "NSCA — Considering the Mental Health of Athletes",
+     "url": "https://www.nsca.com/education/articles/nsca-coach/considering-the-mental-health-of-athletes/",
+     "credibility": "NSCA (certifying body)"
+    }
    ]
   },
   "34": {
@@ -3026,7 +3072,8 @@
     "Eccentric loading → mechanotransduction → ↑collagen synthesis; eccentrics ↓hamstring-strain risk",
     "CKC (foot fixed, e.g. squat) = functional/multi-joint stability; OKC (foot free, e.g. leg ext) = isolate one joint",
     "RTS: side-to-side deficit <10% (LSI ≥90%) in strength/function; prior injury = top reinjury risk factor",
-    "DAPRE: 4 sets off 6RM (10×50%, 6×75%, max×100%, then set-3 reps set the set-4 & next-session load)"
+    "DAPRE: 4 sets off 6RM (10×50%, 6×75%, max×100%, then set-3 reps set the set-4 & next-session load)",
+    "Reconditioning is physical AND psychological: fear of reinjury, depression, and loss of identity can stall return-to-play and raise reinjury risk even after tissue has healed — integrate psychological support with progressive loading."
    ],
    "training_link": "Treat these load-vs-phase rules as your everyday progression logic, not just injury care — any new Hyrox stimulus (first sled-heavy block, adding eccentrics, ramping wall-ball volume) is 'healing tissue' that wants controlled overload, not a spike. If you tweak a hamstring on a run, POLICE it early, keep the uninjured half of your engine training (upper body, opposite leg, bike), then rebuild eccentric → concentric → speed before you sprint again. Coach your athletes to an LSI ≥90% and pain-free sport-specific testing before RTS, not just to 'pain gone' — pain resolves well before the tissue does.",
    "video": {
@@ -3095,6 +3142,13 @@
     "Table 23.3",
     "Figure 23.6",
     "Figure 23.8"
+   ],
+   "resources": [
+    {
+     "title": "NSCA — Considering the Mental Health of Athletes",
+     "url": "https://www.nsca.com/education/articles/nsca-coach/considering-the-mental-health-of-athletes/",
+     "credibility": "NSCA (certifying body)"
+    }
    ]
   },
   "40": {
@@ -4150,7 +4204,12 @@
     "Not all underperformance = OT; mistimed peak, undertraining, illness, RED-S all mimic it",
     "Monitor tiers: Cat I daily/cheap/fast → Cat II every few days → Cat III occasional/intrusive; escalate only if flagged",
     "Recovery = cut volume/intensity (mandatory); OR recovers ~1 wk, severe OT up to 4 wk (RE) or months–year (endurance volume)",
-    "Recovery-strategy evidence (Table 24.4): modifying the program is rated 'Most strong'; quality sleep and training taper are both 'Strong'; HRV/RHR are Cat-I cardiovascular readiness markers"
+    "Recovery-strategy evidence (Table 24.4): modifying the program is rated 'Most strong'; quality sleep and training taper are both 'Strong'; HRV/RHR are Cat-I cardiovascular readiness markers",
+    "Overreaching = short-term ↓performance from accumulated load; overtraining (OT) is the process of loading beyond recovery capacity.",
+    "Functional overreaching (FOR): planned overload → brief ↓performance → supercompensation ABOVE baseline after a taper (days–~2 wks). Beneficial and intentional.",
+    "Nonfunctional overreaching (NFOR): same acute neural/structural/hormonal responses, but performance stays depressed for weeks–months with no positive adaptation until rest.",
+    "Overtraining syndrome (OTS): the end result — long-term (months+) performance decrement + maladaptation; a diagnosis of exclusion (rule out illness, iron/thyroid, under-fuelling).",
+    "Path: load matched to recovery → FOR → supercompensation; load unmatched → NFOR → OTS. The variable you control is recovery, not just training."
    ],
    "training_link": "Map your monitoring the way Ch 24 does: WHOOP HRV + RHR are your Category-I daily markers (HRV +59%, RHR -9 bpm Jan→May = real adaptation, resistance phase working). But watch the trend, not one noisy morning. Sleep is your genuine limiter (median ~5.5h vs ~9.8h need) — one of the strongest-evidence recovery levers in Table 24.4, behind only modifying the program itself — which is why v9.8 gates any load bump behind a 7-day-median readiness check, keeping your Hyrox blocks in functional-OR territory instead of tipping into NFOR before race day.",
    "video": {
@@ -4198,6 +4257,21 @@
      "term": "Sleep debt",
      "def": "Accumulated shortfall vs sleep need; erodes quality sleep, which Table 24.4 rates as a strongly-supported recovery strategy, and raises injury/illness and OTS risk.",
      "svg": "<svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><rect x='6' y='8' width='14' height='26' rx='2' fill='#ff7a7a'/><rect x='33' y='20' width='14' height='14' rx='2' fill='#ffb86b'/><rect x='60' y='14' width='14' height='20' rx='2' fill='#5ec8ff'/></svg>"
+    },
+    {
+     "term": "Functional overreaching (FOR)",
+     "def": "Planned short-term overload: performance dips, then rebounds above baseline after recovery/taper. The intended mechanism behind an overload-then-taper block.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 24 C18 24 20 32 30 32 C42 32 42 12 60 12\" fill=\"none\" stroke=\"#67e8b0\" stroke-width=\"2\"/><line x1=\"8\" y1=\"24\" x2=\"72\" y2=\"24\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/><circle cx=\"60\" cy=\"12\" r=\"2.5\" fill=\"#67e8b0\"/></svg>"
+    },
+    {
+     "term": "Nonfunctional overreaching (NFOR)",
+     "def": "Prolonged overload without adequate recovery: performance stagnates for weeks–months with no positive adaptation. Maladaptive; a warning sign en route to OTS.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 20 C18 20 22 30 34 31 C50 32 56 31 70 31\" fill=\"none\" stroke=\"#ffb86b\" stroke-width=\"2\"/><line x1=\"8\" y1=\"20\" x2=\"72\" y2=\"20\" stroke=\"#3a4a5e\" stroke-width=\"1\" stroke-dasharray=\"3 2\"/></svg>"
+    },
+    {
+     "term": "Overtraining syndrome (OTS)",
+     "def": "Long-term performance decline plus maladaptation from a chronic stress-vs-recovery imbalance; a diagnosis of exclusion needing extended recovery.",
+     "svg": "<svg viewBox=\"0 0 80 40\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M8 12 L24 12 L24 20 L40 20 L40 28 L56 28 L56 34 L72 34\" fill=\"none\" stroke=\"#e0556b\" stroke-width=\"2\"/></svg>"
     }
    ],
    "relevant": true,
@@ -4210,6 +4284,13 @@
     "Figure 24.15",
     "Table 24.4",
     "Figure 24.16"
+   ],
+   "resources": [
+    {
+     "title": "NSCA — Functional & Nonfunctional Overreaching and Overtraining",
+     "url": "https://www.nsca.com/education/articles/kinetic-select/functional-and-nonfunctional-overreaching-and-overtraining/",
+     "credibility": "NSCA (certifying body)"
+    }
    ]
   }
  }

@@ -193,6 +193,11 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
         media += (f'<a class="media-link audio" href="{esc(a["url"])}" target="_blank" rel="noopener">'
                   f'<span class="m-icon">♪</span><div><div class="m-title">{esc(a["title"])}</div>'
                   f'<div class="m-cred">{esc(a.get("credibility", ""))}</div></div></a>')
+    for rsrc in (lesson.get("resources") or []):
+        if rsrc.get("url"):
+            media += (f'<a class="media-link resource" href="{esc(rsrc["url"])}" target="_blank" rel="noopener">'
+                      f'<span class="m-icon">🔗</span><div><div class="m-title">{esc(rsrc["title"])}</div>'
+                      f'<div class="m-cred">{esc(rsrc.get("credibility", ""))}</div></div></a>')
     widget_html = widgets.render(lesson["topic_id"]) if show_widget else ""
     chip = (f'<span class="domain-chip" style="background: {theme["glow"]}; color: {theme["accent"]}; border-color: {theme["accent"]}66;">'
             f'<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
@@ -473,6 +478,9 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
   </header>
   <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day {today_day} &middot; {date_str}</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
   <div class="games-cta"><a href="../games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a><a href="../figures.html" style="margin-left:10px">&#128444;&#65039; 5E Figure Library &mdash; every diagram &amp; table</a></div>
+  <div class="companion-cta"><span class="cc-label">Official 5th-edition companion &amp; videos:</span>
+    <a href="https://us.humankinetics.com/products/essentials-of-strength-training-and-conditioning-5th-edition-with-hkpropel-access" target="_blank" rel="noopener">Human Kinetics HKPropel &mdash; 21 exercise videos + 60 clips + 20 labs</a>
+    <a href="https://www.nsca.com/education/nsca-videos/" target="_blank" rel="noopener">NSCA video library</a></div>
   <div class="study-tip">
     <b>How to use this:</b> recall and type an answer <b>before</b> you reveal — the reveal stays locked until you commit.
     After the answer, grade yourself <b>Again / Hard / Good / Easy</b>; that grade schedules the card with
