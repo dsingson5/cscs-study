@@ -882,7 +882,7 @@ body {
     <div class="session-goal">Today: <b id="goal-new">9</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
   <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day 50 &middot; July 12, 2026</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
-  <div class="games-cta"><a href="../games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a><a href="../figures.html" style="margin-left:10px">&#128444;&#65039; 5E Figure Library &mdash; every diagram &amp; table</a></div>
+  <div class="browse-all">Everything relevant to today is on this page. Browse all: <a href="../games.html">Drills &amp; Games hub</a> &middot; <a href="../figures.html">5E figure library</a></div>
   <div class="companion-cta"><span class="cc-label">Official 5th-edition companion &amp; videos:</span>
     <a href="https://us.humankinetics.com/products/essentials-of-strength-training-and-conditioning-5th-edition-with-hkpropel-access" target="_blank" rel="noopener">Human Kinetics HKPropel &mdash; 21 exercise videos + 60 clips + 20 labs</a>
     <a href="https://www.nsca.com/education/nsca-videos/" target="_blank" rel="noopener">NSCA video library</a></div>
@@ -977,6 +977,13 @@ body {
 <script>window.__CSCS_DOMAINS = {"anaerobic_adaptations": "ES", "atp_pcr": "ES", "glycolysis": "ES", "oxidative": "ES", "energy_system_interaction": "ES", "ex_squat": "EX", "ex_deadlift": "EX", "ex_press": "EX", "ex_clean": "EX", "ex_alt_modes": "EX", "needs_analysis": "PD", "exercise_selection": "PD", "intensity_volume": "PD", "rest_frequency": "PD", "periodization_models": "PD", "periodization_structure": "PD", "plyometrics": "PD", "hyrox_demands_pacing": "PD", "hybrid_periodization": "PD", "concurrent_interference": "PD", "sled_force_velocity": "EX", "durability_decoupling": "ES", "recovery_hrv_sleep": "PD", "overtraining_syndrome": "PD", "lactate_thresholds_zones": "PD", "polarized_training": "PD", "zone2_mitochondria": "ES", "endurance_determinants": "ES", "hiit_interval_design": "PD", "aerobic_adaptations": "ES", "aerobic_programming": "PD", "cns_priming": "EX", "warmup": "EX", "force_velocity_length_tension": "ES", "heat_thermoregulation": "ES", "nutrient_timing": "NT", "macros": "NT", "anabolic_hormones": "ES", "catabolic_hormones": "ES", "muscle_fiber_types": "ES", "motor_units": "ES", "ec_coupling": "ES", "cardiovascular": "ES", "respiratory": "ES", "biomech_levers": "ES", "phase1_review": "ES", "age_sex": "ES", "sex_differences": "ES", "sport_psych": "ES", "mental_health_injury": "ES", "speed_agility": "PD", "rehab": "PD", "test_principles": "PD", "test_admin_strength": "PD", "test_admin_endurance": "PD", "peds": "NT", "smoking_vaping_aerobic": "ES", "facility_design": "PD", "facility_legal": "PD"};</script>
 <script>window.__CSCS_NEWCOUNT = 9;</script>
 <script>window.__CSCS_PAGE_DATE = "2026-07-12";window.__CSCS_PREV = "2026-07-11"; window.__CSCS_NEXT = "2026-07-13";</script>
+<script>
+window.addEventListener("message",function(e){
+  var d=e.data; if(!d||!d.cscsGames)return;
+  var f=document.querySelector('iframe.drill-frame[data-focus="'+(d.focus||"")+'"]')||document.querySelector("iframe.drill-frame");
+  if(f&&d.height){ f.style.height=(d.height+6)+"px"; }
+});
+</script>
 <script type="module">
   try {
     const m = await import('https://cdn.jsdelivr.net/npm/ts-fsrs@5.4.1/+esm');

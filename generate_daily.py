@@ -63,6 +63,30 @@ FIGS_BY_CH = {}
 for _f in _figs_list:
     FIGS_BY_CH.setdefault(_f["chapter"], []).append(_f)
 
+# ── Games embed: topics that have at least one relevant drill in games.html ──────
+GAMES_HTML = ROOT / "games.html"
+try:
+    import re as _re2
+    _gh = GAMES_HTML.read_text(encoding="utf-8")
+    _fm = _re2.search(r"window\.FOCUS_MAP=(\{.*?\});</script>", _gh, _re2.S).group(1)
+    GAMES_TOPICS = set(_re2.findall(r'"([a-z0-9_]+)":\[', _fm))
+except Exception:
+    GAMES_TOPICS = set()
+
+
+def render_drills(lesson, is_today):
+    """Inline the games relevant to THIS lesson's topic (auto-sized iframe)."""
+    if not is_today:
+        return ""
+    tid = lesson.get("topic_id", "")
+    if tid not in GAMES_TOPICS:
+        return ""
+    return (f'<div class="drills-embed"><div class="drills-title">Practice drills for this topic '
+            f'<span class="drills-hint">active retrieval &amp; decisions</span></div>'
+            f'<iframe class="drill-frame" data-focus="{esc(tid)}" loading="lazy" '
+            f'title="Practice drills for this topic" src="../games.html?focus={esc(tid)}&amp;embed=1" '
+            f'style="width:100%;border:0;height:220px;overflow:hidden"></iframe></div>')
+
 
 
 SPACING_DAYS = [1, 3, 7, 14, 30, 90]
@@ -105,6 +129,14 @@ FSRS_MODULE = (
     "  window.dispatchEvent(new Event('fsrs-ready'));\n"
     "</script>"
 )
+
+DRILL_LISTENER = """<script>
+window.addEventListener("message",function(e){
+  var d=e.data; if(!d||!d.cscsGames)return;
+  var f=document.querySelector('iframe.drill-frame[data-focus="'+(d.focus||"")+'"]')||document.querySelector("iframe.drill-frame");
+  if(f&&d.height){ f.style.height=(d.height+6)+"px"; }
+});
+</script>"""
 
 
 def load_data():
@@ -218,6 +250,7 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
                          f'<div class="gloss-grid">{items}</div></div>')
 
     fig_html = render_fig_strip(lesson)
+    drills_html = render_drills(lesson, is_today)
     return (f'<section class="lesson-card reveal{motif_class}" data-domain="{domain}" '
             f'style="--accent: {theme["accent"]}; --accent-2: {theme["accent_2"]}; --glow: {theme["glow"]};">'
             f'{hero_html}'
@@ -229,7 +262,7 @@ def render_lesson_card(lesson, badge, badge_class, show_widget=True, is_today=Fa
             f'<div class="facts"><div class="facts-title">Key facts to memorize</div><ul>{facts}</ul></div>'
             f'{glossary_html}'
             f'{fig_html}'
-            f'{tl_html}<div class="media">{media}</div></section>')
+            f'{tl_html}<div class="media">{media}</div>{drills_html}</section>')
 
 
 def render_q_card(topic_id, orig_idx, q, qid, domain, label="Q", pretest=False):
@@ -480,7 +513,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
     <div class="session-goal">Today: <b id="goal-new">{new_count}</b> new &middot; <b id="goal-due">0</b> due &middot; ~<b id="goal-min">25</b> min <span class="sg-note">— attendance, not a streak</span></div>
   </header>
   <nav class="lesson-nav" aria-label="Lesson navigation"><a class="ln-prev" id="ln-prev" href="#" onclick="return cscsNavPrev();">&larr; Previous lesson</a><span class="ln-here">Day {today_day} &middot; {date_str}</span><a class="ln-next" id="ln-next" href="#" onclick="return cscsNavNext();">Next lesson &rarr;</a></nav>
-  <div class="games-cta"><a href="../games.html">&#127918; Drills &amp; Games &mdash; practice with retrieval games</a><a href="../figures.html" style="margin-left:10px">&#128444;&#65039; 5E Figure Library &mdash; every diagram &amp; table</a></div>
+  <div class="browse-all">Everything relevant to today is on this page. Browse all: <a href="../games.html">Drills &amp; Games hub</a> &middot; <a href="../figures.html">5E figure library</a></div>
   <div class="companion-cta"><span class="cc-label">Official 5th-edition companion &amp; videos:</span>
     <a href="https://us.humankinetics.com/products/essentials-of-strength-training-and-conditioning-5th-edition-with-hkpropel-access" target="_blank" rel="noopener">Human Kinetics HKPropel &mdash; 21 exercise videos + 60 clips + 20 labs</a>
     <a href="https://www.nsca.com/education/nsca-videos/" target="_blank" rel="noopener">NSCA video library</a></div>
@@ -521,6 +554,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 <script>window.__CSCS_DOMAINS = {domains_json};</script>
 <script>window.__CSCS_NEWCOUNT = {new_count};</script>
 <script>window.__CSCS_PAGE_DATE = "{page_date}";window.__CSCS_PREV = {prev_json}; window.__CSCS_NEXT = {next_json};</script>
+{DRILL_LISTENER}
 {FSRS_MODULE}
 <script>{js}</script>
 </body>

@@ -151,6 +151,21 @@ a{color:var(--accent);text-decoration:none}
 .row-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
 .foot{margin-top:30px;font-size:11px;color:var(--text-dimmer);line-height:1.6;border-top:1px solid var(--border);padding-top:14px}
 .hidden{display:none!important}
+/* 5E-EMBED */
+body.embed{background:transparent!important}
+body.embed .topbar,body.embed footer{display:none!important}
+body.embed .wrap{padding:6px 2px 4px!important;max-width:none!important}
+body.embed #app{min-height:0!important}
+.focusdrills .fd-head{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);margin:0 0 10px}
+.focusdrills .fd-row{display:flex;flex-wrap:wrap;gap:10px}
+.focusdrills .fd-card{display:flex;flex-direction:column;gap:2px;align-items:flex-start;text-align:left;background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:10px 13px;cursor:pointer;min-width:148px;color:var(--text);font:inherit;transition:border-color .15s,transform .12s,box-shadow .12s}
+.focusdrills .fd-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.28)}
+.focusdrills .fd-ic{font-size:19px;line-height:1}
+.focusdrills .fd-nm{font-weight:600;font-size:13px}
+.focusdrills .fd-n{font-size:10.5px;color:var(--text-dimmer)}
+.focusdrills .fd-all{display:inline-block;margin-top:12px;font-size:11.5px;color:var(--accent);text-decoration:none;opacity:.85}
+.focusdrills .fd-all:hover{opacity:1}
+.focusdrills .fd-empty{font-size:12.5px;color:var(--text-dim)}
 </style>
 </head>
 <body>
@@ -550,10 +565,40 @@ window.GD = {
   ]
 };
 </script>
+<script>window.FOCUS_MAP={"ex_squat":["sequences:squat","recall:0","recall:1","recall:20","recall:21"],"ex_deadlift":["sequences:deadlift","recall:29"],"ex_clean":["sequences:clean","recall:2"],"ex_press":["sequences:press"],"ex_alt_modes":["sequences:sled","recall:25"],"sled_force_velocity":["sequences:sled","recall:25"],"glycolysis":["sequences:glyc","recall:3","recall:4"],"oxidative":["sequences:oxphos","recall:5"],"zone2_mitochondria":["sequences:oxphos","recall:18","recall:37"],"cardiovascular":["sequences:heart"],"ec_coupling":["sequences:eccoupling","recall:6"],"warmup":["sequences:ramp"],"cns_priming":["sequences:ramp"],"plyometrics":["sequences:ssc","recall:9","recall:10","recall:32"],"rehab":["sequences:rehab","sequences:rts_ladder","calc:lsi","scenarios:rehab","scenarios:rts","recall:30","recall:31","recall:32"],"needs_analysis":["sequences:needs","matches:terms","scenarios:novice","recall:7","recall:24"],"test_admin_strength":["sequences:onerm_test","sorts:test_measures","matches:tests","calc:epley1","calc:epley2","calc:brzycki","recall:23","recall:28"],"speed_agility":["sequences:sprint","calc:speed_rest","recall:43"],"facility_design":["sequences:facility_flow","matches:facility_specs","calc:facility_cap","scenarios:facility","recall:42"],"muscle_fiber_types":["sorts:fiber","matches:muscle"],"anaerobic_adaptations":["sorts:fiber","recall:8"],"energy_system_interaction":["sorts:energy","matches:fuel","calc:speed_rest"],"atp_pcr":["sorts:energy","matches:fuel"],"exercise_selection":["sorts:classify","matches:terms","recall:22"],"intensity_volume":["sorts:goal","calc:epley1","calc:epley2","calc:brzycki","calc:load1","calc:load2","calc:vload","calc:reps_pct","recall:13","recall:14","recall:28"],"anabolic_hormones":["sorts:hormone","matches:hormone"],"catabolic_hormones":["sorts:hormone","matches:hormone","recall:16"],"concurrent_interference":["sorts:concurrent","sorts:interference","scenarios:hyrox","recall:19","recall:38","recall:39"],"lactate_thresholds_zones":["sorts:intensity_zones","matches:threshold_terms","calc:hrmax","calc:pct_hrmax","calc:karvonen","scenarios:polarized","recall:11","recall:12","recall:17","recall:35","recall:36"],"polarized_training":["sorts:intensity_zones","calc:polarized_split","scenarios:polarized","recall:18","recall:26","recall:33","recall:34","recall:36"],"test_admin_endurance":["sorts:test_measures","matches:tests","matches:field_tests"],"durability_decoupling":["matches:threshold_terms"],"aerobic_programming":["calc:hrmax","calc:pct_hrmax","calc:karvonen","recall:11","recall:12"],"biomech_levers":["calc:work","calc:power"],"periodization_structure":["scenarios:insoccer"],"periodization_models":["scenarios:insoccer","scenarios:novice"],"hyrox_demands_pacing":["scenarios:hyrox","recall:15","recall:17"],"hybrid_periodization":["scenarios:hyrox"],"motor_units":["recall:8","recall:27"],"facility_legal":["recall:40","recall:41"]};</script>
 <script>
 (function(){
 "use strict";
 var GD=window.GD, APP=document.getElementById('app'), SUB=document.getElementById('topsub');
+var FOCUS_TOPIC=null;
+var SRC_OF={order:'sequences',sort:'sorts',match:'matches',recall:'recall',calc:'calc',coach:'scenarios'};
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function focusKeys(t){return (window.FOCUS_MAP&&window.FOCUS_MAP[t])||[];}
+function keyOf(src,it,i){return src+':'+(it&&it.id!=null?it.id:i);}
+function poolFor(src){var all=GD[src]||[];if(!FOCUS_TOPIC)return all;var ks=focusKeys(FOCUS_TOPIC);if(!ks.length)return all;var f=all.filter(function(it,i){return ks.indexOf(keyOf(src,it,i))>=0;});return f.length?f:all;}
+function modeHasFocus(gid){var src=SRC_OF[gid];if(!src)return false;var ks=focusKeys(FOCUS_TOPIC);if(!ks.length)return false;return (GD[src]||[]).some(function(it,i){return ks.indexOf(keyOf(src,it,i))>=0;});}
+function postHeight(){try{if(window.parent&&window.parent!==window){window.parent.postMessage({cscsGames:true,focus:FOCUS_TOPIC,height:Math.ceil(document.documentElement.getBoundingClientRect().height)},'*');}}catch(e){}}
+function HOME(){ if(FOCUS_TOPIC){showFocusDrills();} else {showHub();} }
+function showFocusDrills(){
+  clear(); if(SUB)SUB.textContent='drills for this topic';
+  var avail=GAMES.filter(function(g){return modeHasFocus(g.id);});
+  var wrap=el('div',{class:'focusdrills'});
+  if(!avail.length){
+    wrap.appendChild(el('div',{class:'fd-empty'},[el('div',{text:'No practice drills tagged to this topic yet.'}),el('a',{class:'fd-all',href:'games.html',target:'_top',text:'Open the full Drills & Games hub \u2192'})]));
+  } else {
+    wrap.appendChild(el('div',{class:'fd-head',text:'Practice drills for this topic'}));
+    var row=el('div',{class:'fd-row'}); var p=loadP();
+    avail.forEach(function(g){
+      var n=poolFor(SRC_OF[g.id]).length; var best=(p.best||{})[g.id];
+      row.appendChild(el('button',{class:'fd-card','aria-label':g.name,onclick:function(){g.start();}},[
+        el('span',{class:'fd-ic',html:g.icon}),el('span',{class:'fd-nm',text:g.name}),
+        el('span',{class:'fd-n',text:n+' drill'+(n>1?'s':'')+(best!=null?' \u00b7 best '+best+'%':'')})]));
+    });
+    wrap.appendChild(row);
+    wrap.appendChild(el('a',{class:'fd-all',href:'games.html',target:'_top',text:'Or open the full Drills & Games hub \u2192'}));
+  }
+  APP.appendChild(wrap); postHeight();
+}
 function $(s,r){return (r||document).querySelector(s);}
 function el(t,a,kids){var e=document.createElement(t);a=a||{};for(var k in a){var v=a[k];
   if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k==='text')e.textContent=v;
@@ -621,12 +666,11 @@ function todayFocus(){
 function showHub(){
   clear(); SUB.textContent='retrieval · sorting · decisions';
   APP.appendChild(el('p',{class:'intro',html:'Pick a drill. Each one makes you <b>retrieve</b> or <b>decide</b> — the parts that actually build memory and transfer. Mix them up; your spaced-repetition lessons stay the backbone.'}));
-  var _tf=todayFocus(); if(_tf) APP.appendChild(_tf);
   var p=loadP();
   var grid=el('div',{class:'grid'});
   GAMES.forEach(function(g){
     var best=p.best[g.id]; var plays=p.plays[g.id]||0; var when=gFmtWhen((p.last||{})[g.id]);
-    var card=el('button',{class:'gcard','aria-label':g.name,onclick:function(){g.start();}},[
+    var card=el('button',{class:'gcard','aria-label':g.name,onclick:function(){FOCUS_TOPIC=null;g.start();}},[
       el('div',{class:'gicon',html:g.icon}),
       el('h3',{text:g.name}),
       el('p',{text:g.desc}),
@@ -645,7 +689,7 @@ function showHub(){
 function gameShell(g, subtitle){
   clear(); SUB.textContent=g.name;
   var head=el('div',{class:'game-head'},[
-    el('button',{class:'btn ghost',onclick:showHub,html:'← Menu'}),
+    el('button',{class:'btn ghost',onclick:HOME,html:'← Menu'}),
     el('div',{},[el('div',{class:'game-title',text:g.name}), subtitle?el('div',{class:'game-sub',text:subtitle}):null, (function(){var w=gFmtWhen((loadP().last||{})[g.id]); if(!w)return null; return el('div',{class:'game-sub when-line',html:(w.today?'<span class="today">&#10003; Done today</span> &middot; last at '+w.time:'Last played '+w.date+' at '+w.time)});})()])
   ]);
   APP.appendChild(head);
@@ -713,11 +757,11 @@ function gameOrder(){
         seq.steps.forEach(function(s,i){list.appendChild(el('li',{class:'dnd-item correct','data-i':i},[el('span',{class:'num',text:String(i+1)}),el('span',{class:'grip',html:'☰'}),el('span',{text:s})]));});
         result.innerHTML='<span class="muted">Correct order shown.</span>';
       }}),
-      el('button',{class:'btn',text:'New ↻',onclick:function(){load(GD.sequences[Math.floor(Math.random()*GD.sequences.length)]);}})
+      el('button',{class:'btn',text:'New ↻',onclick:function(){load(rnd(poolFor('sequences')));}})
     ]);
     panel.appendChild(result); panel.appendChild(actions); body.appendChild(panel);
   }
-  load(GD.sequences[Math.floor(Math.random()*GD.sequences.length)]);
+  load(rnd(poolFor('sequences')));
 }
 
 /* ===================== SORT THE BINS ===================== */
@@ -766,11 +810,11 @@ function gameSort(){
         set.bins.forEach(function(bn,bi){var binItems=bins.querySelectorAll('.binitems')[bi];set.items.forEach(function(pair){if(pair[1]===bn){var t=Array.prototype.slice.call(pool.querySelectorAll('.token')).filter(function(x){return x.textContent===pair[0];})[0];if(t){binItems.appendChild(t);t.classList.add('correct');}}});});
         result.innerHTML='<span class="muted">Correct categories shown.</span>';
       }}),
-      el('button',{class:'btn',text:'New ↻',onclick:function(){load(GD.sorts[Math.floor(Math.random()*GD.sorts.length)]);}})
+      el('button',{class:'btn',text:'New ↻',onclick:function(){load(rnd(poolFor('sorts')));}})
     ]);
     panel.appendChild(result); panel.appendChild(actions); body.appendChild(panel);
   }
-  load(GD.sorts[Math.floor(Math.random()*GD.sorts.length)]);
+  load(rnd(poolFor('sorts')));
 }
 
 /* ===================== MATCH-UP ===================== */
@@ -803,22 +847,22 @@ function gameMatch(){
     });
     grid.appendChild(leftCol); grid.appendChild(rightCol); panel.appendChild(grid);
     var result=el('div',{class:'result'}); panel.appendChild(result);
-    var actions=el('div',{class:'row-actions'},[el('button',{class:'btn',text:'New ↻',onclick:function(){load(GD.matches[Math.floor(Math.random()*GD.matches.length)]);}})]);
+    var actions=el('div',{class:'row-actions'},[el('button',{class:'btn',text:'New ↻',onclick:function(){load(rnd(poolFor('matches')));}})]);
     panel.appendChild(actions); body.appendChild(panel);
     function finish(acc){ result.innerHTML=''; result.appendChild(el('span',{class:acc>=80?'ok':'warnc',html:'✓ All matched in '+tries+' taps — '+acc+'% efficiency'})); }
   }
-  load(GD.matches[Math.floor(Math.random()*GD.matches.length)]);
+  load(rnd(poolFor('matches')));
 }
 
 /* ===================== RAPID RECALL ===================== */
 function gameRecall(){
   var g=GAMES[3]; var body=gameShell(g,'Recall it, reveal, then grade yourself. Gentle clock — no penalty.');
-  var items=shuffle(GD.recall).slice(0,10), i=0, got=0;
+  var items=shuffle(poolFor('recall')).slice(0,10), i=0, got=0;
   function show(){
     body.innerHTML='';
     if(i>=items.length){ var pct=Math.round(got/items.length*100); record(g.id,pct);
       body.appendChild(el('div',{class:'panel done-card'},[el('div',{class:'big',text:got+'/'+items.length}),el('div',{class:'lab',text:'recalled this round ('+pct+'%)'}),
-        el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Play again',onclick:gameRecall}),el('button',{class:'btn',text:'Menu',onclick:showHub})])]));
+        el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Play again',onclick:gameRecall}),el('button',{class:'btn',text:'Menu',onclick:HOME})])]));
       return; }
     var it=items[i];
     var panel=el('div',{class:'panel'});
@@ -844,12 +888,12 @@ function gameRecall(){
 /* ===================== CALC DRILLS ===================== */
 function gameCalc(){
   var g=GAMES[4]; var body=gameShell(g,'Worked example first, then the formula fades. Answers within a small tolerance count.');
-  var items=shuffle(GD.calc), i=0, correct=0;
+  var items=shuffle(poolFor('calc')), i=0, correct=0;
   function show(){
     body.innerHTML='';
     if(i>=items.length){ var pct=Math.round(correct/items.length*100); record(g.id,pct);
       body.appendChild(el('div',{class:'panel done-card'},[el('div',{class:'big',text:correct+'/'+items.length}),el('div',{class:'lab',text:'calculations correct ('+pct+'%)'}),
-        el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Play again',onclick:gameCalc}),el('button',{class:'btn',text:'Menu',onclick:showHub})])]));
+        el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Play again',onclick:gameCalc}),el('button',{class:'btn',text:'Menu',onclick:HOME})])]));
       return; }
     var it=items[i]; var faded=i>=2;
     var panel=el('div',{class:'panel'});
@@ -888,7 +932,7 @@ function gameCoach(){
     var panel=el('div',{class:'panel'});
     panel.appendChild(el('p',{class:'intro',text:'Choose a case:'}));
     var list=el('div',{class:'choices'});
-    GD.scenarios.forEach(function(sc){
+    poolFor('scenarios').forEach(function(sc){
       list.appendChild(el('button',{class:'choice',onclick:function(){play(sc);}},[el('b',{text:sc.title}),el('div',{class:'muted',text:sc.topic})]));
     });
     panel.appendChild(list); body.appendChild(panel);
@@ -904,7 +948,7 @@ function gameCoach(){
         var pct=Math.round(score/sc.steps.length*100); record(g.id,pct);
         var grade=pct>=90?'Head coach':pct>=70?'Solid call':pct>=50?'Keep studying':'Review the principles';
         panel.appendChild(el('div',{class:'done-card'},[el('div',{class:'big',text:score+'/'+sc.steps.length}),el('div',{class:'lab',text:'right calls — '+grade+' ('+pct+'%)'}),
-          el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Another case',onclick:menu}),el('button',{class:'btn',text:'Replay',onclick:function(){play(sc);}}),el('button',{class:'btn',text:'Menu',onclick:showHub})])]));
+          el('div',{class:'row-actions'},[el('button',{class:'btn primary',text:'Another case',onclick:menu}),el('button',{class:'btn',text:'Replay',onclick:function(){play(sc);}}),el('button',{class:'btn',text:'Menu',onclick:HOME})])]));
         body.appendChild(panel); return;
       }
       var st=sc.steps[step];
@@ -931,7 +975,14 @@ function gameCoach(){
 }
 
 window.addEventListener('error',function(){/* keep hub usable */});
-showHub();
+(function boot(){
+  var Q; try{Q=new URLSearchParams(location.search);}catch(e){Q=null;}
+  var f=Q?Q.get('focus'):null; var emb=Q?(Q.get('embed')==='1'):false;
+  if(f||emb) document.body.classList.add('embed');
+  if(f){ FOCUS_TOPIC=f; showFocusDrills(); } else { showHub(); }
+  try{var ro=new ResizeObserver(function(){postHeight();}); ro.observe(document.body);}catch(e){}
+  window.addEventListener('load',postHeight); setTimeout(postHeight,250); setTimeout(postHeight,1200);
+})();
 })();
 </script>
 </body>
