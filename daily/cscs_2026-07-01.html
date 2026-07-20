@@ -1177,42 +1177,59 @@ function maybeHardReset() {
 }
 maybeHardReset();
 
-// ── One-time question-bank migration (5th-edition rewrite) ───────────────────
-// The 5E rewrite replaced EVERY question, but FSRS cards are keyed by
-// <topic_id>__<index> — so the old cards/log/answers now point at questions that
-// no longer exist at those indexes. Two visible symptoms: "Last answered ..." on
-// a question never seen, and per-day completion sets that can never be satisfied
-// (the user gets pinned to one day). Clear the per-question state — backed up
-// first — but KEEP day-level progress. touchedDays only exists from 2026-06-02,
-// so seed the days finished before that or the resume would rewind to Day 1.
+// ── Question-bank migration (5th-edition rewrite) — DISARMED ─────────────────
 const QBANK_EPOCH = "2026-07-04-5e";
-const QBANK_START = "2026-05-24";
-const QBANK_DONE_THROUGH = "2026-06-09";  // days 1-17 were completed pre-rewrite
+const QBANK_BACKUP_KEY = "backup.qbank." + QBANK_EPOCH;
+const QBANK_HEAL_EPOCH = "2026-07-20-heal";
+
+// DISARMED 2026-07-20. This used to clear cards/log/answers so that FSRS state
+// keyed <topic_id>__<index> could not point at rewritten 5E questions. The cure
+// was worse than the disease: on 2026-07-20 it wiped 84 cards / 646 grades and
+// then pushed the emptied state over the cloud copy, so the Review schedule read
+// "Nothing tracked yet". A stale "Last answered" label is not worth months of
+// scheduling history. Stamp the epoch only, so devices that have not yet run the
+// old code never wipe.
 function maybeQBankMigrate() {
-  try {
-    if (localStorage.getItem(LS_PREFIX + "qbank_epoch") === QBANK_EPOCH) return;
-    const raw = localStorage.getItem(LS_PREFIX + STATE_KEY);
-    if (raw) {
-      localStorage.setItem(LS_PREFIX + "backup.qbank." + QBANK_EPOCH, raw);
-      let s = null;
-      try { s = JSON.parse(raw); } catch (e) { s = null; }
-      if (s) {
-        s.cards = {}; s.answers = {}; s.log = []; s.calibration = { byDomain: {} };
-        s.touchedDays = s.touchedDays || {};
-        for (let t = new Date(QBANK_START + "T00:00:00Z"), end = new Date(QBANK_DONE_THROUGH + "T00:00:00Z");
-             t <= end; t.setUTCDate(t.getUTCDate() + 1)) {
-          s.touchedDays[t.toISOString().slice(0, 10)] = true;
-        }
-        s.version = 1;
-        s.updated_at = new Date().toISOString();
-        lsSet(STATE_KEY, s);
-        __didHardReset = true;  // push the cleaned state; do not merge the stale cloud copy back
-      }
-    }
-    localStorage.setItem(LS_PREFIX + "qbank_epoch", QBANK_EPOCH);
-  } catch (e) {}
+  try { localStorage.setItem(LS_PREFIX + "qbank_epoch", QBANK_EPOCH); } catch (e) {}
 }
 maybeQBankMigrate();
+
+// Heal a device the wipe already hit: fold its pre-wipe backup back into state.
+// Union merge, newer last_review wins, so it is safe alongside anything graded
+// since. Runs once per device (qbank_heal_epoch).
+function maybeQBankHeal() {
+  try {
+    if (localStorage.getItem(LS_PREFIX + "qbank_heal_epoch") === QBANK_HEAL_EPOCH) return;
+    // A RESET_EPOCH wipe on this very load is deliberate — don't resurrect it.
+    if (__didHardReset) { localStorage.setItem(LS_PREFIX + "qbank_heal_epoch", QBANK_HEAL_EPOCH); return; }
+    const bak = lsGet(QBANK_BACKUP_KEY, null);
+    if (bak && bak.cards) {
+      const s = getState();
+      s.touchedDays = s.touchedDays || {};
+      let healed = 0;
+      for (const k in bak.cards) {
+        const r = bak.cards[k], l = s.cards[k];
+        const lt = l ? (l.last_review || l.due || "") : "", rt = r.last_review || r.due || "";
+        if (!l || rt > lt) { s.cards[k] = r; healed++; }
+      }
+      const seen = new Set(s.log.map(e => e.cardId + "|" + e.ts));
+      (bak.log || []).forEach(e => {
+        const key = e.cardId + "|" + e.ts;
+        if (!seen.has(key)) { s.log.push(e); seen.add(key); healed++; }
+      });
+      s.log.sort((a, b) => (a.ts || "").localeCompare(b.ts || ""));
+      for (const d in (bak.touchedDays || {})) if (bak.touchedDays[d]) s.touchedDays[d] = true;
+      for (const k in (bak.answers || {})) {
+        const rv = bak.answers[k];
+        if (rv && (!s.answers[k] || rv.length > (s.answers[k] || "").length)) s.answers[k] = rv;
+      }
+      const nOf = c => Object.values((c && c.byDomain) || {}).reduce((a, d) => a + (d.n || 0), 0);
+      if (nOf(bak.calibration) > nOf(s.calibration)) s.calibration = bak.calibration;
+      if (healed) saveState(s);
+    }
+    localStorage.setItem(LS_PREFIX + "qbank_heal_epoch", QBANK_HEAL_EPOCH);
+  } catch (e) {}
+}
 
 function domainFor(stable) {
   const topic = String(stable).split("__")[0];
@@ -1356,9 +1373,14 @@ function getState() {
   if (!s.log) s.log = [];
   if (!s.calibration) s.calibration = { byDomain: {} };
   if (!s.user) s.user = { examDate: null, targetRetention: TARGET_RETENTION };
+  // migrateOrInit() predates touchedDays and never emits it, so a state built
+  // that way would make every `s.touchedDays[d] = ...` writer throw.
+  if (!s.touchedDays) s.touchedDays = {};
   return s;
 }
 function saveState(s) { s.updated_at = new Date().toISOString(); lsSet(STATE_KEY, s); }
+
+maybeQBankHeal();  // defined above; deferred to here so getState/saveState exist
 
 function migrateOrInit() {
   const old = lsGet("qstate", null);
@@ -2319,7 +2341,12 @@ function injectSyncUI() {
 document.addEventListener("DOMContentLoaded", () => {
   injectSyncUI();
   if (syncEnabled()) {
-    if (__didHardReset) syncPush({ silent: true }).catch(() => {});  // overwrite cloud with the wiped state
+    // __didHardReset now means exactly one thing: a deliberate RESET_EPOCH wipe
+    // just ran. (The qbank migration used to set it too, which is how an
+    // accidental wipe reached the cloud.) A deliberate wipe MUST push — gating
+    // this on "do we still have cards" would never fire, since maybeHardReset()
+    // empties them first, and syncPull would just haul the wiped data back.
+    if (__didHardReset) syncPush({ silent: true }).catch(() => {});
     else syncPull({ silent: true }).catch(() => {});
   }
   else updateSyncButton("off", "Cloud sync off");
