@@ -613,9 +613,13 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
         'function readLocal(){try{var raw=localStorage.getItem("cscs.state.v1");return raw?JSON.parse(raw):null;}catch(e){return null;}}'
         'function harvest(s,reviewed,engaged,cards){if(!s)return;var tt=s.touchedDays||{};for(var k in tt){if(tt[k])reviewed[k]=true;}'
         'var cc=s.cards||{};for(var ck in cc){engaged[ck.split("__")[0]]=true;cards[ck]=true;}}'
-        'function complete(d,reviewed,engaged,cards){var qs=DAYQ[d];'
+        # touchedDays is the page-identity truth and wins FIRST: if the user
+        # engaged a day, a later change to that day's question set (rewrite /
+        # reorder) must never be able to pin them to it forever.
+        'function complete(d,reviewed,engaged,cards){if(reviewed[d])return true;'
+        'var qs=DAYQ[d];'
         'if(qs&&qs.length){for(var i=0;i<qs.length;i++){if(!cards[qs[i]])return false;}return true;}'
-        'return reviewed[d]||(DTOPIC[d]&&engaged[DTOPIC[d]]);}'
+        'return (DTOPIC[d]&&engaged[DTOPIC[d]]);}'
         'function decide(reviewed,engaged,cards,hasState){var tg=null;'
         'if(hasState){for(var i=0;i<DAYS.length;i++){var d=DAYS[i];if(d>today)break;'
         'if(!complete(d,reviewed,engaged,cards)){tg=d;break;}}'

@@ -1524,6 +1524,43 @@ function maybeHardReset() {
 }
 maybeHardReset();
 
+// ── One-time question-bank migration (5th-edition rewrite) ───────────────────
+// The 5E rewrite replaced EVERY question, but FSRS cards are keyed by
+// <topic_id>__<index> — so the old cards/log/answers now point at questions that
+// no longer exist at those indexes. Two visible symptoms: "Last answered ..." on
+// a question never seen, and per-day completion sets that can never be satisfied
+// (the user gets pinned to one day). Clear the per-question state — backed up
+// first — but KEEP day-level progress. touchedDays only exists from 2026-06-02,
+// so seed the days finished before that or the resume would rewind to Day 1.
+const QBANK_EPOCH = "2026-07-04-5e";
+const QBANK_START = "2026-05-24";
+const QBANK_DONE_THROUGH = "2026-06-09";  // days 1-17 were completed pre-rewrite
+function maybeQBankMigrate() {
+  try {
+    if (localStorage.getItem(LS_PREFIX + "qbank_epoch") === QBANK_EPOCH) return;
+    const raw = localStorage.getItem(LS_PREFIX + STATE_KEY);
+    if (raw) {
+      localStorage.setItem(LS_PREFIX + "backup.qbank." + QBANK_EPOCH, raw);
+      let s = null;
+      try { s = JSON.parse(raw); } catch (e) { s = null; }
+      if (s) {
+        s.cards = {}; s.answers = {}; s.log = []; s.calibration = { byDomain: {} };
+        s.touchedDays = s.touchedDays || {};
+        for (let t = new Date(QBANK_START + "T00:00:00Z"), end = new Date(QBANK_DONE_THROUGH + "T00:00:00Z");
+             t <= end; t.setUTCDate(t.getUTCDate() + 1)) {
+          s.touchedDays[t.toISOString().slice(0, 10)] = true;
+        }
+        s.version = 1;
+        s.updated_at = new Date().toISOString();
+        lsSet(STATE_KEY, s);
+        __didHardReset = true;  // push the cleaned state; do not merge the stale cloud copy back
+      }
+    }
+    localStorage.setItem(LS_PREFIX + "qbank_epoch", QBANK_EPOCH);
+  } catch (e) {}
+}
+maybeQBankMigrate();
+
 function domainFor(stable) {
   const topic = String(stable).split("__")[0];
   return (window.__CSCS_DOMAINS && window.__CSCS_DOMAINS[topic]) || "ES";
