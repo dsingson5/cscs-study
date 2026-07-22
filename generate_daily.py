@@ -162,6 +162,28 @@ def today_local():
         return _dt.date.today()
 
 
+# touchedDays stamped BEFORE this date came from the old runtime (stamped on
+# the very first grade), so for those legacy days a touch still counts as
+# done. From this date on only completedDays — every core question graded —
+# advances the resume target past a day.
+COMPLETION_CUTOFF = "2026-07-22"
+
+# Bump on behavior changes. Shown with the Manila build time at the top of
+# every page (site-wide rule for David's Pages sites).
+SITE_VERSION = "v2.1"
+
+
+def build_stamp():
+    """Version + Manila build timestamp, shown at the top of every generated
+    page so a deploy is verifiable at a glance."""
+    try:
+        from zoneinfo import ZoneInfo
+        now = _dt.datetime.now(ZoneInfo("Asia/Manila"))
+    except Exception:
+        now = _dt.datetime.now()
+    return SITE_VERSION + " · built " + now.strftime("%b %d, %Y %H:%M") + " Manila"
+
+
 def relevant_lessons(lessons):
     """Training-relevant lessons (Tiers 1-3 + advanced), in day order.
     Lessons marked relevant=False (Tier-4 test-only) are excluded so the
@@ -205,6 +227,33 @@ def sample_questions(topic_id, questions, n, seed):
     rng.shuffle(indices)
     chosen = indices[:min(n, len(pool))]
     return [(i, pool[i]) for i in chosen]
+
+
+def core_ids_for(day_num, lessons, questions, meta):
+    """Deterministic replica of the render-time core question set for a day.
+    MUST mirror render_html's pretest+pool sampling exactly — the build
+    self-checks the replica against today's rendered set. Used to backfill
+    day_completion.json entries for dates whose entry was never persisted
+    (a hollow DAYQ entry would silently revert the completion gate to
+    touch-based advancing for that day)."""
+    today_lesson, deep_review = get_today_lesson(day_num, lessons)
+    reviews = pick_review_lessons(day_num, lessons, meta.get("seen_through_day", 0))
+    t_topic = today_lesson["topic_id"]
+    pre_qs = []
+    if not deep_review:
+        sampled = sample_questions(t_topic, questions, 6, day_num * 7)
+        sampled.sort(key=lambda iq: 0 if iq[1].get("type") == "applied" else 1)
+        pre_qs = sampled[:2]
+    pre_idx = {oi for oi, _ in pre_qs}
+    core = {f"{t_topic}__{oi}" for oi, _ in pre_qs}
+    for oi, _q in sample_questions(t_topic, questions, 5, day_num * 7):
+        if oi not in pre_idx:
+            core.add(f"{t_topic}__{oi}")
+    for interval, lesson in reviews:
+        rtopic = lesson["topic_id"]
+        for oi, _q in sample_questions(rtopic, questions, 2, day_num * 11 + interval):
+            core.add(f"{rtopic}__{oi}")
+    return sorted(core)
 
 
 def esc(s):
@@ -483,6 +532,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
             _core.add(_it['topic_id'] + '__' + str(_it['orig_idx']))
     global LAST_PAGE_QIDS
     LAST_PAGE_QIDS = sorted(_core)
+    core_json = json.dumps(LAST_PAGE_QIDS, ensure_ascii=False)
 
     new_count = len(pre_qs) + len(pool)
 
@@ -510,6 +560,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
   <header class="top">
     <div class="h-day">CSCS Study · Day {today_day} · {weekday}</div>
     <div class="h-date">{date_str}</div>
+    <div class="h-stamp">{build_stamp()}</div>
     <div class="h-phase">{esc(phase_label)}</div>
     <div class="domains">{domains_html}</div>
     <div class="progress"><div class="bar" style="width: {min(100, today_day / 182 * 100):.1f}%;"></div></div>
@@ -556,7 +607,7 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 <script>window.__CSCS_QUESTIONS = {questions_json};</script>
 <script>window.__CSCS_DOMAINS = {domains_json};</script>
 <script>window.__CSCS_NEWCOUNT = {new_count};</script>
-<script>window.__CSCS_PAGE_DATE = "{page_date}";window.__CSCS_PREV = {prev_json}; window.__CSCS_NEXT = {next_json};</script>
+<script>window.__CSCS_PAGE_DATE = "{page_date}";window.__CSCS_PREV = {prev_json}; window.__CSCS_NEXT = {next_json};window.__CSCS_CORE_QIDS = {core_json};</script>
 {DRILL_LISTENER}
 {FSRS_MODULE}
 <script>{js}</script>
@@ -596,6 +647,7 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
     redirect = (
         '<script>(function(){'
         'var DAYS=' + days + ';var DTOPIC=' + dtopic_json + ';var DAYQ=' + dayq_json + ';var THIS="' + this_iso + '";'
+        'var CUTOFF="' + COMPLETION_CUTOFF + '";'
         'var GIST="f7cec859cb4ab8ba049297c925c2a959";var GFILE="cscs-progress.json";'
         'function mt(d){try{var p=new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Manila",'
         'year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d||new Date());'
@@ -611,25 +663,31 @@ def build_index_html(base_html, available, this_iso, dtopic=None):
         'setTimeout(function(){var o=document.getElementById("sa-resume");if(o&&o.parentNode)o.parentNode.removeChild(o);},8000);'
         '}catch(e){}'
         'function readLocal(){try{var raw=localStorage.getItem("cscs.state.v1");return raw?JSON.parse(raw):null;}catch(e){return null;}}'
-        'function harvest(s,reviewed,engaged,cards){if(!s)return;var tt=s.touchedDays||{};for(var k in tt){if(tt[k])reviewed[k]=true;}'
+        'function harvest(s,reviewed,completed,engaged,cards){if(!s)return;var tt=s.touchedDays||{};for(var k in tt){if(tt[k])reviewed[k]=true;}'
+        'var dd=s.completedDays||{};for(var k2 in dd){if(dd[k2])completed[k2]=true;}'
         'var cc=s.cards||{};for(var ck in cc){engaged[ck.split("__")[0]]=true;cards[ck]=true;}}'
-        # touchedDays is the page-identity truth and wins FIRST: if the user
-        # engaged a day, a later change to that day's question set (rewrite /
-        # reorder) must never be able to pin them to it forever.
-        'function complete(d,reviewed,engaged,cards){if(reviewed[d])return true;'
+        # Precedence: completedDays (stamped by the runtime only when EVERY
+        # core question of the page is graded) wins outright — it survives a
+        # later question-set rewrite, so a finished day can never pin the user.
+        # Legacy touchedDays (stamped on the first grade by the pre-cutoff
+        # runtime) still counts as done for days before COMPLETION_CUTOFF;
+        # from the cutoff on, a bare touch no longer advances the day — every
+        # core question must be graded.
+        'function complete(d,reviewed,completed,engaged,cards){if(completed[d])return true;'
+        'if(reviewed[d]&&d<CUTOFF)return true;'
         'var qs=DAYQ[d];'
         'if(qs&&qs.length){for(var i=0;i<qs.length;i++){if(!cards[qs[i]])return false;}return true;}'
-        'return (DTOPIC[d]&&engaged[DTOPIC[d]]);}'
-        'function decide(reviewed,engaged,cards,hasState){var tg=null;'
+        'return reviewed[d]||(DTOPIC[d]&&engaged[DTOPIC[d]]);}'
+        'function decide(reviewed,completed,engaged,cards,hasState){var tg=null;'
         'if(hasState){for(var i=0;i<DAYS.length;i++){var d=DAYS[i];if(d>today)break;'
-        'if(!complete(d,reviewed,engaged,cards)){tg=d;break;}}'
+        'if(!complete(d,reviewed,completed,engaged,cards)){tg=d;break;}}'
         'if(!tg){tg=(DAYS.indexOf(today)!==-1)?today:DAYS[DAYS.length-1];}}'
         'else{if(DAYS.indexOf(today)!==-1)tg=today;else if(today>DAYS[DAYS.length-1])tg=DAYS[DAYS.length-1];else tg=DAYS[0];}'
         'return tg||THIS;}'
         'var local=readLocal();var settled=false;'
         'function finish(remote){if(settled)return;settled=true;'
-        'var reviewed={},engaged={},cards={};harvest(local,reviewed,engaged,cards);harvest(remote,reviewed,engaged,cards);'
-        'var hasState=!!(Object.keys(reviewed).length||Object.keys(engaged).length||Object.keys(cards).length);go(decide(reviewed,engaged,cards,hasState));}'
+        'var reviewed={},completed={},engaged={},cards={};harvest(local,reviewed,completed,engaged,cards);harvest(remote,reviewed,completed,engaged,cards);'
+        'var hasState=!!(Object.keys(reviewed).length||Object.keys(completed).length||Object.keys(engaged).length||Object.keys(cards).length);go(decide(reviewed,completed,engaged,cards,hasState));}'
         'var token="";try{token=localStorage.getItem("cscs.sync.token")||"";}catch(e){}'
         'var to=setTimeout(function(){finish(null);},4500);'
         'try{var hd={"Accept":"application/vnd.github+json"};if(token)hd["Authorization"]="token "+token;'
@@ -750,6 +808,17 @@ def main():
         if _cp.exists():
             _comp = json.loads(_cp.read_text(encoding='utf-8'))
         _comp[today.isoformat()] = LAST_PAGE_QIDS
+        # Self-check the replica sampler, then backfill any archive date whose
+        # entry never got persisted (the daily Action historically committed
+        # only index.html + daily/, so runner-written entries could evaporate).
+        _replica = core_ids_for(today_day, lessons, questions, meta)
+        if _replica != LAST_PAGE_QIDS:
+            print(f"WARNING: core_ids_for() diverges from rendered core set for {today.isoformat()} — update the replica to match render_html")
+        _sd2 = _dt.date.fromisoformat(meta["start_date"])
+        for _dstr in _archive_dates(meta["start_date"]):
+            if _dstr not in _comp:
+                _dn = (_dt.date.fromisoformat(_dstr) - _sd2).days + 1
+                _comp[_dstr] = core_ids_for(_dn, lessons, questions, meta)
         _cp.write_text(json.dumps(_comp, ensure_ascii=False), encoding='utf-8')
     except Exception:
         pass

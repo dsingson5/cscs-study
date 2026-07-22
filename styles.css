@@ -810,3 +810,8 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .companion-cta .cc-label{color:var(--text-dim);font-weight:700}
 .companion-cta a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .15s}
 .companion-cta a:hover{border-color:var(--accent)}
+
+/* Build stamp + day-completion progress (completion-gated day advance) */
+.h-stamp { font-size: 10px; color: var(--text-dim); opacity: 0.75; margin-top: 2px; letter-spacing: 0.3px; }
+#day-progress b { color: var(--warn, #ffb86b); }
+#day-progress .dp-done { color: var(--good, #67e8b0); font-weight: 700; }

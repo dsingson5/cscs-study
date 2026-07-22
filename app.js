@@ -257,6 +257,9 @@ function getState() {
   // migrateOrInit() predates touchedDays and never emits it, so a state built
   // that way would make every `s.touchedDays[d] = ...` writer throw.
   if (!s.touchedDays) s.touchedDays = {};
+  // completedDays: stamped only when EVERY core question of a page has been
+  // graded — the resume redirect advances past a day on this, not on touch.
+  if (!s.completedDays) s.completedDays = {};
   return s;
 }
 function saveState(s) { s.updated_at = new Date().toISOString(); lsSet(STATE_KEY, s); }
@@ -390,11 +393,25 @@ function rateQ(qid, grade) {
   s.cards[stable] = r.card;
   // Review log
   s.log.push({ cardId: stable, ts: new Date().toISOString(), rating: grade, domain: domain });
-  // Mark THIS page's date as touched so the resume-mode redirect knows we've
-  // engaged with this lesson, regardless of when (Manila-time) we did it.
+  // Mark THIS page's date as touched (engagement marker, kept for sync), and
+  // stamp completedDays ONLY once every core question on the page has been
+  // graded at least once. The resume redirect advances past a day solely on
+  // completion, so answering one question can no longer skip the whole day.
+  var __dayJustCompleted = false;
   try {
     var pageDate = (typeof window !== 'undefined' && window.__CSCS_PAGE_DATE) ? window.__CSCS_PAGE_DATE : null;
-    if (pageDate) { s.touchedDays = s.touchedDays || {}; s.touchedDays[pageDate] = true; }
+    if (pageDate) {
+      s.touchedDays = s.touchedDays || {}; s.touchedDays[pageDate] = true;
+      var core = (typeof window !== 'undefined' && window.__CSCS_CORE_QIDS) ? window.__CSCS_CORE_QIDS : null;
+      var allDone = true;
+      if (core && core.length) {
+        for (var ci = 0; ci < core.length; ci++) { if (!s.cards[core[ci]]) { allDone = false; break; } }
+      }
+      if (allDone) {
+        s.completedDays = s.completedDays || {};
+        if (!s.completedDays[pageDate]) { s.completedDays[pageDate] = true; __dayJustCompleted = true; }
+      }
+    }
   } catch (e) {}
   refreshLastAnsweredFor(stable);
   if (s.log.length > 4000) s.log = s.log.slice(-4000);
@@ -431,7 +448,40 @@ function rateQ(qid, grade) {
   updateHeaderStats();
   renderDashboard();
   buildReviewQueue();
+  renderDayProgress();
+  if (__dayJustCompleted) showToast("Question set complete ✓ — the daily resume will move on from this day.");
   if (typeof scheduleSyncPush === "function") scheduleSyncPush();
+}
+
+// ── Day-completion progress ─────────────────────────────────────────────────
+// The generator bakes the page's core question ids (__CSCS_CORE_QIDS). A day
+// only counts as done — and the resume redirect only moves on — once every
+// one of them has been graded at least once (on any page; review-queue grades
+// of the same card count too).
+// Keep in sync with COMPLETION_CUTOFF in generate_daily.py: days before this
+// ran under the old touch-based rule and stay grandfathered in the redirect.
+var COMPLETION_CUTOFF = "2026-07-22";
+function coreProgress() {
+  var core = (typeof window !== "undefined" && window.__CSCS_CORE_QIDS) ? window.__CSCS_CORE_QIDS : null;
+  if (!core || !core.length) return null;
+  var s = getState(), done = 0;
+  for (var i = 0; i < core.length; i++) if (s.cards[core[i]]) done++;
+  return { total: core.length, done: done };
+}
+function renderDayProgress() {
+  var host = document.querySelector(".session-goal");
+  if (!host) return;
+  var p = coreProgress();
+  var el = document.getElementById("day-progress");
+  if (!p) { if (el && el.parentNode) el.parentNode.removeChild(el); return; }
+  if (!el) { el = document.createElement("span"); el.id = "day-progress"; host.appendChild(el); }
+  var pageDate = (typeof window !== "undefined" && window.__CSCS_PAGE_DATE) ? window.__CSCS_PAGE_DATE : null;
+  var legacyDone = !!(pageDate && pageDate < COMPLETION_CUTOFF && getState().touchedDays[pageDate]);
+  el.innerHTML = (p.done >= p.total)
+    ? ' · <span class="dp-done">✓ day complete</span>'
+    : legacyDone
+      ? ' · <span class="dp-done">✓ counted done (pre-update)</span> · ' + p.done + "/" + p.total + " answered"
+      : ' · <b>' + p.done + "/" + p.total + '</b> of this day’s set — answer all to mark it done (the site resumes here until finished)';
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -1005,6 +1055,7 @@ function bootRender() {
   wireScheduleOpeners();
   gateStaticPractice();
   hydrateLessonNav();
+  renderDayProgress();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -1075,6 +1126,13 @@ function mergeRemote(remote) {
     local.touchedDays = local.touchedDays || {};
     for (const d in rstate.touchedDays) {
       if (rstate.touchedDays[d] && !local.touchedDays[d]) { local.touchedDays[d] = true; changed = true; }
+    }
+  }
+  // completedDays: union — a day fully finished on ANY device stays finished.
+  if (rstate.completedDays) {
+    local.completedDays = local.completedDays || {};
+    for (const d in rstate.completedDays) {
+      if (rstate.completedDays[d] && !local.completedDays[d]) { local.completedDays[d] = true; changed = true; }
     }
   }
   // log: union by cardId+ts
