@@ -168,20 +168,30 @@ def today_local():
 # advances the resume target past a day.
 COMPLETION_CUTOFF = "2026-07-22"
 
-# Bump on behavior changes. Shown with the Manila build time at the top of
-# every page (site-wide rule for David's Pages sites).
-SITE_VERSION = "v2.1"
+# Bump on behavior changes. Shown with the Manila build time in the top-right
+# version pill on every page (site-wide rule for David's Pages sites).
+SITE_VERSION = "v2.2"
 
 
-def build_stamp():
-    """Version + Manila build timestamp, shown at the top of every generated
-    page so a deploy is verifiable at a glance."""
+def stamp_html(site_label="CSCS Study"):
+    """Tiny fixed top-right version pill — same pattern as the hybrid-crew hub:
+    version + Manila date/time this page was built, tap to hide."""
     try:
         from zoneinfo import ZoneInfo
         now = _dt.datetime.now(ZoneInfo("Asia/Manila"))
     except Exception:
         now = _dt.datetime.now()
-    return SITE_VERSION + " · built " + now.strftime("%b %d, %Y %H:%M") + " Manila"
+    d = now.strftime("%b %d, %Y")
+    t = now.strftime("%I:%M %p").lstrip("0")
+    return ('<div id="pg-stamp" onclick="this.remove()" '
+            f'title="{site_label} {SITE_VERSION} · this page built {d} · {t} (Manila) · tap to hide" '
+            'style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;'
+            "font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;"
+            'background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);'
+            'border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;'
+            'letter-spacing:.03em;white-space:nowrap;cursor:pointer;'
+            '-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">'
+            f'{SITE_VERSION} · {d} · {t}</div>')
 
 
 def relevant_lessons(lessons):
@@ -556,11 +566,11 @@ def render_html(today, today_day, today_lesson, deep_review, reviews, questions,
 <style>{motif_css}</style>
 </head>
 <body class="{theme["body_class"]}">
+{stamp_html()}
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day {today_day} · {weekday}</div>
     <div class="h-date">{date_str}</div>
-    <div class="h-stamp">{build_stamp()}</div>
     <div class="h-phase">{esc(phase_label)}</div>
     <div class="domains">{domains_html}</div>
     <div class="progress"><div class="bar" style="width: {min(100, today_day / 182 * 100):.1f}%;"></div></div>
@@ -755,6 +765,7 @@ background:var(--card);color:var(--text);font:inherit;margin-bottom:18px}}
 .gal-cap{{display:block;font-size:10px;color:var(--text-dim);font-weight:400;margin-top:2px;line-height:1.25}}
 .gal-empty{{display:none}}</style>
 </head><body class="{theme["body_class"]}">
+{stamp_html()}
 <div class="gal-wrap">
 <div class="gal-head"><a href="./" style="color:var(--accent);font-size:12px;text-decoration:none">&larr; Back to today\u2019s study</a>
 <h1>5th Edition Figure Library</h1>
