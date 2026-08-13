@@ -821,11 +821,11 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 #day-progress b { color: var(--warn, #ffb86b); }
 #day-progress .dp-done { color: var(--good, #67e8b0); font-weight: 700; }
 
-/* ===== study-voice v1 — panel, mini buttons, modal (synced: hyrox/cscs) ===== */
+/* ===== study-voice v2 — panel, mini buttons, modals (synced: hyrox/cscs) ===== */
 .sv-panel { position: fixed; right: 14px; bottom: 64px; z-index: 998;
   background: rgba(13, 17, 26, 0.96); border: 1px solid #2a3446; border-radius: 14px;
   padding: 10px 12px; display: flex; flex-direction: column; gap: 7px;
-  box-shadow: 0 10px 34px rgba(0,0,0,0.55); max-width: 320px;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.55); max-width: 330px;
   backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
 .sv-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 .sv-btn { background: #1a2232; color: #dfe7f5; border: 1px solid #33405a;
@@ -838,9 +838,10 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 .sv-btn.sv-seg.on { background: #223349; outline: 1px solid #5ec8ff; }
 .sv-btn.sv-primary { background: #223349; border-color: #5ec8ff; }
 .sv-select { background: #131a28; color: #b9c4d8; border: 1px solid #33405a;
-  border-radius: 8px; font-size: 11px; padding: 4px 6px; max-width: 150px;
+  border-radius: 8px; font-size: 11px; padding: 4px 6px; max-width: 158px;
   font-family: inherit; }
 .sv-lab { font-size: 11px; color: #8b96ab; }
+.sv-status { font-size: 11px; color: #8b96ab; }
 .sv-mini { background: transparent; border: 1px solid #33405a; color: #9fb4d8;
   border-radius: 7px; font-size: 11px; padding: 1px 6px; margin: 0 0 0 8px;
   cursor: pointer; vertical-align: middle; line-height: 1.5; font-family: inherit; }
@@ -857,6 +858,10 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   box-shadow: 0 18px 60px rgba(0,0,0,0.6); }
 .sv-dialog h3 { margin: 0 0 6px; font-size: 17px; }
 .sv-note { color: #8b96ab; font-size: 12.5px; margin: 0 0 12px; }
+.sv-note a { color: #5ec8ff; }
+.sv-key-input { width: 100%; box-sizing: border-box; background: #131a28;
+  color: #dfe7f5; border: 1px solid #33405a; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; margin: 0 0 8px; font-family: inherit; }
 .sv-steps { margin: 0 0 14px; padding-left: 20px; font-size: 13px;
   display: flex; flex-direction: column; gap: 10px; }
 .sv-small { font-size: 11.5px; padding: 3px 8px; }
@@ -866,10 +871,10 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   padding: 8px 14px; font-size: 13px; z-index: 99999; opacity: 0; transition: all 0.25s; }
 .sv-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
 @media (max-width: 640px) {
-  .sv-panel { right: 8px; bottom: 58px; max-width: 78vw; padding: 8px; }
+  .sv-panel { right: 8px; bottom: 58px; max-width: 80vw; padding: 8px; }
   .sv-btn { font-size: 11px; }
 }
-/* ===== end study-voice v1 ===== */
+/* ===== end study-voice v2 ===== */
 </style>
 <style>:root {
   --bg: #07090b;
@@ -977,7 +982,7 @@ body { background-image: linear-gradient(rgba(184, 143, 255, 0.04) 1px, transpar
 </style>
 </head>
 <body class="theme-day-12">
-<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 13, 2026 · 1:26 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 13, 2026 · 1:26 PM</div>
+<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 13, 2026 · 2:07 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 13, 2026 · 2:07 PM</div>
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day 12 · Thursday</div>
@@ -2468,21 +2473,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
-/* ===== study-voice v1 — listen buttons (Web Speech) + NotebookLM helpers.
-   Synced copies live in hyrox_study/app.js and cscs_study/app.js — keep both
-   in step. No external services: speech uses the browser's own voices, and the
-   NotebookLM buttons prepare copy-paste material (NotebookLM has no public
-   API, so nothing can be generated for the user directly). ===== */
+/* ===== study-voice v2 — listen buttons (device + neural AI voices) and
+   NotebookLM helpers. Synced copies in hyrox_study/app.js and
+   cscs_study/app.js — keep both in step.
+   Engines: device Web Speech (free, no setup) · Gemini TTS (free API key,
+   realistic) · ElevenLabs (paid key, most realistic). Keys live only in this
+   browser's localStorage. NotebookLM has no public API, so those buttons
+   prepare copy-paste material. ===== */
 (function () {
   "use strict";
   if (typeof window === "undefined" || typeof document === "undefined") return;
 
   var CFG = {
-    prefix: "cscs.tts.v1",
+    prefKey: "cscs.tts.v1",
+    keyKey: "cscs.tts.keys.v1",
     siteName: "CSCS exam-prep study site",
     exam: "NSCA CSCS exam",
     palette: "iron-black, gunmetal-grey and blood-red barbell-club palette",
-    action: "barbell lifting, sprinting and jumping"
+    action: "barbell lifting, sprinting and jumping",
+    applyterm: "training-floor application"
   };
 
   function onReady(fn) {
@@ -2492,44 +2501,60 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   onReady(function () {
-    // Only lesson-bearing pages (daily pages + the entry copy). Dashboards,
-    // galleries and games pages don't get the panel.
     if (!document.querySelector(".lesson-card") && !document.querySelector(".q")) return;
 
     var synth = window.speechSynthesis || null;
 
-    // ── prefs ────────────────────────────────────────────────────────────
-    var prefs = { accent: "gb", rate: 1, answers: "revealed", voiceName: "" };
+    // ── prefs + keys ─────────────────────────────────────────────────────
+    var prefs = { accent: "gb", rate: 1, answers: "revealed", engine: "device",
+                  voiceName: "", geminiVoice: "Charon", elevenVoice: "" };
+    var keys = { gemini: "", eleven: "", elevenGb: "", elevenUs: "", geminiModel: "" };
     try {
-      var raw = localStorage.getItem(CFG.prefix);
+      var raw = localStorage.getItem(CFG.prefKey);
       if (raw) { var p = JSON.parse(raw); for (var k in prefs) if (p[k] !== undefined) prefs[k] = p[k]; }
+      var rawk = localStorage.getItem(CFG.keyKey);
+      if (rawk) { var kk = JSON.parse(rawk); for (var k2 in keys) if (kk[k2] !== undefined) keys[k2] = kk[k2]; }
     } catch (e) {}
-    function savePrefs() { try { localStorage.setItem(CFG.prefix, JSON.stringify(prefs)); } catch (e) {} }
+    function savePrefs() { try { localStorage.setItem(CFG.prefKey, JSON.stringify(prefs)); } catch (e) {} }
+    function saveKeys() { try { localStorage.setItem(CFG.keyKey, JSON.stringify(keys)); } catch (e) {} }
 
-    // ── voices ───────────────────────────────────────────────────────────
-    // Ranked, best-first. Edge exposes the excellent "Online (Natural)"
-    // voices; Chrome exposes Windows SAPI + Google network voices; iOS has
-    // Daniel/Arthur (GB) and Aaron/Alex (US).
-    var GB = ["ryan", "thomas", "george", "daniel", "arthur", "oliver",
-              "google uk english male", "brian"];
-    var US = ["andrew", "guy", "christopher", "roger", "eric", "davis",
-              "microsoft david", "microsoft mark", "alex", "aaron"];
-    var FEMALEISH = /female|zira|hazel|susan|sonia|libby|aria|jenny|michelle|emma|ava|salli|joanna|kate|serena|martha|google us english$/i;
+    // ── device voices ────────────────────────────────────────────────────
+    // Desktop names (Edge naturals, Windows SAPI, Apple) PLUS Android's
+    // Google-TTS variant codes: Android exposes e.g. "en-gb-x-gbb-local",
+    // and the locale-default voice there is female — which is exactly the
+    // Galaxy-tablet bug this list fixes.
+    var GB_MALE = ["ryan", "thomas", "george", "daniel", "arthur", "oliver",
+      "google uk english male", "brian",
+      "en-gb-x-gbb", "en-gb-x-gbd", "en-gb-x-rjs"];
+    var US_MALE = ["andrew", "guy", "christopher", "roger", "eric", "davis",
+      "microsoft david", "microsoft mark", "alex", "aaron",
+      "en-us-x-iob", "en-us-x-iom", "en-us-x-tpd"];
+    var FEMALE_HINTS = /female|zira|hazel|susan|sonia|libby|aria|jenny|michelle|emma|ava|salli|joanna|kate|serena|martha|karen|moira|tessa|samantha|victoria|en-gb-x-gba|en-gb-x-gbc|en-us-x-sfg|en-us-x-tpc|en-us-x-tpf|en-us-x-iog|en-us-x-iol|google us english(?!\s+male)|google uk english female/i;
+    var MALE_HINTS = /\bmale\b|ryan|thomas|george|daniel|arthur|oliver|aaron|alex\b|guy|andrew|christopher|roger|eric|davis|david|mark\b|brian|james|william|en-gb-x-gbb|en-gb-x-gbd|en-gb-x-rjs|en-us-x-iob|en-us-x-iom|en-us-x-tpd/i;
 
     function voiceScore(v, accent) {
       var name = (v.name || "").toLowerCase();
       var lang = (v.lang || "").toLowerCase().replace("_", "-");
+      var probe = name + " " + (v.voiceURI || "").toLowerCase();
       var want = accent === "gb" ? "en-gb" : "en-us";
-      var list = accent === "gb" ? GB : US;
+      var list = accent === "gb" ? GB_MALE : US_MALE;
       var s = 0;
       if (lang === want) s += 60;
       else if (lang.indexOf("en") === 0) s += 15;
       else return -1;
       for (var i = 0; i < list.length; i++)
-        if (name.indexOf(list[i]) >= 0) { s += 200 - i * 10; break; }
+        if (probe.indexOf(list[i]) >= 0) { s += 220 - i * 10; break; }
       if (/natural|online/.test(name)) s += 25;
-      if (FEMALEISH.test(name)) s -= 40;
+      if (MALE_HINTS.test(probe)) s += 20;
+      if (FEMALE_HINTS.test(probe)) s -= 60;
       return s;
+    }
+
+    function genderTag(v) {
+      var probe = ((v.name || "") + " " + (v.voiceURI || "")).toLowerCase();
+      if (FEMALE_HINTS.test(probe)) return "\u2640 ";
+      if (MALE_HINTS.test(probe)) return "\u2642 ";
+      return "";
     }
 
     function englishVoices() {
@@ -2541,7 +2566,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return out;
     }
 
-    function pickVoice() {
+    function pickDeviceVoice() {
       var vs = englishVoices();
       if (!vs.length) return null;
       if (prefs.voiceName)
@@ -2555,8 +2580,52 @@ document.addEventListener("DOMContentLoaded", () => {
       return best;
     }
 
-    // ── speech engine ────────────────────────────────────────────────────
-    var queue = [], qi = 0, speaking = false, paused = false, currentEl = null, gen = 0;
+    // ── neural voice catalogues ──────────────────────────────────────────
+    var GEM_VOICES = [
+      ["Charon", "Charon — deep, informative (recommended)"],
+      ["Algenib", "Algenib — gravelly"],
+      ["Gacrux", "Gacrux — mature"],
+      ["Alnilam", "Alnilam — firm"],
+      ["Sadaltager", "Sadaltager — knowledgeable"],
+      ["Iapetus", "Iapetus — clear"],
+      ["Schedar", "Schedar — even"],
+      ["Enceladus", "Enceladus — breathy"],
+      ["Puck", "Puck — upbeat"]
+    ];
+    var GEM_MODELS = ["gemini-2.5-flash-preview-tts", "gemini-2.5-flash-tts",
+                      "gemini-2.5-pro-preview-tts"];
+    var ELEVEN_VOICES = [
+      ["onwK4e9ZLuTAKqWW03F9", "Daniel — British, deep (GB default)"],
+      ["JBFqnCBsd6RMkjVDRZzb", "George — British, warm"],
+      ["nPczCjzI2devNBz1zQrb", "Brian — American, deep (US default)"],
+      ["pqHfZKP75CvOlQylNhV4", "Bill — American, documentary"]
+    ];
+    function elevenVoiceId() {
+      if (prefs.elevenVoice) return prefs.elevenVoice;
+      if (prefs.accent === "gb") return keys.elevenGb || "onwK4e9ZLuTAKqWW03F9";
+      return keys.elevenUs || "nPczCjzI2devNBz1zQrb";
+    }
+    function geminiStyle() {
+      return prefs.accent === "gb"
+        ? "Read the following aloud in a deep, measured BRITISH natural-history documentary narration - calm, warm, unhurried, with quiet awe. Do not add, skip or change any words.\n\n"
+        : "Read the following aloud as a clear, confident AMERICAN male narrator - natural pacing, engaging but calm. Do not add, skip or change any words.\n\n";
+    }
+
+    // ── shared playback state ────────────────────────────────────────────
+    var gen = 0, speaking = false, paused = false, currentEl = null;
+    var queue = [], qi = 0;                    // device engine
+    var rBatches = [], rIdx = 0;               // remote engines
+    var audioEl = null;
+    var cache = {}; var cacheCount = 0;        // text -> object URL
+
+    function getAudioEl() {
+      if (!audioEl) {
+        audioEl = document.createElement("audio");
+        audioEl.style.display = "none";
+        document.body.appendChild(audioEl);
+      }
+      return audioEl;
+    }
 
     function clearHighlight() {
       if (currentEl) { currentEl.classList.remove("sv-now"); currentEl = null; }
@@ -2569,10 +2638,36 @@ document.addEventListener("DOMContentLoaded", () => {
         try { el.scrollIntoView({ block: "nearest", behavior: "smooth" }); } catch (e) {}
       }
     }
+    function setStatus(msg) {
+      var s = panel && panel.querySelector(".sv-status");
+      if (s) s.textContent = msg || "";
+    }
 
-    // Split into sentence-ish chunks ≤ ~220 chars: long single utterances are
-    // where Chrome's speech engine stalls.
-    function chunk(text) {
+    function stopAll() {
+      gen++;
+      speaking = false; paused = false;
+      queue = []; qi = 0; rBatches = []; rIdx = 0;
+      if (synth) try { synth.cancel(); } catch (e) {}
+      if (audioEl) { try { audioEl.pause(); audioEl.removeAttribute("src"); } catch (e) {} }
+      clearHighlight(); setStatus(""); updatePanel();
+    }
+
+    function togglePause() {
+      if (!speaking) return;
+      if (prefs.engine === "device") {
+        if (!synth) return;
+        if (paused) { synth.resume(); paused = false; }
+        else { synth.pause(); paused = true; }
+      } else {
+        var a = getAudioEl();
+        if (paused) { a.play(); paused = false; }
+        else { a.pause(); paused = true; }
+      }
+      updatePanel();
+    }
+
+    // ── device engine ────────────────────────────────────────────────────
+    function chunkDevice(text) {
       var parts = text.match(/[^.!?\u2026]+[.!?\u2026]*\s*/g) || [text];
       var out = [], cur = "";
       for (var i = 0; i < parts.length; i++) {
@@ -2583,62 +2678,212 @@ document.addEventListener("DOMContentLoaded", () => {
       return out;
     }
 
-    function speakNext() {
+    function speakNextDevice() {
       if (!synth || qi >= queue.length) { stopAll(); return; }
       var item = queue[qi];
       var u = new SpeechSynthesisUtterance(item.text);
       var myGen = gen, fired = false;
-      var v = pickVoice();
+      var v = pickDeviceVoice();
       if (v) { u.voice = v; u.lang = v.lang; }
       u.rate = prefs.rate;
       u.pitch = prefs.accent === "gb" ? 0.92 : 1.0;
       u.onend = u.onerror = function () {
         if (fired || myGen !== gen) return; fired = true;
-        qi++; if (speaking) speakNext();
+        qi++; if (speaking) speakNextDevice();
       };
       highlight(item.el);
       synth.speak(u);
     }
 
-    function playItems(items) {
+    function playDevice(items) {
       if (!synth) { toast("Speech isn't available in this browser."); return; }
-      stopAll();
       queue = [];
       for (var i = 0; i < items.length; i++) {
-        var chunks = chunk(items[i].text);
+        var chunks = chunkDevice(items[i].text);
         for (var c = 0; c < chunks.length; c++)
           queue.push({ text: chunks[c], el: items[i].el });
       }
       if (!queue.length) { toast("Nothing to read here yet."); return; }
-      qi = 0; speaking = true; paused = false;
-      updatePanel();
-      // Chrome drops the first utterance if speak() follows cancel() at once.
-      setTimeout(speakNext, 80);
+      qi = 0; speaking = true; paused = false; updatePanel();
+      setTimeout(speakNextDevice, 80);
     }
 
-    function stopAll() {
-      gen++;
-      speaking = false; paused = false; queue = []; qi = 0;
-      if (synth) try { synth.cancel(); } catch (e) {}
-      clearHighlight(); updatePanel();
-    }
-
-    function togglePause() {
-      if (!synth || !speaking) return;
-      if (paused) { synth.resume(); paused = false; }
-      else { synth.pause(); paused = true; }
-      updatePanel();
-    }
-
-    // Un-stick Chrome's engine on long reads; resume() while speaking and not
-    // user-paused is a no-op elsewhere.
     setInterval(function () {
-      if (synth && speaking && !paused && synth.speaking) { try { synth.resume(); } catch (e) {} }
+      if (synth && speaking && !paused && prefs.engine === "device" && synth.speaking) {
+        try { synth.resume(); } catch (e) {}
+      }
     }, 10000);
 
-    // Voices load asynchronously in Chrome.
     if (synth && typeof synth.addEventListener === "function")
       synth.addEventListener("voiceschanged", function () { fillVoiceSelect(); });
+
+    // ── remote engines: fetch + wav + playback ───────────────────────────
+    function b64ToBytes(b64) {
+      var bin = atob(b64), len = bin.length, bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+      return bytes;
+    }
+    // Gemini returns raw 16-bit PCM @24 kHz mono — wrap a WAV header on it.
+    function pcmToWavUrl(bytes, rate) {
+      var h = new ArrayBuffer(44), d = new DataView(h);
+      function ws(o, s) { for (var i = 0; i < s.length; i++) d.setUint8(o + i, s.charCodeAt(i)); }
+      ws(0, "RIFF"); d.setUint32(4, 36 + bytes.length, true); ws(8, "WAVE");
+      ws(12, "fmt "); d.setUint32(16, 16, true); d.setUint16(20, 1, true);
+      d.setUint16(22, 1, true); d.setUint32(24, rate, true);
+      d.setUint32(28, rate * 2, true); d.setUint16(32, 2, true);
+      d.setUint16(34, 16, true); ws(36, "data"); d.setUint32(40, bytes.length, true);
+      return URL.createObjectURL(new Blob([h, bytes], { type: "audio/wav" }));
+    }
+
+    function cachePut(key, url) {
+      if (cacheCount > 80) {
+        for (var k in cache) { try { URL.revokeObjectURL(cache[k]); } catch (e) {} }
+        cache = {}; cacheCount = 0;
+      }
+      cache[key] = url; cacheCount++;
+    }
+
+    function fetchGemini(text) {
+      var key = keys.gemini;
+      var models = keys.geminiModel ? [keys.geminiModel] : GEM_MODELS.slice();
+      var body = JSON.stringify({
+        contents: [{ parts: [{ text: geminiStyle() + text }] }],
+        generationConfig: {
+          responseModalities: ["AUDIO"],
+          speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: prefs.geminiVoice || "Charon" } } }
+        }
+      });
+      function tryModel(i) {
+        if (i >= models.length) return Promise.reject(new Error("No Gemini TTS model responded — the model name may have changed."));
+        return fetch("https://generativelanguage.googleapis.com/v1beta/models/" +
+            models[i] + ":generateContent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+          body: body
+        }).then(function (res) {
+          if (res.status === 404) return tryModel(i + 1);
+          if (!res.ok) return res.text().then(function (t) {
+            var msg = "Gemini error " + res.status;
+            try { msg += ": " + (JSON.parse(t).error.message || "").slice(0, 140); } catch (e) {}
+            throw new Error(msg);
+          });
+          if (!keys.geminiModel) { keys.geminiModel = models[i]; saveKeys(); }
+          return res.json().then(function (j) {
+            var parts = (((j.candidates || [])[0] || {}).content || {}).parts || [];
+            var chunks = [], total = 0;
+            for (var p = 0; p < parts.length; p++)
+              if (parts[p].inlineData && parts[p].inlineData.data) {
+                var u8 = b64ToBytes(parts[p].inlineData.data);
+                chunks.push(u8); total += u8.length;
+              }
+            if (!total) throw new Error("Gemini returned no audio (quota or safety block).");
+            var bytes = new Uint8Array(total), off = 0;
+            for (var c = 0; c < chunks.length; c++) { bytes.set(chunks[c], off); off += chunks[c].length; }
+            return pcmToWavUrl(bytes, 24000);
+          });
+        });
+      }
+      return tryModel(0);
+    }
+
+    function fetchEleven(text) {
+      return fetch("https://api.elevenlabs.io/v1/text-to-speech/" + elevenVoiceId() +
+          "?output_format=mp3_44100_128", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "xi-api-key": keys.eleven },
+        body: JSON.stringify({ text: text, model_id: "eleven_turbo_v2_5" })
+      }).then(function (res) {
+        if (!res.ok) return res.text().then(function (t) {
+          var msg = "ElevenLabs error " + res.status;
+          try { msg += ": " + (JSON.parse(t).detail.message || JSON.parse(t).detail.status || "").slice(0, 140); } catch (e) {}
+          throw new Error(msg + (res.status === 401 ? " (check your API key)" : ""));
+        });
+        return res.blob().then(function (b) { return URL.createObjectURL(b); });
+      });
+    }
+
+    function remoteKeyFor(text) {
+      var v = prefs.engine === "gemini" ? (prefs.geminiVoice + prefs.accent) : elevenVoiceId();
+      return prefs.engine + "|" + v + "|" + text;
+    }
+    function ensureAudio(i) {
+      var b = rBatches[i];
+      if (!b) return Promise.resolve(null);
+      var ck = remoteKeyFor(b.text);
+      if (cache[ck]) return Promise.resolve(cache[ck]);
+      if (!b.pending)
+        b.pending = (prefs.engine === "gemini" ? fetchGemini(b.text) : fetchEleven(b.text))
+          .then(function (url) { cachePut(ck, url); b.pending = null; return url; });
+      return b.pending;
+    }
+
+    // Merge portions into ~2200-char requests (fewer API calls, smoother audio).
+    function buildBatches(items) {
+      var out = [], curText = "", curEl = null;
+      for (var i = 0; i < items.length; i++) {
+        var t = items[i].text;
+        if (curText && (curText.length + t.length) > 2200) {
+          out.push({ text: curText, el: curEl }); curText = ""; curEl = null;
+        }
+        if (!curEl) curEl = items[i].el;
+        curText += (curText ? "\n\n" : "") + t;
+        // very long single portions: flush in sentence-safe slices
+        while (curText.length > 2600) {
+          var cut = curText.lastIndexOf(". ", 2200);
+          if (cut < 400) cut = 2200;
+          out.push({ text: curText.slice(0, cut + 1), el: curEl });
+          curText = curText.slice(cut + 1); curEl = items[i].el;
+        }
+      }
+      if (curText) out.push({ text: curText, el: curEl });
+      return out;
+    }
+
+    function playRemoteIdx(i) {
+      var myGen = gen;
+      if (i >= rBatches.length) { stopAll(); return; }
+      rIdx = i;
+      highlight(rBatches[i].el);
+      setStatus("fetching audio\u2026");
+      ensureAudio(i).then(function (url) {
+        if (myGen !== gen || !url) return;
+        setStatus("");
+        var a = getAudioEl();
+        a.src = url;
+        a.playbackRate = prefs.rate;
+        try { a.preservesPitch = true; a.webkitPreservesPitch = true; } catch (e) {}
+        a.onended = function () { if (myGen === gen) playRemoteIdx(i + 1); };
+        a.onerror = function () { if (myGen === gen) { toast("Audio playback failed."); stopAll(); } };
+        if (!paused) {
+          var pr = a.play();
+          if (pr && pr.catch) pr.catch(function () {
+            if (myGen !== gen) return;
+            toast("Tap again to allow audio playback.");
+            stopAll();
+          });
+        }
+        ensureAudio(i + 1).then(null, function () {}); // prefetch; error surfaces on play
+      }).catch(function (err) {
+        if (myGen !== gen) return;
+        toast(String(err && err.message || err).slice(0, 160));
+        stopAll();
+      });
+    }
+
+    function playRemote(items) {
+      var need = prefs.engine === "gemini" ? keys.gemini : keys.eleven;
+      if (!need) { openKeyModal(prefs.engine); return; }
+      rBatches = buildBatches(items);
+      if (!rBatches.length) { toast("Nothing to read here yet."); return; }
+      speaking = true; paused = false; updatePanel();
+      playRemoteIdx(0);
+    }
+
+    function playItems(items) {
+      stopAll();
+      if (prefs.engine === "device") playDevice(items);
+      else playRemote(items);
+    }
 
     // ── text extraction ──────────────────────────────────────────────────
     function txt(el) { return el ? el.textContent.replace(/\s+/g, " ").trim() : ""; }
@@ -2706,7 +2951,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return items;
     }
 
-    // Full text WITH answers — source material for NotebookLM.
     function sourceText() {
       var lines = [CFG.siteName, "Page: " + document.title,
                    "URL: " + location.href, ""];
@@ -2740,7 +2984,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return h ? txt(h) : document.title;
     }
 
-    // ── NotebookLM prompts ───────────────────────────────────────────────
+    // ── NotebookLM ───────────────────────────────────────────────────────
     function nlmPrompt(mode) {
       var t = topicTitle();
       if (mode === "video")
@@ -2749,7 +2993,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "British narration; slow, dramatic pacing; sweeping establishing shots; " +
           "moody arena lighting; slow-motion close-ups of athletes " + CFG.action + ". " +
           "Structure: a cold open that frames the core tension of the topic, then one " +
-          "visual scene per key fact, closing with a single training-floor application. " +
+          "visual scene per key fact, closing with a single " + CFG.applyterm + ". " +
           "Keep every number and claim exactly as stated in the source. Audience: a " +
           "coach preparing for the " + CFG.exam + ".";
       if (mode === "podcast")
@@ -2766,7 +3010,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "superpower auras, crackling lightning and energy effects; bold heavy " +
         "typography on a dark background. Content: the lesson title as a hero " +
         "banner, every key fact as its own labelled panel with a chibi icon, " +
-        "glossary terms as a labelled icon strip, and one 'training-floor application' " +
+        "glossary terms as a labelled icon strip, and one '" + CFG.applyterm + "' " +
         "callout. Dense but readable; keep every number exactly as in the source.";
     }
 
@@ -2783,13 +3027,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (btn) {
           var old = btn.getAttribute("data-label") || btn.textContent;
           btn.setAttribute("data-label", old);
-          btn.textContent = ok ? (okLabel || "Copied ✓") : "Copy failed";
+          btn.textContent = ok ? (okLabel || "Copied \u2713") : "Copy failed";
           setTimeout(function () { btn.textContent = btn.getAttribute("data-label"); }, 1600);
         }
       }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(s).then(function () { done(true); },
-          function () { legacyCopy(s) ? done(true) : done(false); });
+          function () { done(legacyCopy(s)); });
       } else done(legacyCopy(s));
     }
     function legacyCopy(s) {
@@ -2809,11 +3053,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.appendChild(t);
       setTimeout(function () { t.classList.add("on"); }, 10);
       setTimeout(function () { t.classList.remove("on");
-        setTimeout(function () { t.remove(); }, 300); }, 2200);
+        setTimeout(function () { t.remove(); }, 300); }, 2600);
     }
 
     // ── UI: floating panel ───────────────────────────────────────────────
-    var panel, btnPlay, btnPause, voiceSel;
+    var panel, btnPause, voiceSel, engineSel;
 
     function mkBtn(label, title, cls, fn) {
       var b = document.createElement("button");
@@ -2823,28 +3067,41 @@ document.addEventListener("DOMContentLoaded", () => {
       return b;
     }
 
+    function audition() {
+      playItems([{ text: "Here's how this voice sounds. Fast feet into the next station.", el: null }]);
+    }
+
     function fillVoiceSelect() {
       if (!voiceSel) return;
-      var vs = englishVoices();
-      var ranked = vs.map(function (v) { return { v: v, s: voiceScore(v, prefs.accent) }; })
-        .filter(function (x) { return x.s >= 0; })
-        .sort(function (a, b) { return b.s - a.s; });
       voiceSel.innerHTML = "";
-      var auto = document.createElement("option");
-      auto.value = ""; auto.textContent = "Voice: automatic (best available)";
-      voiceSel.appendChild(auto);
-      for (var i = 0; i < ranked.length; i++) {
+      function opt(val, label) {
         var o = document.createElement("option");
-        o.value = ranked[i].v.name;
-        o.textContent = ranked[i].v.name.replace(/^Microsoft /, "").replace(/ - English.*$/, "");
-        voiceSel.appendChild(o);
+        o.value = val; o.textContent = label; voiceSel.appendChild(o);
       }
-      voiceSel.value = prefs.voiceName || "";
+      if (prefs.engine === "device") {
+        var vs = englishVoices();
+        var ranked = vs.map(function (v) { return { v: v, s: voiceScore(v, prefs.accent) }; })
+          .filter(function (x) { return x.s >= 0; })
+          .sort(function (a, b) { return b.s - a.s; });
+        opt("", "Voice: automatic (best male match)");
+        for (var i = 0; i < ranked.length; i++) {
+          var v = ranked[i].v;
+          opt(v.name, genderTag(v) + v.name.replace(/^Microsoft /, "").replace(/ - English.*$/, ""));
+        }
+        voiceSel.value = prefs.voiceName || "";
+      } else if (prefs.engine === "gemini") {
+        for (var g = 0; g < GEM_VOICES.length; g++) opt(GEM_VOICES[g][0], GEM_VOICES[g][1]);
+        voiceSel.value = prefs.geminiVoice || "Charon";
+      } else {
+        for (var e = 0; e < ELEVEN_VOICES.length; e++) opt(ELEVEN_VOICES[e][0], ELEVEN_VOICES[e][1]);
+        opt("__custom__", "Custom voice ID\u2026 (set in \uD83D\uDD11 Key)");
+        voiceSel.value = prefs.elevenVoice || elevenVoiceId();
+      }
     }
 
     function updatePanel() {
-      if (!btnPause) return;
-      btnPause.textContent = paused ? "▶ Resume" : "⏸ Pause";
+      if (!panel) return;
+      btnPause.textContent = paused ? "\u25B6 Resume" : "\u23F8 Pause";
       btnPause.disabled = !speaking;
       var stopB = panel.querySelector(".sv-stop");
       if (stopB) stopB.disabled = !speaking;
@@ -2853,7 +3110,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (gb) gb.classList.toggle("on", prefs.accent === "gb");
       if (us) us.classList.toggle("on", prefs.accent === "us");
       var rateB = panel.querySelector(".sv-rate");
-      if (rateB) rateB.textContent = prefs.rate.toFixed(2).replace(/0+$/, "").replace(/\.$/, "") + "×";
+      if (rateB) rateB.textContent = prefs.rate.toFixed(2).replace(/0+$/, "").replace(/\.$/, "") + "\u00D7";
+      var keyB = panel.querySelector(".sv-keybtn");
+      if (keyB) keyB.style.display = prefs.engine === "device" ? "none" : "";
     }
 
     function buildPanel() {
@@ -2863,32 +3122,63 @@ document.addEventListener("DOMContentLoaded", () => {
       panel.setAttribute("aria-label", "Listen and NotebookLM tools");
 
       var row1 = document.createElement("div"); row1.className = "sv-row";
-      btnPlay = mkBtn("🔊 Listen to page", "Read the whole lesson aloud", "sv-main",
-        function () { playItems(pageItems()); });
-      btnPause = mkBtn("⏸ Pause", "Pause / resume", "", togglePause);
-      var btnStop = mkBtn("⏹", "Stop", "sv-stop", stopAll);
-      row1.appendChild(btnPlay); row1.appendChild(btnPause); row1.appendChild(btnStop);
+      row1.appendChild(mkBtn("\uD83D\uDD0A Listen to page", "Read the whole lesson aloud", "sv-main",
+        function () { playItems(pageItems()); }));
+      btnPause = mkBtn("\u23F8 Pause", "Pause / resume", "", togglePause);
+      row1.appendChild(btnPause);
+      row1.appendChild(mkBtn("\u23F9", "Stop", "sv-stop", stopAll));
+      var status = document.createElement("span");
+      status.className = "sv-status";
+      row1.appendChild(status);
 
       var row2 = document.createElement("div"); row2.className = "sv-row";
-      var gb = mkBtn("🇬🇧 British", "Deep British male voice — documentary style", "sv-seg",
-        function () { prefs.accent = "gb"; prefs.voiceName = ""; savePrefs(); fillVoiceSelect(); updatePanel(); });
+      var gb = mkBtn("\uD83C\uDDEC\uD83C\uDDE7 British", "Deep British male — documentary style", "sv-seg",
+        function () { prefs.accent = "gb"; prefs.voiceName = ""; prefs.elevenVoice = "";
+          savePrefs(); fillVoiceSelect(); updatePanel(); audition(); });
       gb.setAttribute("data-accent", "gb");
-      var us = mkBtn("🇺🇸 American", "American male voice", "sv-seg",
-        function () { prefs.accent = "us"; prefs.voiceName = ""; savePrefs(); fillVoiceSelect(); updatePanel(); });
+      var us = mkBtn("\uD83C\uDDFA\uD83C\uDDF8 American", "American male voice", "sv-seg",
+        function () { prefs.accent = "us"; prefs.voiceName = ""; prefs.elevenVoice = "";
+          savePrefs(); fillVoiceSelect(); updatePanel(); audition(); });
       us.setAttribute("data-accent", "us");
-      var rate = mkBtn("1×", "Reading speed", "sv-rate", function () {
+      var rate = mkBtn("1\u00D7", "Reading speed", "sv-rate", function () {
         var steps = [0.85, 1, 1.15, 1.3];
         prefs.rate = steps[(steps.indexOf(prefs.rate) + 1) % steps.length] || 1;
         savePrefs(); updatePanel();
+        if (speaking && prefs.engine !== "device" && audioEl) audioEl.playbackRate = prefs.rate;
       });
       row2.appendChild(gb); row2.appendChild(us); row2.appendChild(rate);
 
       var row3 = document.createElement("div"); row3.className = "sv-row";
+      engineSel = document.createElement("select");
+      engineSel.className = "sv-select";
+      engineSel.title = "Voice engine";
+      [["device", "Engine: device voices (free)"],
+       ["gemini", "Engine: Gemini AI voice (free key)"],
+       ["eleven", "Engine: ElevenLabs (best, paid key)"]].forEach(function (o) {
+        var op = document.createElement("option");
+        op.value = o[0]; op.textContent = o[1]; engineSel.appendChild(op);
+      });
+      engineSel.value = prefs.engine;
+      engineSel.addEventListener("change", function () {
+        stopAll();
+        prefs.engine = engineSel.value; savePrefs(); fillVoiceSelect(); updatePanel();
+        var need = prefs.engine === "gemini" ? keys.gemini :
+                   prefs.engine === "eleven" ? keys.eleven : "ok";
+        if (!need) openKeyModal(prefs.engine); else if (prefs.engine !== "device") audition();
+      });
+      var keyBtn = mkBtn("\uD83D\uDD11 Key", "Set / change the API key for this engine", "sv-keybtn",
+        function () { openKeyModal(prefs.engine); });
+      row3.appendChild(engineSel); row3.appendChild(keyBtn);
+
+      var row4 = document.createElement("div"); row4.className = "sv-row";
       voiceSel = document.createElement("select");
-      voiceSel.className = "sv-select";
-      voiceSel.title = "Exact voice (from this device's installed voices)";
+      voiceSel.className = "sv-select sv-voice";
+      voiceSel.title = "Voice";
       voiceSel.addEventListener("change", function () {
-        prefs.voiceName = voiceSel.value; savePrefs();
+        if (prefs.engine === "device") prefs.voiceName = voiceSel.value;
+        else if (prefs.engine === "gemini") prefs.geminiVoice = voiceSel.value;
+        else if (voiceSel.value !== "__custom__") prefs.elevenVoice = voiceSel.value;
+        savePrefs(); audition();
       });
       var ansSel = document.createElement("select");
       ansSel.className = "sv-select";
@@ -2902,37 +3192,101 @@ document.addEventListener("DOMContentLoaded", () => {
       ansSel.addEventListener("change", function () {
         prefs.answers = ansSel.value; savePrefs();
       });
-      row3.appendChild(voiceSel); row3.appendChild(ansSel);
+      row4.appendChild(voiceSel); row4.appendChild(ansSel);
 
-      var row4 = document.createElement("div"); row4.className = "sv-row";
+      var row5 = document.createElement("div"); row5.className = "sv-row";
       var lab = document.createElement("span");
       lab.className = "sv-lab"; lab.textContent = "NotebookLM:";
-      row4.appendChild(lab);
-      row4.appendChild(mkBtn("🎬 Video", "Prepare a cinematic NotebookLM Video Overview", "",
+      row5.appendChild(lab);
+      row5.appendChild(mkBtn("\uD83C\uDFAC Video", "Prepare a cinematic NotebookLM Video Overview", "",
         function () { openNlm("video"); }));
-      row4.appendChild(mkBtn("🎙️ Podcast", "Prepare a long NotebookLM Deep Dive podcast", "",
+      row5.appendChild(mkBtn("\uD83C\uDF99\uFE0F Podcast", "Prepare a long NotebookLM Deep Dive podcast", "",
         function () { openNlm("podcast"); }));
-      row4.appendChild(mkBtn("📊 Infographic", "Prepare a kawaii-powers NotebookLM infographic", "",
+      row5.appendChild(mkBtn("\uD83D\uDCCA Infographic", "Prepare a kawaii-powers NotebookLM infographic", "",
         function () { openNlm("infographic"); }));
 
-      panel.appendChild(row1); panel.appendChild(row2);
-      panel.appendChild(row3); panel.appendChild(row4);
+      panel.appendChild(row1); panel.appendChild(row2); panel.appendChild(row3);
+      panel.appendChild(row4); panel.appendChild(row5);
       document.body.appendChild(panel);
       fillVoiceSelect(); updatePanel();
     }
 
-    // ── UI: NotebookLM modal ─────────────────────────────────────────────
-    function openNlm(mode) {
+    // ── UI: key modal ────────────────────────────────────────────────────
+    function overlay() {
       var old = document.querySelector(".sv-overlay");
       if (old) old.remove();
       var ov = document.createElement("div");
       ov.className = "sv-overlay";
       ov.addEventListener("click", function (e) { if (e.target === ov) ov.remove(); });
+      return ov;
+    }
 
+    function openKeyModal(engine) {
+      var ov = overlay();
+      var d = document.createElement("div");
+      d.className = "sv-dialog";
+      var isG = engine === "gemini";
+      var h = document.createElement("h3");
+      h.textContent = isG ? "Gemini AI voice — free API key" : "ElevenLabs — API key";
+      var note = document.createElement("p");
+      note.className = "sv-note";
+      note.innerHTML = isG
+        ? "Much more natural than device voices. Get a <b>free</b> key at " +
+          "<a href='https://aistudio.google.com/apikey' target='_blank' rel='noopener'>aistudio.google.com/apikey</a> " +
+          "(Google account, no card). Free tier has daily limits — plenty for lessons. " +
+          "The key is stored only in this browser."
+        : "The most realistic voices available. Get a key at " +
+          "<a href='https://elevenlabs.io' target='_blank' rel='noopener'>elevenlabs.io</a> " +
+          "(free tier \u2248 10 min/month, paid from $5/mo). " +
+          "The key is stored only in this browser.";
+      var inp = document.createElement("input");
+      inp.type = "password"; inp.className = "sv-key-input";
+      inp.setAttribute("autocomplete", "new-password");
+      inp.setAttribute("name", "tts-api-key");
+      inp.placeholder = isG ? "Paste Gemini API key (AIza\u2026)" : "Paste ElevenLabs API key";
+      inp.value = isG ? keys.gemini : keys.eleven;
+      d.appendChild(h); d.appendChild(note); d.appendChild(inp);
+
+      var cGb, cUs;
+      if (!isG) {
+        var small = document.createElement("p");
+        small.className = "sv-note";
+        small.textContent = "Optional: custom voice IDs (from your ElevenLabs voice library).";
+        cGb = document.createElement("input");
+        cGb.className = "sv-key-input"; cGb.placeholder = "Custom British voice ID (optional)";
+        cGb.value = keys.elevenGb;
+        cUs = document.createElement("input");
+        cUs.className = "sv-key-input"; cUs.placeholder = "Custom American voice ID (optional)";
+        cUs.value = keys.elevenUs;
+        d.appendChild(small); d.appendChild(cGb); d.appendChild(cUs);
+      }
+
+      var foot = document.createElement("div");
+      foot.className = "sv-row sv-foot";
+      foot.appendChild(mkBtn("Save & test", "", "sv-main", function () {
+        if (isG) { keys.gemini = inp.value.trim(); keys.geminiModel = ""; }
+        else {
+          keys.eleven = inp.value.trim();
+          keys.elevenGb = cGb.value.trim(); keys.elevenUs = cUs.value.trim();
+        }
+        saveKeys(); ov.remove();
+        if (inp.value.trim()) audition(); else toast("Key cleared.");
+      }));
+      foot.appendChild(mkBtn("Cancel", "", "", function () { ov.remove(); }));
+      d.appendChild(foot);
+      ov.appendChild(d);
+      document.body.appendChild(ov);
+      inp.focus();
+    }
+
+    // ── UI: NotebookLM modal ─────────────────────────────────────────────
+    function openNlm(mode) {
+      var ov = overlay();
       var d = document.createElement("div");
       d.className = "sv-dialog";
       var h = document.createElement("h3");
-      h.textContent = "Create " + (/^[aeiou]/i.test(NLM_LABEL[mode]) ? "an " : "a ") + NLM_LABEL[mode] + " with NotebookLM";
+      h.textContent = "Create " + (/^[aeiou]/i.test(NLM_LABEL[mode]) ? "an " : "a ") +
+        NLM_LABEL[mode] + " with NotebookLM";
       var note = document.createElement("p");
       note.className = "sv-note";
       note.textContent = "NotebookLM has no public API, so this can't run by itself — " +
@@ -2948,31 +3302,30 @@ document.addEventListener("DOMContentLoaded", () => {
       li1.appendChild(mkBtn("Copy page link", "", "sv-small",
         function () { copyText(location.href, this); }));
       var li2 = document.createElement("li");
-      li2.textContent = "In NotebookLM: New notebook → Add source → \u201CCopied text\u201D " +
+      li2.textContent = "In NotebookLM: New notebook \u2192 Add source \u2192 \u201CCopied text\u201D " +
         "(paste the lesson) — or \u201CWebsite\u201D (paste the link).";
       var li3 = document.createElement("li");
       li3.appendChild(document.createTextNode("Open " + NLM_TOOL[mode] +
-        " → Customise, and paste the tailored prompt: "));
+        " \u2192 Customise, and paste the tailored prompt: "));
       li3.appendChild(mkBtn("Copy " + NLM_LABEL[mode] + " prompt", "", "sv-small sv-primary",
         function () { copyText(nlmPrompt(mode), this); }));
       ol.appendChild(li1); ol.appendChild(li2); ol.appendChild(li3);
 
-      var open = mkBtn("Open NotebookLM ↗", "notebooklm.google.com", "sv-main",
-        function () { window.open("https://notebooklm.google.com/", "_blank", "noopener"); });
-      var close = mkBtn("Close", "", "", function () { ov.remove(); });
       var foot = document.createElement("div");
       foot.className = "sv-row sv-foot";
-      foot.appendChild(open); foot.appendChild(close);
+      foot.appendChild(mkBtn("Open NotebookLM \u2197", "notebooklm.google.com", "sv-main",
+        function () { window.open("https://notebooklm.google.com/", "_blank", "noopener"); }));
+      foot.appendChild(mkBtn("Close", "", "", function () { ov.remove(); }));
 
       d.appendChild(h); d.appendChild(note); d.appendChild(ol); d.appendChild(foot);
       ov.appendChild(d);
       document.body.appendChild(ov);
     }
 
-    // ── UI: per-section buttons ──────────────────────────────────────────
+    // ── UI: per-section buttons (idempotent — safe to re-run) ────────────
     function mini(title, fn) {
       var b = document.createElement("button");
-      b.type = "button"; b.className = "sv-mini"; b.textContent = "🔊";
+      b.type = "button"; b.className = "sv-mini"; b.textContent = "\uD83D\uDD0A";
       b.title = title;
       b.addEventListener("click", function (e) { e.stopPropagation(); fn(); });
       return b;
@@ -2984,7 +3337,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (head && !head.querySelector(".sv-chip")) {
           var b = document.createElement("button");
           b.type = "button"; b.className = "sv-mini sv-chip";
-          b.textContent = "🔊 Listen to this lesson";
+          b.textContent = "\uD83D\uDD0A Listen to this lesson";
           b.addEventListener("click", function () { playItems(lessonItems(card)); });
           head.appendChild(b);
         }
@@ -3034,15 +3387,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     buildPanel();
     injectButtons();
-    // Review-queue cards render late (after the async FSRS module) and the
-    // container is rebuilt after every grade — re-inject when that happens.
+    // Review-queue cards render late (async FSRS module) and the container is
+    // rebuilt after every grade — re-inject when that happens.
     var rq = document.getElementById("personal-reviews");
     if (rq && typeof MutationObserver === "function")
       new MutationObserver(function () { injectButtons(); })
         .observe(rq, { childList: true });
   });
 })();
-/* ===== end study-voice v1 ===== */
+/* ===== end study-voice v2 ===== */
 </script>
 </body>
 </html>
