@@ -820,6 +820,56 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* Build stamp + day-completion progress (completion-gated day advance) */
 #day-progress b { color: var(--warn, #ffb86b); }
 #day-progress .dp-done { color: var(--good, #67e8b0); font-weight: 700; }
+
+/* ===== study-voice v1 — panel, mini buttons, modal (synced: hyrox/cscs) ===== */
+.sv-panel { position: fixed; right: 14px; bottom: 64px; z-index: 998;
+  background: rgba(13, 17, 26, 0.96); border: 1px solid #2a3446; border-radius: 14px;
+  padding: 10px 12px; display: flex; flex-direction: column; gap: 7px;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.55); max-width: 320px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.sv-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.sv-btn { background: #1a2232; color: #dfe7f5; border: 1px solid #33405a;
+  border-radius: 8px; padding: 5px 9px; font-size: 12px; line-height: 1.3;
+  cursor: pointer; font-family: inherit; }
+.sv-btn:hover { border-color: #5ec8ff; }
+.sv-btn:disabled { opacity: 0.45; cursor: default; }
+.sv-btn.sv-main { background: #5ec8ff; color: #0b0e14; font-weight: 700;
+  border-color: #5ec8ff; }
+.sv-btn.sv-seg.on { background: #223349; outline: 1px solid #5ec8ff; }
+.sv-btn.sv-primary { background: #223349; border-color: #5ec8ff; }
+.sv-select { background: #131a28; color: #b9c4d8; border: 1px solid #33405a;
+  border-radius: 8px; font-size: 11px; padding: 4px 6px; max-width: 150px;
+  font-family: inherit; }
+.sv-lab { font-size: 11px; color: #8b96ab; }
+.sv-mini { background: transparent; border: 1px solid #33405a; color: #9fb4d8;
+  border-radius: 7px; font-size: 11px; padding: 1px 6px; margin: 0 0 0 8px;
+  cursor: pointer; vertical-align: middle; line-height: 1.5; font-family: inherit; }
+.sv-mini:hover { border-color: #5ec8ff; color: #dfe7f5; }
+.sv-mini.sv-chip { margin-left: auto; padding: 3px 9px; }
+.concept > .sv-mini, .training-link > .sv-mini { float: right; margin: 0 0 4px 8px; }
+.sv-now { outline: 2px solid rgba(94, 200, 255, 0.85); outline-offset: 3px;
+  border-radius: 8px; }
+.sv-overlay { position: fixed; inset: 0; background: rgba(4, 6, 10, 0.72);
+  z-index: 99995; display: flex; align-items: center; justify-content: center;
+  padding: 18px; }
+.sv-dialog { background: #10151f; border: 1px solid #2a3446; border-radius: 16px;
+  max-width: 520px; width: 100%; padding: 20px 22px; color: #dfe7f5;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.6); }
+.sv-dialog h3 { margin: 0 0 6px; font-size: 17px; }
+.sv-note { color: #8b96ab; font-size: 12.5px; margin: 0 0 12px; }
+.sv-steps { margin: 0 0 14px; padding-left: 20px; font-size: 13px;
+  display: flex; flex-direction: column; gap: 10px; }
+.sv-small { font-size: 11.5px; padding: 3px 8px; }
+.sv-foot { justify-content: flex-end; }
+.sv-toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(8px);
+  background: #1a2232; color: #dfe7f5; border: 1px solid #33405a; border-radius: 10px;
+  padding: 8px 14px; font-size: 13px; z-index: 99999; opacity: 0; transition: all 0.25s; }
+.sv-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (max-width: 640px) {
+  .sv-panel { right: 8px; bottom: 58px; max-width: 78vw; padding: 8px; }
+  .sv-btn { font-size: 11px; }
+}
+/* ===== end study-voice v1 ===== */
 </style>
 <style>:root {
   --bg: #0e0f17;
@@ -922,7 +972,7 @@ body { background-image: radial-gradient(circle at 50% 50%, rgba(94, 200, 255, 0
 </style>
 </head>
 <body class="theme-day-41">
-<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Jul 22, 2026 · 8:40 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Jul 22, 2026 · 8:40 PM</div>
+<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 13, 2026 · 1:28 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 13, 2026 · 1:28 PM</div>
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day 41 · Friday</div>
@@ -1135,8 +1185,8 @@ body { background-image: radial-gradient(circle at 50% 50%, rgba(94, 200, 255, 0
   <div class="w-hint">Drag the dot along the curve. Peak power lives at ~30% max isometric force — the F-V intersection.</div>
 </div>
 
-<div class="widget bm-w" id="tq14137"><div class="w-head"><span class="w-icon">⚖️</span><span class="w-title">Torque &amp; moment arm — find the sticking point</span></div><div class="w-body">
-<svg viewBox="0 0 320 230" class="w-svg" id="tq14137-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:240px">
+<div class="widget bm-w" id="tq14151"><div class="w-head"><span class="w-icon">⚖️</span><span class="w-title">Torque &amp; moment arm — find the sticking point</span></div><div class="w-body">
+<svg viewBox="0 0 320 230" class="w-svg" id="tq14151-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:240px">
   <!-- upper arm (fixed, vertical) -->
   <line x1="90" y1="40" x2="90" y2="120" stroke="var(--text-dim,#9ba3b4)" stroke-width="6" stroke-linecap="round"/>
   <text x="74" y="80" fill="var(--text-dim,#9ba3b4)" font-size="9" text-anchor="end">upper arm</text>
@@ -1144,55 +1194,55 @@ body { background-image: radial-gradient(circle at 50% 50%, rgba(94, 200, 255, 0
   <circle cx="90" cy="120" r="6" fill="var(--warn,#ffb86b)"/>
   <text x="90" y="142" fill="var(--warn,#ffb86b)" font-size="9" text-anchor="middle">elbow</text>
   <!-- moment-arm bracket (horizontal dist elbow->weight) -->
-  <line id="tq14137-arm" x1="90" y1="190" x2="90" y2="190" stroke="var(--accent,#5ec8ff)" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text id="tq14137-armlbl" x="90" y="204" fill="var(--accent,#5ec8ff)" font-size="9" text-anchor="middle">moment arm</text>
+  <line id="tq14151-arm" x1="90" y1="190" x2="90" y2="190" stroke="var(--accent,#5ec8ff)" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text id="tq14151-armlbl" x="90" y="204" fill="var(--accent,#5ec8ff)" font-size="9" text-anchor="middle">moment arm</text>
   <!-- forearm (rotates) -->
-  <line id="tq14137-fore" x1="90" y1="120" x2="90" y2="200" stroke="var(--good,#67e8b0)" stroke-width="6" stroke-linecap="round"/>
+  <line id="tq14151-fore" x1="90" y1="120" x2="90" y2="200" stroke="var(--good,#67e8b0)" stroke-width="6" stroke-linecap="round"/>
   <!-- weight at hand -->
-  <g id="tq14137-hand">
+  <g id="tq14151-hand">
     <rect x="-9" y="-9" width="18" height="18" rx="3" fill="var(--bad,#ff7a7a)"/>
     <line x1="0" y1="9" x2="0" y2="34" stroke="var(--bad,#ff7a7a)" stroke-width="2"/>
     <path d="M 0 36 L -5 26 L 5 26 Z" fill="var(--bad,#ff7a7a)"/>
   </g>
-</svg><div class="bm-controls"><label>Elbow position: <b id="tq14137-anglbl">extended (hanging)</b></label><input type="range" min="0" max="180" step="2" value="20" id="tq14137-sl" class="bm-slider"><div class="bm-read">Resistance torque on the elbow: <b id="tq14137-tq">low</b> &nbsp;|&nbsp; moment arm = <b id="tq14137-mm">short</b></div></div>
+</svg><div class="bm-controls"><label>Elbow position: <b id="tq14151-anglbl">extended (hanging)</b></label><input type="range" min="0" max="180" step="2" value="20" id="tq14151-sl" class="bm-slider"><div class="bm-read">Resistance torque on the elbow: <b id="tq14151-tq">low</b> &nbsp;|&nbsp; moment arm = <b id="tq14151-mm">short</b></div></div>
 <style>
-#tq14137 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
-#tq14137 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
-#tq14137 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
+#tq14151 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
+#tq14151 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+#tq14151 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
   padding:9px 12px;border-radius:9px;border:1px solid var(--border-2,#2d3548);
   background:var(--surface-2,rgba(255,255,255,.03));color:var(--text);
   transition:border-color .15s,background .15s,transform .1s;line-height:1.35}
-#tq14137 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
-#tq14137 .bm-opt:disabled{cursor:default}
-#tq14137 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
-#tq14137 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
-#tq14137 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
-#tq14137 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
+#tq14151 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
+#tq14151 .bm-opt:disabled{cursor:default}
+#tq14151 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
+#tq14151 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
+#tq14151 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
+#tq14151 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
   background:rgba(94,200,255,.07);border-left:3px solid var(--accent);font-size:12.5px;
   color:var(--text-dim,#9ba3b4);line-height:1.5}
-#tq14137 .bm-reveal.show{display:block;animation:bmfade .35s ease}
-#tq14137 .bm-reveal b{color:var(--text)}
-#tq14137 .bm-reveal .bm-why{color:var(--warn)}
-#tq14137 .bm-controls{margin-top:10px}
-#tq14137 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
-#tq14137 .bm-controls label b{color:var(--text)}
-#tq14137 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
+#tq14151 .bm-reveal.show{display:block;animation:bmfade .35s ease}
+#tq14151 .bm-reveal b{color:var(--text)}
+#tq14151 .bm-reveal .bm-why{color:var(--warn)}
+#tq14151 .bm-controls{margin-top:10px}
+#tq14151 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
+#tq14151 .bm-controls label b{color:var(--text)}
+#tq14151 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
   background:var(--surface-3,#2d3548);border-radius:999px;outline:none;cursor:pointer;margin-top:4px}
-#tq14137 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
+#tq14151 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
   border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent)}
-#tq14137 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
+#tq14151 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
   background:var(--accent);border:none;cursor:pointer}
-#tq14137 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
-#tq14137 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
+#tq14151 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
+#tq14151 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
   border:1px solid var(--border-2,#2d3548);background:transparent;color:var(--text-dim,#9ba3b4)}
-#tq14137 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
-#tq14137 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
-#tq14137 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
+#tq14151 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
+#tq14151 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
+#tq14151 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
 @keyframes bmfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 </style>
 <div class="bm-q">Before you touch the slider — <b>at which elbow angle is the dumbbell's resistance torque the GREATEST?</b></div><div class="bm-opts"><button class="bm-opt" data-correct="0"><span class="bm-tag">A</span>Fully extended (forearm hanging straight down)</button><button class="bm-opt" data-correct="1"><span class="bm-tag">B</span>About 90° (forearm horizontal)</button><button class="bm-opt" data-correct="0"><span class="bm-tag">C</span>Fully flexed (forearm pointing up at the top)</button></div><div class="bm-reveal"><b>Greatest at ~90° (forearm horizontal).</b> Torque = force × <b>perpendicular</b> moment arm. Gravity always pulls straight down, so the moment arm is the <i>horizontal</i> distance from the elbow to the weight — longest when the forearm is horizontal, near-zero when it points straight down or straight up. <span class='bm-why'>Why it matters:</span> that horizontal point is your <b>sticking point</b> — where the resistance curve peaks. Drag the slider to watch the moment arm (blue) and torque grow to a max mid-rep, then fall off. It's also why accommodating resistance (bands/chains) and exercise selection are built around where torque demand is highest.</div>
 <script>(function(){
-  var root=document.getElementById("tq14137");if(!root)return;
+  var root=document.getElementById("tq14151");if(!root)return;
   var opts=root.querySelectorAll(".bm-opt");
   var rev=root.querySelector(".bm-reveal");
   var answered=false;
@@ -1206,18 +1256,18 @@ body { background-image: radial-gradient(circle at 50% 50%, rgba(94, 200, 255, 0
       if(b.getAttribute("data-correct")!=="1")b.classList.add("is-wrong");
       if(rev)rev.classList.add("show");
       var hook=root.querySelector("[data-after-answer]");
-      if(hook&&window["tq14137after"])window["tq14137after"]();
+      if(hook&&window["tq14151after"])window["tq14151after"]();
     });
   });
 })();</script>
 
 <script>(function(){
-  var root=document.getElementById("tq14137");if(!root)return;
-  var sl=root.querySelector("#tq14137-sl"),
-      fore=root.querySelector("#tq14137-fore"),
-      hand=root.querySelector("#tq14137-hand"),
-      arm=root.querySelector("#tq14137-arm"),
-      armlbl=root.querySelector("#tq14137-armlbl"),
+  var root=document.getElementById("tq14151");if(!root)return;
+  var sl=root.querySelector("#tq14151-sl"),
+      fore=root.querySelector("#tq14151-fore"),
+      hand=root.querySelector("#tq14151-hand"),
+      arm=root.querySelector("#tq14151-arm"),
+      armlbl=root.querySelector("#tq14151-armlbl"),
       ex=90,ey=120,L=80;
   function up(){
     var phi=+sl.value*Math.PI/180;
@@ -1231,15 +1281,15 @@ body { background-image: radial-gradient(circle at 50% 50%, rgba(94, 200, 255, 0
     armlbl.setAttribute("x",(ax+bx)/2);armlbl.setAttribute("y",ay+14);
     var ratio=Math.abs(Math.sin(phi)); // 0..1, 1 at horizontal
     var pct=Math.round(ratio*100);
-    root.querySelector("#tq14137-tq").textContent=pct+"% of max";
-    root.querySelector("#tq14137-mm").textContent=Math.round(L*Math.abs(Math.sin(phi)))+" units";
+    root.querySelector("#tq14151-tq").textContent=pct+"% of max";
+    root.querySelector("#tq14151-mm").textContent=Math.round(L*Math.abs(Math.sin(phi)))+" units";
     var deg=+sl.value, name;
     if(deg<25)name="extended (hanging)";
     else if(deg<70)name="mid-range (rising)";
     else if(deg<110)name="~horizontal — STICKING POINT";
     else if(deg<150)name="past horizontal (easing)";
     else name="fully flexed (top)";
-    root.querySelector("#tq14137-anglbl").textContent=name;
+    root.querySelector("#tq14151-anglbl").textContent=name;
   }
   sl.addEventListener("input",up);up();
 })();</script></div></div><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Force order: eccentric &gt; isometric &gt; concentric</li><li>F–V (Hill): concentric torque ↓ as angular velocity ↑; decline steepest at slow speeds (non-linear)</li><li>Eccentric torque ↑ with velocity up to ~90°/s (~1.57 rad/s), then gradual ↓</li><li>Length–tension peak = resting length (max actin–myosin overlap); too long or too short ↓ force</li><li>Titin: mechanosensing 3rd filament; tightens with Ca²⁺ in eccentrics → aids force + hypertrophy signaling</li><li>Torque = force × moment arm; MA = muscle moment arm ÷ resistive moment arm</li><li>MA &gt; 1.0 → muscle force &lt; load; MA &lt; 1.0 → muscle force &gt; load</li><li>Levers: 1st-class = forces on opposite sides of fulcrum; 2nd = same side, MM &gt; MR (advantage); 3rd = same side, MM &lt; MR (disadvantage, most limb muscles)</li><li>Free-weight resistive moment arm = horizontal distance from load to joint → resistive torque varies through ROM (sticking points)</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 8 Q 25 12 40 22 Q 55 32 70 36" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M 10 12 Q 25 4 40 8 Q 55 18 70 36" fill="none" stroke="#ffb86b" stroke-width="1.5" stroke-dasharray="3 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Force-velocity curve</div><div class="gloss-def">Force ↓ as concentric velocity ↑; eccentric force rises with speed to ~90°/s then plateaus. Order: eccentric &gt; isometric &gt; concentric.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M 10 32 Q 25 28 40 8 Q 55 28 70 32" fill="none" stroke="#67e8b0" stroke-width="2"/><line x1="40" y1="6" x2="40" y2="34" stroke="#9ba3b4" stroke-width="0.5" stroke-dasharray="2 2"/></svg></div><div class="gloss-text"><div class="gloss-term">Length-tension relationship</div><div class="gloss-def">Force is maximal at resting length (optimal actin–myosin overlap); falls when the muscle is stretched (fewer aligned sites) or overly shortened (excessive overlap).</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M10 30 C24 30 40 24 66 8" fill="none" stroke="#5ec8ff" stroke-width="2"/><line x1="10" y1="30" x2="70" y2="30" stroke="#9fb2c8" stroke-width="1"/><line x1="10" y1="6" x2="10" y2="34" stroke="#9fb2c8" stroke-width="1"/></svg></div><div class="gloss-text"><div class="gloss-term">Moment arm</div><div class="gloss-def">Perpendicular distance from a force&#x27;s line of action to the fulcrum. Longer moment arm → more torque per unit of force.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M10 30 C24 30 40 24 66 8" fill="none" stroke="#5ec8ff" stroke-width="2"/><line x1="10" y1="30" x2="70" y2="30" stroke="#9fb2c8" stroke-width="1"/><line x1="10" y1="6" x2="10" y2="34" stroke="#9fb2c8" stroke-width="1"/></svg></div><div class="gloss-text"><div class="gloss-term">Torque</div><div class="gloss-def">Rotational effect of a force about a joint = force × moment arm. Muscle force must be expressed as torque because movement is joint rotation.</div></div></div><div class="gloss-card" style="animation-delay: 0.32s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M10 30 C24 30 40 24 66 8" fill="none" stroke="#5ec8ff" stroke-width="2"/><line x1="10" y1="30" x2="70" y2="30" stroke="#9fb2c8" stroke-width="1"/><line x1="10" y1="6" x2="10" y2="34" stroke="#9fb2c8" stroke-width="1"/></svg></div><div class="gloss-text"><div class="gloss-term">Mechanical advantage</div><div class="gloss-def">Ratio of muscle moment arm to resistive moment arm. &gt;1.0 lets muscle force be less than the load; &lt;1.0 forces it to exceed the load.</div></div></div><div class="gloss-card" style="animation-delay: 0.40s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="9" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M40 20h22M54 13l8 7-8 7" fill="none" stroke="#67e8b0" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">Titin</div><div class="gloss-def">Elastic third filament with mechanosensing properties; tightens under eccentric load and calcium influx, contributing to force and hypertrophy signaling.</div></div></div><div class="gloss-card" style="animation-delay: 0.48s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="12" width="60" height="6" rx="3" fill="#5ec8ff"/><rect x="10" y="22" width="60" height="6" rx="3" fill="#ffb86b"/><g stroke="#0b1220" stroke-width="1"><line x1="22" y1="12" x2="22" y2="28"/><line x1="40" y1="12" x2="40" y2="28"/><line x1="58" y1="12" x2="58" y2="28"/></g></svg></div><div class="gloss-text"><div class="gloss-term">Muscle action</div><div class="gloss-def">Preferred over &#x27;contraction&#x27;: concentric (shortening, force &gt; load), eccentric (lengthening, force &lt; load), isometric (no length change, force = load).</div></div></div></div></div><div class="fig-strip"><div class="fig-title">Figures from the 5th edition <span class="fig-hint">tap to enlarge</span></div><div class="fig-row"><figure class="fig-thumb" data-full="../figures/figure_2.13.jpg" data-cap="Figure 2.13 — Force—velocity curve for eccentric and concentric actions" tabindex="0" role="button" aria-label="Figure 2.13 — Force—velocity curve for eccentric and concentric actions"><img loading="lazy" src="../figures/figure_2.13.jpg" alt="Figure 2.13"><figcaption>Figure 2.13</figcaption></figure><figure class="fig-thumb" data-full="../figures/figure_2.12.jpg" data-cap="Figure 2.12 — A schematic of the interaction between actin, myosin, and titin filamentswhen the muscle is at its resting length and when it is contracted" tabindex="0" role="button" aria-label="Figure 2.12 — A schematic of the interaction between actin, myosin, and titin filamentswhen the muscle is at its resting length and when it is contracted"><img loading="lazy" src="../figures/figure_2.12.jpg" alt="Figure 2.12"><figcaption>Figure 2.12</figcaption></figure><figure class="fig-thumb" data-full="../figures/figure_2.1.jpg" data-cap="Figure 2.1 — A first-class lever (the forearm). Elbow extension against resistance (e.g., atriceps extension exercise). O= fulcrum; FM= muscle force; FR" tabindex="0" role="button" aria-label="Figure 2.1 — A first-class lever (the forearm). Elbow extension against resistance (e.g., atriceps extension exercise). O= fulcrum; FM= muscle force; FR"><img loading="lazy" src="../figures/figure_2.1.jpg" alt="Figure 2.1"><figcaption>Figure 2.1</figcaption></figure><figure class="fig-thumb" data-full="../figures/figure_2.3.jpg" data-cap="Figure 2.3 — A second-class lever (the foot). Plantar flexion against resistance (e.g., astanding heel raise exercise). FM = muscle force; FR = resistive" tabindex="0" role="button" aria-label="Figure 2.3 — A second-class lever (the foot). Plantar flexion against resistance (e.g., astanding heel raise exercise). FM = muscle force; FR = resistive"><img loading="lazy" src="../figures/figure_2.3.jpg" alt="Figure 2.3"><figcaption>Figure 2.3</figcaption></figure><figure class="fig-thumb" data-full="../figures/figure_2.4.jpg" data-cap="Figure 2.4 — A third-class lever (the forearm). Elbow flexion against resistance (e.g., abiceps curl exercise). FM= muscle force; FR= resistive force; MM" tabindex="0" role="button" aria-label="Figure 2.4 — A third-class lever (the forearm). Elbow flexion against resistance (e.g., abiceps curl exercise). FM= muscle force; FR= resistive force; MM"><img loading="lazy" src="../figures/figure_2.4.jpg" alt="Figure 2.4"><figcaption>Figure 2.4</figcaption></figure><figure class="fig-thumb" data-full="../figures/figure_2.6.jpg" data-cap="Figure 2.6 — Mechanical advantage at the elbow. During elbow flexion with the bicepsmuscle, the perpendicular distance from the joint axis of rotation to" tabindex="0" role="button" aria-label="Figure 2.6 — Mechanical advantage at the elbow. During elbow flexion with the bicepsmuscle, the perpendicular distance from the joint axis of rotation to"><img loading="lazy" src="../figures/figure_2.6.jpg" alt="Figure 2.6"><figcaption>Figure 2.6</figcaption></figure></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your PM heavy squats/deadlifts train the high-force, low-velocity left side of the F–V curve; sled pushes and box jumps develop the right side. Program eccentric-emphasis lowers to exploit that eccentric force ceiling and drive titin-linked adaptation. For Hyrox, recognize that a wall-ball or lunge sticking point is a moment-arm problem — the resistive torque peaks mid-range — so cue athletes to accelerate hardest where leverage is worst.</p></div><div class="media"><a class="media-link video" href="https://www.youtube.com/watch?v=9vOmlzLfxGA" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Dr. Andy Galpin: Muscle Fiber Types and Muscle Growth (force-velocity context)</div><div class="m-cred">Cal State Fullerton · Galpin PhD</div></div></a><a class="media-link audio" href="https://www.hubermanlab.com/episode/dr-andy-galpin-how-to-build-strength-muscle-size-and-endurance" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Huberman Lab — Galpin: How to Build Strength, Muscle Size &amp; Endurance</div><div class="m-cred">Stanford + Galpin PhD</div></div></a></div></section><section class="lesson-card reveal" data-domain="ES" style="--accent: #5ec8ff; --accent-2: #8fdfff; --glow: rgba(94, 200, 255, 0.18);"><div class="lesson-head"><span class="badge badge-spaced">2 weeks back</span><span class="domain-chip" style="background: rgba(94, 200, 255, 0.18); color: #5ec8ff; border-color: #5ec8ff66;"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22a7 7 0 0 0 7-7c0-2 0-3 2-5 1.5-1.5 3-3 3-5a5 5 0 0 0-10 0c0 2 1.5 3.5 3 5 2 2 2 3 2 5a7 7 0 0 0-7 7"/></svg>Exercise Science</span><span class="domain">Ch 3 &amp; 6 (5E) · 5E Ch 3 — Oxidative System, Fat Oxidation, LT/OBLA; Ch 6 — Muscular Adaptations to Aerobic Training. Zone-2/San-Millán extends 5E.</span></div><h2>Zone 2, mitochondrial biogenesis &amp; fat oxidation (San-Millán)</h2><p class="concept">The oxidative system rephosphorylates ATP in the mitochondria via the Krebs cycle and electron transport chain, burning both carbohydrate (~32 ATP/glucose) and fat, where beta-oxidation of one triglyceride yields &gt;300 ATP. Aerobic training enlarges and multiplies mitochondria, raises oxidative-enzyme and capillary density, and increases stored triglyceride — so muscle burns more fat, spares glycogen, and shifts LT/OBLA rightward. Zone-2 (just below LT1) is the modern extension: the intensity that maximally drives Type-I fat oxidation with minimal lactate, chronically upregulating PGC-1α, mitochondrial biogenesis, and MCT1 clearance.</p><div class="facts"><div class="facts-title">Key facts to memorize</div><ul><li>Oxidative system = primary ATP source at rest + low intensity; uses CHO + fat (protein minor, rises &gt;90 min work)</li><li>At rest ~70% ATP from fat, ~30% CHO; as intensity ↑, substrate shifts fat→CHO (near-100% CHO at high intensity)</li><li>1 glucose → ~32 ATP oxidatively (~34 from glycogen); glucose oxidation nets &gt;90% of ATP via oxidative phosphorylation</li><li>Beta-oxidation: FFAs → acetyl-CoA into Krebs; 1 triglyceride (3× palmitic) yields &gt;300 ATP → huge fat capacity</li><li>Krebs rate-limiter = isocitrate dehydrogenase (isocitrate→α-ketoglutarate); ↑ by ADP, inhibited by ATP</li><li>Aerobic training: ↑ mitochondrial size + number, ↑ myoglobin, ↑ oxidative enzymes, ↑ capillary density, ↑ stored triglyceride → fat use ↑, glycogen spared</li><li>LT1 ~50-60% VO2max untrained, ~70-80% trained; OBLA/LT2 ≈ 4 mmol/L blood lactate</li><li>Training shifts LT/OBLA right → hold higher %VO2max before lactate rises (↓ catecholamines, ↑ mito content)</li><li>Zone-2 (extension): just below LT1 = max fat-ox stimulus, near-baseline lactate; drives PGC-1α, biogenesis, MCT1 — dose-dependent on easy volume</li></ul></div><div class="glossary"><div class="gloss-title">Visual glossary</div><div class="gloss-grid"><div class="gloss-card" style="animation-delay: 0.00s"><div class="gloss-svg"><svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='16' cy='20' r='9' fill='#5ec8ff'/><line x1='28' y1='20' x2='52' y2='20' stroke='#ffd84a' stroke-width='2.5'/><polygon points='52,15 62,20 52,25' fill='#ffd84a'/><circle cx='70' cy='20' r='9' fill='#67e8b0'/></svg></div><div class="gloss-text"><div class="gloss-term">PGC-1α</div><div class="gloss-def">Master transcriptional coactivator switched on by repeated endurance work; orchestrates mitochondrial biogenesis and capillary growth.</div></div></div><div class="gloss-card" style="animation-delay: 0.08s"><div class="gloss-svg"><svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><path d='M 6 34 C 30 34 40 30 50 18 C 58 9 66 7 74 6' stroke='#67e8b0' stroke-width='2.5' fill='none'/><line x1='6' y1='34' x2='74' y2='34' stroke='#888' stroke-width='1'/></svg></div><div class="gloss-text"><div class="gloss-term">Metabolic flexibility</div><div class="gloss-def">Capacity to switch between and efficiently oxidize fat vs carbohydrate as fuel across a range of intensities.</div></div></div><div class="gloss-card" style="animation-delay: 0.16s"><div class="gloss-svg"><svg viewBox='0 0 80 40' xmlns='http://www.w3.org/2000/svg'><circle cx='14' cy='20' r='6' fill='#ffb86b'/><circle cx='38' cy='20' r='6' fill='#ffb86b'/><circle cx='62' cy='20' r='6' fill='#ffb86b'/></svg></div><div class="gloss-text"><div class="gloss-term">MCT1</div><div class="gloss-def">Monocarboxylate transporter-1; shuttles lactate into oxidative fibers/mitochondria to be used as fuel. Upregulated by Zone-2 volume.</div></div></div><div class="gloss-card" style="animation-delay: 0.24s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="20" r="11" fill="none" stroke="#67e8b0" stroke-width="2"/><path d="M26 12v16M18 20h16" stroke="#67e8b0" stroke-width="1.6"/><path d="M44 20h20M56 14l8 6-8 6" fill="none" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">Beta-oxidation</div><div class="gloss-def">Mitochondrial breakdown of free fatty acids into acetyl-CoA units that feed the Krebs cycle; yields hundreds of ATP per triglyceride.</div></div></div><div class="gloss-card" style="animation-delay: 0.32s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M8 32 C30 30 40 26 54 12 L72 6" fill="none" stroke="#5ec8ff" stroke-width="2"/><line x1="50" y1="6" x2="50" y2="34" stroke="#ffb86b" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="50" cy="15" r="2.5" fill="#ffb86b"/></svg></div><div class="gloss-text"><div class="gloss-term">Lactate threshold (LT1)</div><div class="gloss-def">Exercise intensity where blood lactate first rises abruptly above baseline (~50-60% VO2max untrained, 70-80% trained).</div></div></div><div class="gloss-card" style="animation-delay: 0.40s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M8 32 C30 30 40 26 54 12 L72 6" fill="none" stroke="#5ec8ff" stroke-width="2"/><line x1="50" y1="6" x2="50" y2="34" stroke="#ffb86b" stroke-width="1.5" stroke-dasharray="3 2"/><circle cx="50" cy="15" r="2.5" fill="#ffb86b"/></svg></div><div class="gloss-text"><div class="gloss-term">OBLA (LT2)</div><div class="gloss-def">Onset of blood lactate accumulation; a second inflection where lactate ≈ 4 mmol/L, marking a higher sustainable intensity.</div></div></div><div class="gloss-card" style="animation-delay: 0.48s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="26" cy="20" r="11" fill="none" stroke="#67e8b0" stroke-width="2"/><path d="M26 12v16M18 20h16" stroke="#67e8b0" stroke-width="1.6"/><path d="M44 20h20M56 14l8 6-8 6" fill="none" stroke="#5ec8ff" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">Mitochondrial biogenesis</div><div class="gloss-def">Training-driven increase in mitochondrial size and number, raising oxidative ATP capacity and fat oxidation.</div></div></div><div class="gloss-card" style="animation-delay: 0.56s"><div class="gloss-svg"><svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="9" fill="none" stroke="#5ec8ff" stroke-width="2"/><path d="M40 20h22M54 13l8 7-8 7" fill="none" stroke="#67e8b0" stroke-width="2"/></svg></div><div class="gloss-text"><div class="gloss-term">Isocitrate dehydrogenase</div><div class="gloss-def">Rate-limiting Krebs enzyme (isocitrate→α-ketoglutarate); stimulated by ADP, inhibited by ATP — links flux to energy demand.</div></div></div></div></div><div class="fig-strip"><div class="fig-title">Figures from the 5th edition <span class="fig-hint">tap to enlarge</span></div><div class="fig-row"><figure class="fig-thumb" data-full="../figures/figure_3.6.jpg" data-cap="Figure 3.6 — The Krebs cycle. CoA = coenzyme A; FAD2*, FADH, FADH2 = flavin adenine" tabindex="0" role="button" aria-label="Figure 3.6 — The Krebs cycle. CoA = coenzyme A; FAD2*, FADH, FADH2 = flavin adenine"><img loading="lazy" src="../figures/figure_3.6.jpg" alt="Figure 3.6"><figcaption>Figure 3.6</figcaption></figure><figure class="fig-thumb" data-full="../figures/table_3.1.jpg" data-cap="Table 3.1 — Total Energy Yield From the Oxidation of One" tabindex="0" role="button" aria-label="Table 3.1 — Total Energy Yield From the Oxidation of One"><img loading="lazy" src="../figures/table_3.1.jpg" alt="Table 3.1"><figcaption>Table 3.1</figcaption></figure><figure class="fig-thumb" data-full="../figures/table_6.1.jpg" data-cap="Table 6.1 — Physiological Adaptations to Aerobic Endurance" tabindex="0" role="button" aria-label="Table 6.1 — Physiological Adaptations to Aerobic Endurance"><img loading="lazy" src="../figures/table_6.1.jpg" alt="Table 6.1"><figcaption>Table 6.1</figcaption></figure><figure class="fig-thumb" data-full="../figures/table_6.2.jpg" data-cap="Table 6.2 — Physiological Variables in Aerobic Endurance" tabindex="0" role="button" aria-label="Table 6.2 — Physiological Variables in Aerobic Endurance"><img loading="lazy" src="../figures/table_6.2.jpg" alt="Table 6.2"><figcaption>Table 6.2</figcaption></figure></div></div><div class="training-link"><span class="tl-label">Connection to your training</span><p>Your Z2 cap at HR 132 indoor keeps you just under LT1, in the fat-ox sweet spot instead of leaking into the grey zone that stalls both endurance and recovery. The RHR 46→37 and HRV 118→187 (Jan→May) are the visible face of exactly this mitochondrial/autonomic remodeling — more mitochondria and MCT1 mean you clear the running-station lactate faster and hold sled/row pace with less glycogen cost. Bank the easy volume: the biogenesis signal is dose-dependent, so most Hyrox base weeks should be Z2, not threshold grinds.</p></div><div class="media"><a class="media-link video" href="https://peterattiamd.com/inigosanmillan/" target="_blank" rel="noopener"><span class="m-icon">▶</span><div><div class="m-title">Peter Attia Drive #85 — Iñigo San-Millán: Mitochondria, Exercise &amp; Metabolic Health</div><div class="m-cred">Peter Attia MD + Colorado</div></div></a><a class="media-link audio" href="https://peterattiamd.com/inigosanmillan2/" target="_blank" rel="noopener"><span class="m-icon">♪</span><div><div class="m-title">Peter Attia Drive #201 — San-Millán: Deep Dive into Zone 2 (Part 2)</div><div class="m-cred">Peter Attia MD + Colorado</div></div></a></div></section></div>
@@ -2672,6 +2722,582 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 })();
+
+/* ===== study-voice v1 — listen buttons (Web Speech) + NotebookLM helpers.
+   Synced copies live in hyrox_study/app.js and cscs_study/app.js — keep both
+   in step. No external services: speech uses the browser's own voices, and the
+   NotebookLM buttons prepare copy-paste material (NotebookLM has no public
+   API, so nothing can be generated for the user directly). ===== */
+(function () {
+  "use strict";
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+
+  var CFG = {
+    prefix: "cscs.tts.v1",
+    siteName: "CSCS exam-prep study site",
+    exam: "NSCA CSCS exam",
+    palette: "iron-black, gunmetal-grey and blood-red barbell-club palette",
+    action: "barbell lifting, sprinting and jumping"
+  };
+
+  function onReady(fn) {
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+
+  onReady(function () {
+    // Only lesson-bearing pages (daily pages + the entry copy). Dashboards,
+    // galleries and games pages don't get the panel.
+    if (!document.querySelector(".lesson-card") && !document.querySelector(".q")) return;
+
+    var synth = window.speechSynthesis || null;
+
+    // ── prefs ────────────────────────────────────────────────────────────
+    var prefs = { accent: "gb", rate: 1, answers: "revealed", voiceName: "" };
+    try {
+      var raw = localStorage.getItem(CFG.prefix);
+      if (raw) { var p = JSON.parse(raw); for (var k in prefs) if (p[k] !== undefined) prefs[k] = p[k]; }
+    } catch (e) {}
+    function savePrefs() { try { localStorage.setItem(CFG.prefix, JSON.stringify(prefs)); } catch (e) {} }
+
+    // ── voices ───────────────────────────────────────────────────────────
+    // Ranked, best-first. Edge exposes the excellent "Online (Natural)"
+    // voices; Chrome exposes Windows SAPI + Google network voices; iOS has
+    // Daniel/Arthur (GB) and Aaron/Alex (US).
+    var GB = ["ryan", "thomas", "george", "daniel", "arthur", "oliver",
+              "google uk english male", "brian"];
+    var US = ["andrew", "guy", "christopher", "roger", "eric", "davis",
+              "microsoft david", "microsoft mark", "alex", "aaron"];
+    var FEMALEISH = /female|zira|hazel|susan|sonia|libby|aria|jenny|michelle|emma|ava|salli|joanna|kate|serena|martha|google us english$/i;
+
+    function voiceScore(v, accent) {
+      var name = (v.name || "").toLowerCase();
+      var lang = (v.lang || "").toLowerCase().replace("_", "-");
+      var want = accent === "gb" ? "en-gb" : "en-us";
+      var list = accent === "gb" ? GB : US;
+      var s = 0;
+      if (lang === want) s += 60;
+      else if (lang.indexOf("en") === 0) s += 15;
+      else return -1;
+      for (var i = 0; i < list.length; i++)
+        if (name.indexOf(list[i]) >= 0) { s += 200 - i * 10; break; }
+      if (/natural|online/.test(name)) s += 25;
+      if (FEMALEISH.test(name)) s -= 40;
+      return s;
+    }
+
+    function englishVoices() {
+      var out = [];
+      if (!synth) return out;
+      var vs = synth.getVoices() || [];
+      for (var i = 0; i < vs.length; i++)
+        if ((vs[i].lang || "").toLowerCase().indexOf("en") === 0) out.push(vs[i]);
+      return out;
+    }
+
+    function pickVoice() {
+      var vs = englishVoices();
+      if (!vs.length) return null;
+      if (prefs.voiceName)
+        for (var i = 0; i < vs.length; i++)
+          if (vs[i].name === prefs.voiceName) return vs[i];
+      var best = null, bestScore = -1;
+      for (var j = 0; j < vs.length; j++) {
+        var sc = voiceScore(vs[j], prefs.accent);
+        if (sc > bestScore) { bestScore = sc; best = vs[j]; }
+      }
+      return best;
+    }
+
+    // ── speech engine ────────────────────────────────────────────────────
+    var queue = [], qi = 0, speaking = false, paused = false, currentEl = null, gen = 0;
+
+    function clearHighlight() {
+      if (currentEl) { currentEl.classList.remove("sv-now"); currentEl = null; }
+    }
+    function highlight(el) {
+      clearHighlight();
+      if (el) {
+        currentEl = el;
+        el.classList.add("sv-now");
+        try { el.scrollIntoView({ block: "nearest", behavior: "smooth" }); } catch (e) {}
+      }
+    }
+
+    // Split into sentence-ish chunks ≤ ~220 chars: long single utterances are
+    // where Chrome's speech engine stalls.
+    function chunk(text) {
+      var parts = text.match(/[^.!?\u2026]+[.!?\u2026]*\s*/g) || [text];
+      var out = [], cur = "";
+      for (var i = 0; i < parts.length; i++) {
+        if ((cur + parts[i]).length > 220 && cur) { out.push(cur); cur = ""; }
+        cur += parts[i];
+      }
+      if (cur.replace(/\s/g, "")) out.push(cur);
+      return out;
+    }
+
+    function speakNext() {
+      if (!synth || qi >= queue.length) { stopAll(); return; }
+      var item = queue[qi];
+      var u = new SpeechSynthesisUtterance(item.text);
+      var myGen = gen, fired = false;
+      var v = pickVoice();
+      if (v) { u.voice = v; u.lang = v.lang; }
+      u.rate = prefs.rate;
+      u.pitch = prefs.accent === "gb" ? 0.92 : 1.0;
+      u.onend = u.onerror = function () {
+        if (fired || myGen !== gen) return; fired = true;
+        qi++; if (speaking) speakNext();
+      };
+      highlight(item.el);
+      synth.speak(u);
+    }
+
+    function playItems(items) {
+      if (!synth) { toast("Speech isn't available in this browser."); return; }
+      stopAll();
+      queue = [];
+      for (var i = 0; i < items.length; i++) {
+        var chunks = chunk(items[i].text);
+        for (var c = 0; c < chunks.length; c++)
+          queue.push({ text: chunks[c], el: items[i].el });
+      }
+      if (!queue.length) { toast("Nothing to read here yet."); return; }
+      qi = 0; speaking = true; paused = false;
+      updatePanel();
+      // Chrome drops the first utterance if speak() follows cancel() at once.
+      setTimeout(speakNext, 80);
+    }
+
+    function stopAll() {
+      gen++;
+      speaking = false; paused = false; queue = []; qi = 0;
+      if (synth) try { synth.cancel(); } catch (e) {}
+      clearHighlight(); updatePanel();
+    }
+
+    function togglePause() {
+      if (!synth || !speaking) return;
+      if (paused) { synth.resume(); paused = false; }
+      else { synth.pause(); paused = true; }
+      updatePanel();
+    }
+
+    // Un-stick Chrome's engine on long reads; resume() while speaking and not
+    // user-paused is a no-op elsewhere.
+    setInterval(function () {
+      if (synth && speaking && !paused && synth.speaking) { try { synth.resume(); } catch (e) {} }
+    }, 10000);
+
+    // Voices load asynchronously in Chrome.
+    if (synth && typeof synth.addEventListener === "function")
+      synth.addEventListener("voiceschanged", function () { fillVoiceSelect(); });
+
+    // ── text extraction ──────────────────────────────────────────────────
+    function txt(el) { return el ? el.textContent.replace(/\s+/g, " ").trim() : ""; }
+
+    function lessonItems(card) {
+      var items = [];
+      var h = card.querySelector("h2");
+      if (h) items.push({ text: txt(h) + ".", el: h });
+      var concept = card.querySelector(".concept");
+      if (concept) items.push({ text: "Key concept. " + txt(concept), el: concept });
+      var facts = card.querySelectorAll(".facts li");
+      if (facts.length) {
+        items.push({ text: "Key facts.", el: card.querySelector(".facts-title") });
+        for (var i = 0; i < facts.length; i++)
+          items.push({ text: "Fact " + (i + 1) + ". " + txt(facts[i]), el: facts[i] });
+      }
+      var gloss = card.querySelectorAll(".gloss-card");
+      if (gloss.length) {
+        items.push({ text: "Glossary.", el: card.querySelector(".gloss-title") });
+        for (var g = 0; g < gloss.length; g++) {
+          var term = txt(gloss[g].querySelector(".gloss-term"));
+          var def = txt(gloss[g].querySelector(".gloss-def"));
+          items.push({ text: term + ". " + def, el: gloss[g] });
+        }
+      }
+      var tl = card.querySelector(".training-link");
+      if (tl) items.push({ text: "Connection to your training. " +
+        txt(tl).replace(/^Connection to your training\s*/i, ""), el: tl });
+      return items;
+    }
+
+    function qItems(q, forceAnswers) {
+      var items = [];
+      var body = txt(q.querySelector(".q-text"));
+      var label = txt(q.querySelector(".q-num")) || "Question";
+      if (body) items.push({ text: label + ". " + body, el: q });
+      var revealed = q.querySelector(".q-reveal.shown");
+      var include = forceAnswers === true ||
+        (forceAnswers !== false && (prefs.answers === "always" || revealed));
+      if (include) {
+        var a = txt(q.querySelector(".reveal-body"));
+        if (a) items.push({ text: "Answer. " + a, el: q.querySelector(".reveal-body") || q });
+      }
+      return items;
+    }
+
+    function blockItems(section) {
+      var items = [];
+      var h = section.querySelector("h3");
+      if (h) items.push({ text: txt(h) + ".", el: h });
+      var qs = section.querySelectorAll(".q");
+      for (var i = 0; i < qs.length; i++) items = items.concat(qItems(qs[i]));
+      return items;
+    }
+
+    function pageItems() {
+      var items = [];
+      var secs = document.querySelectorAll(
+        "section.lesson-card, section.question-block, section.pretest-section");
+      for (var i = 0; i < secs.length; i++) {
+        var s = secs[i];
+        if (s.classList.contains("lesson-card")) items = items.concat(lessonItems(s));
+        else items = items.concat(blockItems(s));
+      }
+      return items;
+    }
+
+    // Full text WITH answers — source material for NotebookLM.
+    function sourceText() {
+      var lines = [CFG.siteName, "Page: " + document.title,
+                   "URL: " + location.href, ""];
+      var cards = document.querySelectorAll("section.lesson-card");
+      for (var i = 0; i < cards.length; i++) {
+        var c = cards[i];
+        lines.push("## " + txt(c.querySelector("h2")));
+        var con = txt(c.querySelector(".concept"));
+        if (con) lines.push("Key concept: " + con);
+        var facts = c.querySelectorAll(".facts li");
+        for (var f = 0; f < facts.length; f++) lines.push("- " + txt(facts[f]));
+        var gloss = c.querySelectorAll(".gloss-card");
+        for (var g = 0; g < gloss.length; g++)
+          lines.push("Glossary — " + txt(gloss[g].querySelector(".gloss-term")) +
+                     ": " + txt(gloss[g].querySelector(".gloss-def")));
+        var tl = txt(c.querySelector(".training-link"));
+        if (tl) lines.push(tl);
+        lines.push("");
+      }
+      var qs = document.querySelectorAll(".q");
+      if (qs.length) lines.push("## Practice questions");
+      for (var q = 0; q < qs.length; q++) {
+        lines.push("Q: " + txt(qs[q].querySelector(".q-text")));
+        lines.push("A: " + txt(qs[q].querySelector(".reveal-body")));
+      }
+      return lines.join("\n");
+    }
+
+    function topicTitle() {
+      var h = document.querySelector("section.lesson-card h2");
+      return h ? txt(h) : document.title;
+    }
+
+    // ── NotebookLM prompts ───────────────────────────────────────────────
+    function nlmPrompt(mode) {
+      var t = topicTitle();
+      if (mode === "video")
+        return 'Create a cinematic Video Overview of "' + t + '". Style: ' +
+          "high-production natural-history documentary — measured, authoritative " +
+          "British narration; slow, dramatic pacing; sweeping establishing shots; " +
+          "moody arena lighting; slow-motion close-ups of athletes " + CFG.action + ". " +
+          "Structure: a cold open that frames the core tension of the topic, then one " +
+          "visual scene per key fact, closing with a single training-floor application. " +
+          "Keep every number and claim exactly as stated in the source. Audience: a " +
+          "coach preparing for the " + CFG.exam + ".";
+      if (mode === "podcast")
+        return 'Make a LONG deep-dive Audio Overview of "' + t + '" — aim for 30+ ' +
+          "minutes. Two hosts. Work through EVERY key fact and EVERY practice " +
+          "question in the source: read each question aloud, pause so the listener " +
+          "can attempt it, discuss the reasoning and common exam traps, then give " +
+          "the model answer. Finish with a rapid-fire recap quiz of the whole " +
+          "lesson. Keep every number and claim faithful to the source. Audience: a " +
+          "coach preparing for the " + CFG.exam + ".";
+      return 'Create a detailed infographic of "' + t + '". Art direction: kawaii ' +
+        "chibi illustration style fused with a masculine " + CFG.palette + " — " +
+        "cute big-eyed chibi athletes mid-" + CFG.action + ", each glowing with " +
+        "superpower auras, crackling lightning and energy effects; bold heavy " +
+        "typography on a dark background. Content: the lesson title as a hero " +
+        "banner, every key fact as its own labelled panel with a chibi icon, " +
+        "glossary terms as a labelled icon strip, and one 'training-floor application' " +
+        "callout. Dense but readable; keep every number exactly as in the source.";
+    }
+
+    var NLM_LABEL = { video: "cinematic video", podcast: "deep-dive podcast", infographic: "infographic" };
+    var NLM_TOOL = {
+      video: "Video Overview",
+      podcast: "Audio Overview (choose the longer / Deep Dive option)",
+      infographic: "Infographic"
+    };
+
+    // ── clipboard + toast ────────────────────────────────────────────────
+    function copyText(s, btn, okLabel) {
+      function done(ok) {
+        if (btn) {
+          var old = btn.getAttribute("data-label") || btn.textContent;
+          btn.setAttribute("data-label", old);
+          btn.textContent = ok ? (okLabel || "Copied ✓") : "Copy failed";
+          setTimeout(function () { btn.textContent = btn.getAttribute("data-label"); }, 1600);
+        }
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(s).then(function () { done(true); },
+          function () { legacyCopy(s) ? done(true) : done(false); });
+      } else done(legacyCopy(s));
+    }
+    function legacyCopy(s) {
+      try {
+        var ta = document.createElement("textarea");
+        ta.value = s; ta.style.position = "fixed"; ta.style.opacity = "0";
+        document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      } catch (e) { return false; }
+    }
+    function toast(msg) {
+      if (typeof showToast === "function") { showToast(msg); return; }
+      var t = document.createElement("div");
+      t.className = "sv-toast"; t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(function () { t.classList.add("on"); }, 10);
+      setTimeout(function () { t.classList.remove("on");
+        setTimeout(function () { t.remove(); }, 300); }, 2200);
+    }
+
+    // ── UI: floating panel ───────────────────────────────────────────────
+    var panel, btnPlay, btnPause, voiceSel;
+
+    function mkBtn(label, title, cls, fn) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "sv-btn " + (cls || "");
+      b.textContent = label; b.title = title || "";
+      b.addEventListener("click", fn);
+      return b;
+    }
+
+    function fillVoiceSelect() {
+      if (!voiceSel) return;
+      var vs = englishVoices();
+      var ranked = vs.map(function (v) { return { v: v, s: voiceScore(v, prefs.accent) }; })
+        .filter(function (x) { return x.s >= 0; })
+        .sort(function (a, b) { return b.s - a.s; });
+      voiceSel.innerHTML = "";
+      var auto = document.createElement("option");
+      auto.value = ""; auto.textContent = "Voice: automatic (best available)";
+      voiceSel.appendChild(auto);
+      for (var i = 0; i < ranked.length; i++) {
+        var o = document.createElement("option");
+        o.value = ranked[i].v.name;
+        o.textContent = ranked[i].v.name.replace(/^Microsoft /, "").replace(/ - English.*$/, "");
+        voiceSel.appendChild(o);
+      }
+      voiceSel.value = prefs.voiceName || "";
+    }
+
+    function updatePanel() {
+      if (!btnPause) return;
+      btnPause.textContent = paused ? "▶ Resume" : "⏸ Pause";
+      btnPause.disabled = !speaking;
+      var stopB = panel.querySelector(".sv-stop");
+      if (stopB) stopB.disabled = !speaking;
+      var gb = panel.querySelector('[data-accent="gb"]');
+      var us = panel.querySelector('[data-accent="us"]');
+      if (gb) gb.classList.toggle("on", prefs.accent === "gb");
+      if (us) us.classList.toggle("on", prefs.accent === "us");
+      var rateB = panel.querySelector(".sv-rate");
+      if (rateB) rateB.textContent = prefs.rate.toFixed(2).replace(/0+$/, "").replace(/\.$/, "") + "×";
+    }
+
+    function buildPanel() {
+      panel = document.createElement("div");
+      panel.className = "sv-panel";
+      panel.setAttribute("role", "region");
+      panel.setAttribute("aria-label", "Listen and NotebookLM tools");
+
+      var row1 = document.createElement("div"); row1.className = "sv-row";
+      btnPlay = mkBtn("🔊 Listen to page", "Read the whole lesson aloud", "sv-main",
+        function () { playItems(pageItems()); });
+      btnPause = mkBtn("⏸ Pause", "Pause / resume", "", togglePause);
+      var btnStop = mkBtn("⏹", "Stop", "sv-stop", stopAll);
+      row1.appendChild(btnPlay); row1.appendChild(btnPause); row1.appendChild(btnStop);
+
+      var row2 = document.createElement("div"); row2.className = "sv-row";
+      var gb = mkBtn("🇬🇧 British", "Deep British male voice — documentary style", "sv-seg",
+        function () { prefs.accent = "gb"; prefs.voiceName = ""; savePrefs(); fillVoiceSelect(); updatePanel(); });
+      gb.setAttribute("data-accent", "gb");
+      var us = mkBtn("🇺🇸 American", "American male voice", "sv-seg",
+        function () { prefs.accent = "us"; prefs.voiceName = ""; savePrefs(); fillVoiceSelect(); updatePanel(); });
+      us.setAttribute("data-accent", "us");
+      var rate = mkBtn("1×", "Reading speed", "sv-rate", function () {
+        var steps = [0.85, 1, 1.15, 1.3];
+        prefs.rate = steps[(steps.indexOf(prefs.rate) + 1) % steps.length] || 1;
+        savePrefs(); updatePanel();
+      });
+      row2.appendChild(gb); row2.appendChild(us); row2.appendChild(rate);
+
+      var row3 = document.createElement("div"); row3.className = "sv-row";
+      voiceSel = document.createElement("select");
+      voiceSel.className = "sv-select";
+      voiceSel.title = "Exact voice (from this device's installed voices)";
+      voiceSel.addEventListener("change", function () {
+        prefs.voiceName = voiceSel.value; savePrefs();
+      });
+      var ansSel = document.createElement("select");
+      ansSel.className = "sv-select";
+      ansSel.title = "Whether question answers are read aloud";
+      [["revealed", "Answers: revealed only"], ["always", "Answers: always read"]]
+        .forEach(function (o) {
+          var op = document.createElement("option");
+          op.value = o[0]; op.textContent = o[1]; ansSel.appendChild(op);
+        });
+      ansSel.value = prefs.answers;
+      ansSel.addEventListener("change", function () {
+        prefs.answers = ansSel.value; savePrefs();
+      });
+      row3.appendChild(voiceSel); row3.appendChild(ansSel);
+
+      var row4 = document.createElement("div"); row4.className = "sv-row";
+      var lab = document.createElement("span");
+      lab.className = "sv-lab"; lab.textContent = "NotebookLM:";
+      row4.appendChild(lab);
+      row4.appendChild(mkBtn("🎬 Video", "Prepare a cinematic NotebookLM Video Overview", "",
+        function () { openNlm("video"); }));
+      row4.appendChild(mkBtn("🎙️ Podcast", "Prepare a long NotebookLM Deep Dive podcast", "",
+        function () { openNlm("podcast"); }));
+      row4.appendChild(mkBtn("📊 Infographic", "Prepare a kawaii-powers NotebookLM infographic", "",
+        function () { openNlm("infographic"); }));
+
+      panel.appendChild(row1); panel.appendChild(row2);
+      panel.appendChild(row3); panel.appendChild(row4);
+      document.body.appendChild(panel);
+      fillVoiceSelect(); updatePanel();
+    }
+
+    // ── UI: NotebookLM modal ─────────────────────────────────────────────
+    function openNlm(mode) {
+      var old = document.querySelector(".sv-overlay");
+      if (old) old.remove();
+      var ov = document.createElement("div");
+      ov.className = "sv-overlay";
+      ov.addEventListener("click", function (e) { if (e.target === ov) ov.remove(); });
+
+      var d = document.createElement("div");
+      d.className = "sv-dialog";
+      var h = document.createElement("h3");
+      h.textContent = "Create " + (/^[aeiou]/i.test(NLM_LABEL[mode]) ? "an " : "a ") + NLM_LABEL[mode] + " with NotebookLM";
+      var note = document.createElement("p");
+      note.className = "sv-note";
+      note.textContent = "NotebookLM has no public API, so this can't run by itself — " +
+        "but everything is prepared below. Three pastes and you're done.";
+
+      var ol = document.createElement("ol");
+      ol.className = "sv-steps";
+      var li1 = document.createElement("li");
+      li1.appendChild(document.createTextNode("Copy this lesson as source material: "));
+      li1.appendChild(mkBtn("Copy lesson text", "", "sv-small",
+        function () { copyText(sourceText(), this); }));
+      li1.appendChild(document.createTextNode(" or "));
+      li1.appendChild(mkBtn("Copy page link", "", "sv-small",
+        function () { copyText(location.href, this); }));
+      var li2 = document.createElement("li");
+      li2.textContent = "In NotebookLM: New notebook → Add source → \u201CCopied text\u201D " +
+        "(paste the lesson) — or \u201CWebsite\u201D (paste the link).";
+      var li3 = document.createElement("li");
+      li3.appendChild(document.createTextNode("Open " + NLM_TOOL[mode] +
+        " → Customise, and paste the tailored prompt: "));
+      li3.appendChild(mkBtn("Copy " + NLM_LABEL[mode] + " prompt", "", "sv-small sv-primary",
+        function () { copyText(nlmPrompt(mode), this); }));
+      ol.appendChild(li1); ol.appendChild(li2); ol.appendChild(li3);
+
+      var open = mkBtn("Open NotebookLM ↗", "notebooklm.google.com", "sv-main",
+        function () { window.open("https://notebooklm.google.com/", "_blank", "noopener"); });
+      var close = mkBtn("Close", "", "", function () { ov.remove(); });
+      var foot = document.createElement("div");
+      foot.className = "sv-row sv-foot";
+      foot.appendChild(open); foot.appendChild(close);
+
+      d.appendChild(h); d.appendChild(note); d.appendChild(ol); d.appendChild(foot);
+      ov.appendChild(d);
+      document.body.appendChild(ov);
+    }
+
+    // ── UI: per-section buttons ──────────────────────────────────────────
+    function mini(title, fn) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "sv-mini"; b.textContent = "🔊";
+      b.title = title;
+      b.addEventListener("click", function (e) { e.stopPropagation(); fn(); });
+      return b;
+    }
+
+    function injectButtons() {
+      document.querySelectorAll("section.lesson-card").forEach(function (card) {
+        var head = card.querySelector(".lesson-head");
+        if (head && !head.querySelector(".sv-chip")) {
+          var b = document.createElement("button");
+          b.type = "button"; b.className = "sv-mini sv-chip";
+          b.textContent = "🔊 Listen to this lesson";
+          b.addEventListener("click", function () { playItems(lessonItems(card)); });
+          head.appendChild(b);
+        }
+        var concept = card.querySelector(".concept");
+        if (concept && !concept.querySelector(".sv-mini")) concept.insertBefore(
+          mini("Read the key concept", function () {
+            playItems([{ text: "Key concept. " + txt(concept), el: concept }]);
+          }), concept.firstChild);
+        var ft = card.querySelector(".facts-title");
+        if (ft && !ft.querySelector(".sv-mini")) ft.appendChild(mini("Read the key facts", function () {
+          var items = [{ text: "Key facts.", el: ft }];
+          card.querySelectorAll(".facts li").forEach(function (li, i) {
+            items.push({ text: "Fact " + (i + 1) + ". " + txt(li), el: li });
+          });
+          playItems(items);
+        }));
+        var gt = card.querySelector(".gloss-title");
+        if (gt && !gt.querySelector(".sv-mini")) gt.appendChild(mini("Read the glossary", function () {
+          var items = [{ text: "Glossary.", el: gt }];
+          card.querySelectorAll(".gloss-card").forEach(function (gc) {
+            items.push({ text: txt(gc.querySelector(".gloss-term")) + ". " +
+              txt(gc.querySelector(".gloss-def")), el: gc });
+          });
+          playItems(items);
+        }));
+        var tl = card.querySelector(".training-link");
+        if (tl && !tl.querySelector(".sv-mini")) tl.insertBefore(mini("Read the training connection", function () {
+          playItems([{ text: "Connection to your training. " +
+            txt(tl).replace(/^Connection to your training\s*/i, ""), el: tl }]);
+        }), tl.firstChild);
+      });
+
+      document.querySelectorAll("section.question-block, section.pretest-section")
+        .forEach(function (sec) {
+          var h = sec.querySelector("h3");
+          if (h && !h.querySelector(".sv-mini")) h.appendChild(mini("Read this whole practice block",
+            function () { playItems(blockItems(sec)); }));
+        });
+
+      document.querySelectorAll(".q .q-head").forEach(function (head) {
+        var q = head.closest(".q");
+        if (!q || head.querySelector(".sv-mini")) return;
+        head.appendChild(mini("Read this question (answer once revealed)",
+          function () { playItems(qItems(q)); }));
+      });
+    }
+
+    buildPanel();
+    injectButtons();
+    // Review-queue cards render late (after the async FSRS module) and the
+    // container is rebuilt after every grade — re-inject when that happens.
+    var rq = document.getElementById("personal-reviews");
+    if (rq && typeof MutationObserver === "function")
+      new MutationObserver(function () { injectButtons(); })
+        .observe(rq, { childList: true });
+  });
+})();
+/* ===== end study-voice v1 ===== */
 </script>
 </body>
 </html>

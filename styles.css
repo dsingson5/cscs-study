@@ -814,3 +814,53 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
 /* Build stamp + day-completion progress (completion-gated day advance) */
 #day-progress b { color: var(--warn, #ffb86b); }
 #day-progress .dp-done { color: var(--good, #67e8b0); font-weight: 700; }
+
+/* ===== study-voice v1 — panel, mini buttons, modal (synced: hyrox/cscs) ===== */
+.sv-panel { position: fixed; right: 14px; bottom: 64px; z-index: 998;
+  background: rgba(13, 17, 26, 0.96); border: 1px solid #2a3446; border-radius: 14px;
+  padding: 10px 12px; display: flex; flex-direction: column; gap: 7px;
+  box-shadow: 0 10px 34px rgba(0,0,0,0.55); max-width: 320px;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.sv-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.sv-btn { background: #1a2232; color: #dfe7f5; border: 1px solid #33405a;
+  border-radius: 8px; padding: 5px 9px; font-size: 12px; line-height: 1.3;
+  cursor: pointer; font-family: inherit; }
+.sv-btn:hover { border-color: #5ec8ff; }
+.sv-btn:disabled { opacity: 0.45; cursor: default; }
+.sv-btn.sv-main { background: #5ec8ff; color: #0b0e14; font-weight: 700;
+  border-color: #5ec8ff; }
+.sv-btn.sv-seg.on { background: #223349; outline: 1px solid #5ec8ff; }
+.sv-btn.sv-primary { background: #223349; border-color: #5ec8ff; }
+.sv-select { background: #131a28; color: #b9c4d8; border: 1px solid #33405a;
+  border-radius: 8px; font-size: 11px; padding: 4px 6px; max-width: 150px;
+  font-family: inherit; }
+.sv-lab { font-size: 11px; color: #8b96ab; }
+.sv-mini { background: transparent; border: 1px solid #33405a; color: #9fb4d8;
+  border-radius: 7px; font-size: 11px; padding: 1px 6px; margin: 0 0 0 8px;
+  cursor: pointer; vertical-align: middle; line-height: 1.5; font-family: inherit; }
+.sv-mini:hover { border-color: #5ec8ff; color: #dfe7f5; }
+.sv-mini.sv-chip { margin-left: auto; padding: 3px 9px; }
+.concept > .sv-mini, .training-link > .sv-mini { float: right; margin: 0 0 4px 8px; }
+.sv-now { outline: 2px solid rgba(94, 200, 255, 0.85); outline-offset: 3px;
+  border-radius: 8px; }
+.sv-overlay { position: fixed; inset: 0; background: rgba(4, 6, 10, 0.72);
+  z-index: 99995; display: flex; align-items: center; justify-content: center;
+  padding: 18px; }
+.sv-dialog { background: #10151f; border: 1px solid #2a3446; border-radius: 16px;
+  max-width: 520px; width: 100%; padding: 20px 22px; color: #dfe7f5;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.6); }
+.sv-dialog h3 { margin: 0 0 6px; font-size: 17px; }
+.sv-note { color: #8b96ab; font-size: 12.5px; margin: 0 0 12px; }
+.sv-steps { margin: 0 0 14px; padding-left: 20px; font-size: 13px;
+  display: flex; flex-direction: column; gap: 10px; }
+.sv-small { font-size: 11.5px; padding: 3px 8px; }
+.sv-foot { justify-content: flex-end; }
+.sv-toast { position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(8px);
+  background: #1a2232; color: #dfe7f5; border: 1px solid #33405a; border-radius: 10px;
+  padding: 8px 14px; font-size: 13px; z-index: 99999; opacity: 0; transition: all 0.25s; }
+.sv-toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+@media (max-width: 640px) {
+  .sv-panel { right: 8px; bottom: 58px; max-width: 78vw; padding: 8px; }
+  .sv-btn { font-size: 11px; }
+}
+/* ===== end study-voice v1 ===== */
