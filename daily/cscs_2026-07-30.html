@@ -875,6 +875,22 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   .sv-btn { font-size: 11px; }
 }
 /* ===== end study-voice v2 ===== */
+
+/* ===== study-anim v1 — icon entrances + flows (synced: hyrox/cscs) ===== */
+@keyframes svaPop { from { opacity: 0; transform: scale(0.55); }
+  to { opacity: 1; transform: scale(1); } }
+.sva-pop { animation: svaPop 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  transform-origin: center; transform-box: fill-box; }
+@keyframes svaDash { to { stroke-dashoffset: -12; } }
+.sva-flow { animation: svaDash 1.6s linear infinite; }
+@keyframes svNowPulse {
+  0%, 100% { outline-color: rgba(94, 200, 255, 0.85); }
+  50% { outline-color: rgba(94, 200, 255, 0.35); } }
+.sv-now { animation: svNowPulse 1.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .sva-pop, .sva-flow, .sv-now { animation: none; }
+}
+/* ===== end study-anim v1 ===== */
 </style>
 <style>:root {
   --bg: #100d0e;
@@ -932,7 +948,7 @@ body {
 <style></style>
 </head>
 <body class="theme-day-68">
-<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 13, 2026 · 2:09 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 13, 2026 · 2:09 PM</div>
+<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 17, 2026 · 12:36 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 17, 2026 · 12:36 PM</div>
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day 68 · Thursday</div>
@@ -3355,6 +3371,116 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 /* ===== end study-voice v2 ===== */
+
+/* ===== study-anim v1 — glossary-icon animator (synced: hyrox/cscs).
+   Entrance draw-in for static icons; viewport + reduced-motion pausing for
+   SMIL icons. ===== */
+(function () {
+  "use strict";
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  function onReady(fn) {
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+  onReady(function () {
+    var svgs = Array.prototype.slice.call(
+      document.querySelectorAll(".gloss-svg svg"));
+    if (!svgs.length) return;
+
+    var reduced = false;
+    try {
+      reduced = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {}
+
+    function hasSmil(svg) {
+      return !!svg.querySelector("animate,animateTransform,animateMotion");
+    }
+    function pauseSmil(svg) { try { svg.pauseAnimations(); } catch (e) {} }
+    function playSmil(svg) { try { svg.unpauseAnimations(); } catch (e) {} }
+
+    // SMIL autostarts — hold everything until it is actually looked at.
+    svgs.forEach(function (s) { if (hasSmil(s)) pauseSmil(s); });
+    if (reduced) return; // paused stays paused; no entrances; CSS handles the rest
+
+    var visible = []; // SMIL svgs currently in view (for visibilitychange)
+
+    function entrance(svg) {
+      var shapes = svg.querySelectorAll("path,line,polyline,circle,rect,ellipse");
+      var di = 0, pi = 0;
+      Array.prototype.forEach.call(shapes, function (el) {
+        var stroke = el.getAttribute("stroke");
+        var fill = el.getAttribute("fill");
+        if (stroke && stroke !== "none") {
+          if (el.getAttribute("stroke-dasharray")) {
+            el.classList.add("sva-flow"); // dashed = a flow: march, don't draw
+            return;
+          }
+          var L = 0;
+          try { L = el.getTotalLength(); } catch (e) { return; }
+          if (!L || !isFinite(L)) return;
+          el.style.strokeDasharray = L + " " + L;
+          el.style.strokeDashoffset = L;
+          el.style.transition = "stroke-dashoffset 0.8s ease-out " + (di * 0.12) + "s";
+          di++;
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { el.style.strokeDashoffset = "0"; });
+          });
+          el.addEventListener("transitionend", function te() {
+            el.style.strokeDasharray = "";
+            el.style.strokeDashoffset = "";
+            el.style.transition = "";
+            el.removeEventListener("transitionend", te);
+          });
+        } else if (fill && fill !== "none") {
+          el.classList.add("sva-pop");
+          el.style.animationDelay = (pi * 0.09) + "s";
+          pi++;
+        }
+      });
+    }
+
+    var seen = typeof WeakSet === "function" ? new WeakSet() : null;
+    function markSeen(s) { if (seen) seen.add(s); else s.__svaSeen = true; }
+    function wasSeen(s) { return seen ? seen.has(s) : !!s.__svaSeen; }
+
+    if (typeof IntersectionObserver !== "function") {
+      // Old browser: just let SMIL run and skip entrances.
+      svgs.forEach(function (s) { if (hasSmil(s)) playSmil(s); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var svg = en.target;
+        var smil = hasSmil(svg);
+        if (en.isIntersecting) {
+          if (smil) {
+            playSmil(svg);
+            if (visible.indexOf(svg) < 0) visible.push(svg);
+          } else if (!wasSeen(svg)) {
+            markSeen(svg);
+            entrance(svg);
+          }
+        } else if (smil) {
+          pauseSmil(svg);
+          var ix = visible.indexOf(svg);
+          if (ix >= 0) visible.splice(ix, 1);
+        }
+      });
+    }, { threshold: 0.15 });
+    svgs.forEach(function (s) { io.observe(s); });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden)
+        svgs.forEach(function (s) { if (hasSmil(s)) pauseSmil(s); });
+      else
+        visible.forEach(playSmil);
+    });
+  });
+})();
+/* ===== end study-anim v1 ===== */
 </script>
 </body>
 </html>

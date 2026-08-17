@@ -875,6 +875,22 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   .sv-btn { font-size: 11px; }
 }
 /* ===== end study-voice v2 ===== */
+
+/* ===== study-anim v1 — icon entrances + flows (synced: hyrox/cscs) ===== */
+@keyframes svaPop { from { opacity: 0; transform: scale(0.55); }
+  to { opacity: 1; transform: scale(1); } }
+.sva-pop { animation: svaPop 0.5s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  transform-origin: center; transform-box: fill-box; }
+@keyframes svaDash { to { stroke-dashoffset: -12; } }
+.sva-flow { animation: svaDash 1.6s linear infinite; }
+@keyframes svNowPulse {
+  0%, 100% { outline-color: rgba(94, 200, 255, 0.85); }
+  50% { outline-color: rgba(94, 200, 255, 0.35); } }
+.sv-now { animation: svNowPulse 1.6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .sva-pop, .sva-flow, .sv-now { animation: none; }
+}
+/* ===== end study-anim v1 ===== */
 </style>
 <style>:root {
   --bg: #0c0c0a;
@@ -981,7 +997,7 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
 </style>
 </head>
 <body class="theme-day-45">
-<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 13, 2026 · 2:09 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 13, 2026 · 2:09 PM</div>
+<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 17, 2026 · 12:35 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 17, 2026 · 12:35 PM</div>
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day 45 · Tuesday</div>
@@ -1099,7 +1115,7 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
   <div class="w-hint">Drag the moment arms to see why long limbs create force disadvantage at the joint.</div>
 </div>
 
-<div class="widget bm-w" id="lev19052"><div class="w-head"><span class="w-icon">🦴</span><span class="w-title">Lever classifier — predict the class</span></div><div class="w-body">
+<div class="widget bm-w" id="lev17165"><div class="w-head"><span class="w-icon">🦴</span><span class="w-title">Lever classifier — predict the class</span></div><div class="w-body">
 <svg viewBox="0 0 460 150" class="w-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:160px">
   <!-- the lever beam -->
   <line x1="40" y1="80" x2="420" y2="80" stroke="var(--text-dim,#9ba3b4)" stroke-width="5" stroke-linecap="round"/>
@@ -1121,43 +1137,43 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
   <text x="230" y="14" fill="var(--text-dim,#9ba3b4)" font-size="10" text-anchor="middle">Effort between fulcrum &amp; load &rarr; effort arm is SHORT</text>
 </svg>
 <style>
-#lev19052 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
-#lev19052 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
-#lev19052 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
+#lev17165 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
+#lev17165 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+#lev17165 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
   padding:9px 12px;border-radius:9px;border:1px solid var(--border-2,#2d3548);
   background:var(--surface-2,rgba(255,255,255,.03));color:var(--text);
   transition:border-color .15s,background .15s,transform .1s;line-height:1.35}
-#lev19052 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
-#lev19052 .bm-opt:disabled{cursor:default}
-#lev19052 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
-#lev19052 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
-#lev19052 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
-#lev19052 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
+#lev17165 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
+#lev17165 .bm-opt:disabled{cursor:default}
+#lev17165 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
+#lev17165 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
+#lev17165 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
+#lev17165 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
   background:rgba(94,200,255,.07);border-left:3px solid var(--accent);font-size:12.5px;
   color:var(--text-dim,#9ba3b4);line-height:1.5}
-#lev19052 .bm-reveal.show{display:block;animation:bmfade .35s ease}
-#lev19052 .bm-reveal b{color:var(--text)}
-#lev19052 .bm-reveal .bm-why{color:var(--warn)}
-#lev19052 .bm-controls{margin-top:10px}
-#lev19052 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
-#lev19052 .bm-controls label b{color:var(--text)}
-#lev19052 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
+#lev17165 .bm-reveal.show{display:block;animation:bmfade .35s ease}
+#lev17165 .bm-reveal b{color:var(--text)}
+#lev17165 .bm-reveal .bm-why{color:var(--warn)}
+#lev17165 .bm-controls{margin-top:10px}
+#lev17165 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
+#lev17165 .bm-controls label b{color:var(--text)}
+#lev17165 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
   background:var(--surface-3,#2d3548);border-radius:999px;outline:none;cursor:pointer;margin-top:4px}
-#lev19052 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
+#lev17165 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
   border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent)}
-#lev19052 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
+#lev17165 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
   background:var(--accent);border:none;cursor:pointer}
-#lev19052 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
-#lev19052 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
+#lev17165 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
+#lev17165 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
   border:1px solid var(--border-2,#2d3548);background:transparent;color:var(--text-dim,#9ba3b4)}
-#lev19052 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
-#lev19052 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
-#lev19052 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
+#lev17165 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
+#lev17165 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
+#lev17165 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
 @keyframes bmfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 </style>
 <div class="bm-q">The diagram shows a biceps curl: elbow = fulcrum, biceps = effort, dumbbell in the hand = load. <b>Which lever class is this?</b></div><div class="bm-opts"><button class="bm-opt" data-correct="0"><span class="bm-tag">A</span>1st class — fulcrum in the middle (e.g. neck extension, triceps)</button><button class="bm-opt" data-correct="0"><span class="bm-tag">B</span>2nd class — load in the middle (e.g. standing calf raise)</button><button class="bm-opt" data-correct="1"><span class="bm-tag">C</span>3rd class — effort in the middle (most limb muscles)</button></div><div class="bm-reveal"><b>Most human limbs are 3rd-class levers.</b> Order along the bone: fulcrum (joint) → effort (muscle inserting close to the joint) → load (weight far out in the hand/foot). <span class='bm-why'>Why it matters:</span> a short effort arm vs a long load arm means the muscle must generate <b>several times</b> the external load in force — a force <i>disadvantage</i> traded for a <b>speed &amp; range-of-motion advantage</b> at the hand/foot. That trade is exactly why a small range of muscle shortening produces a large, fast limb movement (your sprint stride, your sled drive).</div>
 <script>(function(){
-  var root=document.getElementById("lev19052");if(!root)return;
+  var root=document.getElementById("lev17165");if(!root)return;
   var opts=root.querySelectorAll(".bm-opt");
   var rev=root.querySelector(".bm-reveal");
   var answered=false;
@@ -1171,13 +1187,13 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
       if(b.getAttribute("data-correct")!=="1")b.classList.add("is-wrong");
       if(rev)rev.classList.add("show");
       var hook=root.querySelector("[data-after-answer]");
-      if(hook&&window["lev19052after"])window["lev19052after"]();
+      if(hook&&window["lev17165after"])window["lev17165after"]();
     });
   });
 })();</script>
 </div></div>
-<div class="widget bm-w" id="tq27167"><div class="w-head"><span class="w-icon">⚖️</span><span class="w-title">Torque &amp; moment arm — find the sticking point</span></div><div class="w-body">
-<svg viewBox="0 0 320 230" class="w-svg" id="tq27167-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:240px">
+<div class="widget bm-w" id="tq22569"><div class="w-head"><span class="w-icon">⚖️</span><span class="w-title">Torque &amp; moment arm — find the sticking point</span></div><div class="w-body">
+<svg viewBox="0 0 320 230" class="w-svg" id="tq22569-svg" xmlns="http://www.w3.org/2000/svg" style="max-height:240px">
   <!-- upper arm (fixed, vertical) -->
   <line x1="90" y1="40" x2="90" y2="120" stroke="var(--text-dim,#9ba3b4)" stroke-width="6" stroke-linecap="round"/>
   <text x="74" y="80" fill="var(--text-dim,#9ba3b4)" font-size="9" text-anchor="end">upper arm</text>
@@ -1185,55 +1201,55 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
   <circle cx="90" cy="120" r="6" fill="var(--warn,#ffb86b)"/>
   <text x="90" y="142" fill="var(--warn,#ffb86b)" font-size="9" text-anchor="middle">elbow</text>
   <!-- moment-arm bracket (horizontal dist elbow->weight) -->
-  <line id="tq27167-arm" x1="90" y1="190" x2="90" y2="190" stroke="var(--accent,#5ec8ff)" stroke-width="1.5" stroke-dasharray="4 3"/>
-  <text id="tq27167-armlbl" x="90" y="204" fill="var(--accent,#5ec8ff)" font-size="9" text-anchor="middle">moment arm</text>
+  <line id="tq22569-arm" x1="90" y1="190" x2="90" y2="190" stroke="var(--accent,#5ec8ff)" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <text id="tq22569-armlbl" x="90" y="204" fill="var(--accent,#5ec8ff)" font-size="9" text-anchor="middle">moment arm</text>
   <!-- forearm (rotates) -->
-  <line id="tq27167-fore" x1="90" y1="120" x2="90" y2="200" stroke="var(--good,#67e8b0)" stroke-width="6" stroke-linecap="round"/>
+  <line id="tq22569-fore" x1="90" y1="120" x2="90" y2="200" stroke="var(--good,#67e8b0)" stroke-width="6" stroke-linecap="round"/>
   <!-- weight at hand -->
-  <g id="tq27167-hand">
+  <g id="tq22569-hand">
     <rect x="-9" y="-9" width="18" height="18" rx="3" fill="var(--bad,#ff7a7a)"/>
     <line x1="0" y1="9" x2="0" y2="34" stroke="var(--bad,#ff7a7a)" stroke-width="2"/>
     <path d="M 0 36 L -5 26 L 5 26 Z" fill="var(--bad,#ff7a7a)"/>
   </g>
-</svg><div class="bm-controls"><label>Elbow position: <b id="tq27167-anglbl">extended (hanging)</b></label><input type="range" min="0" max="180" step="2" value="20" id="tq27167-sl" class="bm-slider"><div class="bm-read">Resistance torque on the elbow: <b id="tq27167-tq">low</b> &nbsp;|&nbsp; moment arm = <b id="tq27167-mm">short</b></div></div>
+</svg><div class="bm-controls"><label>Elbow position: <b id="tq22569-anglbl">extended (hanging)</b></label><input type="range" min="0" max="180" step="2" value="20" id="tq22569-sl" class="bm-slider"><div class="bm-read">Resistance torque on the elbow: <b id="tq22569-tq">low</b> &nbsp;|&nbsp; moment arm = <b id="tq22569-mm">short</b></div></div>
 <style>
-#tq27167 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
-#tq27167 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
-#tq27167 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
+#tq22569 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
+#tq22569 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+#tq22569 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
   padding:9px 12px;border-radius:9px;border:1px solid var(--border-2,#2d3548);
   background:var(--surface-2,rgba(255,255,255,.03));color:var(--text);
   transition:border-color .15s,background .15s,transform .1s;line-height:1.35}
-#tq27167 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
-#tq27167 .bm-opt:disabled{cursor:default}
-#tq27167 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
-#tq27167 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
-#tq27167 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
-#tq27167 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
+#tq22569 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
+#tq22569 .bm-opt:disabled{cursor:default}
+#tq22569 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
+#tq22569 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
+#tq22569 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
+#tq22569 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
   background:rgba(94,200,255,.07);border-left:3px solid var(--accent);font-size:12.5px;
   color:var(--text-dim,#9ba3b4);line-height:1.5}
-#tq27167 .bm-reveal.show{display:block;animation:bmfade .35s ease}
-#tq27167 .bm-reveal b{color:var(--text)}
-#tq27167 .bm-reveal .bm-why{color:var(--warn)}
-#tq27167 .bm-controls{margin-top:10px}
-#tq27167 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
-#tq27167 .bm-controls label b{color:var(--text)}
-#tq27167 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
+#tq22569 .bm-reveal.show{display:block;animation:bmfade .35s ease}
+#tq22569 .bm-reveal b{color:var(--text)}
+#tq22569 .bm-reveal .bm-why{color:var(--warn)}
+#tq22569 .bm-controls{margin-top:10px}
+#tq22569 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
+#tq22569 .bm-controls label b{color:var(--text)}
+#tq22569 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
   background:var(--surface-3,#2d3548);border-radius:999px;outline:none;cursor:pointer;margin-top:4px}
-#tq27167 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
+#tq22569 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
   border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent)}
-#tq27167 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
+#tq22569 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
   background:var(--accent);border:none;cursor:pointer}
-#tq27167 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
-#tq27167 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
+#tq22569 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
+#tq22569 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
   border:1px solid var(--border-2,#2d3548);background:transparent;color:var(--text-dim,#9ba3b4)}
-#tq27167 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
-#tq27167 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
-#tq27167 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
+#tq22569 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
+#tq22569 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
+#tq22569 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
 @keyframes bmfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 </style>
 <div class="bm-q">Before you touch the slider — <b>at which elbow angle is the dumbbell's resistance torque the GREATEST?</b></div><div class="bm-opts"><button class="bm-opt" data-correct="0"><span class="bm-tag">A</span>Fully extended (forearm hanging straight down)</button><button class="bm-opt" data-correct="1"><span class="bm-tag">B</span>About 90° (forearm horizontal)</button><button class="bm-opt" data-correct="0"><span class="bm-tag">C</span>Fully flexed (forearm pointing up at the top)</button></div><div class="bm-reveal"><b>Greatest at ~90° (forearm horizontal).</b> Torque = force × <b>perpendicular</b> moment arm. Gravity always pulls straight down, so the moment arm is the <i>horizontal</i> distance from the elbow to the weight — longest when the forearm is horizontal, near-zero when it points straight down or straight up. <span class='bm-why'>Why it matters:</span> that horizontal point is your <b>sticking point</b> — where the resistance curve peaks. Drag the slider to watch the moment arm (blue) and torque grow to a max mid-rep, then fall off. It's also why accommodating resistance (bands/chains) and exercise selection are built around where torque demand is highest.</div>
 <script>(function(){
-  var root=document.getElementById("tq27167");if(!root)return;
+  var root=document.getElementById("tq22569");if(!root)return;
   var opts=root.querySelectorAll(".bm-opt");
   var rev=root.querySelector(".bm-reveal");
   var answered=false;
@@ -1247,18 +1263,18 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
       if(b.getAttribute("data-correct")!=="1")b.classList.add("is-wrong");
       if(rev)rev.classList.add("show");
       var hook=root.querySelector("[data-after-answer]");
-      if(hook&&window["tq27167after"])window["tq27167after"]();
+      if(hook&&window["tq22569after"])window["tq22569after"]();
     });
   });
 })();</script>
 
 <script>(function(){
-  var root=document.getElementById("tq27167");if(!root)return;
-  var sl=root.querySelector("#tq27167-sl"),
-      fore=root.querySelector("#tq27167-fore"),
-      hand=root.querySelector("#tq27167-hand"),
-      arm=root.querySelector("#tq27167-arm"),
-      armlbl=root.querySelector("#tq27167-armlbl"),
+  var root=document.getElementById("tq22569");if(!root)return;
+  var sl=root.querySelector("#tq22569-sl"),
+      fore=root.querySelector("#tq22569-fore"),
+      hand=root.querySelector("#tq22569-hand"),
+      arm=root.querySelector("#tq22569-arm"),
+      armlbl=root.querySelector("#tq22569-armlbl"),
       ex=90,ey=120,L=80;
   function up(){
     var phi=+sl.value*Math.PI/180;
@@ -1272,52 +1288,52 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
     armlbl.setAttribute("x",(ax+bx)/2);armlbl.setAttribute("y",ay+14);
     var ratio=Math.abs(Math.sin(phi)); // 0..1, 1 at horizontal
     var pct=Math.round(ratio*100);
-    root.querySelector("#tq27167-tq").textContent=pct+"% of max";
-    root.querySelector("#tq27167-mm").textContent=Math.round(L*Math.abs(Math.sin(phi)))+" units";
+    root.querySelector("#tq22569-tq").textContent=pct+"% of max";
+    root.querySelector("#tq22569-mm").textContent=Math.round(L*Math.abs(Math.sin(phi)))+" units";
     var deg=+sl.value, name;
     if(deg<25)name="extended (hanging)";
     else if(deg<70)name="mid-range (rising)";
     else if(deg<110)name="~horizontal — STICKING POINT";
     else if(deg<150)name="past horizontal (easing)";
     else name="fully flexed (top)";
-    root.querySelector("#tq27167-anglbl").textContent=name;
+    root.querySelector("#tq22569-anglbl").textContent=name;
   }
   sl.addEventListener("input",up);up();
 })();</script></div></div>
-<div class="widget bm-w" id="l3d38133"><div class="w-head"><span class="w-icon">🦾</span><span class="w-title">3D lever lab — bones, joints &amp; force vectors</span></div><div class="w-body">
+<div class="widget bm-w" id="l3d37942"><div class="w-head"><span class="w-icon">🦾</span><span class="w-title">3D lever lab — bones, joints &amp; force vectors</span></div><div class="w-body">
 <style>
-#l3d38133 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
-#l3d38133 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
-#l3d38133 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
+#l3d37942 .bm-q{font-size:13px;font-weight:600;color:var(--text);margin:10px 0 8px}
+#l3d37942 .bm-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:8px}
+#l3d37942 .bm-opt{appearance:none;text-align:left;cursor:pointer;font-size:13px;
   padding:9px 12px;border-radius:9px;border:1px solid var(--border-2,#2d3548);
   background:var(--surface-2,rgba(255,255,255,.03));color:var(--text);
   transition:border-color .15s,background .15s,transform .1s;line-height:1.35}
-#l3d38133 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
-#l3d38133 .bm-opt:disabled{cursor:default}
-#l3d38133 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
-#l3d38133 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
-#l3d38133 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
-#l3d38133 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
+#l3d37942 .bm-opt:hover:not(:disabled){border-color:var(--accent);transform:translateX(2px)}
+#l3d37942 .bm-opt:disabled{cursor:default}
+#l3d37942 .bm-opt.is-correct{border-color:var(--good);background:rgba(103,232,176,.12);color:var(--good)}
+#l3d37942 .bm-opt.is-wrong{border-color:var(--bad);background:rgba(255,122,122,.10);color:var(--bad)}
+#l3d37942 .bm-opt .bm-tag{font-weight:700;margin-right:6px}
+#l3d37942 .bm-reveal{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;
   background:rgba(94,200,255,.07);border-left:3px solid var(--accent);font-size:12.5px;
   color:var(--text-dim,#9ba3b4);line-height:1.5}
-#l3d38133 .bm-reveal.show{display:block;animation:bmfade .35s ease}
-#l3d38133 .bm-reveal b{color:var(--text)}
-#l3d38133 .bm-reveal .bm-why{color:var(--warn)}
-#l3d38133 .bm-controls{margin-top:10px}
-#l3d38133 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
-#l3d38133 .bm-controls label b{color:var(--text)}
-#l3d38133 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
+#l3d37942 .bm-reveal.show{display:block;animation:bmfade .35s ease}
+#l3d37942 .bm-reveal b{color:var(--text)}
+#l3d37942 .bm-reveal .bm-why{color:var(--warn)}
+#l3d37942 .bm-controls{margin-top:10px}
+#l3d37942 .bm-controls label{font-size:12px;color:var(--text-dim,#9ba3b4);display:block;margin-top:6px}
+#l3d37942 .bm-controls label b{color:var(--text)}
+#l3d37942 .bm-slider{width:100%;-webkit-appearance:none;appearance:none;height:4px;
   background:var(--surface-3,#2d3548);border-radius:999px;outline:none;cursor:pointer;margin-top:4px}
-#l3d38133 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
+#l3d37942 .bm-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;
   border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 8px var(--accent)}
-#l3d38133 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
+#l3d37942 .bm-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;
   background:var(--accent);border:none;cursor:pointer}
-#l3d38133 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
-#l3d38133 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
+#l3d37942 .bm-toggle{display:inline-flex;gap:6px;margin-top:10px}
+#l3d37942 .bm-tbtn{cursor:pointer;font-size:12px;padding:6px 12px;border-radius:999px;
   border:1px solid var(--border-2,#2d3548);background:transparent;color:var(--text-dim,#9ba3b4)}
-#l3d38133 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
-#l3d38133 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
-#l3d38133 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
+#l3d37942 .bm-tbtn.active{border-color:var(--accent);color:var(--accent);background:rgba(94,200,255,.08)}
+#l3d37942 .bm-read{margin-top:8px;font-size:12.5px;color:var(--text)}
+#l3d37942 .bm-read b{color:var(--accent);font-variant-numeric:tabular-nums}
 @keyframes bmfade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 </style>
 <div class="bm3d-stage" style="position:relative;width:100%;height:268px;border-radius:10px;overflow:hidden;background:radial-gradient(circle at 50% 35%,rgba(94,200,255,.06),transparent 70%);touch-action:none;cursor:grab"></div><div class="bm3d-fallback" style="display:none">
@@ -1329,9 +1345,9 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
   <path d="M240 188 l-5 -12 l10 0 z" fill="#ff7a7a"/>
   <line x1="90" y1="60" x2="78" y2="150" stroke="#5ec8ff" stroke-width="2.5"/>
   <text x="150" y="176" fill="#9ba3b4" font-size="10" text-anchor="middle">3D needs WebGL — showing the 2D lever instead</text>
-</svg></div><div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:11px;color:var(--text-dim,#9ba3b4)"><span><span style="color:var(--warn,#ffb86b)">●</span> joint (fulcrum)</span><span><span style="color:var(--good,#67e8b0)">▬</span> forearm (lever)</span><span><span style="color:var(--accent,#5ec8ff)">→</span> muscle force</span><span><span style="color:var(--bad,#ff7a7a)">↓</span> load (gravity)</span></div><div class="bm-controls"><label>Elbow angle: <b id="l3d38133-anglbl">90°</b> &nbsp;·&nbsp; drag the model to rotate it</label><input type="range" min="0" max="170" step="2" value="90" id="l3d38133-sl" class="bm-slider"><div class="bm-read">Load moment arm: <b id="l3d38133-mm">max</b> &nbsp;|&nbsp; muscle force demand: <b id="l3d38133-mf">100%</b></div></div><div class="bm-q">This is a third-class lever (the elbow). As you sweep it through its range, <b>where is the muscle's force demand highest?</b></div><div class="bm-opts"><button class="bm-opt" data-correct="0"><span class="bm-tag">A</span>Near full extension (forearm hanging down)</button><button class="bm-opt" data-correct="1"><span class="bm-tag">B</span>With the forearm horizontal (~90°)</button><button class="bm-opt" data-correct="0"><span class="bm-tag">C</span>It's constant throughout the range</button></div><div class="bm-reveal"><b>3rd-class lever, viewed in 3D.</b> The blue muscle-force arrow inserts <i>close</i> to the joint (short effort arm); the red load hangs out at the hand (long load arm). <span class='bm-why'>Why it matters:</span> spin it and sweep the angle — the load's moment arm (its horizontal offset from the joint) peaks when the forearm is horizontal, so the muscle's force demand peaks there too. Same physics as the 2D torque tool, now in space: force disadvantage bought in exchange for speed and reach.</div>
+</svg></div><div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:11px;color:var(--text-dim,#9ba3b4)"><span><span style="color:var(--warn,#ffb86b)">●</span> joint (fulcrum)</span><span><span style="color:var(--good,#67e8b0)">▬</span> forearm (lever)</span><span><span style="color:var(--accent,#5ec8ff)">→</span> muscle force</span><span><span style="color:var(--bad,#ff7a7a)">↓</span> load (gravity)</span></div><div class="bm-controls"><label>Elbow angle: <b id="l3d37942-anglbl">90°</b> &nbsp;·&nbsp; drag the model to rotate it</label><input type="range" min="0" max="170" step="2" value="90" id="l3d37942-sl" class="bm-slider"><div class="bm-read">Load moment arm: <b id="l3d37942-mm">max</b> &nbsp;|&nbsp; muscle force demand: <b id="l3d37942-mf">100%</b></div></div><div class="bm-q">This is a third-class lever (the elbow). As you sweep it through its range, <b>where is the muscle's force demand highest?</b></div><div class="bm-opts"><button class="bm-opt" data-correct="0"><span class="bm-tag">A</span>Near full extension (forearm hanging down)</button><button class="bm-opt" data-correct="1"><span class="bm-tag">B</span>With the forearm horizontal (~90°)</button><button class="bm-opt" data-correct="0"><span class="bm-tag">C</span>It's constant throughout the range</button></div><div class="bm-reveal"><b>3rd-class lever, viewed in 3D.</b> The blue muscle-force arrow inserts <i>close</i> to the joint (short effort arm); the red load hangs out at the hand (long load arm). <span class='bm-why'>Why it matters:</span> spin it and sweep the angle — the load's moment arm (its horizontal offset from the joint) peaks when the forearm is horizontal, so the muscle's force demand peaks there too. Same physics as the 2D torque tool, now in space: force disadvantage bought in exchange for speed and reach.</div>
 <script>(function(){
-  var root=document.getElementById("l3d38133");if(!root)return;
+  var root=document.getElementById("l3d37942");if(!root)return;
   var opts=root.querySelectorAll(".bm-opt");
   var rev=root.querySelector(".bm-reveal");
   var answered=false;
@@ -1345,16 +1361,16 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
       if(b.getAttribute("data-correct")!=="1")b.classList.add("is-wrong");
       if(rev)rev.classList.add("show");
       var hook=root.querySelector("[data-after-answer]");
-      if(hook&&window["l3d38133after"])window["l3d38133after"]();
+      if(hook&&window["l3d37942after"])window["l3d37942after"]();
     });
   });
 })();</script>
 
 <script>(function(){
-  var root=document.getElementById("l3d38133");if(!root)return;
+  var root=document.getElementById("l3d37942");if(!root)return;
   var stage=root.querySelector(".bm3d-stage"),
       fb=root.querySelector(".bm3d-fallback"),
-      sl=root.querySelector("#l3d38133-sl");
+      sl=root.querySelector("#l3d37942-sl");
   function fail(){ if(stage)stage.style.display="none"; if(fb)fb.style.display="block"; }
   function cssv(n,d){try{var v=getComputedStyle(root).getPropertyValue(n).trim();return v||d;}catch(e){return d;}}
   if(!window.WebGLRenderingContext){fail();return;}
@@ -1433,9 +1449,9 @@ body { background-image: linear-gradient(rgba(127, 196, 255, 0.05) 1px, transpar
       group.add(momentLine);
       // readouts
       var ratio=Math.abs(Math.sin(a));
-      root.querySelector("#l3d38133-anglbl").textContent=deg+"°";
-      root.querySelector("#l3d38133-mm").textContent=Math.round(ratio*100)+"% of max";
-      root.querySelector("#l3d38133-mf").textContent=Math.round(ratio*100)+"%";
+      root.querySelector("#l3d37942-anglbl").textContent=deg+"°";
+      root.querySelector("#l3d37942-mm").textContent=Math.round(ratio*100)+"% of max";
+      root.querySelector("#l3d37942-mf").textContent=Math.round(ratio*100)+"%";
     }
     setAngle(+sl.value);
     sl.addEventListener("input",function(){setAngle(+sl.value);});
@@ -3879,6 +3895,116 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 /* ===== end study-voice v2 ===== */
+
+/* ===== study-anim v1 — glossary-icon animator (synced: hyrox/cscs).
+   Entrance draw-in for static icons; viewport + reduced-motion pausing for
+   SMIL icons. ===== */
+(function () {
+  "use strict";
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  function onReady(fn) {
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+  onReady(function () {
+    var svgs = Array.prototype.slice.call(
+      document.querySelectorAll(".gloss-svg svg"));
+    if (!svgs.length) return;
+
+    var reduced = false;
+    try {
+      reduced = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {}
+
+    function hasSmil(svg) {
+      return !!svg.querySelector("animate,animateTransform,animateMotion");
+    }
+    function pauseSmil(svg) { try { svg.pauseAnimations(); } catch (e) {} }
+    function playSmil(svg) { try { svg.unpauseAnimations(); } catch (e) {} }
+
+    // SMIL autostarts — hold everything until it is actually looked at.
+    svgs.forEach(function (s) { if (hasSmil(s)) pauseSmil(s); });
+    if (reduced) return; // paused stays paused; no entrances; CSS handles the rest
+
+    var visible = []; // SMIL svgs currently in view (for visibilitychange)
+
+    function entrance(svg) {
+      var shapes = svg.querySelectorAll("path,line,polyline,circle,rect,ellipse");
+      var di = 0, pi = 0;
+      Array.prototype.forEach.call(shapes, function (el) {
+        var stroke = el.getAttribute("stroke");
+        var fill = el.getAttribute("fill");
+        if (stroke && stroke !== "none") {
+          if (el.getAttribute("stroke-dasharray")) {
+            el.classList.add("sva-flow"); // dashed = a flow: march, don't draw
+            return;
+          }
+          var L = 0;
+          try { L = el.getTotalLength(); } catch (e) { return; }
+          if (!L || !isFinite(L)) return;
+          el.style.strokeDasharray = L + " " + L;
+          el.style.strokeDashoffset = L;
+          el.style.transition = "stroke-dashoffset 0.8s ease-out " + (di * 0.12) + "s";
+          di++;
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { el.style.strokeDashoffset = "0"; });
+          });
+          el.addEventListener("transitionend", function te() {
+            el.style.strokeDasharray = "";
+            el.style.strokeDashoffset = "";
+            el.style.transition = "";
+            el.removeEventListener("transitionend", te);
+          });
+        } else if (fill && fill !== "none") {
+          el.classList.add("sva-pop");
+          el.style.animationDelay = (pi * 0.09) + "s";
+          pi++;
+        }
+      });
+    }
+
+    var seen = typeof WeakSet === "function" ? new WeakSet() : null;
+    function markSeen(s) { if (seen) seen.add(s); else s.__svaSeen = true; }
+    function wasSeen(s) { return seen ? seen.has(s) : !!s.__svaSeen; }
+
+    if (typeof IntersectionObserver !== "function") {
+      // Old browser: just let SMIL run and skip entrances.
+      svgs.forEach(function (s) { if (hasSmil(s)) playSmil(s); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var svg = en.target;
+        var smil = hasSmil(svg);
+        if (en.isIntersecting) {
+          if (smil) {
+            playSmil(svg);
+            if (visible.indexOf(svg) < 0) visible.push(svg);
+          } else if (!wasSeen(svg)) {
+            markSeen(svg);
+            entrance(svg);
+          }
+        } else if (smil) {
+          pauseSmil(svg);
+          var ix = visible.indexOf(svg);
+          if (ix >= 0) visible.splice(ix, 1);
+        }
+      });
+    }, { threshold: 0.15 });
+    svgs.forEach(function (s) { io.observe(s); });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden)
+        svgs.forEach(function (s) { if (hasSmil(s)) pauseSmil(s); });
+      else
+        visible.forEach(playSmil);
+    });
+  });
+})();
+/* ===== end study-anim v1 ===== */
 </script>
 </body>
 </html>

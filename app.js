@@ -2324,3 +2324,113 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 /* ===== end study-voice v2 ===== */
+
+/* ===== study-anim v1 — glossary-icon animator (synced: hyrox/cscs).
+   Entrance draw-in for static icons; viewport + reduced-motion pausing for
+   SMIL icons. ===== */
+(function () {
+  "use strict";
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  function onReady(fn) {
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+  onReady(function () {
+    var svgs = Array.prototype.slice.call(
+      document.querySelectorAll(".gloss-svg svg"));
+    if (!svgs.length) return;
+
+    var reduced = false;
+    try {
+      reduced = window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    } catch (e) {}
+
+    function hasSmil(svg) {
+      return !!svg.querySelector("animate,animateTransform,animateMotion");
+    }
+    function pauseSmil(svg) { try { svg.pauseAnimations(); } catch (e) {} }
+    function playSmil(svg) { try { svg.unpauseAnimations(); } catch (e) {} }
+
+    // SMIL autostarts — hold everything until it is actually looked at.
+    svgs.forEach(function (s) { if (hasSmil(s)) pauseSmil(s); });
+    if (reduced) return; // paused stays paused; no entrances; CSS handles the rest
+
+    var visible = []; // SMIL svgs currently in view (for visibilitychange)
+
+    function entrance(svg) {
+      var shapes = svg.querySelectorAll("path,line,polyline,circle,rect,ellipse");
+      var di = 0, pi = 0;
+      Array.prototype.forEach.call(shapes, function (el) {
+        var stroke = el.getAttribute("stroke");
+        var fill = el.getAttribute("fill");
+        if (stroke && stroke !== "none") {
+          if (el.getAttribute("stroke-dasharray")) {
+            el.classList.add("sva-flow"); // dashed = a flow: march, don't draw
+            return;
+          }
+          var L = 0;
+          try { L = el.getTotalLength(); } catch (e) { return; }
+          if (!L || !isFinite(L)) return;
+          el.style.strokeDasharray = L + " " + L;
+          el.style.strokeDashoffset = L;
+          el.style.transition = "stroke-dashoffset 0.8s ease-out " + (di * 0.12) + "s";
+          di++;
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { el.style.strokeDashoffset = "0"; });
+          });
+          el.addEventListener("transitionend", function te() {
+            el.style.strokeDasharray = "";
+            el.style.strokeDashoffset = "";
+            el.style.transition = "";
+            el.removeEventListener("transitionend", te);
+          });
+        } else if (fill && fill !== "none") {
+          el.classList.add("sva-pop");
+          el.style.animationDelay = (pi * 0.09) + "s";
+          pi++;
+        }
+      });
+    }
+
+    var seen = typeof WeakSet === "function" ? new WeakSet() : null;
+    function markSeen(s) { if (seen) seen.add(s); else s.__svaSeen = true; }
+    function wasSeen(s) { return seen ? seen.has(s) : !!s.__svaSeen; }
+
+    if (typeof IntersectionObserver !== "function") {
+      // Old browser: just let SMIL run and skip entrances.
+      svgs.forEach(function (s) { if (hasSmil(s)) playSmil(s); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var svg = en.target;
+        var smil = hasSmil(svg);
+        if (en.isIntersecting) {
+          if (smil) {
+            playSmil(svg);
+            if (visible.indexOf(svg) < 0) visible.push(svg);
+          } else if (!wasSeen(svg)) {
+            markSeen(svg);
+            entrance(svg);
+          }
+        } else if (smil) {
+          pauseSmil(svg);
+          var ix = visible.indexOf(svg);
+          if (ix >= 0) visible.splice(ix, 1);
+        }
+      });
+    }, { threshold: 0.15 });
+    svgs.forEach(function (s) { io.observe(s); });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden)
+        svgs.forEach(function (s) { if (hasSmil(s)) pauseSmil(s); });
+      else
+        visible.forEach(playSmil);
+    });
+  });
+})();
+/* ===== end study-anim v1 ===== */
