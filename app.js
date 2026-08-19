@@ -1435,7 +1435,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ── prefs + keys ─────────────────────────────────────────────────────
     var prefs = { accent: "gb", rate: 1, answers: "revealed", engine: "device",
-                  voiceName: "", geminiVoice: "Charon", elevenVoice: "" };
+                  voiceName: "", geminiVoice: "Charon", elevenVoice: "", min: false };
     var keys = { gemini: "", eleven: "", elevenGb: "", elevenUs: "", geminiModel: "" };
     try {
       var raw = localStorage.getItem(CFG.prefKey);
@@ -2135,7 +2135,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       panel.appendChild(row1); panel.appendChild(row2); panel.appendChild(row3);
       panel.appendChild(row4); panel.appendChild(row5);
+      function setMin(v) {
+        prefs.min = !!v; savePrefs();
+        panel.classList.toggle("sv-min", prefs.min);
+      }
+      var minB = mkBtn("\u2212", "Minimise \u2014 tuck this panel into a small button", "sv-minb",
+        function (ev) { ev.stopPropagation(); setMin(true); });
+      var chip = document.createElement("button");
+      chip.type = "button"; chip.className = "sv-minchip";
+      chip.title = "Open Listen & NotebookLM tools";
+      chip.setAttribute("aria-label", "Open Listen and NotebookLM tools");
+      chip.textContent = "\uD83D\uDD0A";
+      chip.addEventListener("click", function () { setMin(false); });
+      panel.appendChild(minB); panel.appendChild(chip);
       document.body.appendChild(panel);
+      panel.classList.toggle("sv-min", !!prefs.min);
       fillVoiceSelect(); updatePanel();
     }
 

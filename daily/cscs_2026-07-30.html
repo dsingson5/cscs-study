@@ -874,6 +874,21 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   .sv-panel { right: 8px; bottom: 58px; max-width: 80vw; padding: 8px; }
   .sv-btn { font-size: 11px; }
 }
+/* -- v2.1: minimisable panel -- */
+.sv-panel { padding-right: 30px; }
+.sv-btn.sv-minb { position: absolute; top: 6px; right: 7px; padding: 0 7px;
+  line-height: 17px; font-size: 13px; opacity: 0.75; }
+.sv-btn.sv-minb:hover { opacity: 1; }
+.sv-minchip { display: none; }
+.sv-panel.sv-min { padding: 0; background: transparent; border: none;
+  box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.sv-panel.sv-min .sv-row, .sv-panel.sv-min .sv-minb { display: none; }
+.sv-panel.sv-min .sv-minchip { display: flex; align-items: center;
+  justify-content: center; width: 46px; height: 46px; border-radius: 50%;
+  font-size: 20px; cursor: pointer; background: rgba(13, 17, 26, 0.96);
+  color: #dfe7f5; border: 1px solid #33405a;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-family: inherit; }
+.sv-panel.sv-min .sv-minchip:hover { border-color: #5ec8ff; }
 /* ===== end study-voice v2 ===== */
 
 /* ===== study-anim v1 — icon entrances + flows (synced: hyrox/cscs) ===== */
@@ -948,7 +963,7 @@ body {
 <style></style>
 </head>
 <body class="theme-day-68">
-<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 17, 2026 · 12:36 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 17, 2026 · 12:36 PM</div>
+<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 19, 2026 · 5:08 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 19, 2026 · 5:08 PM</div>
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day 68 · Thursday</div>
@@ -2482,7 +2497,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ── prefs + keys ─────────────────────────────────────────────────────
     var prefs = { accent: "gb", rate: 1, answers: "revealed", engine: "device",
-                  voiceName: "", geminiVoice: "Charon", elevenVoice: "" };
+                  voiceName: "", geminiVoice: "Charon", elevenVoice: "", min: false };
     var keys = { gemini: "", eleven: "", elevenGb: "", elevenUs: "", geminiModel: "" };
     try {
       var raw = localStorage.getItem(CFG.prefKey);
@@ -3182,7 +3197,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
       panel.appendChild(row1); panel.appendChild(row2); panel.appendChild(row3);
       panel.appendChild(row4); panel.appendChild(row5);
+      function setMin(v) {
+        prefs.min = !!v; savePrefs();
+        panel.classList.toggle("sv-min", prefs.min);
+      }
+      var minB = mkBtn("\u2212", "Minimise \u2014 tuck this panel into a small button", "sv-minb",
+        function (ev) { ev.stopPropagation(); setMin(true); });
+      var chip = document.createElement("button");
+      chip.type = "button"; chip.className = "sv-minchip";
+      chip.title = "Open Listen & NotebookLM tools";
+      chip.setAttribute("aria-label", "Open Listen and NotebookLM tools");
+      chip.textContent = "\uD83D\uDD0A";
+      chip.addEventListener("click", function () { setMin(false); });
+      panel.appendChild(minB); panel.appendChild(chip);
       document.body.appendChild(panel);
+      panel.classList.toggle("sv-min", !!prefs.min);
       fillVoiceSelect(); updatePanel();
     }
 

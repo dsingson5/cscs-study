@@ -868,6 +868,21 @@ footer code { background: var(--surface); padding: 2px 6px; border-radius: 4px; 
   .sv-panel { right: 8px; bottom: 58px; max-width: 80vw; padding: 8px; }
   .sv-btn { font-size: 11px; }
 }
+/* -- v2.1: minimisable panel -- */
+.sv-panel { padding-right: 30px; }
+.sv-btn.sv-minb { position: absolute; top: 6px; right: 7px; padding: 0 7px;
+  line-height: 17px; font-size: 13px; opacity: 0.75; }
+.sv-btn.sv-minb:hover { opacity: 1; }
+.sv-minchip { display: none; }
+.sv-panel.sv-min { padding: 0; background: transparent; border: none;
+  box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.sv-panel.sv-min .sv-row, .sv-panel.sv-min .sv-minb { display: none; }
+.sv-panel.sv-min .sv-minchip { display: flex; align-items: center;
+  justify-content: center; width: 46px; height: 46px; border-radius: 50%;
+  font-size: 20px; cursor: pointer; background: rgba(13, 17, 26, 0.96);
+  color: #dfe7f5; border: 1px solid #33405a;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5); font-family: inherit; }
+.sv-panel.sv-min .sv-minchip:hover { border-color: #5ec8ff; }
 /* ===== end study-voice v2 ===== */
 
 /* ===== study-anim v1 — icon entrances + flows (synced: hyrox/cscs) ===== */
