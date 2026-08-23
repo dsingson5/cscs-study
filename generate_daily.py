@@ -860,6 +860,23 @@ def main():
     print(f"Wrote {rolling_path} (rolling)")
     gallery_path = ROOT / "figures.html"
     gallery_path.write_text(build_gallery_html(), encoding="utf-8")
+    # Offline pack manifest (study-offline v1): everything the "Download all"
+    # button stores — regenerated on every entry build so nightly-added pages
+    # join the pack automatically. Paths are site-root-relative.
+    try:
+        _pk = ["index.html", "modules.html"]
+        for _extra in ("figures.html", "games.html"):
+            if (ROOT / _extra).exists():
+                _pk.append(_extra)
+        from urllib.parse import quote as _urlq
+        _pk += sorted("daily/" + _urlq(p.name) for p in OUT.glob("*.html"))
+        _figdir = ROOT / "figures"
+        if _figdir.is_dir():
+            _pk += sorted("figures/" + _urlq(p.name) for p in _figdir.iterdir() if p.is_file())
+        (DATA / "pages.json").write_text(json.dumps(_pk), encoding="utf-8")
+        print(f"Wrote {DATA / 'pages.json'} ({len(_pk)} entries)")
+    except Exception as _pe:
+        print("pages.json write failed:", _pe)
     print(f"Wrote {index_path} (GitHub Pages entry)")
     print(f"Wrote {gallery_path} (figure gallery)")
     return 0

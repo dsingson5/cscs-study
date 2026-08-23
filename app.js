@@ -2448,3 +2448,100 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 /* ===== end study-anim v1 ===== */
+
+/* ===== study-offline v1 — sw registration + offline pack (synced: hyrox/cscs).
+   Registers sw.js (scope = site root) and adds an "Offline: Download all"
+   row to the study-voice panel: fetches data/pages.json and stores every
+   page in the sw's cache so the whole site works with no connection. ===== */
+(function () {
+  "use strict";
+  if (typeof window === "undefined" || typeof document === "undefined") return;
+  if (!("serviceWorker" in navigator) || !window.caches) return;
+  var path = location.pathname;
+  var di = path.indexOf("/daily/");
+  var base = di >= 0 ? path.slice(0, di + 1) : path.replace(/[^\/]*$/, "");
+  var siteKey = base.replace(/[^a-z0-9]/gi, "") || "root";
+  var CACHE = "svoff-" + siteKey + "-v1";
+  var LSK = "svoff." + siteKey + ".packed";
+
+  try { navigator.serviceWorker.register(base + "sw.js").catch(function () {}); } catch (e) {}
+
+  function onReady(fn) {
+    if (document.readyState === "loading")
+      document.addEventListener("DOMContentLoaded", fn);
+    else fn();
+  }
+  onReady(function () {
+    var panel = document.querySelector(".sv-panel");
+    if (!panel || panel.querySelector(".sv-offbtn")) return;
+    var row = document.createElement("div"); row.className = "sv-row";
+    var lab = document.createElement("span"); lab.className = "sv-lab";
+    lab.textContent = "Offline:";
+    var btn = document.createElement("button"); btn.type = "button";
+    btn.className = "sv-btn sv-offbtn";
+    btn.textContent = "\uD83D\uDCE5 Download all";
+    btn.title = "Store every lesson on this device so the whole site works with no connection";
+    var st = document.createElement("span"); st.className = "sv-status";
+    row.appendChild(lab); row.appendChild(btn); row.appendChild(st);
+    var chip = panel.querySelector(".sv-minchip");
+    panel.insertBefore(row, chip || null);
+
+    /* trust the CACHE, not the stamp — iOS can evict the pack while
+       localStorage survives, and a lying checkmark strands the user offline. */
+    caches.open(CACHE).then(function (c) { return c.keys(); }).then(function (ks) {
+      if (ks.length) { st.textContent = "\u2713 " + ks.length + " stored on this device"; return; }
+      try {
+        var p = JSON.parse(localStorage.getItem(LSK) || "null");
+        if (p && p.n) st.textContent = "stored copy missing \u2014 download again";
+      } catch (e) {}
+    }).catch(function () {});
+
+    var busy = false;
+    btn.addEventListener("click", function () {
+      if (busy) return;
+      busy = true; btn.disabled = true; st.textContent = "listing\u2026";
+      fetch(base + "data/pages.json", { cache: "no-store" })
+        .then(function (r) { if (!r.ok) throw new Error("list"); return r.json(); })
+        .then(function (list) {
+          if (!list || !list.length) throw new Error("empty");
+          return caches.open(CACHE).then(function (cache) {
+            var done = 0, fail = 0, idx = 0;
+            st.textContent = "0 / " + list.length;
+            function one() {
+              if (idx >= list.length) return Promise.resolve();
+              var u = base + list[idx++];
+              return fetch(u, { cache: "no-store" }).then(function (r) {
+                if (r && r.ok && !r.redirected) {
+                  var k = new URL(u, location.href).href.split("#")[0].split("?")[0];
+                  return cache.put(k, r).then(function () { done++; });
+                }
+                fail++;
+              }).catch(function () { fail++; }).then(function () {
+                var n = done + fail;
+                if (n % 5 === 0 || n === list.length)
+                  st.textContent = n + " / " + list.length + (fail ? " \u00B7 " + fail + " failed" : "");
+                return one();
+              });
+            }
+            var lanes = [];
+            for (var w = 0; w < 5; w++) lanes.push(one());
+            return Promise.all(lanes).then(function () {
+              try {
+                localStorage.setItem(LSK, JSON.stringify({ n: done, at: new Date().toISOString() }));
+              } catch (e) {}
+              try {
+                if (navigator.storage && navigator.storage.persist)
+                  navigator.storage.persist().catch(function () {});
+              } catch (e) {}
+              st.textContent = fail
+                ? "\u2713 " + done + " stored \u00B7 " + fail + " failed \u2014 tap again to retry"
+                : "\u2713 " + done + " pages \u2014 this device now works offline";
+            });
+          });
+        })
+        .catch(function () { st.textContent = "couldn't fetch the page list \u2014 are you online?"; })
+        .then(function () { busy = false; btn.disabled = false; });
+    });
+  });
+})();
+/* ===== end study-offline v1 ===== */
