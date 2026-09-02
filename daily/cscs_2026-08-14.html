@@ -1013,7 +1013,7 @@ body { font-family: "JetBrains Mono", "SF Mono", monospace; }
 </style>
 </head>
 <body class="theme-day-83">
-<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Aug 31, 2026 · 1:54 PM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Aug 31, 2026 · 1:54 PM</div>
+<div id="pg-stamp" onclick="this.remove()" title="CSCS Study v2.2 · this page built Sep 03, 2026 · 3:58 AM (Manila) · tap to hide" style="position:fixed;top:env(safe-area-inset-top,0px);right:0;z-index:2147483647;font:600 10px/1.2 -apple-system,'Segoe UI',Roboto,sans-serif;background:rgba(8,10,20,.82);color:#9fb6c9;border:1px solid rgba(159,182,201,.35);border-top:0;border-right:0;border-radius:0 0 0 8px;padding:4px 9px 5px;letter-spacing:.03em;white-space:nowrap;cursor:pointer;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)">v2.2 · Sep 03, 2026 · 3:58 AM</div>
 <div class="container">
   <header class="top">
     <div class="h-day">CSCS Study · Day 83 · Friday</div>
@@ -1565,8 +1565,14 @@ function rateQ(qid, grade) {
     if (pageDate) {
       s.touchedDays = s.touchedDays || {}; s.touchedDays[pageDate] = true;
       var core = (typeof window !== 'undefined' && window.__CSCS_CORE_QIDS) ? window.__CSCS_CORE_QIDS : null;
-      var allDone = true;
-      if (core && core.length) {
+      // A page with NO baked core set must never stamp completedDays: the old
+      // `= true` initialiser meant one grade on such a page marked the whole
+      // day done, and complete() in the redirect checks completedDays FIRST,
+      // so the all-core gate never got a vote. No core set = nothing to
+      // verify = not completable (legacy pre-cutoff days are still covered by
+      // the touchedDays rule; re-render the page to give it a core set).
+      var allDone = !!(core && core.length);
+      if (allDone) {
         for (var ci = 0; ci < core.length; ci++) { if (!s.cards[core[ci]]) { allDone = false; break; } }
       }
       if (allDone) {
@@ -2492,7 +2498,17 @@ async function gistFetch(method, path, token, body) {
     headers: { "Authorization": "token " + token, "Accept": "application/vnd.github+json", "Content-Type": "application/json", "X-GitHub-Api-Version": "2022-11-28" },
     body: body ? JSON.stringify(body) : undefined
   });
-  if (!res.ok) { const text = await res.text(); throw new Error("GitHub API " + res.status + ": " + text.slice(0, 200)); }
+  if (!res.ok) {
+    const text = await res.text();
+    // A dead personal access token is the single most common failure here now
+    // that Google sign-in has replaced it; say so plainly instead of leaking
+    // GitHub's raw JSON at someone mid-study.
+    if (res.status === 401 || res.status === 403) {
+      throw new Error("Your GitHub token has expired. You do not need it any more — "
+        + "close this and tap Sign in with Google at the top of the panel; that replaces the token entirely.");
+    }
+    throw new Error("GitHub API " + res.status + ": " + text.slice(0, 200));
+  }
   return res.status === 204 ? null : res.json();
 }
 
@@ -2767,7 +2783,7 @@ function setupGoogleSignIn() {
           syncAccountNote("Google sign-in couldn't start on this device — use the GitHub token option below.", "err");
         }
       }, function () {
-        syncAccountNote("Google's sign-in script was blocked — a content blocker or network filter may be stopping it. Try another browser or network, or use the GitHub token option below.", "err");
+        syncAccountNote("Google's sign-in script was blocked here (a content blocker or network filter stops it). You can still sign in: open the Hybrid Crew gate at https://dsingson5.github.io/hybrid-crew/enter.html in THIS browser, sign in there, then reload this page — sync switches on by itself, because both sites share that session.", "err");
       });
     })
     .catch(function () { syncAccountNote("Can't reach sign-in right now. Check your connection and try again.", "err"); });
@@ -3033,6 +3049,11 @@ function injectSyncUI() {
 
 document.addEventListener("DOMContentLoaded", () => {
   injectSyncUI();
+  // The landing page's resume redirect owns this document and already has its
+  // own /study read in flight; it is about to replace the page. Booting a
+  // SECOND remote pull here doubles worker load for a page nobody will read.
+  // The lesson page we land on runs this block normally a moment later.
+  if (typeof window !== "undefined" && window.__RESUME_REDIRECTING) return;
   // A known-dead token: say so on the button and wait for a fresh sign-in
   // rather than firing a request that can only 401.
   if (accountSession() && accountStale()) updateSyncButton("error", "Sign in again");
@@ -4206,10 +4227,16 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 /* ===== end study-anim v1 ===== */
 
-/* ===== study-offline v1 — sw registration + offline pack (synced: hyrox/cscs).
+/* ===== study-offline v1.1 — sw registration + offline pack (synced: hyrox/cscs).
    Registers sw.js (scope = site root) and adds an "Offline: Download all"
    row to the study-voice panel: fetches data/pages.json and stores every
-   page in the sw's cache so the whole site works with no connection. ===== */
+   page in the sw's cache so the whole site works with no connection.
+   v1.1: the sw serves pages cache-first, so after a redeploy a packed device
+   keeps showing its stored copies. data/build.json carries the stamp of the
+   deployed build and we remember the stamp the pack was downloaded against;
+   when the two differ the row says so ("Update offline copy" / "new lessons
+   available") instead of letting him study stale lessons for days. Advisory
+   only — it NEVER wipes the cache: a stale pack still beats no pack. ===== */
 (function () {
   "use strict";
   if (typeof window === "undefined" || typeof document === "undefined") return;
@@ -4220,8 +4247,30 @@ document.addEventListener("DOMContentLoaded", () => {
   var siteKey = base.replace(/[^a-z0-9]/gi, "") || "root";
   var CACHE = "svoff-" + siteKey + "-v1";
   var LSK = "svoff." + siteKey + ".packed";
+  var LSB = "svoff." + siteKey + ".build"; /* build stamp the stored pack matches */
+  var DL_LABEL = "\uD83D\uDCE5 Download all";
+  var DL_TITLE = "Store every lesson on this device so the whole site works with no connection";
+  var UP_LABEL = "\u21BB Update offline copy";
+  var UP_TITLE = "New lessons were published after this device stored its copy";
 
   try { navigator.serviceWorker.register(base + "sw.js").catch(function () {}); } catch (e) {}
+
+  /* Stamp of the build that is deployed right now. no-store so the sw hands it
+     straight to the network (see sw.js) — a cached copy could otherwise vouch
+     for the very pack we are questioning. ANY failure (offline, blocked, file
+     missing, junk JSON) resolves to "" and every caller then does nothing: no
+     warning shown, nothing stored, and never anything evicted. */
+  function liveBuild() {
+    try {
+      return fetch(base + "data/build.json", { cache: "no-store" })
+        .then(function (r) { if (!r.ok) throw new Error("build"); return r.json(); })
+        .then(function (b) { return b && b.built ? String(b.built) : ""; })
+        .catch(function () { return ""; });
+    } catch (e) { return Promise.resolve(""); }
+  }
+  function savedBuild() {
+    try { return localStorage.getItem(LSB) || ""; } catch (e) { return ""; }
+  }
 
   function onReady(fn) {
     if (document.readyState === "loading")
@@ -4236,8 +4285,8 @@ document.addEventListener("DOMContentLoaded", () => {
     lab.textContent = "Offline:";
     var btn = document.createElement("button"); btn.type = "button";
     btn.className = "sv-btn sv-offbtn";
-    btn.textContent = "\uD83D\uDCE5 Download all";
-    btn.title = "Store every lesson on this device so the whole site works with no connection";
+    btn.textContent = DL_LABEL;
+    btn.title = DL_TITLE;
     var st = document.createElement("span"); st.className = "sv-status";
     row.appendChild(lab); row.appendChild(btn); row.appendChild(st);
     var chip = panel.querySelector(".sv-minchip");
@@ -4246,7 +4295,19 @@ document.addEventListener("DOMContentLoaded", () => {
     /* trust the CACHE, not the stamp — iOS can evict the pack while
        localStorage survives, and a lying checkmark strands the user offline. */
     caches.open(CACHE).then(function (c) { return c.keys(); }).then(function (ks) {
-      if (ks.length) { st.textContent = "\u2713 " + ks.length + " stored on this device"; return; }
+      if (ks.length) {
+        st.textContent = "\u2713 " + ks.length + " stored on this device";
+        /* A real pack is here — is it still the deployed build? An unrecorded
+           stamp counts as behind: that copy was stored before this check
+           existed, so nothing can vouch for it. */
+        liveBuild().then(function (v) {
+          if (!v || v === savedBuild()) return;
+          btn.textContent = UP_LABEL;
+          btn.title = UP_TITLE;
+          st.textContent = "new lessons available";
+        });
+        return;
+      }
       try {
         var p = JSON.parse(localStorage.getItem(LSK) || "null");
         if (p && p.n) st.textContent = "stored copy missing \u2014 download again";
@@ -4262,27 +4323,43 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(function (list) {
           if (!list || !list.length) throw new Error("empty");
           return caches.open(CACHE).then(function (cache) {
-            var done = 0, fail = 0, idx = 0;
-            st.textContent = "0 / " + list.length;
-            function one() {
-              if (idx >= list.length) return Promise.resolve();
-              var u = base + list[idx++];
-              return fetch(u, { cache: "no-store" }).then(function (r) {
-                if (r && r.ok && !r.redirected) {
-                  var k = new URL(u, location.href).href.split("#")[0].split("?")[0];
-                  return cache.put(k, r).then(function () { done++; });
-                }
-                fail++;
-              }).catch(function () { fail++; }).then(function () {
-                var n = done + fail;
-                if (n % 5 === 0 || n === list.length)
-                  st.textContent = n + " / " + list.length + (fail ? " \u00B7 " + fail + " failed" : "");
-                return one();
-              });
+            var done = 0, fail = 0, total = list.length;
+            /* One dropped request out of ~364 on mobile data used to cost the
+               build stamp permanently: the stamp is written only after a clean
+               sweep, so a single miss left the row reading "new lessons
+               available" on every load until a flawless run happened. Sweep
+               once, then retry ONLY the entries that failed before giving up. */
+            function sweep(items, isRetry) {
+              var idx = 0, missed = [];
+              function one() {
+                if (idx >= items.length) return Promise.resolve();
+                var u = base + items[idx++];
+                return fetch(u, { cache: "no-store" }).then(function (r) {
+                  if (r && r.ok && !r.redirected) {
+                    var k = new URL(u, location.href).href.split("#")[0].split("?")[0];
+                    return cache.put(k, r).then(function () { done++; });
+                  }
+                  fail++; missed.push(u.slice(base.length));
+                }).catch(function () {
+                  fail++; missed.push(u.slice(base.length));
+                }).then(function () {
+                  var n = done + fail;
+                  if (n % 5 === 0 || n === total)
+                    st.textContent = (isRetry ? "retrying \u00B7 " : "") + n + " / " + total +
+                      (fail ? " \u00B7 " + fail + " failed" : "");
+                  return one();
+                });
+              }
+              var lanes = [];
+              for (var w = 0; w < 5; w++) lanes.push(one());
+              return Promise.all(lanes).then(function () { return missed; });
             }
-            var lanes = [];
-            for (var w = 0; w < 5; w++) lanes.push(one());
-            return Promise.all(lanes).then(function () {
+            st.textContent = "0 / " + total;
+            return sweep(list, false).then(function (missed) {
+              if (!missed.length) return null;
+              fail = 0;              /* the retry pass decides these ones */
+              return sweep(missed, true);
+            }).then(function () {
               try {
                 localStorage.setItem(LSK, JSON.stringify({ n: done, at: new Date().toISOString() }));
               } catch (e) {}
@@ -4293,6 +4370,18 @@ document.addEventListener("DOMContentLoaded", () => {
               st.textContent = fail
                 ? "\u2713 " + done + " stored \u00B7 " + fail + " failed \u2014 tap again to retry"
                 : "\u2713 " + done + " pages \u2014 this device now works offline";
+              /* Only a clean sweep may claim the pack matches this build; with
+                 pages still missing after the retry, the update prompt honestly
+                 stays up. Fired and forgotten — it must never hold up the
+                 button. */
+              if (!fail && done) {
+                liveBuild().then(function (v) {
+                  if (!v) return;
+                  try { localStorage.setItem(LSB, v); } catch (e) {}
+                  btn.textContent = DL_LABEL;
+                  btn.title = DL_TITLE;
+                });
+              }
             });
           });
         })
@@ -4301,7 +4390,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 })();
-/* ===== end study-offline v1 ===== */
+/* ===== end study-offline v1.1 ===== */
 </script>
 </body>
 </html>

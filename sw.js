@@ -40,6 +40,11 @@ self.addEventListener("fetch", function (e) {
   var req = e.request;
   if (req.method !== "GET") return;
   if (req.cache === "no-store") return; /* pack downloader: straight to network */
+  /* Request.cache is undefined on Safari < 16.4, where the test above silently
+     fails open and the build stamp would be cached BY the very cache it exists
+     to audit (and the pack downloader would re-store pages it already had).
+     Bypass these two by path as well, so the guarantee holds on every engine. */
+  if (/\/data\/(build|pages)\.json$/.test(req.url.split("#")[0].split("?")[0])) return;
   if (req.url.indexOf(SCOPE) !== 0) return; /* other origins + the sibling site: untouched */
   var key = keyFor(req.url);
   if (key.slice(-6) === "/sw.js") return;   /* let the browser manage sw updates itself */
